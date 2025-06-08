@@ -20,13 +20,11 @@ class Plan extends Model
         'features' => 'array',
     ];
 
-    // Relacionamento com users
     public function users()
     {
         return $this->hasMany(User::class);
     }
 
-    // Relacionamento com subscriptions
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);

@@ -14,13 +14,11 @@ class Role extends Model
         'description',
     ];
 
-    // Relacionamento com usuários
     public function users()
     {
         return $this->belongsToMany(User::class);
     }
 
-    // Relacionamento com permissions
     public function permissions()
     {
         return $this->belongsToMany(Permission::class);

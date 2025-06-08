@@ -5,8 +5,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -31,27 +32,33 @@ class User extends Authenticatable
         'subscription_ends_at' => 'datetime',
     ];
 
-    // Relacionamento com o plano atual
     public function plan()
     {
         return $this->belongsTo(Plan::class);
     }
 
-    // Relacionamento com as subscriptions
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
     }
 
-    // Relacionamento com roles (muitos para muitos)
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
 
-    // Helper: verificar se usuário tem um role específico
     public function hasRole($roleName)
     {
         return $this->roles()->where('name', $roleName)->exists();
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
