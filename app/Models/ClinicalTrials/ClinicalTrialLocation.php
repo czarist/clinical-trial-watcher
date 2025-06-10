@@ -1,9 +1,9 @@
 <?php
-
-namespace App\Models;
+namespace App\Models\ClinicalTrials;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ClinicalTrialLocation extends Model
 {
@@ -22,7 +22,7 @@ class ClinicalTrialLocation extends Model
         'longitude',
     ];
 
-    public function trial()
+    public function trial(): BelongsTo
     {
         return $this->belongsTo(ClinicalTrial::class, 'clinical_trial_id');
     }

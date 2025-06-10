@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\ClinicalTrials;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ClinicalTrialIntervention extends Model
+class ClinicalTrialArmGroup extends Model
 {
     use HasFactory;
 
@@ -13,12 +14,12 @@ class ClinicalTrialIntervention extends Model
 
     protected $fillable = [
         'clinical_trial_id',
+        'label',
         'type',
-        'name',
         'description',
     ];
 
-    public function trial()
+    public function trial(): BelongsTo
     {
         return $this->belongsTo(ClinicalTrial::class, 'clinical_trial_id');
     }
