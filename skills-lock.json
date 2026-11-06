@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "skills": {
+    "api-designer": {
+      "source": "Jeffallan/claude-skills",
+      "sourceType": "github",
+      "skillPath": "skills/api-designer/SKILL.md",
+      "computedHash": "b9d0ef61ede97ff8b78bed7c97c98fd4461c39cfa80d544813e6790c18db1fc3"
+    },
+    "code-documenter": {
+      "source": "Jeffallan/claude-skills",
+      "sourceType": "github",
+      "skillPath": "skills/code-documenter/SKILL.md",
+      "computedHash": "53e9bb8ba66894f5b995149b2bfd719e89956caaaebea5cdb6d52563c7fee046"
+    },
+    "database-optimizer": {
+      "source": "Jeffallan/claude-skills",
+      "sourceType": "github",
+      "skillPath": "skills/database-optimizer/SKILL.md",
+      "computedHash": "6b4bf917227430bf404d93679de4616013b613036a899b5a62ad5802a8441d2f"
+    },
+    "devops-engineer": {
+      "source": "Jeffallan/claude-skills",
+      "sourceType": "github",
+      "skillPath": "skills/devops-engineer/SKILL.md",
+      "computedHash": "65468fbe15355afc2be115b1fcc0b98c5ecbf5371da16a01674a676ed7fd67f0"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "106acf230014cbb43ca34e6410371321b56ca742f9ee0442e8ec05bf02eb0384"
+    },
+    "laravel-specialist": {
+      "source": "Jeffallan/claude-skills",
+      "sourceType": "github",
+      "skillPath": "skills/laravel-specialist/SKILL.md",
+      "computedHash": "54d63412e4b4024f384edaa7758e9ad7e76a5ff91a134f8042dbf6200b031800"
+    },
+    "monitoring-expert": {
+      "source": "Jeffallan/claude-skills",
+      "sourceType": "github",
+      "skillPath": "skills/monitoring-expert/SKILL.md",
+      "computedHash": "0f49ef0dfb448e0061486bfd97c46b7e7ed7d42a4f1bb4f6d2641aeb6c72a352"
+    },
+    "php-pro": {
+      "source": "Jeffallan/claude-skills",
+      "sourceType": "github",
+      "skillPath": "skills/php-pro/SKILL.md",
+      "computedHash": "b69c9a5586579786acd35241cd5570cb8bc213797a0d7885743b1403dc4b6383"
+    },
+    "secure-code-guardian": {
+      "source": "Jeffallan/claude-skills",
+      "sourceType": "github",
+      "skillPath": "skills/secure-code-guardian/SKILL.md",
+      "computedHash": "4cebc5f003afe8115f5494aa39d686a1cf9fdc806245cd55fd974c4fa25a7685"
+    },
+    "test-master": {
+      "source": "Jeffallan/claude-skills",
+      "sourceType": "github",
+      "skillPath": "skills/test-master/SKILL.md",
+      "computedHash": "c01e86694830811642583df6a4760ec7930ec7986e1a3faccd2fa2e7c4c2b991"
+    }
+  }
+}
