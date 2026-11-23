@@ -1,13 +1,37 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Models\ClinicalTrials;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * A study registered on ClinicalTrials.gov. Registry data, not medical advice.
+ */
 class ClinicalTrial extends Model
 {
     use HasFactory;
+
+    /**
+     * Related lists replaced on every import, keyed by relation name.
+     *
+     * @var list<string>
+     */
+    public const array SYNCED_RELATIONS = [
+        'secondaryIds',
+        'collaborators',
+        'references',
+        'meshTerms',
+        'conditions',
+        'keywords',
+        'locations',
+        'interventions',
+        'armGroups',
+        'outcomes',
+    ];
 
     protected $fillable = [
         'nct_id',
@@ -17,6 +41,7 @@ class ClinicalTrial extends Model
         'overall_status',
         'status_verified_date',
         'start_date',
+        'primary_completion_date',
         'completion_date',
         'sponsor_name',
         'sponsor_class',
@@ -41,6 +66,35 @@ class ClinicalTrial extends Model
         'has_expanded_access',
         'ipd_sharing',
     ];
+
+    protected $hidden = ['raw_json'];
+
+    #[\Override]
+    protected function casts(): array
+    {
+        return [
+            'status_verified_date' => 'date:Y-m-d',
+            'start_date' => 'date:Y-m-d',
+            'primary_completion_date' => 'date:Y-m-d',
+            'completion_date' => 'date:Y-m-d',
+            'study_first_post_date' => 'date:Y-m-d',
+            'last_update_post_date' => 'date:Y-m-d',
+            'enrollment_count' => 'integer',
+            'has_results' => 'boolean',
+            'is_fda_regulated_drug' => 'boolean',
+            'is_fda_regulated_device' => 'boolean',
+            'has_expanded_access' => 'boolean',
+            'raw_json' => 'array',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function phases(): array
+    {
+        return $this->phase === null || $this->phase === '' ? [] : explode(', ', $this->phase);
+    }
 
     public function conditions(): HasMany
     {
@@ -92,4 +146,8 @@ class ClinicalTrial extends Model
         return $this->hasMany(ClinicalTrialMeshTerm::class);
     }
 
+    public function trialChanges(): HasMany
+    {
+        return $this->hasMany(ClinicalTrialChange::class);
+    }
 }

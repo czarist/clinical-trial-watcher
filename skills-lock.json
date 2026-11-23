@@ -43,6 +43,12 @@
       "skillPath": "skills/monitoring-expert/SKILL.md",
       "computedHash": "0f49ef0dfb448e0061486bfd97c46b7e7ed7d42a4f1bb4f6d2641aeb6c72a352"
     },
+    "php-best-practices": {
+      "source": "AsyrafHussin/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/php-best-practices/SKILL.md",
+      "computedHash": "40b922a65a7b29c0561517c2aa505dd80950b259dec415b37dd5486f1e46771c"
+    },
     "php-pro": {
       "source": "Jeffallan/claude-skills",
       "sourceType": "github",

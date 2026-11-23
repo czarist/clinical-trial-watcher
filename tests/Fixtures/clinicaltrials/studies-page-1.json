@@ -1,0 +1,1808 @@
+{
+  "studies": [
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT05222529",
+          "orgStudyIdInfo": {
+            "id": "CQVM149C2201"
+          },
+          "secondaryIdInfos": [
+            {
+              "id": "2021-004972-32",
+              "type": "EUDRACT_NUMBER"
+            },
+            {
+              "id": "2024-511382-11-00",
+              "type": "OTHER",
+              "domain": "EU CT number"
+            }
+          ],
+          "organization": {
+            "fullName": "Novartis",
+            "class": "INDUSTRY"
+          },
+          "briefTitle": "Pharmacokinetics, Pharmacodynamics, Safety and Tolerability of Glycopyrronium (Bromide) in Children (6 to Less Than 12 Years) With Asthma",
+          "officialTitle": "A Phase II, Double-blind, Randomized, Multiple Dose, Cross Over, Three-treatment, Three-period, Six Sequence Placebo Controlled Trial to Evaluate Efficacy, Pharmacokinetics (PK), Pharmacodynamics (PD) and Safety and Tolerability of Glycopyrronium (Bromide) in Children From 6 to Less Than 12 Years of Age With Asthma."
+        },
+        "statusModule": {
+          "statusVerifiedDate": "2026-11",
+          "overallStatus": "RECRUITING",
+          "expandedAccessInfo": {
+            "hasExpandedAccess": false
+          },
+          "startDateStruct": {
+            "date": "2022-08-29",
+            "type": "ACTUAL"
+          },
+          "primaryCompletionDateStruct": {
+            "date": "2027-07-30",
+            "type": "ESTIMATED"
+          },
+          "completionDateStruct": {
+            "date": "2027-08-30",
+            "type": "ESTIMATED"
+          },
+          "studyFirstSubmitDate": "2022-01-10",
+          "studyFirstSubmitQcDate": "2022-01-24",
+          "studyFirstPostDateStruct": {
+            "date": "2022-02-03",
+            "type": "ACTUAL"
+          },
+          "lastUpdateSubmitDate": "2026-11-09",
+          "lastUpdatePostDateStruct": {
+            "date": "2026-11-10",
+            "type": "ACTUAL"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "responsibleParty": {
+            "type": "SPONSOR"
+          },
+          "leadSponsor": {
+            "name": "Novartis Pharmaceuticals",
+            "class": "INDUSTRY"
+          }
+        },
+        "oversightModule": {
+          "oversightHasDmc": true,
+          "isFdaRegulatedDrug": false,
+          "isFdaRegulatedDevice": false
+        },
+        "descriptionModule": {
+          "briefSummary": "The purpose of this study is to characterize the bronchodilator effect, systemic exposure and safety/tolerability of two different doses of inhaled glycopyrronium, when compared to placebo. Outcome of this study will be used to determine the dose of inhaled glycopyrronium for the development of fixed dose combination indacaterol/mometasone/glycopyrronium (QVM149) for children aged 6 to less than 12 years old with moderate to severe asthma.",
+          "detailedDescription": "The study design is a double-blind, placebo controlled, randomized sequence, three-treatment, three-period, six-sequence, cross-over multiple-dose study to evaluate efficacy, pharmacokinetics, pharmacodynamics, and safety and tolerability of glycopyrronium bromide (bromide) in children from 6 to less than 12 years of age with asthma with forced expiratory volume in one second (FEV1) ≥60% and ≤ 90% of the predicted normal value for the participant.\n\nThis study will consist of 4 phases: Screening, Run-in, Treatment and Follow-up.\n\nAfter the screening phase, participants will enter the Run-in Phase to further assess eligibility and those participants that meet all eligibility criteria will be randomized. Study treatment will be administered in addition to background asthma LABA+ICS controller therapy (salmeterol xinafoate 50µg/fluticasone propionate 100µg) from entering the run-in period, through to the end of the treatment phase, including the 2 wash-out periods. Participants will be randomized to one of 6 different sequences with an equal (1:1:1:1:1:1) randomization ratio. The Treatment Phase will last 10 weeks, and every sequence is divided in three treatment periods: Glycopyrronium bromide 12.5 µg, Glycopyrronium bromide 25µg or matching placebo dry powder in capsules for inhalation, via Breezhaler. Each treatment period lasts 2 weeks and 2 consecutive treatment periods are separated by a 2-week wash-out period. Participants who discontinue their study treatment prematurely will be required to return to the clinic for an Early Termination Visit. 30 days after last treatment date, a final telephone contact must be conducted for safety follow-up.\n\nThe total duration of the trial for a participant (from screening to follow up) is approximately 20 weeks including safety follow-up."
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Asthma"
+          ],
+          "keywords": [
+            "Glycopyrronium, pediatric, asthma, Breezhaler, PK"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "PHASE2"
+          ],
+          "designInfo": {
+            "allocation": "RANDOMIZED",
+            "interventionModel": "CROSSOVER",
+            "primaryPurpose": "TREATMENT",
+            "maskingInfo": {
+              "masking": "QUADRUPLE",
+              "maskingDescription": "Participants, investigator staff, persons performing the assessments, data analysts and the Sponsor Clinical Trial Team (CTT) will remain blind to the identity of the treatment from the time of randomization until database lock.",
+              "whoMasked": [
+                "PARTICIPANT",
+                "CARE_PROVIDER",
+                "INVESTIGATOR",
+                "OUTCOMES_ASSESSOR"
+              ]
+            }
+          },
+          "enrollmentInfo": {
+            "count": 42,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "Glycopyrronium 25μg",
+              "type": "EXPERIMENTAL",
+              "description": "Glycopyrronium 25μg for two weeks",
+              "interventionNames": [
+                "Drug: Glycopyrronium bromide 25ug",
+                "Drug: Placebo",
+                "Drug: Glycopyrronium bromide 12.5ug"
+              ]
+            },
+            {
+              "label": "Glycopyrronium 12.5μg",
+              "type": "EXPERIMENTAL",
+              "description": "Glycopyrronium 12.5μg for two weeks",
+              "interventionNames": [
+                "Drug: Glycopyrronium bromide 25ug",
+                "Drug: Placebo",
+                "Drug: Glycopyrronium bromide 12.5ug"
+              ]
+            },
+            {
+              "label": "Placebo",
+              "type": "PLACEBO_COMPARATOR",
+              "description": "Placebo for two weeks",
+              "interventionNames": [
+                "Drug: Glycopyrronium bromide 25ug",
+                "Drug: Placebo",
+                "Drug: Glycopyrronium bromide 12.5ug"
+              ]
+            }
+          ],
+          "interventions": [
+            {
+              "type": "DRUG",
+              "name": "Glycopyrronium bromide 25ug",
+              "description": "25μg Glycopyrronium bromide capsules for oral inhalation via Breezhaler",
+              "armGroupLabels": [
+                "Glycopyrronium 12.5μg",
+                "Glycopyrronium 25μg",
+                "Placebo"
+              ],
+              "otherNames": [
+                "NVA237"
+              ]
+            },
+            {
+              "type": "DRUG",
+              "name": "Placebo",
+              "description": "Placebo to Glycopyrronium bromide capsules for oral inhalation via Breezhaler",
+              "armGroupLabels": [
+                "Glycopyrronium 12.5μg",
+                "Glycopyrronium 25μg",
+                "Placebo"
+              ]
+            },
+            {
+              "type": "DRUG",
+              "name": "Glycopyrronium bromide 12.5ug",
+              "description": "12.5ug Glycopyrronium bromide capsules for oral inhalation via Breezhaler",
+              "armGroupLabels": [
+                "Glycopyrronium 12.5μg",
+                "Glycopyrronium 25μg",
+                "Placebo"
+              ],
+              "otherNames": [
+                "NVA237"
+              ]
+            }
+          ]
+        },
+        "outcomesModule": {
+          "primaryOutcomes": [
+            {
+              "measure": "Change from Baseline in trough FEV1",
+              "description": "Forced Expiratory Volume in 1 second (FEV1) is the amount of air which can be forcibly exhaled from the lungs in the first second of a forced exhalation, measured by spirometry.",
+              "timeFrame": "At the start and end of each 2 week treatment period (Days 1, 14, 29, 42, 57 and 70)"
+            }
+          ],
+          "secondaryOutcomes": [
+            {
+              "measure": "Steady state pharmacokinetic (PK) parameters C0",
+              "description": "Steady state pharmacokinetic (PK) parameters C0 will be provided for plasma glycopyrronium concentrations at pre-dose and post-dose time-points.",
+              "timeFrame": "At the start and end of each 2 week treatment period (Days 1, 14, 15, 29, 42, 43, 57, 70 and 71)"
+            },
+            {
+              "measure": "Systemic exposure following sparse PK sampling",
+              "description": "Systemic exposure following sparse PK sampling will be provided at pre-dose and post-dose time-points for each glycopyrronium dose level",
+              "timeFrame": "At the start and end of each 2 week treatment period (Days 1, 14, 15, 29, 42, 43, 57, 70 and 71)"
+            },
+            {
+              "measure": "Change from Baseline in PEF rate",
+              "description": "Morning and Evening Peak Expiratory Flow Rate (PEF) will be measured. PEF is the peak expiratory flow, the maximum speed of expiration.",
+              "timeFrame": "At the start and end of each 2 week treatment period (Days 1, 14, 15, 29, 42, 43, 57, 70 and 71)"
+            },
+            {
+              "measure": "Change from Baseline in FEV1",
+              "description": "Forced Expiratory Volume in 1 second (FEV1) is the amount of air which can be forcibly exhaled from the lungs in the first second of a forced exhalation, measured by spirometry.",
+              "timeFrame": "At the start and end of each 2 week treatment period (Days 1, 14, 15, 29, 42, 43, 57, 70 and 71)"
+            },
+            {
+              "measure": "Change from baseline in rescue medication use",
+              "description": "Daily use of rescue medication will be recorded each morning and evening throughout the 2 week treatment by the participant using their electronic diary.",
+              "timeFrame": "At the start and end of each 2 week treatment period (Days 1, 14, 15, 29, 42, 43, 57, 70 and 71)"
+            },
+            {
+              "measure": "Adverse events of special interest (AESI) typical of anti-muscarinic side effects",
+              "description": "AESIs that are typical of anti-muscarinic agents will be reported.",
+              "timeFrame": "From the start of run-in to 30 days after end of treatment, assessed up to maximum duration of 16 weeks"
+            }
+          ]
+        },
+        "eligibilityModule": {
+          "eligibilityCriteria": "Inclusion Criteria:\n\n* Confirmed diagnosis of asthma for at least 6 months\n* Signed informed consent by parent(s)/legal guardian(s) and assent by the pediatric participant (depending on local requirements)\n* Participant on stable dose of inhaled low-to-medium dose ICS with one additional controller for at least 4 weeks prior to run-in\n* Pre-Bronchodilator FEV1 ≥60% to ≤90% of predicted normal at beginning of Run-in and randomization. If FEV1 eligibility criteria are not met at -45min pre-dose of the End of Run-in (Visit 30), the visit can be rescheduled once within 5 days from the previous attempt.\n* FEV1 reversibility, done using up to 4 puffs of SABA (up to 400μg salbutamol or 360μg albuterol) at Run-in visit (Visit 20): increase \\> and/or = 12% (performed according to American Thoracic Society (ATS)/European Respiratory Society (ERS) 2019 guidelines). All participants must perform a reversibility test at start of Run-in. If reversibility is not demonstrated at Run-in, it may be attempted at up to two ad hoc, unscheduled separate visits within 5 days from previous attempt. If reversibility is still not demonstrated after repeated assessment participants must be screen failed\n* Demonstrated acceptable inhaler use technique for Diskus/Accuhaler (prior to run-in) and Breezhaler (prior to randomization) and able to complete spirometry procedures prior to randomization.\n* A parent/legal guardian must be designated to complete all e-Diary entries and attend all clinic visits with the participant.\n* Parents/legal guardian must be willing and able to assist the child with the procedures outlined in the protocol, e.g. compliance with study medication, completion of electronic participant diary\n* Female participants of child-bearing potential, who might become sexually active, must be informed of the need to prevent pregnancy during the study using effective contraceptive methods. The decision on the contraceptive method should be reviewed at least every 3 months to evaluate the individual need and compatibility of the method chosen.\n\nExclusion Criteria:\n\n* Systemic corticosteroid use for any reason within 3 months of Run-in\n* Participants on low to medium mono ICS alone\n* Participants requiring six or more puffs of rescue medication per day on more than two consecutive days in the four weeks prior to Screening (Visit 1) and/or in the four weeks prior to the Run-in visit\n* Participants who have had an asthma attack/exacerbation requiring a) systemic corticosteroids (SCS) or b) hospitalization or c) emergency room visit, within 3 months prior to Screening (Visit 1), or more than 3 separate exacerbations in the 12 months preceding the Screening visit\n* Participants with a known narrow-angle glaucoma, bladder dysfunction, bladder outlet obstruction or any other conditions where anticholinergic treatment is contraindicated prior to Screening (Visit 1)\n* Participants with a history of long QT syndrome or whose corrected QT interval (QTc) measured at start of Run-in and confirmed at Baseline (prior to randomization) (Fridericia method) is prolonged (\\> 450 msec for boys and girls) and confirmed by a central assessor (these patients should not be rescreened)\n* Suspected or documented active infections (bacterial, viral, fungal, mycobacterial or other, including active SARS-CoV-2, tuberculosis or atypical mycobacterial disease) of the upper or lower respiratory tract, sinus or middle ear that is not resolved within 6 weeks of Screening (Visit 1)\n* History of Type I diabetes or uncontrolled Type II diabetes\n* Participants who are sexually active at screening\n* Hemoglobin levels outside normal ranges at Run-in (Visit 20)\n* Female patients of childbearing potential (e.g., are menstruating) who do not agree to abstinence or, if they become sexually active during study participation, do not agree to the use of contraception as defined in the inclusion criteria.\n\nAdditional protocol-defined inclusion / exclusion criteria may apply.",
+          "healthyVolunteers": false,
+          "sex": "ALL",
+          "minimumAge": "6 Years",
+          "maximumAge": "11 Years",
+          "stdAges": [
+            "CHILD"
+          ]
+        },
+        "contactsLocationsModule": {
+          "centralContacts": [
+            {
+              "name": "Novartis Pharmaceuticals",
+              "role": "CONTACT",
+              "phone": "+41613241111",
+              "email": "novartis.email@novartis.com"
+            },
+            {
+              "name": "Novartis Pharmaceuticals",
+              "role": "CONTACT"
+            }
+          ],
+          "locations": [
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Rousse",
+              "zip": "7002",
+              "country": "Bulgaria",
+              "geoPoint": {
+                "lat": 43.84872,
+                "lon": 25.9534
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Sevlievo",
+              "zip": "5400",
+              "country": "Bulgaria",
+              "geoPoint": {
+                "lat": 43.02295,
+                "lon": 25.10364
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Sofia",
+              "zip": "1510",
+              "country": "Bulgaria",
+              "geoPoint": {
+                "lat": 42.69751,
+                "lon": 23.32415
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Ibague",
+              "state": "Tolima Department",
+              "zip": "730006",
+              "country": "Colombia",
+              "geoPoint": {
+                "lat": 4.43573,
+                "lon": -75.20289
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "WITHDRAWN",
+              "city": "Guatemala City",
+              "state": "GTM",
+              "zip": "01010",
+              "country": "Guatemala",
+              "geoPoint": {
+                "lat": 14.64072,
+                "lon": -90.51327
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Guatemala City",
+              "zip": "01015",
+              "country": "Guatemala",
+              "geoPoint": {
+                "lat": 14.64072,
+                "lon": -90.51327
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Debrecen",
+              "state": "Hajdu Bihar Megye",
+              "zip": "4032",
+              "country": "Hungary",
+              "geoPoint": {
+                "lat": 47.53167,
+                "lon": 21.62444
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Budapest",
+              "zip": "1033",
+              "country": "Hungary",
+              "geoPoint": {
+                "lat": 47.49835,
+                "lon": 19.04045
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Budapest",
+              "zip": "1083",
+              "country": "Hungary",
+              "geoPoint": {
+                "lat": 47.49835,
+                "lon": 19.04045
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Eger",
+              "zip": "3300",
+              "country": "Hungary",
+              "geoPoint": {
+                "lat": 47.90265,
+                "lon": 20.37329
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "WITHDRAWN",
+              "city": "Kaposvár",
+              "zip": "7400",
+              "country": "Hungary",
+              "geoPoint": {
+                "lat": 46.36667,
+                "lon": 17.8
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "WITHDRAWN",
+              "city": "Nagykanizsa",
+              "zip": "8800",
+              "country": "Hungary",
+              "geoPoint": {
+                "lat": 46.45347,
+                "lon": 16.99104
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Szigetvár",
+              "zip": "7900",
+              "country": "Hungary",
+              "geoPoint": {
+                "lat": 46.04865,
+                "lon": 17.80554
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Tarnów",
+              "state": "Poland",
+              "zip": "33-100",
+              "country": "Poland",
+              "geoPoint": {
+                "lat": 50.01381,
+                "lon": 20.98698
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Lodz",
+              "state": "Łódź Voivodeship",
+              "zip": "90-329",
+              "country": "Poland",
+              "geoPoint": {
+                "lat": 51.77058,
+                "lon": 19.47395
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "George",
+              "state": "Western Cape",
+              "zip": "6529",
+              "country": "South Africa",
+              "geoPoint": {
+                "lat": -33.963,
+                "lon": 22.46173
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Cape Town",
+              "zip": "7531",
+              "country": "South Africa",
+              "geoPoint": {
+                "lat": -33.92584,
+                "lon": 18.42322
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Esplugues",
+              "state": "Barcelona",
+              "zip": "08950",
+              "country": "Spain"
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Sabadell",
+              "state": "Barcelona",
+              "zip": "08208",
+              "country": "Spain",
+              "geoPoint": {
+                "lat": 41.54329,
+                "lon": 2.10942
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "WITHDRAWN",
+              "city": "Mérida",
+              "state": "Extremadura",
+              "zip": "06800",
+              "country": "Spain",
+              "geoPoint": {
+                "lat": 38.91802,
+                "lon": -6.34292
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Barcelona",
+              "zip": "08035",
+              "country": "Spain",
+              "geoPoint": {
+                "lat": 41.38879,
+                "lon": 2.15899
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "London",
+              "zip": "SE5 9RS",
+              "country": "United Kingdom",
+              "geoPoint": {
+                "lat": 51.50853,
+                "lon": -0.12574
+              }
+            },
+            {
+              "facility": "Novartis Investigative Site",
+              "status": "RECRUITING",
+              "city": "Stoke-on-Trent",
+              "zip": "ST4 6QG",
+              "country": "United Kingdom",
+              "geoPoint": {
+                "lat": 53.00415,
+                "lon": -2.18538
+              }
+            }
+          ]
+        },
+        "ipdSharingStatementModule": {
+          "ipdSharing": "YES",
+          "description": "Novartis is committed to sharing with qualified external researchers, access to patient-level data and supporting clinical documents from eligible studies. These requests are reviewed and approved by an independent review panel on the basis of scientific merit. All data provided is anonymized to respect the privacy of patients who have participated in the trial in line with applicable laws and regulations.\n\nThis trial data availability is according to the criteria and process described on www.clinicalstudydatarequest.com."
+        }
+      },
+      "derivedSection": {
+        "miscInfoModule": {
+          "versionHolder": "2026-11-20"
+        },
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "D001249",
+              "term": "Asthma"
+            }
+          ],
+          "ancestors": [
+            {
+              "id": "D001982",
+              "term": "Bronchial Diseases"
+            },
+            {
+              "id": "D012140",
+              "term": "Respiratory Tract Diseases"
+            },
+            {
+              "id": "D008173",
+              "term": "Lung Diseases, Obstructive"
+            },
+            {
+              "id": "D008171",
+              "term": "Lung Diseases"
+            },
+            {
+              "id": "D012130",
+              "term": "Respiratory Hypersensitivity"
+            },
+            {
+              "id": "D006969",
+              "term": "Hypersensitivity, Immediate"
+            },
+            {
+              "id": "D006967",
+              "term": "Hypersensitivity"
+            },
+            {
+              "id": "D007154",
+              "term": "Immune System Diseases"
+            }
+          ]
+        },
+        "interventionBrowseModule": {
+          "meshes": [
+            {
+              "id": "D006024",
+              "term": "Glycopyrrolate"
+            }
+          ],
+          "ancestors": [
+            {
+              "id": "D000644",
+              "term": "Quaternary Ammonium Compounds"
+            },
+            {
+              "id": "D000588",
+              "term": "Amines"
+            },
+            {
+              "id": "D009930",
+              "term": "Organic Chemicals"
+            },
+            {
+              "id": "D009861",
+              "term": "Onium Compounds"
+            },
+            {
+              "id": "D011759",
+              "term": "Pyrrolidines"
+            },
+            {
+              "id": "D006573",
+              "term": "Heterocyclic Compounds, 1-Ring"
+            },
+            {
+              "id": "D006571",
+              "term": "Heterocyclic Compounds"
+            }
+          ]
+        }
+      },
+      "hasResults": false
+    },
+    {
+      "protocolSection": {
+        "identificationModule": {
+          "nctId": "NCT07120503",
+          "orgStudyIdInfo": {
+            "id": "WB-2101"
+          },
+          "secondaryIdInfos": [
+            {
+              "id": "2025-521391-58-00",
+              "type": "CTIS"
+            },
+            {
+              "id": "U1111-1319-6369",
+              "type": "OTHER",
+              "domain": "UTN, World Health Organization (WHO)"
+            }
+          ],
+          "organization": {
+            "fullName": "Windward Bio",
+            "class": "INDUSTRY"
+          },
+          "briefTitle": "Study to Evaluate the Safety, Pharmacology and Efficacy of WIN378 in Adults With Moderate or Severe Asthma",
+          "officialTitle": "A Phase 2 Randomized, Double-blind Placebo-Controlled Study to Evaluate the Pharmacokinetics, Immunogenicity, Safety and Efficacy of WIN378 in Adult Participants With Moderate or Severe Asthma",
+          "acronym": "Polaris"
+        },
+        "statusModule": {
+          "statusVerifiedDate": "2026-10",
+          "overallStatus": "RECRUITING",
+          "expandedAccessInfo": {
+            "hasExpandedAccess": false
+          },
+          "startDateStruct": {
+            "date": "2025-07-24",
+            "type": "ACTUAL"
+          },
+          "primaryCompletionDateStruct": {
+            "date": "2028-10-01",
+            "type": "ESTIMATED"
+          },
+          "completionDateStruct": {
+            "date": "2028-11-23",
+            "type": "ESTIMATED"
+          },
+          "studyFirstSubmitDate": "2025-07-25",
+          "studyFirstSubmitQcDate": "2025-08-06",
+          "studyFirstPostDateStruct": {
+            "date": "2025-08-13",
+            "type": "ACTUAL"
+          },
+          "lastUpdateSubmitDate": "2026-10-16",
+          "lastUpdatePostDateStruct": {
+            "date": "2026-10-21",
+            "type": "ACTUAL"
+          }
+        },
+        "sponsorCollaboratorsModule": {
+          "responsibleParty": {
+            "type": "SPONSOR"
+          },
+          "leadSponsor": {
+            "name": "Windward Bio",
+            "class": "INDUSTRY"
+          }
+        },
+        "oversightModule": {
+          "oversightHasDmc": true,
+          "isFdaRegulatedDrug": true,
+          "isFdaRegulatedDevice": false
+        },
+        "descriptionModule": {
+          "briefSummary": "This is a global Phase 2 study divided in two parts. Part A is a double-blind, randomized dose-range finding study in adults with moderate to severe asthma to confirm the dosing regimen of WIN378 that can be tested in future pivotal trials for efficacy and safety.\n\nPart B is a pivotal double-blind, randomized study to demonstrate the efficacy and safety of WIN378 in adults with severe uncontrolled asthma. Two dose levels of WIN378 will be tested against placebo to evaluate AAER, lung function, asthma control, asthma-related quality of life and other important efficacy endpoints.",
+          "detailedDescription": "The main purpose of this global study is to assess whether WIN378, an ultra-long-acting medicine for people with asthma, reduces the annualized rate of asthma exacerbations using the doses identified from an interim analysis of Part A of the study. WIN378 blocks the action of a protein called TSLP, which causes inflammation in the lung and may contribute to asthma control and symptoms. The study has two parts. Part A is evaluating three doses of WIN378 in adults with moderate or severe asthma to evaluate: 1) how WIN378 is handled by your body (pharmacokinetics), 2) the safety of WIN378 and 3) efficacy (markers of asthma inflammation (in your breath and in your blood), lung function and asthma control. An interim analysis of Part A data was used to select two doses of WIN378 for Part B. Part B will compare the two selected doses of WIN378 with placebo in adults with severe uncontrolled asthma. The main purpose of Part B is to assess whether WIN378 reduces the annualized rate of asthma exacerbations. In addition, it aims to evaluate whether WIN378 can improve lung function, quality of life, asthma control and other important efficacy measures. Furthermore the study will evaluate the safety and tolerability of WIN378 versus placebo."
+        },
+        "conditionsModule": {
+          "conditions": [
+            "Asthma"
+          ],
+          "keywords": [
+            "Asthma",
+            "Moderate Asthma",
+            "Severe Asthma",
+            "Uncontrolled Asthma",
+            "Respiratory Diseases",
+            "Lung Diseases",
+            "Bronchial Diseases",
+            "Allergic Diseases",
+            "Biologic Therapy",
+            "Anti-TSLP",
+            "TSLP inhibitor",
+            "monoclonal antibody",
+            "ultra-long-acting biologic",
+            "ultra-long-acting monoclonal antibody",
+            "Thymic stromal lymphopoietin"
+          ]
+        },
+        "designModule": {
+          "studyType": "INTERVENTIONAL",
+          "phases": [
+            "PHASE2"
+          ],
+          "designInfo": {
+            "allocation": "RANDOMIZED",
+            "interventionModel": "PARALLEL",
+            "primaryPurpose": "TREATMENT",
+            "maskingInfo": {
+              "masking": "DOUBLE",
+              "maskingDescription": "Double-blind",
+              "whoMasked": [
+                "PARTICIPANT",
+                "INVESTIGATOR"
+              ]
+            }
+          },
+          "enrollmentInfo": {
+            "count": 600,
+            "type": "ESTIMATED"
+          }
+        },
+        "armsInterventionsModule": {
+          "armGroups": [
+            {
+              "label": "WIN378",
+              "type": "EXPERIMENTAL",
+              "description": "WIN378 SC injections",
+              "interventionNames": [
+                "Drug: WIN378"
+              ]
+            },
+            {
+              "label": "Placebo",
+              "type": "EXPERIMENTAL",
+              "description": "Placebo SC Injections",
+              "interventionNames": [
+                "Drug: Placebo"
+              ]
+            }
+          ],
+          "interventions": [
+            {
+              "type": "DRUG",
+              "name": "WIN378",
+              "description": "WIN378 is a fully human, ultra-long-acting monoclonal antibody given twice-yearly that binds to thymic stromal lymphopoietin (TSLP), blocking its activity and thereby reducing airway inflammation and improving asthma control over the extended dosing interval.",
+              "armGroupLabels": [
+                "WIN378"
+              ]
+            },
+            {
+              "type": "DRUG",
+              "name": "Placebo",
+              "description": "A sham injection consisting of placebo to mask WIN378.",
+              "armGroupLabels": [
+                "Placebo"
+              ]
+            }
+          ]
+        },
+        "outcomesModule": {
+          "primaryOutcomes": [
+            {
+              "measure": "PART A: Number of participants with treatment-emergent adverse events (TEAEs) during the study",
+              "timeFrame": "Week 0 - Week 60"
+            },
+            {
+              "measure": "PART A: Number of participants with treatment-emergent serious adverse events (TESAEs) during the study",
+              "timeFrame": "Week 0 - Week 60"
+            },
+            {
+              "measure": "PART A: Number of participants with abnormal vital signs during the study",
+              "timeFrame": "Week 0 - Week 60"
+            },
+            {
+              "measure": "PART A: Number of participants with abnormal laboratory assessments during the study",
+              "timeFrame": "Week 0 - Week 60"
+            },
+            {
+              "measure": "PART A: Number of participants with Clinically significant abnormal ECG results during the study",
+              "timeFrame": "Week 0 - Week 60"
+            },
+            {
+              "measure": "PART A: WIN 378 Pharmacokinetics: concentration at trough [Ctrough]",
+              "timeFrame": "Week 0 - Week 60"
+            },
+            {
+              "measure": "PART A: WIN 378 Pharmacokinetics: area under the concentration time curve [AUC]",
+              "timeFrame": "Week 0 - Week 60"
+            },
+            {
+              "measure": "PART A: WIN 378 Pharmacokinetics: maximum observed concentration [Cmax])",
+              "timeFrame": "Week 0 - Week 60"
+            },
+            {
+              "measure": "PART A: Number of participants with positive anti-drug antibodies (ADA) during the study",
+              "timeFrame": "Week 0 - Week 60"
+            },
+            {
+              "measure": "PART B: Annualized Asthma Exacerbation Rate (AAER)",
+              "timeFrame": "24 Weeks after last dose"
+            }
+          ],
+          "secondaryOutcomes": [
+            {
+              "measure": "PART A,B: Change from baseline in FeNO at Week 24 and Week 48",
+              "timeFrame": "Week 0 - Week 24, Week 48"
+            },
+            {
+              "measure": "PART A,B: Change from Baseline in Blood eosinophil count at Week 24 and Week 48",
+              "timeFrame": "Week 0 - Week 24, Week 48"
+            },
+            {
+              "measure": "PART A,B: Change in pre-BD and post-BD FEV1 at Week 24 and Week 48",
+              "timeFrame": "Week 0 - Week 24, Week 48"
+            },
+            {
+              "measure": "PART A: Change in pre-BD and post-BD forced vital capacity (FVC) at Week 24 and Week 48",
+              "timeFrame": "Week 0 - Week 24, Week 48"
+            },
+            {
+              "measure": "PART A Annualized asthma exacerbation rate (AAER) over 48 weeks",
+              "timeFrame": "Week 0 - Week 48"
+            },
+            {
+              "measure": "PART A Annualized rate of severe asthma exacerbations over 48 weeks",
+              "timeFrame": "Week 0 - Week 48"
+            },
+            {
+              "measure": "PART A,B:Time to first asthma exacerbation/severe asthma exacerbation over 48 weeks",
+              "timeFrame": "Week 0 - Week 48"
+            },
+            {
+              "measure": "PART A,B: Proportion of participants without any asthma exacerbations/severe asthma exacerbations over 48 weeks",
+              "timeFrame": "Week 0 - Week 48"
+            },
+            {
+              "measure": "PART A Change from baseline in asthma symptoms (daytime and nighttime symptom frequency and severity, activity avoidance and limitation, asthma-related stress and fatigue as well as rescue asthma medication use) as measured by the Asthma Symptom Diary",
+              "timeFrame": "Week 0 - Week 48"
+            },
+            {
+              "measure": "PART A,B: Change from baseline in Asthma Control Questionnaire (ACQ-6) at Week 48",
+              "timeFrame": "Week 0 - Week 48"
+            },
+            {
+              "measure": "PART A,B: Change from baseline in Asthma Quality of Life Questionnaire (Standardised) + 12 at Week 48",
+              "timeFrame": "Week 0 - Week 48"
+            },
+            {
+              "measure": "PART A,B: Change from baseline in European Quality of Life - 5 Dimensions 5 Level Version (EQ-5D-5L) at Week 48",
+              "timeFrame": "Week 0 - Week 48"
+            },
+            {
+              "measure": "PART B: Change from baseline in Patient Global Impression of Change at Week 48",
+              "timeFrame": "Week 0 - Week 48"
+            }
+          ]
+        },
+        "eligibilityModule": {
+          "eligibilityCriteria": "Inclusion Criteria:\n\n* Written Informed Consent Form\n* Females that are not pregnant or breastfeeding with following condition: not a woman of childbearing potential or woman of childbearing potential using a highly effective contraception method\n* Physician-diagnosis of asthma and documented evidence of airway reversibility during prior 24 months or during screening\n* Airflow limitation as indicated by pre-BD FEV1 value: PART A of ≥ 30% and ≤ 90%, predicted; PART B of ≥ 30% and ≤ 80%, predicted\n* PART A Low, medium-, or high-dose ICS and ≥1 maintenance asthma controller medication (LABA/LTRA/LAMA/chromones/theophylline)\n* PART B: medium-, or high-dose ICS and ≥1 maintenance asthma controller medication (LABA/LTRA/LAMA/chromones/theophylline)\n* Part B: History of at least of 2 asthma exacerbations within 12 months before V1\n\nExclusion Criteria:\n\n* Participants with a known, pre-existing, clinically important lung condition other than asthma\n* Tuberculosis or treatment required for tuberculosis within 12 months\n* Current or former smokers ≥10 pack years\n* History of cancer\n* Receipt of any marketed biologic agent within 4 months or 5 half-lives prior to screening; Receipt of immunoglobulin or blood products within 30 days prior to screening or during the Screening Run-in period; Receipt of any live or attenuated vaccines within 15 days prior to screening\n* Helminth infection within 24 weeks prior to screening\n* Use of immunosuppressive medication within 3 months prior to Screening Visit or during the Screening Run-in period\n* Participants who are pregnant, lactating or breastfeeding",
+          "healthyVolunteers": false,
+          "sex": "ALL",
+          "minimumAge": "18 Years",
+          "maximumAge": "75 Years",
+          "stdAges": [
+            "ADULT",
+            "OLDER_ADULT"
+          ]
+        },
+        "contactsLocationsModule": {
+          "centralContacts": [
+            {
+              "name": "Ayshea Kring",
+              "role": "CONTACT",
+              "phone": "+41 61 551 71 39",
+              "email": "clinical.trial.enquiry@windwardbio.com"
+            }
+          ],
+          "overallOfficials": [
+            {
+              "name": "Omar Khwaja, MD",
+              "affiliation": "Windward Bio",
+              "role": "STUDY_DIRECTOR"
+            }
+          ],
+          "locations": [
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Los Angeles",
+              "state": "California",
+              "zip": "90025-7014",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 34.05223,
+                "lon": -118.24368
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "San Jose",
+              "state": "California",
+              "zip": "95117",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 37.33939,
+                "lon": -121.89496
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "RECRUITING",
+              "city": "Melbourne",
+              "state": "Florida",
+              "zip": "32763",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 28.08363,
+                "lon": -80.60811
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Miami",
+              "state": "Florida",
+              "zip": "33175",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 25.77427,
+                "lon": -80.19366
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "White Marsh",
+              "state": "Maryland",
+              "zip": "21162",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 39.38372,
+                "lon": -76.43218
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Stow",
+              "state": "Massachusetts",
+              "zip": "01775-1205",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 42.43704,
+                "lon": -71.50562
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Detroit",
+              "state": "Michigan",
+              "zip": "48202-2608",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 42.33143,
+                "lon": -83.04575
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Richfield",
+              "state": "Minnesota",
+              "zip": "55423-2477",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 44.8833,
+                "lon": -93.283
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "St Louis",
+              "state": "Missouri",
+              "zip": "98119",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 38.62727,
+                "lon": -90.19789
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Bellevue",
+              "state": "Nebraska",
+              "zip": "68123",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 41.13667,
+                "lon": -95.89084
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "RECRUITING",
+              "city": "Toledo",
+              "state": "Ohio",
+              "zip": "43560",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 41.66394,
+                "lon": -83.55521
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Edmond",
+              "state": "Oklahoma",
+              "zip": "73034",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 35.65283,
+                "lon": -97.4781
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Pittsburgh",
+              "state": "Pennsylvania",
+              "zip": "15213-3236",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 40.44062,
+                "lon": -79.99589
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Charleston",
+              "state": "South Carolina",
+              "zip": "29420",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 32.77632,
+                "lon": -79.93275
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Spartanburg",
+              "state": "South Carolina",
+              "zip": "29303",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 34.94957,
+                "lon": -81.93205
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Austin",
+              "state": "Texas",
+              "zip": "78730",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 30.26715,
+                "lon": -97.74306
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "El Paso",
+              "state": "Texas",
+              "zip": "79903",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 31.75872,
+                "lon": -106.48693
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "RECRUITING",
+              "city": "McKinney",
+              "state": "Texas",
+              "zip": "75069-8085",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 33.19762,
+                "lon": -96.61527
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "San Antonio",
+              "state": "Texas",
+              "zip": "78229",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 29.42412,
+                "lon": -98.49363
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Tyler",
+              "state": "Texas",
+              "zip": "75708-3154",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 32.35126,
+                "lon": -95.30106
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Richmond",
+              "state": "Virginia",
+              "zip": "23226",
+              "country": "United States",
+              "geoPoint": {
+                "lat": 37.55376,
+                "lon": -77.46026
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Buenos Aires",
+              "state": "Buenos Aires F.D.",
+              "zip": "C1023AAB",
+              "country": "Argentina",
+              "geoPoint": {
+                "lat": -34.61315,
+                "lon": -58.37723
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Buenos Aires",
+              "state": "Buenos Aires F.D.",
+              "zip": "C1121ABE",
+              "country": "Argentina",
+              "geoPoint": {
+                "lat": -34.61315,
+                "lon": -58.37723
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "RECRUITING",
+              "city": "Buenos Aires",
+              "state": "Buenos Aires F.D.",
+              "zip": "C1414AIF",
+              "country": "Argentina",
+              "geoPoint": {
+                "lat": -34.61315,
+                "lon": -58.37723
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "RECRUITING",
+              "city": "Buenos Aires",
+              "state": "Buenos Aires F.D.",
+              "zip": "C1425BEN",
+              "country": "Argentina",
+              "geoPoint": {
+                "lat": -34.61315,
+                "lon": -58.37723
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Buenos Aires",
+              "state": "Buenos Aires F.D.",
+              "zip": "C1425FVH",
+              "country": "Argentina",
+              "geoPoint": {
+                "lat": -34.61315,
+                "lon": -58.37723
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Buenos Aires",
+              "state": "Buenos Aires F.D.",
+              "zip": "C1426ABP",
+              "country": "Argentina",
+              "geoPoint": {
+                "lat": -34.61315,
+                "lon": -58.37723
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "RECRUITING",
+              "city": "Córdoba",
+              "state": "Córdoba Province",
+              "zip": "X5003DCE",
+              "country": "Argentina",
+              "geoPoint": {
+                "lat": -31.40648,
+                "lon": -64.18853
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "RECRUITING",
+              "city": "Paraná",
+              "state": "Entre Ríos Province",
+              "zip": "E3102ADP",
+              "country": "Argentina",
+              "geoPoint": {
+                "lat": -31.73271,
+                "lon": -60.52897
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Rosario",
+              "state": "Santa Fe Province",
+              "zip": "S2000BRH",
+              "country": "Argentina",
+              "geoPoint": {
+                "lat": -32.94682,
+                "lon": -60.63932
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Rosario",
+              "state": "Santa Fe Province",
+              "zip": "S2013KZD",
+              "country": "Argentina",
+              "geoPoint": {
+                "lat": -32.94682,
+                "lon": -60.63932
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "RECRUITING",
+              "city": "Santa Fe",
+              "state": "Santa Fe Province",
+              "zip": "S3000ASF",
+              "country": "Argentina",
+              "geoPoint": {
+                "lat": -31.64881,
+                "lon": -60.70868
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "San Miguel de Tucumán",
+              "state": "Tucumán Province",
+              "zip": "T4000CBC",
+              "country": "Argentina",
+              "geoPoint": {
+                "lat": -26.81601,
+                "lon": -65.21051
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "San Miguel de Tucumán",
+              "state": "Tucumán Province",
+              "zip": "T4000IAP",
+              "country": "Argentina",
+              "geoPoint": {
+                "lat": -26.81601,
+                "lon": -65.21051
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "RECRUITING",
+              "city": "San Miguel de Tucumán",
+              "state": "Tucumán Province",
+              "zip": "T4000IFL",
+              "country": "Argentina",
+              "geoPoint": {
+                "lat": -26.81601,
+                "lon": -65.21051
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Brookvale",
+              "state": "New South Wales",
+              "zip": "2100",
+              "country": "Australia",
+              "geoPoint": {
+                "lat": -33.76108,
+                "lon": 151.27446
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Coffs Harbour",
+              "state": "New South Wales",
+              "zip": "2450",
+              "country": "Australia",
+              "geoPoint": {
+                "lat": -30.29626,
+                "lon": 153.11351
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Maroubra",
+              "state": "New South Wales",
+              "zip": "2035",
+              "country": "Australia",
+              "geoPoint": {
+                "lat": -33.95,
+                "lon": 151.23333
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Miranda",
+              "state": "New South Wales",
+              "zip": "2228",
+              "country": "Australia",
+              "geoPoint": {
+                "lat": -34.03857,
+                "lon": 151.10005
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Wollongong",
+              "state": "New South Wales",
+              "zip": "2500",
+              "country": "Australia",
+              "geoPoint": {
+                "lat": -34.424,
+                "lon": 150.89345
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Birtinya",
+              "state": "Queensland",
+              "zip": "4575",
+              "country": "Australia",
+              "geoPoint": {
+                "lat": -26.74322,
+                "lon": 153.11913
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "North Altona",
+              "state": "Victoria",
+              "zip": "3025",
+              "country": "Australia",
+              "geoPoint": {
+                "lat": -37.83487,
+                "lon": 144.84735
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Sofia",
+              "state": "Grad Sofia",
+              "zip": "1407",
+              "country": "Bulgaria",
+              "geoPoint": {
+                "lat": 42.69751,
+                "lon": 23.32415
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Lovech",
+              "state": "Lovech",
+              "zip": "5500",
+              "country": "Bulgaria",
+              "geoPoint": {
+                "lat": 43.13227,
+                "lon": 24.71763
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Rousse",
+              "state": "Ruse",
+              "zip": "7000",
+              "country": "Bulgaria",
+              "geoPoint": {
+                "lat": 43.84872,
+                "lon": 25.9534
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Sofia",
+              "state": "Sofia",
+              "zip": "1233",
+              "country": "Bulgaria"
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Sofia",
+              "state": "Sofia",
+              "zip": "1680",
+              "country": "Bulgaria"
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Pessac",
+              "state": "Bordeaux",
+              "zip": "33000",
+              "country": "France",
+              "geoPoint": {
+                "lat": 44.80565,
+                "lon": -0.6324
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Dijon",
+              "state": "Côte-dOr",
+              "zip": "21000",
+              "country": "France",
+              "geoPoint": {
+                "lat": 47.31344,
+                "lon": 5.01391
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Montpellier",
+              "state": "Hérault",
+              "zip": "34090",
+              "country": "France",
+              "geoPoint": {
+                "lat": 43.61093,
+                "lon": 3.87635
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "La Tronche",
+              "state": "Isère",
+              "zip": "38700",
+              "country": "France",
+              "geoPoint": {
+                "lat": 45.20507,
+                "lon": 5.74629
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Nantes",
+              "state": "Loire-Atlantique",
+              "zip": "44093",
+              "country": "France",
+              "geoPoint": {
+                "lat": 47.21725,
+                "lon": -1.55336
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Berlin",
+              "state": "Loire-Atlantique",
+              "zip": "10119",
+              "country": "Germany",
+              "geoPoint": {
+                "lat": 52.52437,
+                "lon": 13.41053
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "München",
+              "state": "Loire-Atlantique",
+              "zip": "80539",
+              "country": "Germany",
+              "geoPoint": {
+                "lat": 51.60698,
+                "lon": 13.31243
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Bendorf",
+              "state": "Rhineland-Palatinate",
+              "zip": "56170",
+              "country": "Germany",
+              "geoPoint": {
+                "lat": 50.42289,
+                "lon": 7.57924
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Lübeck",
+              "state": "Schleswig-Holstein",
+              "zip": "23552",
+              "country": "Germany",
+              "geoPoint": {
+                "lat": 53.86893,
+                "lon": 10.68729
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Darmstadt",
+              "zip": "64283",
+              "country": "Germany",
+              "geoPoint": {
+                "lat": 49.87167,
+                "lon": 8.65027
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Frankfurt am Main",
+              "zip": "60389",
+              "country": "Germany",
+              "geoPoint": {
+                "lat": 50.11552,
+                "lon": 8.68417
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Frankfurt am Main",
+              "zip": "60596",
+              "country": "Germany",
+              "geoPoint": {
+                "lat": 50.11552,
+                "lon": 8.68417
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Leipzig",
+              "zip": "4347",
+              "country": "Germany",
+              "geoPoint": {
+                "lat": 51.33962,
+                "lon": 12.37129
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Mainz",
+              "zip": "55128",
+              "country": "Germany",
+              "geoPoint": {
+                "lat": 49.98185,
+                "lon": 8.28008
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "München",
+              "zip": "81241",
+              "country": "Germany",
+              "geoPoint": {
+                "lat": 51.60698,
+                "lon": 13.31243
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Chiclana de la Frontera",
+              "state": "Cádiz",
+              "zip": "11139",
+              "country": "Spain",
+              "geoPoint": {
+                "lat": 36.41976,
+                "lon": -6.14367
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Madrid",
+              "state": "Entre Ríos",
+              "zip": "28003",
+              "country": "Spain",
+              "geoPoint": {
+                "lat": 40.4165,
+                "lon": -3.70256
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "San Sebastián",
+              "state": "Guipúzcoa",
+              "zip": "20014",
+              "country": "Spain",
+              "geoPoint": {
+                "lat": 43.56667,
+                "lon": -5.9
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Madrid",
+              "state": "Madrid",
+              "zip": "28050",
+              "country": "Spain",
+              "geoPoint": {
+                "lat": 40.4165,
+                "lon": -3.70256
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Pozuelo de Alarcón",
+              "state": "Madrid",
+              "zip": "28223",
+              "country": "Spain",
+              "geoPoint": {
+                "lat": 40.43293,
+                "lon": -3.81338
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Benalmádena",
+              "state": "Málaga",
+              "zip": "29639",
+              "country": "Spain",
+              "geoPoint": {
+                "lat": 36.5961,
+                "lon": -4.57267
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Málaga",
+              "state": "Málaga",
+              "zip": "29010",
+              "country": "Spain",
+              "geoPoint": {
+                "lat": 36.72016,
+                "lon": -4.42034
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Seville",
+              "state": "Sevilla",
+              "zip": "41012",
+              "country": "Spain",
+              "geoPoint": {
+                "lat": 37.38283,
+                "lon": -5.97317
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Linköping",
+              "state": "Ostergotlands",
+              "zip": "587 58",
+              "country": "Sweden",
+              "geoPoint": {
+                "lat": 58.41086,
+                "lon": 15.62157
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Malmö",
+              "state": "Skåne County",
+              "zip": "20512",
+              "country": "Sweden",
+              "geoPoint": {
+                "lat": 55.60587,
+                "lon": 13.00073
+              }
+            },
+            {
+              "facility": "WB Contracted Clinical Research Site",
+              "status": "ACTIVE_NOT_RECRUITING",
+              "city": "Stockholm",
+              "state": "Stockholm County",
+              "zip": "11239",
+              "country": "Sweden",
+              "geoPoint": {
+                "lat": 59.32938,
+                "lon": 18.06871
+              }
+            }
+          ]
+        },
+        "referencesModule": {
+          "seeAlsoLinks": [
+            {
+              "label": "Related Info",
+              "url": "https://windwardbio.com/"
+            }
+          ]
+        },
+        "ipdSharingStatementModule": {
+          "ipdSharing": "NO"
+        }
+      },
+      "derivedSection": {
+        "miscInfoModule": {
+          "versionHolder": "2026-11-20"
+        },
+        "conditionBrowseModule": {
+          "meshes": [
+            {
+              "id": "D001249",
+              "term": "Asthma"
+            },
+            {
+              "id": "D012140",
+              "term": "Respiratory Tract Diseases"
+            },
+            {
+              "id": "D008171",
+              "term": "Lung Diseases"
+            },
+            {
+              "id": "D001982",
+              "term": "Bronchial Diseases"
+            }
+          ],
+          "ancestors": [
+            {
+              "id": "D008173",
+              "term": "Lung Diseases, Obstructive"
+            },
+            {
+              "id": "D012130",
+              "term": "Respiratory Hypersensitivity"
+            },
+            {
+              "id": "D006969",
+              "term": "Hypersensitivity, Immediate"
+            },
+            {
+              "id": "D006967",
+              "term": "Hypersensitivity"
+            },
+            {
+              "id": "D007154",
+              "term": "Immune System Diseases"
+            }
+          ]
+        }
+      },
+      "hasResults": false
+    }
+  ],
+  "nextPageToken": "recorded-next-page-token"
+}

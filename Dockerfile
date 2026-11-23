@@ -1,5 +1,5 @@
-# Usa imagem oficial PHP 8.3 com FPM
-FROM php:8.3-fpm
+# Usa imagem oficial PHP 8.6 com FPM
+FROM php:8.6-fpm
 
 # Instala dependências do sistema
 RUN apt-get update && apt-get install -y \
@@ -24,8 +24,8 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip
 
-# Instala Node.js 20 LTS + npm
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+# Instala Node.js 26 LTS + npm
+RUN curl -fsSL https://deb.nodesource.com/setup_26.x | bash - \
     && apt-get install -y nodejs
 
 # Instala Composer
