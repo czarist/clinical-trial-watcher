@@ -11,6 +11,7 @@ use App\Models\AlertMatch;
 use App\Models\ClinicalTrials\ClinicalTrialChange;
 use App\Models\Digest;
 use App\Services\ClinicalTrials\Search\TrialSearchCriteria;
+use App\Services\Registries\SourceRegistry;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\Log;
 
@@ -31,6 +32,7 @@ final readonly class DigestBuilder
         private ChangeSummarizer $summarizer,
         private FactualChangeWriter $writer,
         private ConnectionInterface $db,
+        private SourceRegistry $sources,
         private int $maxItems,
     ) {}
 
@@ -45,7 +47,12 @@ final readonly class DigestBuilder
             ->where('created_at', '>=', $digest->period_start)
             ->where('created_at', '<', $digest->period_end);
 
-        $total = (clone $changes)->count();
+        // Studies, not change records: a study updated in two registries counts once.
+        $total = AlertMatch::query()
+            ->where('alert_id', $alert->id)
+            ->whereIn('clinical_trial_change_id', (clone $changes)->select('id'))
+            ->distinct()
+            ->count('clinical_trial_id');
 
         if ($total === 0) {
             $digest->update(['status' => DigestStatus::Empty, 'generated_at' => now()]);
@@ -53,12 +60,17 @@ final readonly class DigestBuilder
             return;
         }
 
-        $candidates = $changes->with('trial:id,nct_id,brief_title,overall_status,last_update_post_date')
+        $candidates = $changes->with('trial:id,source,source_id,canonical_trial_id,nct_id,brief_title,overall_status,last_update_post_date')
             ->latest('id')
             ->limit(self::MAX_RANKED)
             ->get();
 
         $ranked = $this->ranker->rank($candidates, TrialSearchCriteria::fromArray($alert->criteria ?? []), $language);
+        // One item per study: keep the best-ranked change among its registrations.
+        $ranked = collect($ranked)
+            ->unique(fn (RankedChange $item): string => (string) ($item->change->trial?->canonicalId() ?? 'change-'.$item->change->id))
+            ->values()
+            ->all();
         $shown = array_slice($ranked, 0, max(1, $this->maxItems));
         $batch = $this->summarizer->summarize(array_map(fn (RankedChange $item): ClinicalTrialChange => $item->change, $shown), $language);
 
@@ -74,8 +86,11 @@ final readonly class DigestBuilder
                 'rank' => $rank + 1,
                 'change_id' => $change->id,
                 'nct_id' => $nctId,
+                'source' => $trial?->source,
+                'source_id' => $trial?->source_id,
+                'registry' => $trial !== null ? $this->sources->name($trial->source) : null,
                 'title' => $trial?->brief_title,
-                'url' => RegistryLink::forNctId($nctId),
+                'url' => $trial !== null ? $this->sources->recordUrl($trial->source, $trial->source_id) : null,
                 'update_date' => $trial?->last_update_post_date?->toDateString(),
                 'update_date_label' => $trial?->last_update_post_date !== null
                     ? $this->writer->date(['date' => $trial->last_update_post_date->toDateString()], $language)

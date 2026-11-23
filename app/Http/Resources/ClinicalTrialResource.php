@@ -7,6 +7,8 @@ namespace App\Http\Resources;
 use App\Enums\TrialChangeType;
 use App\Models\ClinicalTrials\ClinicalTrial;
 use App\Models\ClinicalTrials\ClinicalTrialChange;
+use App\Models\ClinicalTrials\ClinicalTrialIdentifier;
+use App\Services\Registries\SourceRegistry;
 use Illuminate\Http\Request;
 
 /**
@@ -55,6 +57,14 @@ final class ClinicalTrialResource extends ClinicalTrialSummaryResource
             'arm_groups' => $this->whenLoaded('armGroups', fn () => $this->armGroups->map->only(['label', 'type', 'description'])),
             'outcomes' => $this->whenLoaded('outcomes', fn () => $this->outcomes->map->only(['type', 'measure', 'description', 'time_frame'])),
             'references' => $this->whenLoaded('references', fn () => $this->references->map->only(['pmid', 'type', 'citation', 'url', 'pubmed_url'])),
+            // Other registrations of the same study, and the record shown for it when this is one.
+            'duplicate_of' => $this->whenLoaded('canonical', fn () => $this->canonical === null ? null : $this->registration($this->canonical)),
+            'also_registered_as' => $this->whenLoaded('duplicates', fn () => $this->duplicates->map(fn (ClinicalTrial $trial): array => $this->registration($trial))->values()),
+            'identifiers' => $this->whenLoaded('identifiers', fn () => $this->identifiers->map(fn (ClinicalTrialIdentifier $identifier): array => [
+                'scheme' => $identifier->scheme->value,
+                'value' => $identifier->value,
+                'is_primary' => $identifier->is_primary,
+            ])->values()),
             'status_history' => $this->whenLoaded('trialChanges', fn () => $this->trialChanges
                 ->filter(fn (ClinicalTrialChange $change): bool => $change->type === TrialChangeType::StatusChanged)
                 ->values()
@@ -63,6 +73,22 @@ final class ClinicalTrialResource extends ClinicalTrialSummaryResource
                     'new_status' => $change->new_status,
                     'detected_at' => $change->created_at?->toIso8601String(),
                 ])),
+        ];
+    }
+
+    /**
+     * @return array{source: string, source_id: string, registry: string, registry_url: ?string, nct_id: ?string}
+     */
+    private function registration(ClinicalTrial $trial): array
+    {
+        $sources = app(SourceRegistry::class);
+
+        return [
+            'source' => $trial->source,
+            'source_id' => $trial->source_id,
+            'registry' => $sources->name($trial->source),
+            'registry_url' => $sources->recordUrl($trial->source, $trial->source_id),
+            'nct_id' => $trial->nct_id,
         ];
     }
 

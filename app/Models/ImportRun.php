@@ -28,6 +28,7 @@ class ImportRun extends Model
     ];
 
     protected $fillable = [
+        'source',
         'status',
         'updated_since',
         'pages',
@@ -76,6 +77,7 @@ class ImportRun extends Model
     {
         return [
             'id' => $this->id,
+            'source' => $this->source,
             'status' => $this->status->value,
             'updated_since' => $this->updated_since?->toDateString(),
             'pages' => $this->pages,

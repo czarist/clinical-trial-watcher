@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Groundwork for more registries and duplicate handling: records keep their registry (`source`) and identifier there (`source_id`); registry identifiers are normalized (NCT, EU CT, EudraCT, ISRCTN, DRKS, ACTRN, ChiCTR, jRCT, UMIN, CRIS, CTRI, ReBEC, PACTR, UTN) and indexed; records that share one are linked and shown as one study, with the registry listed first in `config/registries.php` preferred. Same-registry matches and groups that would hold one registry twice wait for review at `/api/admin/trial-links`, and reviews survive re-imports. Searches list each study once (new `source[]` filter), the study API lists its other registrations, alerts do not repeat news reported by a second registry, and digests have one item per study. `clinicaltrials:fetch --source` and `trials:reconcile-duplicates` (run once after upgrading).
 - Roadmap stage 8 (more registries): a multi-registry schema, a scraping base with a legal check per source, and importers planned for ISRCTN, Health Canada, CTIS, EudraCT, DRKS, REEC, CRIS, MFDS, UMIN-CTR, TFDA, ANZCTR, RENIS, ReBEC, NCI, EDA, CDE/NMPA and others, with WHO ICTRP conditioned on WHO's confirmation of its terms.
 
 ## [0.1.0] - 2026-11-23

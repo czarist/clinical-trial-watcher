@@ -294,6 +294,34 @@ final class AiDigestTest extends TestCase
         $this->assertTrue($alert->is_active);
     }
 
+    public function test_a_study_updated_in_two_registries_is_one_digest_item(): void
+    {
+        $alert = $this->alertFor($this->subscriber);
+        $duplicate = ClinicalTrial::factory()->create([
+            'source' => 'other_registry',
+            'source_id' => 'ISRCTN12345678',
+            'nct_id' => null,
+            'canonical_trial_id' => $this->trial->id,
+            'last_update_post_date' => '2026-11-19',
+        ]);
+        $change = $duplicate->trialChanges()->create([
+            'type' => TrialChangeType::StatusChanged,
+            'previous_status' => 'NOT_YET_RECRUITING',
+            'new_status' => 'RECRUITING',
+            'fingerprint' => str_repeat('b', 64),
+            'details' => [['field' => 'overall_status', 'before' => 'NOT_YET_RECRUITING', 'after' => 'RECRUITING']],
+        ]);
+        $change->forceFill(['created_at' => '2026-11-19 10:00:00'])->save();
+        AlertMatch::query()->create(['alert_id' => $alert->id, 'clinical_trial_id' => $this->trial->id, 'clinical_trial_change_id' => $change->id, 'reason' => 'status_change']);
+
+        $this->artisan('digests:dispatch weekly')->assertSuccessful();
+
+        $digest = Digest::sole();
+        $this->assertSame(1, $digest->content['total_updates']);
+        $this->assertCount(1, $digest->content['items']);
+        $this->assertSame(1, $digest->items()->count());
+    }
+
     /**
      * @param  array<string, mixed>  $criteria
      * @param  array<string, mixed>  $attributes

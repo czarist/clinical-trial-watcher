@@ -37,7 +37,7 @@ Proceed with ordinary implementation choices supported by the repository. Ask on
 
 Clinical Trial Watcher is a Laravel 13 application (PHP 8.6, MySQL 8.4, Redis cache through Predis) that imports clinical studies from the ClinicalTrials.gov API v2, serves them through an API with JWT authentication, and ships a Vue 3 web app in `resources/js/`. It runs with Docker Compose. Keep new code in the layer it belongs to:
 
-- `app/Console/Commands/FetchClinicalTrials.php` is the import's CLI entry point; the work is in `app/Services/ClinicalTrials/Import/` (`StudyMapper` maps the API's `protocolSection` and `derivedSection` modules, `ClinicalTrialSynchronizer` persists). Studies are matched by `nct_id`; keep imports idempotent so a run can be repeated safely.
+- `app/Console/Commands/FetchClinicalTrials.php` is the import's CLI entry point; the work is in `app/Services/ClinicalTrials/Import/` (`StudyMapper` maps the API's `protocolSection` and `derivedSection` modules, `ClinicalTrialSynchronizer` persists). Records are matched by `source` and `source_id` (the registry and the study's identifier there; for ClinicalTrials.gov the NCT number, also kept in `nct_id`); keep imports idempotent so a run can be repeated safely. Each registry is a `RegistrySource` listed in `config/registries.php` (`app/Services/Registries/`).
 - `app/Models/ClinicalTrials/` holds `ClinicalTrial` and one model per related list. Every related table has a `clinical_trial_id` foreign key and a `hasMany` relation on `ClinicalTrial`. When you add a field, add it to the migration, the model's `$fillable`, and the import mapping; a field missing from `$fillable` is silently dropped.
 - Keep the full API response in `raw_json` so new fields can be mapped later without fetching again.
 - `app/Models/` holds `User`, `Role`, `Permission`, `Plan` and `Subscription`. `User` implements `JWTSubject`.
@@ -79,6 +79,7 @@ This is a navigation aid, not a second roadmap. Confirm these points in code bef
 | Authentication | JWT only (`auth:api`). Sanctum was removed; do not reintroduce it. |
 | Authorization | Protected routes use the `permission:<name>` middleware (`App\Enums\PermissionName`) and policies for ownership. A new protected route needs both where relevant. |
 | Import | `ClinicalTrialImporter` follows every page, retries with backoff, saves each study in its own transaction and records an `ImportRun`. Incremental runs start from the last `succeeded` run; a run stopped by `--max-pages` or with failed studies is `partial` and does not move that point. |
+| Duplicates | `DuplicateLinker` runs in each study's transaction: it indexes identifiers, links records that share one and sets `canonical_trial_id` on every record but the one shown. Same-registry matches and groups holding one registry twice become `conflict` links for review (`/api/admin/trial-links`). Searches exclude non-canonical records (`CanonicalFilter`); alerts and digests count a study once. A new registry needs a `RegistrySource`, an entry in `config/registries.php`, tests with recorded fixtures, and its record URL validated by the source. |
 | Related lists | `StudyMapper` always returns every list in `ClinicalTrial::SYNCED_RELATIONS`; the synchronizer replaces each one. A new related list must be added to both. |
 | Full-text search | InnoDB full-text indexes do not see uncommitted rows, so a test of `q` must commit its data (see `FullTextSearchTest`) and clean it up. |
 | Billing | Plans are Free, Pro AI and Team AI (USD per month); Basic, Pro and Enterprise are legacy (`is_legacy`) and must stay untouched for existing subscribers. Check paid features through `App\Services\Billing\Entitlements`, never by plan name. Core search and basic alerts must never need a paid plan. Stripe is reached only through `SubscriptionGateway`; tests bind `Tests\Fakes\FakeSubscriptionGateway`. Webhooks are handled by Cashier at `/stripe/webhook`. |
@@ -110,7 +111,8 @@ For a new related list, also add its table, child model, `clinical_trial_id` for
 ## 6. Recipe: change the import safely
 
 - Keep `clinicaltrials:fetch` and existing options compatible unless the user requests a change.
-- Match studies by `nct_id`, not title or array position. Reject or handle missing identifiers explicitly; do not create anonymous duplicates.
+- Match records by `source` and `source_id`, not title or array position. Reject or handle missing identifiers explicitly; do not create anonymous duplicates.
+- Link duplicate registrations only through normalized registry identifiers (`IdentifierParser`, `DuplicateLinker`), never titles or sponsor protocol numbers. Keep each registry's values on its own record, never overwrite one registry's data with another's, and never override a link a person confirmed or rejected.
 - Idempotent means importing the same study twice produces one parent and the expected current child rows, not twice as many children.
 - A provided empty list means there are no current items: relation synchronization must remove obsolete rows. Define the treatment of an absent module separately if the source can return partial payloads.
 - Scope child deletion to the current study, for example through its relationship. Never delete all rows in a related table to refresh one study.

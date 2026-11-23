@@ -187,10 +187,10 @@ Objective: import studies from registries beyond ClinicalTrials.gov, one importe
 
 Foundations (needed before any second source)
 
-- [ ] Multi-registry schema through new migrations: `source` and `source_id` on studies, keeping `nct_id` working for ClinicalTrials.gov, and a table of linked identifiers (NCT, ISRCTN, EudraCT, EU CT, DRKS, REEC, CRIS, UMIN, jRCT, ACTRN, RBR, UTN and others).
-- [ ] Importer contract per source (fetch, map to the common study model, incremental cursor, `ImportRun` per source) and a `--source` option on the import command, keeping `clinicaltrials:fetch` compatible.
-- [ ] Deduplication through normalized secondary identifiers, never titles: records of the same study are linked as reviewable matches, keeping each source's conflicting values attributed to it.
-- [ ] Search, study page, alerts and digests aware of the source (filter by registry, link to the source record, source shown on every item).
+- [X] Multi-registry schema through new migrations: `source` and `source_id` on studies, keeping `nct_id` working for ClinicalTrials.gov, and a table of linked identifiers (NCT, ISRCTN, EudraCT, EU CT, DRKS, REEC, CRIS, UMIN, jRCT, ACTRN, RBR, UTN and others).
+- [X] Importer contract per source (fetch, map to the common study model, incremental cursor, `ImportRun` per source) and a `--source` option on the import command, keeping `clinicaltrials:fetch` compatible.
+- [X] Deduplication through normalized secondary identifiers, never titles: records of the same study are linked as reviewable matches, keeping each source's conflicting values attributed to it.
+- [X] Search, study page, alerts and digests aware of the source (filter by registry, link to the source record, source shown on every item).
 
 Scraping (for sources without an API or export)
 

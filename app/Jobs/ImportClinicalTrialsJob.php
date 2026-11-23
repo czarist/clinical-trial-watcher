@@ -11,7 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
 /**
- * Runs the ClinicalTrials.gov import on the queue. Only one import runs at a time.
+ * Runs a registry import on the queue. Only one import per registry runs at a time.
  */
 final class ImportClinicalTrialsJob implements ShouldBeUnique, ShouldQueue
 {
@@ -24,6 +24,11 @@ final class ImportClinicalTrialsJob implements ShouldBeUnique, ShouldQueue
     public int $uniqueFor = 6 * 60 * 60;
 
     public function __construct(public readonly ImportOptions $options = new ImportOptions) {}
+
+    public function uniqueId(): string
+    {
+        return $this->options->source;
+    }
 
     public function handle(ClinicalTrialImporter $importer): void
     {

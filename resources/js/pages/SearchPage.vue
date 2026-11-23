@@ -90,9 +90,9 @@ function followThisSearch(): void {
                 <p class="muted count">{{ t('search.count', { count: results.meta.total }) }}</p>
                 <p v-if="results.data.length === 0" class="notice">{{ t('search.empty') }}</p>
                 <ol class="results" :class="{ 'is-loading': loading }">
-                    <li v-for="trial in results.data" :key="trial.nct_id" class="result">
+                    <li v-for="trial in results.data" :key="`${trial.source}:${trial.source_id}`" class="result">
                         <div class="result__main">
-                            <p class="result__id nct">{{ trial.nct_id }}<span v-if="trial.acronym" class="muted"> ({{ trial.acronym }})</span></p>
+                            <p class="result__id nct">{{ trial.nct_id ?? trial.source_id }}<span v-if="trial.acronym" class="muted"> ({{ trial.acronym }})</span><span class="muted"> · {{ trial.registry }}</span></p>
                             <h2 class="result__title"><RouterLink :to="`/studies/${trial.nct_id}`">{{ trial.brief_title }}</RouterLink></h2>
                             <p v-if="trial.conditions?.length" class="result__conditions">{{ trial.conditions.slice(0, 4).join(', ') }}<template v-if="trial.conditions.length > 4"> {{ t('search.moreConditions', { count: trial.conditions.length - 4 }) }}</template></p>
                             <dl class="result__facts">

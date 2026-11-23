@@ -6,6 +6,7 @@ namespace App\Services\ClinicalTrials\Import;
 
 use App\Exceptions\InvalidStudyPayload;
 use App\Services\ClinicalTrials\Changes\TrackedFacts;
+use App\Services\Registries\ClinicalTrialsGovSource;
 use Illuminate\Support\Arr;
 
 /**
@@ -15,16 +16,28 @@ use Illuminate\Support\Arr;
  * replaces obsolete rows. Rows missing a required value are skipped; the full payload is
  * kept in raw_json.
  */
-final class StudyMapper
+final class StudyMapper implements StudyPayloadMapper
 {
     /** Maximum length of indexed string columns. */
     private const int SHORT_TEXT = 255;
+
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    #[\Override]
+    public function payloadId(array $payload): ?string
+    {
+        $nctId = Arr::get($payload, 'protocolSection.identificationModule.nctId');
+
+        return is_string($nctId) ? $nctId : null;
+    }
 
     /**
      * @param  array<string, mixed>  $study
      *
      * @throws InvalidStudyPayload
      */
+    #[\Override]
     public function map(array $study): MappedStudy
     {
         $protocol = $this->section($study, 'protocolSection');
@@ -35,6 +48,8 @@ final class StudyMapper
         }
 
         return new MappedStudy(
+            source: ClinicalTrialsGovSource::KEY,
+            sourceId: $nctId,
             nctId: $nctId,
             attributes: $this->attributes($study, $protocol),
             relations: [

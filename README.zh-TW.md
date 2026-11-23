@@ -46,6 +46,15 @@
 - **變更會連同變更前後的值一併追蹤。** 新研究會記錄為新研究，並成為比較基準。之後的匯入會比較整體招募狀態、試驗地點（新增、移除或試驗地點狀態變更）、開始與完成日期（保留原始精確度：只有年月的日期仍維持年月）以及已發布的結果，並以結構化的詳細資料儲存。試驗地點清單依機構與地點比對，因此登錄資料庫列出的順序改變並不算變更。每項變更都有穩定的指紋，因此重試或重複的匯入不會將同一項變更記錄或通知兩次。
 - **不完整的日期會經過正規化**（`2024` → `2024-01-01`、`2024-06` → `2024-06-01`），完整的研究資料則保存在 `raw_json` 中。
 
+### 重複登錄
+
+匯入功能可支援多個登錄資料庫（`config/registries.php`；目前只匯入 ClinicalTrials.gov，其他登錄資料庫已列入藍圖）。每筆紀錄都會保存所屬的登錄資料庫（`source`）及其在該資料庫中的識別碼（`source_id`），識別碼在每個登錄資料庫內不會重複，因此再次匯入同一筆紀錄時會更新該紀錄。
+
+- **登錄多次的研究只顯示一次。** 每筆紀錄的登錄識別碼（本身的識別碼及其引用的識別碼，例如 ClinicalTrials.gov 次要 ID 中的 ISRCTN 或 EudraCT 編號）會先經過正規化（`ISRCTN 12345678` 與 `isrctn12345678` 視為相同）再進行比對。共用某個識別碼的紀錄會建立連結並歸為一組：顯示在 `config/registries.php` 中排在最前面的登錄資料庫的紀錄，其餘紀錄則保留為它的其他登錄。贊助者的計畫書編號、補助編號及標題絕不會用來合併研究。
+- **有疑慮的比對交由人工判斷。** 同一個登錄資料庫中共用某個識別碼的兩筆紀錄，或會包含同一登錄資料庫兩筆紀錄的群組，都不會合併：它們的連結會標記為 `conflict`。營運人員可在 `GET /api/admin/trial-links` 列出連結並確認或拒絕；之後的匯入會保留此決定。共用識別碼消失的連結會被移除，並重新計算群組。
+- **一項研究，一則提醒。** 搜尋時每項研究只列出一次；任何一筆登錄的變更都會以該研究進行比對；第二個登錄資料庫回報的相同消息（研究出現在該資料庫中，或相同的狀態）不會再次比對或寄送電子郵件。每期摘要中每項研究只有一個項目。
+- **既有資料。** 升級後執行一次 `php artisan trials:reconcile-duplicates`，為已儲存研究的識別碼建立索引；匯入時則會對儲存的每項研究自動執行此作業。
+
 ### 搜尋
 
 - 分頁搜尋，可依下列條件篩選：標題與摘要中的字詞（MySQL 全文檢索）、疾病或狀況、關鍵字、MeSH 詞彙、招募狀態、試驗分期、研究類型、贊助者、國家、城市、開始日期、首次發布日期與最後更新日期、是否有結果，以及與某個地點的距離。
@@ -206,8 +215,8 @@ AI_MODEL=...                            # a model name the provider accepts
 | `POST` | `/auth/email/verification-notification` | 權杖 | 重新寄送確認連結 |
 | `PUT` | `/account/profile`, `/account/password` | 權杖 | 變更名稱與電子郵件，或變更密碼 |
 | `PUT` | `/account/locale` | 權杖 | 變更帳戶語言（`locale`：`en`、`pt_BR`、`es`、`zh_CN`、`zh_TW`、`ja`、`ko`） |
-| `GET` | `/trials` | `view_clinical_trials` | 搜尋；篩選條件見下方，另有 `sort`、`page`、`per_page`（最多 100） |
-| `GET` | `/trials/{nct_id}` | `view_clinical_trials` | 研究及其所有相關清單 |
+| `GET` | `/trials` | `view_clinical_trials` | 搜尋，每項研究一筆結果；篩選條件見下方（包括 `source[]`，即登錄資料庫的鍵值），另有 `sort`、`page`、`per_page`（最多 100） |
+| `GET` | `/trials/{nct_id}` | `view_clinical_trials` | 研究及其所有相關清單、正規化後的 `identifiers`，以及其他登錄（`also_registered_as`；若此紀錄顯示在另一筆紀錄之下，則為 `duplicate_of`） |
 | `GET` `POST` | `/alerts` | `create_alerts`，已確認電子郵件 | 列出或建立已儲存搜尋；使用 `team_id` 存取團隊共用的已儲存搜尋（擁有者建立，成員列出） |
 | `GET` `PATCH` `DELETE` | `/alerts/{id}` | 擁有者；團隊成員可讀取共用的項目 | 讀取、變更或刪除已儲存搜尋，包括 `ai_digest_enabled`、`ai_digest_frequency`（`daily`、`weekly`）及 `ai_digest_language`（`en`、`pt_BR`、`es`、`zh_CN`、`zh_TW`、`ja`、`ko`） |
 | `GET` | `/alerts/{id}/matches` | 擁有者、團隊成員 | 符合的研究 |
@@ -229,6 +238,8 @@ AI_MODEL=...                            # a model name the provider accepts
 | `GET` `PUT` | `/admin/roles`, `/admin/permissions`, `/admin/roles/{id}/permissions` | `manage_roles` | 管理角色權限 |
 | `GET` `POST` | `/admin/imports` | `manage_imports` | 匯入執行紀錄；將匯入排入佇列（202） |
 | `GET` | `/admin/digests` | `manage_imports` | 摘要各期的狀態、產生方式、改用事實摘要的原因及指標（不含內容） |
+| `GET` | `/admin/trial-links` | `manage_imports` | 共用某個登錄識別碼的紀錄之間的連結；`status` = `conflict`（預設）、`auto`、`confirmed` 或 `rejected` |
+| `PATCH` | `/admin/trial-links/{id}` | `manage_imports` | 確認或拒絕連結（`status`：`confirmed` 或 `rejected`）；相關紀錄會重新分組 |
 
 搜尋篩選條件：`q`、`condition`、`keyword`、`mesh_term`、`sponsor`、`country`、`city`、`status[]`、`phase[]`、`study_type[]`、`has_results`、`start_date_from`/`_to`、`first_posted_from`/`_to`、`last_update_from`/`_to`，以及 `latitude` + `longitude` + `radius_km`。`sort` 接受 `-last_update_post_date`（預設）、`last_update_post_date`、`±start_date`、`±study_first_post_date`、`±brief_title` 及 `relevance`。
 
@@ -254,7 +265,8 @@ API:     nginx → PHP-FPM (Laravel) → routes/api.php → Form Request → con
 Web app: Laravel serves resources/views/app.blade.php → Vue 3 + Vue Router + Pinia → /api
 ```
 
-- `app/Services/ClinicalTrials/Import/` 包含匯入功能。登錄資料庫用戶端位於 `StudyRegistryClient` 介面之後，對應器（mapper）是只依賴資料內容的純函式，同步器（synchronizer）則負責資料持久化。
+- `app/Services/ClinicalTrials/Import/` 包含匯入功能。每個登錄資料庫都是一個 `RegistrySource`（`app/Services/Registries/`），具備一個 `StudyRegistryClient` 及一個 `StudyPayloadMapper`；`clinicaltrials:fetch --source=<key>` 用來選擇登錄資料庫（預設為 `clinicaltrials_gov`），且每個登錄資料庫都有各自的增量游標（cursor）。對應器（mapper）是只依賴資料內容的純函式，同步器（synchronizer）則負責資料持久化。
+- `app/Services/Registries/` 包含登錄資料庫清單（`SourceRegistry`）、識別碼正規化（`IdentifierParser`）及去除重複（`DuplicateLinker`，在每項研究的交易中執行）。
 - `app/Services/ClinicalTrials/Search/` 以在 `AppServiceProvider` 中註冊的小型 `TrialFilter` 類別組成搜尋。提醒會重複使用相同的條件與篩選器。
 - `app/Services/ClinicalTrials/Changes/` 包含研究的追蹤事實，以及負責比較這些事實的純函式 `ChangeDetector`。
 - `app/Services/Alerts/` 負責強制執行已儲存搜尋上限、比對匯入結果及寄送電子郵件。`app/Services/Billing/` 包含方案規則及 `Entitlements`；Stripe 透過 `SubscriptionGateway` 介面存取。`app/Services/Teams/` 管理團隊及邀請。
@@ -281,7 +293,7 @@ docker-compose run --rm node npm test
 
 ```text
 app/
-  Console/Commands/      clinicaltrials:fetch, alerts:send-digests, digests:dispatch, billing:check-prices
+  Console/Commands/      clinicaltrials:fetch, trials:reconcile-duplicates, alerts:send-digests, digests:dispatch, billing:check-prices
   Enums/                 statuses, phases, permissions, alert and digest frequency, team role
   Http/                  Controllers/Api (and Admin/), Requests/, Resources/, Middleware/
   Jobs/, Events/, Listeners/, Notifications/, Policies/

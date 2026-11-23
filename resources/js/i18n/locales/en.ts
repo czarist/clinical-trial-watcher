@@ -214,7 +214,9 @@ const en = {
         countries: 'Countries',
         sites: 'Sites',
         lastUpdate: 'Last update',
-        openRegistry: 'Open on ClinicalTrials.gov',
+        openRegistry: 'Open on {registry}',
+        alsoRegistered: 'Also registered as',
+        shownAs: 'Shown on this site as',
     },
     alerts: {
         title: 'Alerts',

@@ -18,6 +18,7 @@ final readonly class TrialSearchCriteria
      * @param  list<string>  $statuses
      * @param  list<string>  $phases
      * @param  list<string>  $studyTypes
+     * @param  list<string>  $sources  registry keys; a study matches when any of its registrations comes from one
      */
     public function __construct(
         public ?string $q = null,
@@ -40,6 +41,7 @@ final readonly class TrialSearchCriteria
         public ?float $latitude = null,
         public ?float $longitude = null,
         public ?float $radiusKm = null,
+        public array $sources = [],
     ) {}
 
     /**
@@ -76,6 +78,8 @@ final readonly class TrialSearchCriteria
             "{$prefix}latitude" => ['nullable', 'numeric', 'between:-90,90', "required_with:{$prefix}longitude,{$prefix}radius_km"],
             "{$prefix}longitude" => ['nullable', 'numeric', 'between:-180,180', "required_with:{$prefix}latitude,{$prefix}radius_km"],
             "{$prefix}radius_km" => ['nullable', 'numeric', 'between:1,2000', "required_with:{$prefix}latitude,{$prefix}longitude"],
+            "{$prefix}source" => ['nullable', 'array', 'max:50'],
+            "{$prefix}source.*" => [Rule::in(array_keys((array) config('registries.sources')))],
         ];
     }
 
@@ -109,6 +113,7 @@ final readonly class TrialSearchCriteria
             latitude: $float('latitude'),
             longitude: $float('longitude'),
             radiusKm: $float('radius_km'),
+            sources: $list('source'),
         );
     }
 
@@ -140,6 +145,7 @@ final readonly class TrialSearchCriteria
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'radius_km' => $this->radiusKm,
+            'source' => $this->sources,
         ], static fn (mixed $value): bool => $value !== null && $value !== []);
     }
 
