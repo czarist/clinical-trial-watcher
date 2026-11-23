@@ -1,0 +1,294 @@
+{
+ "ctNumber": "2026-527959-25-00",
+ "ctStatus": "Authorised",
+ "decisionDate": "2026-11-21T15:23:08.663",
+ "publishDate": "2026-11-22T02:31:11.26147211",
+ "ctPublicStatusCode": 2,
+ "authorizedApplication": {
+  "authorizedPartI": {
+   "id": 151251,
+   "rowSubjectCount": 0,
+   "products": [],
+   "trialDetails": {
+    "clinicalTrialIdentifiers": {
+     "publicTitle": "Comparative Pharmacokinetics and Bioequivalence of Semaglutide 0.5 mg Solution for Injection in Pre-filled Pen in Healthy Participants.",
+     "shortTitle": "PHD1001",
+     "secondaryIdentifyingNumbers": {
+      "additionalRegistries": []
+     }
+    },
+    "trialInformation": {
+     "trialCategory": {
+      "trialPhase": "2",
+      "trialCategory": "1",
+      "trialCategoryId": 140399
+     },
+     "medicalCondition": {
+      "partIMedicalConditions": [
+       {
+        "id": 159083,
+        "medicalCondition": "No medical condition.",
+        "isConditionRareDisease": false
+       }
+      ]
+     },
+     "trialDuration": {
+      "estimatedEndDate": "2027-02-19",
+      "estimatedRecruitmentStartDate": "2026-12-02"
+     },
+     "populationOfTrialSubjects": {
+      "ageRanges": [
+       {
+        "id": 416473,
+        "ageRangeCategoryCode": "3",
+        "ageRangeCategory": "3"
+       }
+      ],
+      "ageRangeSecondaryIds": [],
+      "clinicalTrialGroups": [
+       {
+        "code": "1",
+        "name": "Healthy volunteers"
+       }
+      ],
+      "isFemaleSubjects": true,
+      "isMaleSubjects": true,
+      "isVulnerablePopulationSelected": true
+     }
+    }
+   },
+   "assessmentOutcome": "acceptable",
+   "assessmentOutcomeDate": "2026-11-17",
+   "therapeuticAreas": [
+    {
+     "code": "58",
+     "name": "Not possible to specify"
+    }
+   ],
+   "medicalConditions": [
+    {
+     "id": 159083,
+     "medicalCondition": "No medical condition.",
+     "isConditionRareDisease": false
+    }
+   ],
+   "sponsors": [
+    {
+     "id": 172772,
+     "primary": true,
+     "publicContacts": [
+      {
+       "id": 510560,
+       "type": "Public",
+       "functionalName": "Redacted",
+       "functionalEmailAddress": "Redacted",
+       "telephone": "Redacted",
+       "organisation": {
+        "id": 1063819,
+        "type": "Pharmaceutical company",
+        "typeCode": "10",
+        "name": "PHARMIDEA SIA",
+        "commercial": true,
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100003458",
+        "organisationLocationStatus": "Active"
+       }
+      }
+     ],
+     "scientificContacts": [
+      {
+       "id": 510561,
+       "type": "Scientific",
+       "functionalName": "Redacted",
+       "functionalEmailAddress": "Redacted",
+       "telephone": "Redacted",
+       "organisation": {
+        "id": 1063819,
+        "type": "Pharmaceutical company",
+        "typeCode": "10",
+        "name": "PHARMIDEA SIA",
+        "commercial": true,
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100003458",
+        "organisationLocationStatus": "Active"
+       }
+      }
+     ],
+     "thirdParties": [],
+     "organisation": {
+      "id": 1063819,
+      "type": "Pharmaceutical company",
+      "typeCode": "10",
+      "name": "PHARMIDEA SIA",
+      "commercial": true,
+      "isBusinessKeyValidated": true,
+      "businessKey": "ORG-100003458",
+      "organisationLocationStatus": "Active"
+     },
+     "addresses": [
+      {
+       "id": 1017440,
+       "organisation": {
+        "id": 1063819,
+        "type": "Pharmaceutical company",
+        "typeCode": "10",
+        "name": "PHARMIDEA SIA",
+        "commercial": true,
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100003458",
+        "organisationLocationStatus": "Active"
+       },
+       "address": {
+        "addressId": 1147942,
+        "oneLine": "Rupnicu Iela 4",
+        "addressLine1": "Rupnicu Iela 4",
+        "addressLine2": "",
+        "addressLine3": "",
+        "addressLine4": "",
+        "city": "Olaine",
+        "postcode": "LV-2114",
+        "country": 2019,
+        "countryName": "Latvia"
+       },
+       "isBusinessKeyValidated": true,
+       "businessKey": "LOC-100002233"
+      }
+     ],
+     "isCommercial": true,
+     "commercial": "Commercial"
+    }
+   ],
+   "trialCategoryCode": "1",
+   "partOneTherapeuticAreas": [
+    {
+     "id": 1290669,
+     "therapeuticArea": {
+      "code": "58",
+      "name": "Not possible to specify"
+     }
+    }
+   ]
+  },
+  "authorizedPartsII": [
+   {
+    "id": 352518,
+    "mscId": 65292,
+    "mscInfo": {
+     "id": 65292,
+     "clinicalTrialId": 29988,
+     "countryOrganisationId": 2024,
+     "reportingStatusCode": "Authorised",
+     "fromDate": "2026-10-30",
+     "toDate": "2026-10-30",
+     "isProposedRms": true,
+     "countryName": "Portugal",
+     "organisationInfo": {},
+     "firstDecisionDate": "2026-11-21",
+     "trialStatus": "Authorised",
+     "trialPeriod": [],
+     "trialRecruitmentPeriod": [],
+     "hasRecruitmentStarted": false,
+     "activeTrialPeriod": {},
+     "activeTrialRecruitmentPeriod": {},
+     "isWillingAtDayThreeView": false,
+     "clinicalTrialStatusHistory": [
+      {
+       "id": 528602,
+       "mscId": 65292,
+       "trialStatus": "Authorised",
+       "trialStatusDate": "2026-11-21T15:23:08.359"
+      },
+      {
+       "id": 512036,
+       "mscId": 65292,
+       "trialStatus": "Under evaluation",
+       "trialStatusDate": "2026-10-12T14:55:22.927"
+      }
+     ],
+     "applicationTypeMsc": "1",
+     "mscName": "Portugal",
+     "assessmentOutcome": "acceptable",
+     "assessmentOutcomeDate": "2026-11-20",
+     "decision": "authorized",
+     "decisionDate": "2026-11-21"
+    },
+    "decisionDate": "2026-11-21",
+    "recruitmentSubjectCount": 26,
+    "trialSites": [
+     {
+      "id": 2484995,
+      "organisationAddressInfo": {
+       "id": 1046715,
+       "organisation": {
+        "id": 1094195,
+        "type": "Pharmaceutical company",
+        "typeCode": "10",
+        "name": "Blueclinical Investigacao E Desenvolvimento Em Saude Lda.",
+        "commercial": true,
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100011139",
+        "organisationLocationStatus": "Active"
+       },
+       "address": {
+        "addressId": 1183940,
+        "oneLine": "Rua De Sarmento De Beires 153 0 Floor 3rd Floor",
+        "addressLine1": "Rua De Sarmento De Beires 153 0 Floor 3rd Floor",
+        "addressLine2": "",
+        "addressLine3": "",
+        "addressLine4": "",
+        "city": "Porto",
+        "postcode": "4250-449",
+        "country": 2024,
+        "countryName": "Portugal"
+       },
+       "phone": "Redacted",
+       "email": "Redacted",
+       "isBusinessKeyValidated": true,
+       "businessKey": "LOC-100017721"
+      },
+      "personInfo": {
+       "id": 2753477,
+       "firstName": "Redacted",
+       "lastName": "Redacted",
+       "telephone": "Redacted",
+       "email": "Redacted",
+       "title": "1"
+      },
+      "departmentName": "Medical Management"
+     }
+    ],
+    "applicationStatusCode": "Authorised"
+   }
+  ],
+  "trialGlobalEnd": [],
+  "memberStatesConcerned": [
+   {
+    "mscName": "Portugal",
+    "mscId": 65292,
+    "firstDecisionDate": "2026-11-21T15:23:08.663",
+    "lastDecisionDate": "2026-11-21T15:23:08.663",
+    "mscPublicStatusCode": 2
+   }
+  ],
+  "eudraCt": {
+   "isTransitioned": false
+  }
+ },
+ "events": {
+  "temporaryHaltList": [],
+  "trialEvents": [
+   {
+    "mscId": 65292,
+    "mscName": "Portugal",
+    "events": []
+   }
+  ],
+  "unexpectedEvents": [],
+  "seriousBreaches": [],
+  "urgentSafetyMeasures": []
+ },
+ "results": {},
+ "trialRegion": "EEA",
+ "trialRegionCode": 1,
+ "correctiveMeasures": []
+}

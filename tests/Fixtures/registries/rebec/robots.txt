@@ -1,0 +1,5 @@
+User-Agent: *
+Disallow: 
+Disallow: /xml_ictrp/
+User-Agent: Googlebot
+Allow: /

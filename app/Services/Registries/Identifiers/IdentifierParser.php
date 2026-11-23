@@ -18,6 +18,9 @@ final class IdentifierParser
     /** Secondary identifier types whose value is an EudraCT number even when spelled loosely. */
     private const array EUDRACT_TYPES = ['EUDRACT_NUMBER', 'EUDRACT'];
 
+    /** Secondary identifier types whose digits-only value is an IRAS number. */
+    private const array IRAS_TYPES = ['IRAS', 'IRAS_NUMBER', 'IRAS ID'];
+
     public function parse(?string $raw, ?string $type = null, bool $isPrimary = false): ?TrialIdentifier
     {
         $value = trim(preg_replace('/\s+/u', ' ', (string) $raw) ?? '');
@@ -36,6 +39,10 @@ final class IdentifierParser
         if ($type !== null && in_array(strtoupper($type), self::EUDRACT_TYPES, true)
             && preg_match('/((?:19|20)\d{2})-(\d{6})-(\d{2})/', $value, $matches) === 1) {
             return new TrialIdentifier(IdentifierScheme::EudraCt, implode('-', array_slice($matches, 1)), $isPrimary);
+        }
+
+        if ($type !== null && in_array(strtoupper($type), self::IRAS_TYPES, true) && preg_match('/^\d{5,7}$/', $value) === 1) {
+            return new TrialIdentifier(IdentifierScheme::Iras, 'IRAS'.$value, $isPrimary);
         }
 
         return null;

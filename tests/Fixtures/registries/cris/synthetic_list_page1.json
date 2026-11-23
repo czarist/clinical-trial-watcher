@@ -1,0 +1,35 @@
+{
+  "resultCode": "00",
+  "resultMsg": "NORMAL_SERVICE",
+  "numOfRows": 2,
+  "pageNo": 1,
+  "totalCount": 3,
+  "items": [
+    {
+      "trial_id": "KCT0002243",
+      "scientific_title_kr": "배터리교체가 필요한 심장 전기장치 이식 환자에서 플라즈마블레이드와 기존 전기소작기의 효과 비교",
+      "scientific_title_en": "Comparison of efficacy of PlasmaBlade versus conventional electrocautery in patients undergoing generator replacement of cardiac implantable electronic devices",
+      "date_registration": "2017-02-23",
+      "date_updated": "2026-11-20",
+      "date_enrolment": "2016-06-16",
+      "type_enrolment_kr": "실제등록",
+      "results_date_completed": "2019-06-01",
+      "results_type_date_completed_kr": "예정",
+      "study_type_kr": "중재연구",
+      "i_freetext_kr": "의료기구",
+      "phase_kr": "해당사항없음",
+      "source_name_kr": "메드트로닉코리아",
+      "primary_sponsor_kr": "재단법인 아산사회복지재단 서울아산병원",
+      "primary_outcome_1_kr": "시술후부터 퇴원 전까지 기기 관련 합병증"
+    },
+    {
+      "trial_id": "KCT0009876",
+      "scientific_title_kr": "만성 요통 환자에서 운동 프로그램의 효과에 대한 관찰연구",
+      "scientific_title_en": "",
+      "date_registration": "2024-08-01",
+      "date_updated": "2024-09-10",
+      "study_type_kr": "관찰연구",
+      "phase_kr": "해당사항없음"
+    }
+  ]
+}

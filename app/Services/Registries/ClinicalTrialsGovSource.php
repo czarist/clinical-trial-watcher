@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Registries;
 
+use App\Enums\AccessMethod;
 use App\Services\ClinicalTrials\Import\StudyMapper;
 use App\Services\ClinicalTrials\Import\StudyPayloadMapper;
 use App\Services\ClinicalTrials\Import\StudyRegistryClient;
@@ -29,6 +30,18 @@ final readonly class ClinicalTrialsGovSource implements RegistrySource
     public function name(): string
     {
         return 'ClinicalTrials.gov';
+    }
+
+    public function access(): SourceAccess
+    {
+        return new SourceAccess(
+            method: AccessMethod::Api,
+            termsUrl: 'https://clinicaltrials.gov/about-site/terms-conditions',
+            licence: 'US government public data; no restriction on reuse.',
+            attribution: 'Source: ClinicalTrials.gov',
+            reviewedOn: '2026-11-23',
+            automatedAccessAllowed: true,
+        );
     }
 
     public function client(): StudyRegistryClient

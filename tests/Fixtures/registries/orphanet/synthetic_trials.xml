@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Synthetic Orphadata "National Clinical Trials" dump: invented values in the structure of the published sample (JDBOR 1.3.42 / 4.1.8). Not Orphanet data. -->
+<JDBOR date="2026-11-01 08:00:00" version="1.3.42 / 4.1.8 [2025-03-03]" copyright="Orphanet (c) 2026" dbserver="synthetic">
+  <ClinicalTrialList count="3">
+    <ClinicalTrial id="900001">
+      <OrphaNumber>990001</OrphaNumber>
+      <ExpertLink lang="en">http://www.orpha.net/consor/cgi-bin/OC_Exp.php?lng=en&amp;Expert=990001</ExpertLink>
+      <Name>SYNTH-1 : Étude de phase III comparant le produit A au traitement standard dans la vascularite synthétique - FR</Name>
+      <Name_en>SYNTH-1: Phase III Study Comparing Product A With Standard Care in Synthetic Vasculitis - FR</Name_en>
+      <ClinicalTrialTypeFlagList count="2">
+        <ClinicalTrialTypeFlag id="15066">
+          <Name lang="en">Clinical trial</Name>
+        </ClinicalTrialTypeFlag>
+        <ClinicalTrialTypeFlag id="15072">
+          <Name lang="en">Drug clinical trial</Name>
+        </ClinicalTrialTypeFlag>
+      </ClinicalTrialTypeFlagList>
+      <ClinicalTrialStatusFlagList count="2">
+        <ClinicalTrialStatusFlag id="35">
+          <Name lang="en">on-line</Name>
+        </ClinicalTrialStatusFlag>
+        <ClinicalTrialStatusFlag id="37">
+          <Name lang="en">multicentric</Name>
+        </ClinicalTrialStatusFlag>
+      </ClinicalTrialStatusFlagList>
+      <Url>https://clinicaltrials.gov/study/NCT09000001</Url>
+      <ProtocolUrl/>
+      <PSOIEUrl>https://euclinicaltrials.eu/search-for-clinical-trials/?lang=en&amp;EUCT=2024-590001-11-00</PSOIEUrl>
+      <Country id="75">
+        <Iso>FR</Iso>
+        <Name lang="en">FRANCE</Name>
+      </Country>
+      <GeoCoverage id="1135">
+        <Name lang="en">National</Name>
+      </GeoCoverage>
+      <Phase id="72">
+        <Name lang="en">III</Name>
+      </Phase>
+      <Recruitment id="101">
+        <Name lang="en">yes</Name>
+      </Recruitment>
+      <DrugTradeNameClinicalTrialAssociationList count="1">
+        <DrugTradeNameClinicalTrialAssociation id="700001">
+          <DrugTradeName id="7001">
+            <Name lang="en">Synthavex</Name>
+          </DrugTradeName>
+        </DrugTradeNameClinicalTrialAssociation>
+      </DrugTradeNameClinicalTrialAssociationList>
+      <SubstanceClinicalTrialAssociationList count="1">
+        <SubstanceClinicalTrialAssociation id="800001">
+          <Substance id="8001">
+            <Name lang="en">Synthamab</Name>
+          </Substance>
+        </SubstanceClinicalTrialAssociation>
+      </SubstanceClinicalTrialAssociationList>
+      <BeginDate>2025-03-15 00:00:00.0</BeginDate>
+      <EndDate>2028-06-30 00:00:00.0</EndDate>
+      <ValidationDate>2026-02-10 00:00:00.0</ValidationDate>
+      <Detail>EudraCT 2019-000123-45; EU CT 2024-590001-11-00</Detail>
+      <PersonActivityAssociationList count="3">
+        <PersonActivityAssociation>
+          <PersonFunction id="10">
+            <Name lang="en">Sponsor of clinical trial</Name>
+          </PersonFunction>
+          <Person id="1001">
+            <Firstname/>
+            <Lastname>Synthetic Hospitals Trust (DRC)</Lastname>
+          </Person>
+          <Institution id="2001">
+            <Department_Service_Lab_PatientOrganisationName>Clinical Research Department</Department_Service_Lab_PatientOrganisationName>
+            <Address id="3001">
+              <Hosting_Institution>Synthetic University Hospital</Hosting_Institution>
+              <Town>
+                <Name>PARIS</Name>
+              </Town>
+              <Country id="75">
+                <Iso>FR</Iso>
+                <Name lang="en">FRANCE</Name>
+              </Country>
+            </Address>
+          </Institution>
+        </PersonActivityAssociation>
+        <PersonActivityAssociation>
+          <PersonFunction id="2">
+            <Name lang="en">Principal investigator of clinical trial</Name>
+          </PersonFunction>
+          <Person id="1002">
+            <Firstname>Redacted</Firstname>
+            <Lastname>Redacted</Lastname>
+          </Person>
+          <Institution id="2002">
+            <Department_Service_Lab_PatientOrganisationName>Internal Medicine</Department_Service_Lab_PatientOrganisationName>
+            <Address id="3002">
+              <Hosting_Institution>Synthetic Central Hospital</Hosting_Institution>
+              <Town>
+                <Name>SAINT-ÉTIENNE</Name>
+              </Town>
+              <Country id="75">
+                <Iso>FR</Iso>
+                <Name lang="en">FRANCE</Name>
+              </Country>
+            </Address>
+          </Institution>
+        </PersonActivityAssociation>
+        <PersonActivityAssociation>
+          <PersonFunction id="3">
+            <Name lang="en">Investigator of clinical trial</Name>
+          </PersonFunction>
+          <Institution id="2003">
+            <Department_Service_Lab_PatientOrganisationName>Rheumatology</Department_Service_Lab_PatientOrganisationName>
+            <Address id="3003">
+              <Hosting_Institution>Synthetic Regional Hospital</Hosting_Institution>
+              <Town>
+                <Name>LYON</Name>
+              </Town>
+              <Country id="75">
+                <Iso>FR</Iso>
+                <Name lang="en">FRANCE</Name>
+              </Country>
+            </Address>
+          </Institution>
+        </PersonActivityAssociation>
+      </PersonActivityAssociationList>
+      <DisorderList count="2">
+        <Disorder id="9001">
+          <OrphaCode>99001</OrphaCode>
+          <Name lang="en">Synthetic vasculitis</Name>
+        </Disorder>
+        <Disorder id="9002">
+          <OrphaCode>99002</OrphaCode>
+          <Name lang="en">Synthetic granulomatosis</Name>
+        </Disorder>
+      </DisorderList>
+      <GeneList count="0">
+      </GeneList>
+    </ClinicalTrial>
+    <ClinicalTrial id="900002">
+      <OrphaNumber>990002</OrphaNumber>
+      <ExpertLink lang="en"/>
+      <Name>Synthetic observational trial with few fields</Name>
+      <ClinicalTrialTypeFlagList count="0">
+      </ClinicalTrialTypeFlagList>
+      <ClinicalTrialStatusFlagList count="0">
+      </ClinicalTrialStatusFlagList>
+      <Url/>
+      <ProtocolUrl/>
+      <PSOIEUrl/>
+      <Recruitment id="102">
+        <Name lang="en">no</Name>
+      </Recruitment>
+      <DrugTradeNameClinicalTrialAssociationList count="0">
+      </DrugTradeNameClinicalTrialAssociationList>
+      <SubstanceClinicalTrialAssociationList count="0">
+      </SubstanceClinicalTrialAssociationList>
+      <BeginDate/>
+      <EndDate/>
+      <ValidationDate/>
+      <Detail/>
+      <PersonActivityAssociationList count="0">
+      </PersonActivityAssociationList>
+      <DisorderList count="0">
+      </DisorderList>
+      <GeneList count="0">
+      </GeneList>
+    </ClinicalTrial>
+    <ClinicalTrial id="900003">
+      <OrphaNumber>990003</OrphaNumber>
+      <ExpertLink lang="en">http://www.orpha.net/consor/cgi-bin/OC_Exp.php?lng=en&amp;Expert=990003</ExpertLink>
+      <Name>Synthetic phase I/II gene therapy trial</Name>
+      <Name_en>Synthetic phase I/II gene therapy trial</Name_en>
+      <ClinicalTrialTypeFlagList count="1">
+        <ClinicalTrialTypeFlag id="15066">
+          <Name lang="en">Clinical trial</Name>
+        </ClinicalTrialTypeFlag>
+      </ClinicalTrialTypeFlagList>
+      <ClinicalTrialStatusFlagList count="0">
+      </ClinicalTrialStatusFlagList>
+      <Url>https://www.isrctn.com/ISRCTN90000003</Url>
+      <ProtocolUrl/>
+      <PSOIEUrl/>
+      <Country id="56">
+        <Iso>DE</Iso>
+        <Name lang="en">GERMANY</Name>
+      </Country>
+      <GeoCoverage id="1135">
+        <Name lang="en">National</Name>
+      </GeoCoverage>
+      <Phase id="70">
+        <Name lang="en">I/II</Name>
+      </Phase>
+      <Recruitment id="102">
+        <Name lang="en">no</Name>
+      </Recruitment>
+      <DrugTradeNameClinicalTrialAssociationList count="0">
+      </DrugTradeNameClinicalTrialAssociationList>
+      <SubstanceClinicalTrialAssociationList count="0">
+      </SubstanceClinicalTrialAssociationList>
+      <BeginDate>2023-09-01 00:00:00.0</BeginDate>
+      <EndDate/>
+      <ValidationDate>2025-12-01 00:00:00.0</ValidationDate>
+      <Detail>Sponsor protocol SYN-GT-01; see DRKS00090003</Detail>
+      <PersonActivityAssociationList count="1">
+        <PersonActivityAssociation>
+          <PersonFunction id="10">
+            <Name lang="en">Sponsor of clinical trial</Name>
+          </PersonFunction>
+          <Person id="1003">
+            <Firstname>Redacted</Firstname>
+            <Lastname>Redacted</Lastname>
+          </Person>
+          <Institution id="2004">
+            <Department_Service_Lab_PatientOrganisationName>Synthetic Gene Therapy Unit</Department_Service_Lab_PatientOrganisationName>
+            <Address id="3004">
+              <Hosting_Institution>Synthetic Medical Centre</Hosting_Institution>
+              <Town>
+                <Name>BERLIN</Name>
+              </Town>
+              <Country id="56">
+                <Iso>DE</Iso>
+                <Name lang="en">GERMANY</Name>
+              </Country>
+            </Address>
+          </Institution>
+        </PersonActivityAssociation>
+      </PersonActivityAssociationList>
+      <DisorderList count="1">
+        <Disorder id="9003">
+          <OrphaCode>99003</OrphaCode>
+          <Name lang="en">Synthetic leukodystrophy</Name>
+        </Disorder>
+      </DisorderList>
+      <GeneList count="0">
+      </GeneList>
+    </ClinicalTrial>
+  </ClinicalTrialList>
+</JDBOR>

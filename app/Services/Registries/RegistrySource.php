@@ -20,6 +20,9 @@ interface RegistrySource
     /** Name shown to people, e.g. "ClinicalTrials.gov". */
     public function name(): string;
 
+    /** The legal review of the registry: access method, terms, licence and attribution. */
+    public function access(): SourceAccess;
+
     public function client(): StudyRegistryClient;
 
     public function mapper(): StudyPayloadMapper;

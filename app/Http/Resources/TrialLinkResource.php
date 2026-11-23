@@ -48,7 +48,7 @@ final class TrialLinkResource extends JsonResource
             'source' => $trial->source,
             'source_id' => $trial->source_id,
             'registry' => $sources->name($trial->source),
-            'registry_url' => $sources->recordUrl($trial->source, $trial->source_id),
+            'registry_url' => $sources->urlFor($trial),
             'brief_title' => $trial->brief_title,
             'overall_status' => $trial->overall_status,
             'is_shown' => $trial->canonical_trial_id === null,

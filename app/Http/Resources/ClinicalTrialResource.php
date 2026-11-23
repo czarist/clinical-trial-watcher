@@ -87,7 +87,7 @@ final class ClinicalTrialResource extends ClinicalTrialSummaryResource
             'source' => $trial->source,
             'source_id' => $trial->source_id,
             'registry' => $sources->name($trial->source),
-            'registry_url' => $sources->recordUrl($trial->source, $trial->source_id),
+            'registry_url' => $sources->urlFor($trial),
             'nct_id' => $trial->nct_id,
         ];
     }

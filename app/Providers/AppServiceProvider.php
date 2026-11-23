@@ -28,6 +28,12 @@ use App\Services\Digests\DigestBuilder;
 use App\Services\Digests\FactualChangeWriter;
 use App\Services\Digests\SummaryPrompt;
 use App\Services\Digests\SummaryValidator;
+use App\Services\Registries\Fetching\RawPageStore;
+use App\Services\Registries\Fetching\RegistryFetcher;
+use App\Services\Registries\Fetching\RobotsTxtPolicy;
+use App\Services\Registries\LayoutDriftDetector;
+use App\Services\Registries\Parsing\PdfTextExtractor;
+use App\Services\Registries\Parsing\PopplerPdfTextExtractor;
 use App\Services\Registries\SourceRegistry;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
@@ -51,6 +57,43 @@ final class AppServiceProvider extends ServiceProvider
             (int) config('clinicaltrials.timeout'),
             (int) config('clinicaltrials.retry.times'),
             (int) config('clinicaltrials.retry.sleep_ms'),
+        ));
+
+        $this->app->singleton(RawPageStore::class, fn (Application $app): RawPageStore => new RawPageStore(
+            $app->make('filesystem')->disk((string) config('registries.fetching.disk')),
+            (string) config('registries.fetching.directory'),
+        ));
+
+        $this->app->singleton(RobotsTxtPolicy::class, fn (Application $app): RobotsTxtPolicy => new RobotsTxtPolicy(
+            $app->make(HttpFactory::class),
+            $app->make('cache.store'),
+            (string) config('registries.fetching.user_agent'),
+            (int) config('registries.fetching.robots_cache_hours'),
+            (int) config('registries.fetching.timeout'),
+        ));
+
+        $this->app->singleton(RegistryFetcher::class, fn (Application $app): RegistryFetcher => new RegistryFetcher(
+            $app->make(HttpFactory::class),
+            $app->make('cache.store'),
+            $app->make(RobotsTxtPolicy::class),
+            $app->make(RawPageStore::class),
+            (string) config('registries.fetching.user_agent'),
+            config('registries.fetching.contact'),
+            (int) config('registries.fetching.min_interval_ms'),
+            (int) config('registries.fetching.timeout'),
+            [
+                'times' => (int) config('registries.fetching.retry.times'),
+                'sleep_ms' => (int) config('registries.fetching.retry.sleep_ms'),
+                'max_sleep_ms' => (int) config('registries.fetching.retry.max_sleep_ms'),
+            ],
+        ));
+
+        $this->app->bind(PdfTextExtractor::class, PopplerPdfTextExtractor::class);
+
+        $this->app->singleton(LayoutDriftDetector::class, fn (): LayoutDriftDetector => new LayoutDriftDetector(
+            (int) config('registries.drift.min_previous_records'),
+            (float) config('registries.drift.record_ratio'),
+            (float) config('registries.drift.fill_ratio_drop'),
         ));
 
         $this->app->singleton(SourceRegistry::class, fn (Application $app): SourceRegistry => new SourceRegistry(

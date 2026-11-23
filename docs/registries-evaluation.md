@@ -1,6 +1,6 @@
 # Evaluation of additional trial registries
 
-Status: evaluation only. No import for these registries exists yet.
+Status: sections 1-6 are the first evaluation; section 7 is the legal review of every registry surveyed. Importers now exist for CTIS, the EU CTR and ReBEC, among others (see the README).
 Roadmap item: "Evaluate other registries such as WHO ICTRP, EU CTR and ReBEC (Brazil)".
 Research date: 2026-11-23.
 
@@ -242,6 +242,65 @@ no other registry, plus Portuguese-language text.
    the institutional fee for bulk files and the overlap with the other sources
    outweigh the benefit. Reconsider only for a non-commercial deployment or
    with a WHO agreement; ICTRP could then cover many registries at once.
+
+## 7. Legal gate per source (survey of 2026-11-23)
+
+Every registry was checked on 2026-11-23 for access method, terms of use and
+robots.txt, with a handful of identified requests per host and no attempt to
+get around a block. An importer ships only when its terms and robots.txt allow
+the requests it makes. Each importer records the review in code
+(`RegistrySource::access()`: terms URL, licence, attribution, review date,
+whether automated access is allowed, minimum interval, and whether commercial
+use is allowed). `RegistryFetcher` refuses every request of a source whose
+review does not allow automated access, and stops a run on HTTP 401/403 or a
+challenge page; the operator then asks the registry for permission or an export.
+Importers of registries that need written permission are built but refuse every
+request until the operator records the permission (`REGISTRY_PERMISSION_<KEY>`
+in `config/registries.php`). Draft requests to each registry are in
+[registry-access-requests.md](registry-access-requests.md).
+
+Commercial use: the product sells automation (AI digests), while registry data
+is shown for free. When a registry's terms do not clearly allow commercial
+reuse (non-commercial clauses, "all rights reserved" without a licence, or no
+terms at all), the importer sets `commercialUse: false`: its records are shown
+with attribution but kept out of AI digests until the registry confirms reuse
+in writing.
+
+| Registry | Verdict | Access | Commercial use | What is needed |
+|---|---|---|---|---|
+| ISRCTN | Build | XML API, incremental (`lastEdited`) | Yes (CC BY / CC0) | Nothing; confirming the generic "no database building" clause with ISRCTN is advisable |
+| Health Canada | Build | JSON API, full list | Yes (OGL Canada, attribution) | Nothing. No registry identifiers, so its trials cannot be linked to other registrations |
+| DRKS | Build, CC BY records only | Full JSON dump (ZIP), Crawl-delay 10 s | Yes for CC BY 4.0 records (registered or updated from 2025) | BfArM permission for older records |
+| CTIS | Build | Portal JSON API (search and retrieve) | Yes (EMA legal notice, credit EMA) | Written confirmation from EMA that automated calls are tolerated and the notice covers sponsor-supplied data is advisable |
+| REEC | Build | Documented REST, registration-date window | Yes (cite AEMPS and the update date) | Nothing |
+| EU CTR | Build, low priority | Plain-text export by date | Yes (EMA legal notice) | Same EMA confirmation as CTIS |
+| RENIS | Build | Cumulative XLSX, Crawl-delay 10 s | Yes (CC BY 4.0) | Nothing; the file URL changes per release |
+| TFDA | Build | Monthly ZIP of CSV | Yes (Open Government Data License, mandatory attribution) | Nothing. No trial-level status and almost no registry identifiers |
+| ReBEC | Build (scraping of HTML pages) | List and trial pages; `/xml_ictrp/` is disallowed by robots.txt | Not confirmed ("all rights reserved", no licence) | DECIT/Fiocruz confirmation of reuse, or permission to use the XML |
+| PPB Kenya | Build (scraping) | Server-rendered list and detail pages | Not confirmed (no terms) | PPB confirmation of reuse. No registry identifiers |
+| EDA Egypt | Build (PDF) | Quarterly cumulative PDF | Not confirmed (no terms) | EDA confirmation of reuse. No registry identifiers |
+| MOZ Ukraine orders | Build (PDF annexes) | Orders listing, order pages, annex PDFs | Not confirmed (official documents, probably not copyrighted) | Confirmation; the State Expert Center register is blocked by a firewall |
+| MFDS (Korea) | Built, needs a key | data.go.kr REST API | Yes ("no restriction") | An operator key with production approval |
+| NCI CTS API v2 | Built, needs a key | REST API, `X-API-KEY` | Yes (credit NCI); key terms unread | An operator key and a reading of its terms |
+| WHO ICTRP | Blocked | No public API; robots.txt `Disallow: /`; paid institutional files | No (section 4(d)) | WHO institutional access and a written waiver of 4(d) |
+| UMIN-CTR | Built, off until permission | Daily CSV dump; robots.txt disallows AI agents | No (FAQ bans commercial web services that display the data) | Written permission from UMIN Center |
+| CRIS (Korea) | Built, needs a key; non-commercial | data.go.kr API with key | No (KOGL Type 2): kept out of AI digests | A key; written permission from KDCA to include it in paid features |
+| ANZCTR | Built, off until permission | HTML only, no API | Reuse allowed with conditions, but automated collection needs express approval | Written approval, ideally an XML feed |
+| HRA (UK) | Built, off until permission | HTML pages | No (reuse only for research or private study) | Written permission from HRA |
+| HMA-EMA RWD catalogue | Blocked | Listing and CSV under `/search`, disallowed by robots.txt; HTTP 429 after a few requests | Unclear | Written permission or a data export from EMA |
+| RNEC (Portugal) | Blocked | Stateful JSF form | No ("not for profit") | INFARMED authorisation; its trials are CTIS trials anyway |
+| SÚKL (Czechia) | Built, off until permission | Website search API, data up to 2023 | Prior consent required | SÚKL consent; low value (duplicates EU CTR and CTIS) |
+| Plataforma Brasil | Blocked | Slow stateful form; no CAAE, phase or status on public pages | Not found; LGPD personal data | An official extract with CAAE from Conep/CNS |
+| CDE/NMPA (China) | Blocked | Every page returns an anti-bot challenge | Unknown | Written permission or a data arrangement with CDE |
+| TİTCK (Turkey) | Blocked | Firewall blocks even robots.txt | Unknown | Permission and an allow-listed route or export |
+| Orphanet | Built, off until contract | Contracted Orphadata XML dumps | No (service contract) | An Orphanet-AISBL contract. The CC BY 4.0 ORPHAcode nomenclature can tag rare-disease conditions without it |
+| INCa (France) | Unavailable | Site moved to cancer.fr, in maintenance | Unknown | Re-check later; evaluate the API ECLAIRE (FHIR, data.gouv.fr) instead |
+
+Not planned: EMA Clinical Data Publication (login required and non-commercial
+only; link to it), Australian Clinical Trials and Australian Cancer Trials
+(copies of ANZCTR), KDCA statistics (from CRIS), AACT (a ClinicalTrials.gov
+mirror), AIFA observational studies (not public yet), Hungary (OGYÉI) and
+Vietnam (no official public database found).
 
 ## Sources
 

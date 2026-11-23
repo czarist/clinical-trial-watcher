@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Synthetic record (test identifiers) exercising cross-registry numbers, phases, drugs and an editorial status override. -->
+<fullTrial xmlns="http://www.67bricks.com/isrctn">
+  <trial lastUpdated="2026-10-02T14:05:00.000Z" version="3" isPublished="true" publicIdentifierType="isrctn" publicIdentifierCanonical="ISRCTN00000001" publicIdentifierDateAssigned="2024-03-15T00:00:00.000Z">
+    <isrctn dateAssigned="2024-03-15T00:00:00.000Z">00000001</isrctn>
+    <trialDescription thirdPartyFilesAcknowledgement="false">
+      <acknowledgment>true</acknowledgment>
+      <title>Drug A versus placebo in adults with asthma</title>
+      <scientificTitle>A randomised, double-blind, placebo-controlled phase II/III trial of drug A in adults with moderate asthma</scientificTitle>
+      <acronym>DRASTHMA</acronym>
+      <studyHypothesis>Drug A reduces exacerbations compared with placebo.</studyHypothesis>
+      <plainEnglishSummary>Background and study aims
+This study tests drug A in asthma.
+
+Who is the main contact?
+Redacted</plainEnglishSummary>
+      <primaryOutcomes>
+        <outcomeMeasure id="a1">
+          <variable>Rate of severe exacerbations</variable>
+          <method>Patient diary</method>
+          <timepoints>52 weeks</timepoints>
+        </outcomeMeasure>
+      </primaryOutcomes>
+      <primaryOutcome/>
+      <secondaryOutcomes>
+        <outcomeMeasure id="b1">
+          <variable>FEV1</variable>
+          <method>Spirometry</method>
+          <timepoints>12 and 52 weeks</timepoints>
+        </outcomeMeasure>
+      </secondaryOutcomes>
+      <secondaryOutcome/>
+    </trialDescription>
+    <externalRefs>
+      <doi>10.1186/ISRCTN00000001</doi>
+      <eudraCTNumber>2023-000123-45</eudraCTNumber>
+      <irasNumber>312345</irasNumber>
+      <clinicalTrialsGovNumber>NCT01234567</clinicalTrialsGovNumber>
+      <protocolSerialNumber>DRA-301</protocolSerialNumber>
+      <secondaryNumbers>
+        <secondaryNumber id="s1" numberType="Protocol serial number">DRA-301</secondaryNumber>
+        <secondaryNumber id="s2" numberType="CTIS">2023-501234-12-00</secondaryNumber>
+        <secondaryNumber id="s3" numberType="ClinicalTrials.gov number">NCT01234567</secondaryNumber>
+        <secondaryNumber id="s4" numberType="Other">Nil known</secondaryNumber>
+      </secondaryNumbers>
+    </externalRefs>
+    <trialDesign>
+      <studyDesign>Randomised controlled trial</studyDesign>
+      <primaryStudyDesign>Interventional</primaryStudyDesign>
+      <trialTypes>
+        <trialType>Treatment</trialType>
+      </trialTypes>
+      <overallStartDate>2024-01-01T00:00:00.000Z</overallStartDate>
+      <overallEndDate>2026-06-30T00:00:00.000Z</overallEndDate>
+    </trialDesign>
+    <participants>
+      <recruitmentCountries>
+        <country>England</country>
+        <country>Germany</country>
+      </recruitmentCountries>
+      <trialCentres>
+        <trialCentre id="c1">
+          <name>Royal Example Hospital</name>
+          <address>1 Hospital Road</address>
+          <city>Leeds</city>
+          <state/>
+          <country>England</country>
+          <zip>LS1 3EX</zip>
+        </trialCentre>
+      </trialCentres>
+      <inclusion>Adults aged 18 to 65 with moderate asthma</inclusion>
+      <ageRange>Adult</ageRange>
+      <lowerAgeLimit unit="years" value="18.0"/>
+      <upperAgeLimit unit="years" value="65.0">65 Years</upperAgeLimit>
+      <gender>Female</gender>
+      <targetEnrolment>400</targetEnrolment>
+      <totalFinalEnrolment>212</totalFinalEnrolment>
+      <exclusion>Current smokers</exclusion>
+      <recruitmentStart>2024-02-01T00:00:00.000Z</recruitmentStart>
+      <recruitmentEnd>2025-08-31T00:00:00.000Z</recruitmentEnd>
+      <recruitmentStartStatusOverride/>
+      <recruitmentStatusOverride>Stopped</recruitmentStatusOverride>
+    </participants>
+    <conditions>
+      <condition>
+        <description>Asthma</description>
+        <diseaseClass1>Respiratory</diseaseClass1>
+        <diseaseClass2/>
+      </condition>
+      <condition>
+        <description>asthma</description>
+        <diseaseClass1>Respiratory</diseaseClass1>
+        <diseaseClass2/>
+      </condition>
+    </conditions>
+    <interventions>
+      <intervention>
+        <description>Drug A 10 mg once daily or matching placebo for 52 weeks.</description>
+        <interventionType>Drug</interventionType>
+        <phase>Phase II/III</phase>
+        <drugNames>Drug A</drugNames>
+      </intervention>
+    </interventions>
+    <results>
+      <ipdSharingStatement/>
+      <basicReport>Basic results were uploaded.</basicReport>
+      <plainEnglishReport/>
+    </results>
+    <outputs/>
+    <miscellaneous>
+      <ipdSharingPlan>Yes</ipdSharingPlan>
+    </miscellaneous>
+  </trial>
+  <contact id="p1">
+    <title>Dr</title>
+    <forename>Redacted</forename>
+    <surname>Redacted</surname>
+    <contactDetails>
+      <telephone>Redacted</telephone>
+      <email>Redacted</email>
+    </contactDetails>
+  </contact>
+  <sponsor id="sp1">
+    <organisation>Example Pharma Ltd</organisation>
+    <sponsorType>Industry</sponsorType>
+    <commercialStatus>Commercial</commercialStatus>
+  </sponsor>
+  <sponsor id="sp2">
+    <organisation>Example University</organisation>
+    <sponsorType>University/education</sponsorType>
+  </sponsor>
+  <funder id="f1">
+    <name>Example Pharma Ltd</name>
+  </funder>
+  <funder id="f2">
+    <name>Example Research Council</name>
+  </funder>
+</fullTrial>

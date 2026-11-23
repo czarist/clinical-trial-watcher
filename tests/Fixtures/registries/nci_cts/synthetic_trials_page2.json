@@ -1,0 +1,42 @@
+{
+	"total": 3,
+	"data": [
+		{
+			"nci_id": "NCI-2018-09876",
+			"nct_id": "NCT03456789",
+			"ctep_id": null,
+			"dcp_id": "SYN-DCP-01",
+			"ccr_id": null,
+			"protocol_id": "SYN-2018-07",
+			"other_ids": [
+				{"name": "ISRCTN", "value": "ISRCTN12345678"},
+				{"name": "Study Protocol Other Identifier", "value": "SPONSOR-0042"}
+			],
+			"acronym": null,
+			"brief_title": "Synthetic Screening Study",
+			"official_title": null,
+			"brief_summary": "A synthetic completed trial.",
+			"detail_description": null,
+			"current_trial_status": "Complete",
+			"phase": {"phase": "II_III", "phase_other_text": null, "phase_additional_qualifier_code": "NO"},
+			"study_protocol_type": "Interventional",
+			"start_date": "2018-03",
+			"completion_date": "2022-11-15",
+			"primary_completion_date": "2022-06-30",
+			"record_verification_date": "2023-01-10",
+			"minimum_target_accrual_number": 0,
+			"lead_org": "Synthetic Prevention Network",
+			"principal_investigator": "Redacted",
+			"collaborators": null,
+			"keywords": null,
+			"results_posted": "YES",
+			"diseases": [
+				{"inclusion_indicator": "TRIAL", "nci_thesaurus_concept_id": "C0000020", "preferred_name": "Synthetic Carcinoma", "display_name": "Synthetic Carcinoma"}
+			],
+			"arms": [],
+			"eligibility": {"structured": {"sex": "MALE", "min_age_number": 50, "min_age_unit": "Years", "max_age_number": 999, "max_age_unit": "Years"}, "unstructured": []},
+			"outcome_measures": [],
+			"sites": []
+		}
+	]
+}

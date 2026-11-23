@@ -9,19 +9,22 @@
 </p>
 
 <p align="center">
-  <img alt="Status: early development" src="https://img.shields.io/badge/status-early_development-orange?style=flat-square">
+  <img alt="Status: early development" src="https://img.shields.io/badge/status-early_development-orange?style=flat-square&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMi43IDE5bC05LjEtOS4xYy45LTIuMy40LTUtMS41LTYuOS0yLTItNS0yLjQtNy40LTEuM0w5IDYgNiA5IDEuNiA0LjdDLjQgNy4xLjkgMTAuMSAyLjkgMTIuMWMxLjkgMS45IDQuNiAyLjQgNi45IDEuNWw5LjEgOS4xYy40LjQgMSAuNCAxLjQgMGwyLjMtMi4zYy41LS40LjUtMS4xLjEtMS40eiIvPjwvc3ZnPg%3D%3D">
   <a href="https://github.com/czarist/clinical-trial-watcher/actions/workflows/ci.yml"><img alt="Tests" src="https://img.shields.io/github/actions/workflow/status/czarist/clinical-trial-watcher/ci.yml?branch=main&label=tests&logo=githubactions&logoColor=white&style=flat-square"></a>
   <a href="https://github.com/czarist/clinical-trial-watcher/actions/workflows/packages.yml"><img alt="Packages audit" src="https://img.shields.io/github/actions/workflow/status/czarist/clinical-trial-watcher/packages.yml?branch=main&label=packages&logo=dependabot&logoColor=white&style=flat-square"></a>
   <img alt="PHP 8.6" src="https://img.shields.io/badge/PHP-8.6-777BB4?style=flat-square&logo=php&logoColor=white">
   <img alt="Laravel 13" src="https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square&logo=laravel&logoColor=white">
   <img alt="Vue 3" src="https://img.shields.io/badge/Vue-3-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white">
   <img alt="TypeScript 7" src="https://img.shields.io/badge/TypeScript-7-3178C6?style=flat-square&logo=typescript&logoColor=white">
+  <img alt="Node.js 26" src="https://img.shields.io/badge/Node.js-26-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white">
+  <img alt="npm 12.2.3" src="https://img.shields.io/badge/npm-12.2.3-CB3837?style=flat-square&logo=npm&logoColor=white">
   <img alt="MySQL 8.4" src="https://img.shields.io/badge/MySQL-8.4-4479A1?style=flat-square&logo=mysql&logoColor=white">
   <img alt="Redis 8.10" src="https://img.shields.io/badge/Redis-8.10-FF4438?style=flat-square&logo=redis&logoColor=white">
   <img alt="Stripe" src="https://img.shields.io/badge/billing-Stripe-635BFF?style=flat-square&logo=stripe&logoColor=white">
   <img alt="Auth: JWT" src="https://img.shields.io/badge/auth-JWT-000000?style=flat-square&logo=jsonwebtokens&logoColor=white">
-  <img alt="Docker Compose" src="https://img.shields.io/badge/runs%20with-Docker%20Compose-2496ED?style=flat-square&logo=docker&logoColor=white">
-  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square">
+  <img alt="Docker: Nginx + PHP-FPM" src="https://img.shields.io/badge/Docker-Nginx%20%2B%20PHP--FPM-2496ED?style=flat-square&logo=docker&logoColor=white">
+  <img alt="Nginx 1.30" src="https://img.shields.io/badge/Nginx-1.30-009639?style=flat-square&logo=nginx&logoColor=white">
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white">
 </p>
 
 <p align="center">
@@ -46,9 +49,50 @@
 - **変更は変更前と変更後の値とともに追跡されます。** 新しい試験は新規として記録され、ベースラインになります。以降のインポートでは、全体の募集状況、実施施設（追加、削除、または施設ごとの状況の変更）、開始日と完了日（元の精度を保持し、月までの日付は月のまま）、結果の公開が比較され、構造化された詳細として保存されます。実施施設のリストは施設名と所在地で比較されるため、レジストリ上の並び順が変わっただけでは変更として扱われません。各変更には安定したフィンガープリントがあるため、再試行や繰り返しのインポートで同じ変更が二重に記録・通知されることはありません。
 - **部分的な日付は正規化されます**（`2024` → `2024-01-01`、`2024-06` → `2024-06-01`）。試験のペイロード全体は `raw_json` に保持されます。
 
+### その他のレジストリ
+
+さらに12のレジストリを `php artisan clinicaltrials:fetch --source=<key>` でインポートできます。毎日のスケジュールで実行されるのは ClinicalTrials.gov のみです。
+
+| キー | レジストリ | 読み込み方法 | 差分取得 | 商用利用 |
+|---|---|---|---|---|
+| `ctis` | CTIS（EU/EEA） | ポータルの JSON API | あり（最終更新） | 可（EMA のクレジット表記） |
+| `isrctn` | ISRCTN | XML API | あり（最終編集） | 可（CC BY / CC0） |
+| `euctr` | EU Clinical Trials Register | プレーンテキストのエクスポート | 新規試験のみ | 可（レジストリのクレジット表記） |
+| `drks` | DRKS（ドイツ） | JSON ダンプ。CC BY 4.0 のレコード（2025年以降に登録または更新）のみ | あり（最終更新） | 可（CC BY 4.0） |
+| `reec` | REEC（スペイン） | REST API | 直近90日間の登録 | 可（AEMPS の出典表記） |
+| `rebec` | ReBEC（ブラジル） | Web ページ | あり（最終承認） | 未確認 |
+| `renis` | RENIS（アルゼンチン） | XLSX ファイル | なし | 可（CC BY 4.0） |
+| `health_canada` | Health Canada | JSON API | なし | 可（OGL Canada） |
+| `tfda` | TFDA（台湾） | CSV の ZIP | なし | 可（Open Government Data License） |
+| `ppb_kenya` | Pharmacy and Poisons Board（ケニア） | Web ページ | あり（承認日） | 未確認 |
+| `eda_egypt` | Egyptian Drug Authority | PDF | なし | 未確認 |
+| `moz_ukraine` | ウクライナ保健省の命令 | PDF の附属書 | 最新の命令 | 未確認 |
+
+さらに8つのインポーターが実装・テスト済みですが、レジストリが求めるものを運用者が用意するまでは無効のままです。
+
+| キー | レジストリ | 読み込み方法 | 必要なもの | 商用利用 |
+|---|---|---|---|---|
+| `nci_cts` | NCI Clinical Trials Search API（米国、がん） | JSON API。試験は ClinicalTrials.gov のレコードにリンク | `REGISTRY_NCI_CTS_API_KEY` | 可（NCI のクレジット表記が必要） |
+| `mfds` | MFDS 承認済み試験計画（韓国） | data.go.kr API | `REGISTRY_MFDS_SERVICE_KEY` | 可 |
+| `cris` | CRIS（韓国） | data.go.kr API | `REGISTRY_CRIS_SERVICE_KEY` | 不可（KOGL 第2類型）。出典を明記して表示し、AI ダイジェストには含めない |
+| `anzctr` | ANZCTR（オーストラリア・ニュージーランド） | Web ページ | 書面による許可、`REGISTRY_PERMISSION_ANZCTR` | 不可 |
+| `umin` | UMIN-CTR（日本） | 毎日の CSV ダンプ | 書面による許可、`REGISTRY_PERMISSION_UMIN` | 不可 |
+| `hra` | HRA の研究概要（英国） | Web ページ | 書面による許可、`REGISTRY_PERMISSION_HRA` | 不可 |
+| `sukl` | SÚKL（チェコ） | Web サイトの検索 API | 書面による許可、`REGISTRY_PERMISSION_SUKL` | 不可 |
+| `orphanet` | Orphanet の臨床試験 | Orphadata の XML ダンプ | Orphanet-AISBL との契約、`REGISTRY_PERMISSION_ORPHANET` と `REGISTRY_ORPHANET_DUMP_URL` | 不可 |
+
+キーが必要な API と UMIN のマッピングは、キーもサンプルも入手できなかったため、ドキュメントをもとに合成フィクスチャで作成しました。最初の本番実行で確認してください。
+
+- **すべてのインポーターは法務レビューを通過しています。** レビューは各ソースクラスと [docs/registries-evaluation.md](docs/registries-evaluation.md)（第7節）に記録されており、同文書にはまだインポートできないレジストリとそれぞれに必要な事項（WHO ICTRP、UMIN-CTR、CRIS、ANZCTR、HRA など）も記載されています。
+- **規約で商用利用が確認できないレジストリのレコードは、出典を明記して無料で表示しますが、AI ダイジェストには含めません。** レジストリが再利用を書面で確認するまでこの扱いです。
+- **節度あるアクセス。** リクエストには連絡先アドレスを含む user agent（`REGISTRY_CONTACT`。ダウンロードと Web ページでは必須）を付け、ダウンロードと Web ページでは robots.txt とその Crawl-delay に従い、レジストリごとに一度に1件ずつ、少なくとも `REGISTRY_MIN_INTERVAL_MS` の間隔を空けて送信し、上限回数まで再試行します。ログイン、CAPTCHA、HTTP 401/403 に遭遇すると実行を停止します。その場合はレジストリに許可またはエクスポートを依頼してください。回避策は一切とりません。
+- **ページの保存。** すべてのレスポンス本文は `ETag`/`Last-Modified` とともに保存される（`storage/app/registry-raw/`）ため、変更のないページは再ダウンロードされません。パーサーの修正後は `clinicaltrials:fetch --source=<key> --from-cache` で保存済みのページを再解析できます（繰り返す実行と同じ `--since` または `--full` を指定してください）。
+- **公開されたままのレコード**（XML、CSV の行、Web ページ、PDF のテキスト）は各試験とともに保持され、正規化した内容が変わっていない試験は書き換えられません。
+- **レイアウトの変化。** ダウンロードまたは Web ページで読み込むレジストリで、フル実行の解析件数が前回より大幅に少ない場合や、入力済みフィールドの割合が急落した実行は、理由とともに `partial` として記録されます。インポートが試験を削除することはありません。
+
 ### 重複登録
 
-インポートは複数のレジストリに対応する設計です（`config/registries.php`。現在インポートしているのは ClinicalTrials.gov のみで、その他はロードマップで予定されています）。各レコードは所属するレジストリ（`source`）とそのレジストリでの識別子（`source_id`、レジストリごとに一意）を保持するため、同じレコードを再度インポートすると更新されます。
+各レコードは所属するレジストリ（`source`）とそのレジストリでの識別子（`source_id`、レジストリごとに一意）を保持するため、同じレコードを再度インポートすると更新されます。レジストリは `config/registries.php` に一覧されています。
 
 - **複数回登録された試験は1件として表示。** 各レコードのレジストリ識別子（自身の識別子と、ClinicalTrials.gov の副次 ID に含まれる ISRCTN 番号や EudraCT 番号など、レコードが参照する識別子）は正規化され（`ISRCTN 12345678` と `isrctn12345678` は同じ）、比較されます。識別子を共有するレコードはリンクされてグループにまとめられます。`config/registries.php` で最初に記載されているレジストリのレコードが表示され、それ以外はその試験の別登録として保持されます。スポンサーのプロトコル番号、助成金番号、タイトルが試験の統合に使われることはありません。
 - **疑わしい一致は人が判断。** 同じレジストリの2つのレコードが識別子を共有する場合や、1つのレジストリのレコードを2件含むことになるグループは統合されず、そのリンクは `conflict` としてマークされます。運用者は `GET /api/admin/trial-links` でリンクを一覧し、確定または却下します。その判断は以降のインポートでも維持されます。共有していた識別子がなくなったリンクは削除され、グループが再計算されます。
@@ -133,7 +177,7 @@ Web アプリ、API メッセージ、メール、AI ダイジェストは、英
 | フロントエンドのビルド | Vite 8.3、`laravel-vite-plugin` 3.2、`@vitejs/plugin-vue` 6.0 |
 | PHP のテストと品質 | PHPUnit 13.4、Mockery 1.6、Faker 1.24、Collision 8.9、Laravel Pint 1.32、Ignition 2.13（エラーページ） |
 | フロントエンドのテストと品質 | Vitest 5.1、Vue Test Utils 2.6、jsdom 31、`vue-tsc` 3.3（`@typescript/typescript6` 6.0 上で実行） |
-| ツール | Composer 2.11、Node.js 26、npm、Laravel Tinker 3.2 |
+| ツール | Composer 2.11、Node.js 26、npm 12.2.3、Laravel Tinker 3.2 |
 | コンテナ | Docker Compose：PHP-FPM、キューワーカー、スケジューラー、MySQL、Redis、nginx 1.30、Node.js（Vite） |
 | CI | GitHub Actions |
 | AI | OpenAI 互換の任意の Chat Completions API（Laravel HTTP クライアント経由、任意） |
@@ -164,6 +208,12 @@ docker-compose exec app php artisan clinicaltrials:fetch --max-pages=1
 `--max-pages=1` は最初の1ページ分（100件の試験）をインポートします。これを付けないと、初回の実行でレジストリ全体を読み込むため、数時間かかります。
 
 開発サーバーを動かす代わりに Web アプリをビルドするには：`docker-compose run --rm node npm run build`。
+
+### その他のレジストリの設定
+
+`.env` の `REGISTRY_CONTACT` に、レジストリの運営者が連絡できる URL またはメールアドレスを設定します。これがないと、ダウンロードや Web ページによるインポートは実行されません。`Dockerfile` の変更を取り込んだ後は（PDF のレジストリ用に `poppler-utils` をインストールします）、`docker-compose up -d --build` でイメージを再ビルドします。その後、レジストリを1つずつインポートします。例：`docker-compose exec app php artisan clinicaltrials:fetch --source=isrctn --max-pages=1`。
+
+管理パネルの **レジストリへのアクセス** ページには、レジストリごとにまだ足りないもの（キー、書面による許可、有料利用の確認）、連絡先、取るべき手順が表示されます。運営者のキーが必要なレジストリは、`REGISTRY_<KEY>_SERVICE_KEY` または `REGISTRY_<KEY>_API_KEY` からキーを読み込みます（`.env.example` を参照）。書面による許可が必要なレジストリは、`REGISTRY_PERMISSION_<KEY>=true` で許可が記録されるまで無効のままです。これはレジストリから書面で許可を得た後にのみ設定してください。
 
 ### 課金の設定
 
@@ -215,7 +265,7 @@ AI_MODEL=...                            # a model name the provider accepts
 | `POST` | `/auth/email/verification-notification` | トークン | 確認用リンクを再送信 |
 | `PUT` | `/account/profile`, `/account/password` | トークン | 名前とメールアドレス、またはパスワードを変更 |
 | `PUT` | `/account/locale` | トークン | アカウントの言語を変更（`locale`：`en`、`pt_BR`、`es`、`zh_CN`、`zh_TW`、`ja`、`ko`） |
-| `GET` | `/trials` | `view_clinical_trials` | 検索（試験ごとに1件の結果）。フィルターは下記（レジストリのキーである `source[]` を含む）、`sort`、`page`、`per_page`（最大 100） |
+| `GET` | `/trials` | `view_clinical_trials` | 検索（試験ごとに1件の結果。各結果にその `registry`、`registry_url`、規約が求める `attribution` を含む）。フィルターは下記（レジストリのキーである `source[]` を含む）、`sort`、`page`、`per_page`（最大 100） |
 | `GET` | `/trials/{nct_id}` | `view_clinical_trials` | すべての関連リスト、正規化された `identifiers`、別登録（`also_registered_as`、または別のレコードの下に表示されるレコードでは `duplicate_of`）を含む試験 |
 | `GET` `POST` | `/alerts` | `create_alerts`、確認済みメール | 保存済み検索の一覧または作成。チームの共有検索には `team_id`（オーナーが作成し、メンバーは一覧を取得） |
 | `GET` `PATCH` `DELETE` | `/alerts/{id}` | オーナー。チームメンバーは共有検索を閲覧可 | 保存済み検索の取得・変更・削除。`ai_digest_enabled`、`ai_digest_frequency`（`daily`、`weekly`）、`ai_digest_language`（`en`、`pt_BR`、`es`、`zh_CN`、`zh_TW`、`ja`、`ko`）を含む |
@@ -238,6 +288,7 @@ AI_MODEL=...                            # a model name the provider accepts
 | `GET` `PUT` | `/admin/roles`, `/admin/permissions`, `/admin/roles/{id}/permissions` | `manage_roles` | ロールの権限を管理 |
 | `GET` `POST` | `/admin/imports` | `manage_imports` | インポートの実行履歴。インポートをキューに追加（202） |
 | `GET` | `/admin/digests` | `manage_imports` | 状態、生成方法、フォールバックの理由、指標を含むダイジェスト配信回（内容は含まない） |
+| `GET` | `/admin/registries` | `manage_imports` | レジストリごとに、そのデータを使うために足りないもの（`status`: `active`、`confirmation_advised`、`paid_use_unconfirmed`、`needs_key`、`needs_permission`）、連絡先、変更すべき設定とそれぞれが設定済みかどうか（値は返さない）、ライセンス、最後のインポート。加えて、まだインポートできないレジストリ。Web アプリの 管理 > レジストリへのアクセス に表示 |
 | `GET` | `/admin/trial-links` | `manage_imports` | レジストリ識別子を共有するレコード間のリンク。`status` = `conflict`（既定）、`auto`、`confirmed`、`rejected` |
 | `PATCH` | `/admin/trial-links/{id}` | `manage_imports` | リンクを確定または却下（`status`：`confirmed` または `rejected`）。レコードは再グループ化される |
 
@@ -266,7 +317,7 @@ Web app: Laravel serves resources/views/app.blade.php → Vue 3 + Vue Router + P
 ```
 
 - `app/Services/ClinicalTrials/Import/` にはインポート処理があります。各レジストリは `StudyRegistryClient` と `StudyPayloadMapper` を持つ `RegistrySource`（`app/Services/Registries/`）で、`clinicaltrials:fetch --source=<key>` で1つを選びます（既定は `clinicaltrials_gov`）。レジストリごとに独自の増分カーソルを持ちます。マッパーはペイロードの純粋関数で、永続化はシンクロナイザーが担当します。
-- `app/Services/Registries/` には、レジストリの一覧（`SourceRegistry`）、識別子の正規化（`IdentifierParser`）、重複排除（`DuplicateLinker`、各試験のトランザクション内で実行）があります。
+- `app/Services/Registries/` には、レジストリの一覧（`SourceRegistry`）、識別子の正規化（`IdentifierParser`）、重複排除（`DuplicateLinker`、各試験のトランザクション内で実行）があります。インポーターがレジストリにアクセスする唯一の手段は `Fetching/RegistryFetcher` です。`Parsing/` には HTML、CSV、XLSX、PDF テキスト、固定幅テーブルのリーダーがあり、`Sources/<Registry>/` には各インポーター（法務レビュー付きのソース、クライアント、マッパー）があります。
 - `app/Services/ClinicalTrials/Search/` は、`AppServiceProvider` に登録された小さな `TrialFilter` クラス群から検索を組み立てます。アラートも同じ条件とフィルターを再利用します。
 - `app/Services/ClinicalTrials/Changes/` には、試験の追跡対象となる事実と、それらを比較する純粋な `ChangeDetector` があります。
 - `app/Services/Alerts/` は保存済み検索の上限を適用し、インポート結果を照合してメールを送信します。`app/Services/Billing/` にはプランのルールと `Entitlements` があり、Stripe には `SubscriptionGateway` インターフェースを通じてアクセスします。`app/Services/Teams/` はチームと招待を管理します。
@@ -300,8 +351,9 @@ app/
   Models/                User, Role, Permission, Plan, Subscription, Alert, AlertMatch, ImportRun,
                          Team, TeamMember, TeamInvitation, Digest, DigestItem, DigestDelivery, ChangeSummary
   Models/ClinicalTrials/ ClinicalTrial, its related lists and ClinicalTrialChange
-  Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
-config/                  clinicaltrials.php, billing.php, ai.php, auth.php, jwt.php
+  Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Registries/{Fetching,Parsing,Sources,...},
+                         Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
+config/                  clinicaltrials.php, registries.php, billing.php, ai.php, auth.php, jwt.php
 lang/                    API, email and digest text per language (en, pt_BR, es, zh_CN, zh_TW, ja, ko)
 database/                migrations/, factories/, seeders/
 docs/                    logo, registries evaluation
@@ -312,7 +364,7 @@ tests/                   Feature/, Unit/, Fixtures/
 
 ## データソース
 
-試験データは、米国国立医学図書館（U.S. National Library of Medicine）が運営する [ClinicalTrials.gov](https://clinicaltrials.gov/) から取得しています。記録は登録された試験を説明するもので、医学的助言ではありません。試験の詳細に依拠する前に、必ず公式の記録を確認してください。[docs/registries-evaluation.md](docs/registries-evaluation.md) では、他のレジストリ（WHO ICTRP、EU CTR/CTIS、ReBEC）を評価しています。
+試験データは、米国国立医学図書館（U.S. National Library of Medicine）が運営する [ClinicalTrials.gov](https://clinicaltrials.gov/) から取得しています。記録は登録された試験を説明するもので、医学的助言ではありません。試験の詳細に依拠する前に、必ず公式の記録を確認してください。その他のレジストリは[その他のレジストリ](#その他のレジストリ)に一覧されており、各レジストリのデータは出典を明記して表示されます。[docs/registries-evaluation.md](docs/registries-evaluation.md) には、調査したすべてのレジストリの法務レビューが記録されています。
 
 ## ライセンス
 

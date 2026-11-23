@@ -1,0 +1,282 @@
+<allTrials totalCount="2" xmlns="http://www.67bricks.com/isrctn"><fullTrial>
+  <trial lastUpdated="2026-11-23T09:12:51.726728095Z" version="10" isPublished="true" publicIdentifierType="isrctn" publicIdentifierCanonical="ISRCTN56688303" publicIdentifierDateAssigned="2026-11-23T09:30:18.443979Z">
+    <isrctn dateAssigned="2026-11-23T09:30:18.443979Z">56688303</isrctn>
+    <trialDescription thirdPartyFilesAcknowledgement="true">
+      <acknowledgment>true</acknowledgment>
+      <title>Effect of an AI clinical decision support chatbot on care quality in rural Uganda</title>
+      <scientificTitle>Effect of an AI clinical decision support chatbot on care quality in rural Ugandan primary health centres: a cluster-randomised controlled trial</scientificTitle>
+      <acronym/>
+      <studyHypothesis/>
+      <plainEnglishSummary>Background and study aims
+In rural Uganda, many people get primary care from small clinics staffed by a single nurse. This study aims to find out whether giving nurses access to the chatbot improves the quality of care they provide.
+
+Who is the main contact?
+Redacted, Redacted</plainEnglishSummary>
+      <primaryOutcomes>
+	<outcomeMeasure id="1d46ee81-d42d-49ba-9720-0ebd4b50957c">
+	  <variable>Correct case management</variable>
+	  <method>unannounced standardised patient visits</method>
+	  <timepoints>6 months after introduction of the LLM-powered clinical decision support chatbot</timepoints>
+	</outcomeMeasure>
+      </primaryOutcomes>
+      <primaryOutcome/>
+      <secondaryOutcomes/>
+      <secondaryOutcome/>
+      <ethicsApprovalRequired>Ethics approval required</ethicsApprovalRequired>
+      <ethicsCommittees>
+	<ethicsCommittee id="0b4e7105-e729-406c-88e1-808dc6a8dfb7" approvalStatus="approved" statusDate="2026-02-25T00:00:00.000Z">
+	  <committeeName>LSE Research Ethics Committee</committeeName>
+	  <contactDetails>
+	    <address>London School of Economics</address>
+	    <city>London</city>
+	    <state/>
+	    <country>United Kingdom</country>
+	    <zip>WC2A 2AE</zip>
+	    <telephone xmlns:ssb="http://www.67bricks.com/isrctn/functions"/>
+	    <email xmlns:ssb="http://www.67bricks.com/isrctn/functions"/>
+	  </contactDetails>
+	  <committeeReference>693681</committeeReference>
+	</ethicsCommittee>
+      </ethicsCommittees>
+    </trialDescription>
+    <externalRefs>
+      <doi>10.1186/ISRCTN56688303</doi>
+      <eudraCTNumber/>
+      <irasNumber/>
+      <clinicalTrialsGovNumber/>
+      <protocolSerialNumber/>
+      <secondaryNumbers/>
+    </externalRefs>
+    <trialDesign>
+      <studyDesign/>
+      <primaryStudyDesign>Interventional</primaryStudyDesign>
+      <trialTypes>
+	<trialType>Other</trialType>
+      </trialTypes>
+      <overallEndDate>2027-12-31T00:00:00.000Z</overallEndDate>
+    </trialDesign>
+    <participants>
+      <recruitmentCountries>
+	<country>Uganda</country>
+      </recruitmentCountries>
+      <trialCentres/>
+      <participantTypes/>
+      <healthyVolunteersAllowed>true</healthyVolunteersAllowed>
+      <inclusion>Clinics must have network connection and are part of the network of OneDay Health, a social entreprise running clinics in rural Uganda.</inclusion>
+      <ageRange>Mixed</ageRange>
+      <lowerAgeLimit unit="years" value="18.0">18 Years</lowerAgeLimit>
+      <upperAgeLimit unit="years" value="75.0">75 Years</upperAgeLimit>
+      <gender>All</gender>
+      <targetEnrolment>65</targetEnrolment>
+      <totalFinalEnrolment>0</totalFinalEnrolment>
+      <exclusion>Does not meet inclusion criteria</exclusion>
+      <recruitmentStart>2026-11-20T00:00:00.000Z</recruitmentStart>
+      <recruitmentEnd>2026-12-31T00:00:00.000Z</recruitmentEnd>
+      <recruitmentStartStatusOverride/>
+      <recruitmentStatusOverride/>
+    </participants>
+    <conditions>
+      <condition>
+	<description>Quality of primary care for common acute conditions managed by nurses in rural primary care</description>
+	<diseaseClass1>Other</diseaseClass1>
+	<diseaseClass2/>
+      </condition>
+    </conditions>
+    <interventions>
+      <intervention>
+	<description>Two-arm, parallel, cluster-randomised controlled trial; the clinic is the unit of randomisation.
+
+Intervention arm: nurses receive access to an LLM-powered clinical decision support chatbot delivered through WhatsApp.</description>
+	<interventionType>Behavioural</interventionType>
+	<phase/>
+	<drugNames/>
+      </intervention>
+    </interventions>
+    <results>
+      <ipdSharingStatement/>
+      <dataPolicies>
+	<dataPolicy>Not expected to be made available</dataPolicy>
+      </dataPolicies>
+      <publicationDetails/>
+      <publicationStage/>
+      <basicReport/>
+      <plainEnglishReport/>
+    </results>
+    <outputs>
+    </outputs>
+    <parties xmlns:ssb="http://www.67bricks.com/isrctn/functions">
+      <funderId>1bd337ef-b9ed-4f75-ae2b-25c4d5ca5238</funderId>
+      <contactId>59966a98-e83e-4327-8a4d-a4dbb67e25c2</contactId>
+      <sponsorId>dba27422-b77c-4d5e-aff9-5bf978976cae</sponsorId>
+    </parties>
+    <miscellaneous xmlns:ssb="http://www.67bricks.com/isrctn/functions">
+      <ipdSharingPlan>No</ipdSharingPlan>
+    </miscellaneous>
+    <attachedFiles/>
+  </trial>
+  <contact id="59966a98-e83e-4327-8a4d-a4dbb67e25c2">
+    <title>Prof</title>
+    <forename>Redacted</forename>
+    <surname>Redacted</surname>
+    <orcid/>
+    <contactTypes>
+      <contactType>Principal investigator</contactType>
+    </contactTypes>
+    <contactDetails>
+      <address>Department of Health Policy, London School of Economics</address>
+      <city>London</city>
+      <state/>
+      <country>United Kingdom</country>
+      <zip>WC2A 2AE</zip>
+      <telephone xmlns:ssb="http://www.67bricks.com/isrctn/functions">Redacted</telephone>
+      <email xmlns:ssb="http://www.67bricks.com/isrctn/functions">Redacted</email>
+    </contactDetails>
+    <privacy>Public</privacy>
+  </contact>
+  <sponsor id="dba27422-b77c-4d5e-aff9-5bf978976cae">
+    <organisation>London School of Economics and Political Science</organisation>
+    <sponsorType/>
+    <rorId>https://ror.org/0090zs177</rorId>
+    <commercialStatus>Non-commercial</commercialStatus>
+  </sponsor>
+  <funder id="1bd337ef-b9ed-4f75-ae2b-25c4d5ca5238">
+    <name>OneDay Health</name>
+  </funder>
+</fullTrial><fullTrial>
+  <trial lastUpdated="2013-05-07T00:00:00.000Z" version="38" isPublished="true" publicIdentifierType="isrctn" publicIdentifierCanonical="ISRCTN49306926" publicIdentifierDateAssigned="2010-08-12T00:00:00.000Z">
+    <isrctn dateAssigned="2010-08-12T00:00:00.000Z">49306926</isrctn>
+    <trialDescription thirdPartyFilesAcknowledgement="false">
+      <acknowledgment>true</acknowledgment>
+      <title>Dynamics of endocrine and inflammatory changes during critical illness</title>
+      <scientificTitle>Dynamics of endocrine and inflammatory changes during critical illness: An observational trial comparing patients and healthy volunteers</scientificTitle>
+      <acronym/>
+      <studyHypothesis>During critical illness, cortisol levels are often high in spite of low ACTH levels. We therefore hypothesized that during critical illness, cortisol levels are driven by one or more alternative mechanisms.</studyHypothesis>
+      <plainEnglishSummary>Not provided at time of registration</plainEnglishSummary>
+      <primaryOutcomes/>
+      <primaryOutcome>1. Comparison between the secretion dynamics of cortisol and ACTH, and comparison with time series of inflammatory markers.</primaryOutcome>
+      <secondaryOutcomes/>
+      <secondaryOutcome>None</secondaryOutcome>
+      <ethicsApprovalRequired>Old ethics approval format</ethicsApprovalRequired>
+      <ethicsCommittees/>
+      <ethicsApproval>The Institutional Review Board of the Catholic University Leuven School of Medicine approved on the 5th of July 2010</ethicsApproval>
+    </trialDescription>
+    <externalRefs>
+      <doi>10.1186/ISRCTN49306926</doi>
+      <eudraCTNumber/>
+      <irasNumber/>
+      <clinicalTrialsGovNumber/>
+      <protocolSerialNumber>S52376</protocolSerialNumber>
+      <secondaryNumbers>
+	<secondaryNumber id="1d2dba54-51e8-4e62-97de-125e158ab2ef" numberType="Protocol serial number">S52376</secondaryNumber>
+      </secondaryNumbers>
+    </externalRefs>
+    <trialDesign>
+      <studyDesign>Observational cohort study</studyDesign>
+      <primaryStudyDesign>Observational</primaryStudyDesign>
+      <secondaryStudyDesign>Cohort study</secondaryStudyDesign>
+      <trialTypes>
+	<trialType>Other</trialType>
+      </trialTypes>
+      <overallEndDate>2011-12-31T00:00:00.000Z</overallEndDate>
+    </trialDesign>
+    <participants>
+      <recruitmentCountries>
+	<country>Belgium</country>
+      </recruitmentCountries>
+      <trialCentres>
+	<trialCentre id="c71ae1f2-4c87-4d5e-8e26-4bad0be4ac14">
+	  <name>Director of the Department of Intensive Care Medicine</name>
+	  <address/>
+	  <city>Leuven</city>
+	  <state/>
+	  <country>Belgium</country>
+	  <zip>3000</zip>
+	</trialCentre>
+      </trialCentres>
+      <participantTypes>
+	<participantType>Healthy volunteer</participantType>
+      </participantTypes>
+      <inclusion>1. Patients: all patients admitted to the surgical and medical intensive care units of the university hospitals, Leuven (Belgium)
+2. Healthy volunteers: Age-matched to the average age of the included patient population</inclusion>
+      <ageRange>Adult</ageRange>
+      <gender>All</gender>
+      <targetEnrolment>133</targetEnrolment>
+      <totalFinalEnrolment/>
+      <exclusion>1. Age &lt; 18 years
+2. Do not resuscitate order</exclusion>
+      <recruitmentStart>2010-08-09T00:00:00.000Z</recruitmentStart>
+      <recruitmentEnd>2011-12-31T00:00:00.000Z</recruitmentEnd>
+      <recruitmentStartStatusOverride/>
+      <recruitmentStatusOverride/>
+    </participants>
+    <conditions>
+      <condition>
+	<description>Critical illness</description>
+	<diseaseClass1>Other</diseaseClass1>
+	<diseaseClass2/>
+      </condition>
+    </conditions>
+    <interventions>
+      <intervention>
+	<description>1. During 9 hours a blood sample (2 ml) will be taken every 10 minutes via an arterial catheter.
+2. 24h-urine collections to quantify urinary cortisol metabolites.</description>
+	<interventionType>Other</interventionType>
+	<phase>Not Applicable</phase>
+	<drugNames/>
+      </intervention>
+    </interventions>
+    <results>
+      <ipdSharingStatement/>
+      <dataPolicies>
+	<dataPolicy>Not provided at time of registration</dataPolicy>
+      </dataPolicies>
+      <publicationDetails>2013 Results article in http://www.ncbi.nlm.nih.gov/pubmed/23506003 results</publicationDetails>
+      <publicationStage>Results</publicationStage>
+      <basicReport/>
+      <plainEnglishReport/>
+    </results>
+    <outputs>
+      <output id="cd63fb58-1ef3-4a01-b231-16b118c2a4d2" outputType="resultsarticle" artefactType="ExternalLink" dateCreated="2013-04-18T00:00:00.000Z" dateUploaded="" peerReviewed="true" patientFacing="false" createdBy="Data migration">
+	<externalLink url="http://www.ncbi.nlm.nih.gov/pubmed/23506003"/>
+	<description>results</description>
+	<productionNotes/>
+      </output>
+    </outputs>
+    <parties xmlns:ssb="http://www.67bricks.com/isrctn/functions">
+      <funderId>5a121229-20bd-42f9-aa1d-4305f58080f2</funderId>
+      <contactId>5724571d-714c-4d96-9501-1f96cf89fdc9</contactId>
+      <sponsorId>94eddc57-a479-4241-b99e-89042c8c6ed0</sponsorId>
+    </parties>
+    <miscellaneous xmlns:ssb="http://www.67bricks.com/isrctn/functions">
+      <ipdSharingPlan>No</ipdSharingPlan>
+    </miscellaneous>
+    <attachedFiles/>
+  </trial>
+  <contact id="5724571d-714c-4d96-9501-1f96cf89fdc9">
+    <title>Prof</title>
+    <forename>Redacted</forename>
+    <surname>Redacted</surname>
+    <orcid/>
+    <contactTypes>
+      <contactType>Scientific</contactType>
+    </contactTypes>
+    <contactDetails>
+      <address>Catholic University Leuven, Herestraat 49</address>
+      <city>Leuven</city>
+      <state/>
+      <country>Belgium</country>
+      <zip>3000</zip>
+      <telephone xmlns:ssb="http://www.67bricks.com/isrctn/functions"/>
+      <email xmlns:ssb="http://www.67bricks.com/isrctn/functions"/>
+    </contactDetails>
+    <privacy>Protected</privacy>
+  </contact>
+  <sponsor id="94eddc57-a479-4241-b99e-89042c8c6ed0">
+    <organisation>IWT Flanders (Agentschap voor Innovatie door Wetenschap en Techniek) (Belgium)</organisation>
+    <sponsorType>Government</sponsorType>
+    <commercialStatus>Non-commercial</commercialStatus>
+  </sponsor>
+  <funder id="5a121229-20bd-42f9-aa1d-4305f58080f2">
+    <name>Flanders Agency for Innovation in Science and Technology (IWT Vlaanderen) (Belgium)</name>
+  </funder>
+</fullTrial></allTrials>

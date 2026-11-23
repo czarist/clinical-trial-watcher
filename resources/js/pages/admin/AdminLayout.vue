@@ -8,6 +8,7 @@ const sections: { to: string; label: MessageKey; permission: string }[] = [
     { to: '/admin/plans', label: 'admin.plans', permission: 'manage_plans' },
     { to: '/admin/roles', label: 'admin.roles', permission: 'manage_roles' },
     { to: '/admin/imports', label: 'admin.imports', permission: 'manage_imports' },
+    { to: '/admin/registries', label: 'admin.registries', permission: 'manage_imports' },
 ];
 </script>
 
