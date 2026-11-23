@@ -35,14 +35,14 @@ Proceed with ordinary implementation choices supported by the repository. Ask on
 
 ## Project context
 
-Clinical Trial Watcher is a Laravel 11 application (PHP 8.3, MySQL 8.0) that imports clinical studies from the ClinicalTrials.gov API v2 and serves them through an API with JWT authentication. It runs with Docker Compose. Keep new code in the layer it belongs to:
+Clinical Trial Watcher is a Laravel 13 application (PHP 8.6, MySQL 8.4) that imports clinical studies from the ClinicalTrials.gov API v2, serves them through an API with JWT authentication, and ships a Vue 3 web app in `resources/js/`. It runs with Docker Compose. Keep new code in the layer it belongs to:
 
-- `app/Console/Commands/FetchClinicalTrials.php` is the import. It maps the API's `protocolSection` and `derivedSection` modules to columns and related rows. Studies are matched by `nct_id` with `updateOrCreate`; keep imports idempotent so a run can be repeated safely.
+- `app/Console/Commands/FetchClinicalTrials.php` is the import's CLI entry point; the work is in `app/Services/ClinicalTrials/Import/` (`StudyMapper` maps the API's `protocolSection` and `derivedSection` modules, `ClinicalTrialSynchronizer` persists). Studies are matched by `nct_id`; keep imports idempotent so a run can be repeated safely.
 - `app/Models/ClinicalTrials/` holds `ClinicalTrial` and one model per related list. Every related table has a `clinical_trial_id` foreign key and a `hasMany` relation on `ClinicalTrial`. When you add a field, add it to the migration, the model's `$fillable`, and the import mapping; a field missing from `$fillable` is silently dropped.
 - Keep the full API response in `raw_json` so new fields can be mapped later without fetching again.
 - `app/Models/` holds `User`, `Role`, `Permission`, `Plan` and `Subscription`. `User` implements `JWTSubject`.
 - Controllers stay thin: `app/Http/Controllers/Api/` validates with Form Requests in `app/Http/Requests/` and delegates to services in `app/Services/`. Put new business logic in services, not in controllers or commands.
-- API routes live in `routes/api.php` under the `/api` prefix. Protected routes use `auth:api` (the JWT guard in `config/auth.php`). Sanctum is installed but not used for the API; do not mix the two without updating the roadmap.
+- API routes live in `routes/api.php` under the `/api` prefix. Protected routes use `auth:api` (the JWT guard in `config/auth.php`).
 - The schema is defined only by `database/migrations/`. Add a new migration for every change; never edit a migration that has already run.
 - Seeders in `database/seeders/` use `updateOrCreate` so they can run more than once. Keep them that way.
 - Study data is public registry data, not medical advice. Do not add features that present it as a recommendation for a patient.
@@ -62,12 +62,12 @@ See [README.md](README.md) for user-facing behavior and setup, [ROADMAP.md](ROAD
 | Schema, foreign keys and indexes | `database/migrations/` | Add a new migration with a matching rollback. |
 | Repeatable initial data | `database/seeders/` | Use stable keys with `updateOrCreate`. |
 | Import CLI entry point | `app/Console/Commands/FetchClinicalTrials.php` | Preserve the command interface; delegate new business logic to services. |
-| Scheduled command registration | `routes/console.php` | Scheduling is planned; inspect current code before adding it. |
+| Scheduled command registration | `routes/console.php` | The daily import and the alert digests are scheduled here. |
 | API/import integration tests | `tests/Feature/` | Test observable behavior and persisted results. |
 | Isolated logic tests | `tests/Unit/` | Keep pure unit tests independent of HTTP and the database. |
 | JWT guard and token configuration | `config/auth.php`, `config/jwt.php` | Protected API routes use `auth:api`. |
 
-The current importer contains mapping and persistence logic in the command. That is existing code, not a reason to put unrelated new business logic in commands. Extract only what the requested work needs; do not rewrite the entire importer for a small field fix.
+Commands stay thin like controllers: parse options, call a service, report the result.
 
 ## 4. Current behavior versus known gaps
 
@@ -75,17 +75,14 @@ This is a navigation aid, not a second roadmap. Confirm these points in code bef
 
 | Area | Current implementation / trap |
 |---|---|
-| API | Login, logout and current-user routes exist. Search, alerts and billing flows are planned. |
-| Authentication | JWT is used. Sanctum is installed and must not be adopted accidentally. |
-| Failed login | The service can return `status_code: 401` in JSON while the controller responds with HTTP 200. A JSON property does not set the HTTP status. |
-| Import endpoint | The command currently uses the beta endpoint and disables TLS verification. These are known defects, not patterns to copy. |
-| Pagination | The command fetches one page. `--pageSize` controls that page's size; it does not implement full-registry pagination. |
-| Atomic writes | A study and its relations are not yet wrapped in a per-study transaction. |
-| Empty relations | Several relation updates delete old rows only when incoming lists are nonempty. An empty new list can leave stale rows. |
-| `primary_completion_date` | The importer maps it, but the column and `$fillable` entry are missing. The mapped value is discarded. |
-| `has_results` | Mapping from the API's `hasResults` flag is still missing. |
-| Authorization | Roles and permissions have data models; do not assume every operation enforces them. |
-| Tests | The suite starts with framework examples. `phpunit.xml` has SQLite database settings commented out. `APP_ENV=testing` alone does not isolate the database. |
+| API | Auth, account, search, alerts, billing and admin routes exist; see the README. Responses use API Resources; business failures throw an `ApplicationException` subclass that sets the HTTP status. |
+| Authentication | JWT only (`auth:api`). Sanctum was removed; do not reintroduce it. |
+| Authorization | Protected routes use the `permission:<name>` middleware (`App\Enums\PermissionName`) and policies for ownership. A new protected route needs both where relevant. |
+| Import | `ClinicalTrialImporter` follows every page, retries with backoff, saves each study in its own transaction and records an `ImportRun`. Incremental runs start from the last `succeeded` run; a run stopped by `--max-pages` or with failed studies is `partial` and does not move that point. |
+| Related lists | `StudyMapper` always returns every list in `ClinicalTrial::SYNCED_RELATIONS`; the synchronizer replaces each one. A new related list must be added to both. |
+| Full-text search | InnoDB full-text indexes do not see uncommitted rows, so a test of `q` must commit its data (see `FullTextSearchTest`) and clean it up. |
+| Billing | Stripe is reached only through `SubscriptionGateway`; tests bind `Tests\Fakes\FakeSubscriptionGateway`. Webhooks are handled by Cashier at `/stripe/webhook`. |
+| Tests | PHPUnit runs on the dedicated MySQL database `clinical_saas_test` (forced in `phpunit.xml`). Running every migration takes minutes on Docker Desktop. |
 
 Do not silently fix every item while doing an unrelated task. If a known defect affects the requested result, include the necessary fix and coverage; otherwise mention it only when relevant.
 
@@ -162,8 +159,9 @@ Skills are specialized references, not always-on instructions. Load a skill only
 
 | Skill | Use for |
 |---|---|
-| `laravel-specialist` | Laravel features: Eloquent models and relations, migrations, queues and scheduled jobs for the import, API resources, Sanctum or JWT auth flows. This is the primary skill for this project. |
+| `laravel-specialist` | Laravel features: Eloquent models and relations, migrations, queues and scheduled jobs for the import, API resources, JWT auth flows. This is the primary skill for this project. |
 | `php-pro` | Modern PHP 8.3 code, strict typing, PSR standards, DTOs and value objects, PHPStan or Psalm. |
+| `php-best-practices` | SOLID principles (one rule per principle), PSR standards and PHP 8.x patterns when designing or reviewing classes and services. |
 | `api-designer` | Designing the REST API: resource modeling, pagination, filtering, versioning, error formats and OpenAPI specs. |
 | `database-optimizer` | MySQL indexes, slow queries and execution plans, such as the search filters over the clinical trial tables. |
 | `secure-code-guardian` | Authentication, authorization, JWT handling, input validation and OWASP checks. |

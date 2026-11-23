@@ -1,40 +1,44 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
+use App\Enums\RoleName;
 use App\Models\Plan;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
-class UserSeeder extends Seeder
+/**
+ * Local development administrator. Never use these credentials outside local development.
+ */
+final class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $adminEmail = 'admin@admin.com';
+        $email = 'admin@admin.com';
 
-        // Pega o plano Enterprise
-        $plan = Plan::where('name', 'Enterprise')->first();
-
-        // Cria usuário admin
         $admin = User::updateOrCreate(
-            ['email' => $adminEmail],
+            ['email' => $email],
             [
-                'name'                 => 'Admin',
-                'password'             => Hash::make('password'), // senha: password
-                'plan_id'              => $plan ? $plan->id : null,
-                'is_admin'             => true,
-                'trial_ends_at'        => now()->addDays(14),
-                'subscription_ends_at' => now()->addYear(),
-            ]
+                'name' => 'Admin',
+                'password' => 'password',
+                'plan_id' => Plan::where('name', 'Enterprise')->value('id'),
+                'is_admin' => true,
+            ],
         );
 
-        // Vincula role Admin
-        $adminRole = Role::where('name', 'Admin')->first();
-        if ($adminRole) {
-            $admin->roles()->syncWithoutDetaching([$adminRole->id]);
+        if ($admin->email_verified_at === null) {
+            $admin->markEmailAsVerified();
         }
 
-        $this->command->info("Admin user created: {$adminEmail} / password");
+        $role = Role::where('name', RoleName::Admin->value)->first();
+
+        if ($role !== null) {
+            $admin->roles()->syncWithoutDetaching([$role->id]);
+        }
+
+        $this->command?->info("Admin user: {$email} / password (local development only)");
     }
 }

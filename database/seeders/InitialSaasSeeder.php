@@ -1,60 +1,50 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
+use App\Enums\PermissionName;
+use App\Enums\RoleName;
+use App\Models\Permission;
 use App\Models\Plan;
 use App\Models\Role;
-use App\Models\Permission;
 use Illuminate\Database\Seeder;
 
-class InitialSaasSeeder extends Seeder
+/**
+ * Plans, roles and permissions. Safe to run more than once.
+ */
+final class InitialSaasSeeder extends Seeder
 {
     public function run(): void
     {
-        // Criar planos
         $plans = [
-            ['name' => 'Basic', 'price' => 0.00, 'billing_cycle' => 'monthly', 'features' => json_encode(['alerts_limit' => 5])],
-            ['name' => 'Pro', 'price' => 29.99, 'billing_cycle' => 'monthly', 'features' => json_encode(['alerts_limit' => 50])],
-            ['name' => 'Enterprise', 'price' => 99.99, 'billing_cycle' => 'monthly', 'features' => json_encode(['alerts_limit' => 9999])],
+            ['name' => 'Basic', 'price' => 0.00, 'billing_cycle' => 'monthly', 'trial_days' => 0, 'features' => ['alerts_limit' => 5]],
+            ['name' => 'Pro', 'price' => 29.99, 'billing_cycle' => 'monthly', 'trial_days' => 14, 'features' => ['alerts_limit' => 50]],
+            ['name' => 'Enterprise', 'price' => 99.99, 'billing_cycle' => 'monthly', 'trial_days' => 14, 'features' => ['alerts_limit' => 9999]],
         ];
 
-        foreach ($plans as $planData) {
-            Plan::updateOrCreate(['name' => $planData['name']], $planData);
+        // stripe_price_id is set by an administrator (PATCH /api/admin/plans/{plan}) and is kept here.
+        foreach ($plans as $plan) {
+            Plan::updateOrCreate(['name' => $plan['name']], $plan);
         }
 
-        // Criar roles
-        $roles = [
-            ['name' => 'Admin', 'description' => 'Administrator role'],
-            ['name' => 'User', 'description' => 'Regular user'],
-        ];
-
-        foreach ($roles as $roleData) {
-            Role::updateOrCreate(['name' => $roleData['name']], $roleData);
+        foreach (RoleName::cases() as $role) {
+            Role::updateOrCreate(['name' => $role->value], ['description' => $role === RoleName::Admin ? 'Administrator role' : 'Regular user']);
         }
 
-        // Criar permissions básicas
-        $permissions = [
-            ['name' => 'manage_users', 'description' => 'Manage users'],
-            ['name' => 'manage_plans', 'description' => 'Manage subscription plans'],
-            ['name' => 'manage_roles', 'description' => 'Manage roles and permissions'],
-            ['name' => 'view_clinical_trials', 'description' => 'View clinical trials'],
-            ['name' => 'create_alerts', 'description' => 'Create alerts'],
-        ];
-
-        foreach ($permissions as $permissionData) {
-            Permission::updateOrCreate(['name' => $permissionData['name']], $permissionData);
+        foreach (PermissionName::cases() as $permission) {
+            Permission::updateOrCreate(['name' => $permission->value], ['description' => $permission->description()]);
         }
 
-        // Vincular todas as permissions ao role Admin
-        $adminRole = Role::where('name', 'Admin')->first();
-        $allPermissions = Permission::all();
-        $adminRole->permissions()->sync($allPermissions->pluck('id'));
+        Role::where('name', RoleName::Admin->value)->firstOrFail()
+            ->permissions()->sync(Permission::pluck('id'));
 
-        // Role User só terá algumas permissions básicas
-        $userRole = Role::where('name', 'User')->first();
-        $userPermissions = Permission::whereIn('name', ['view_clinical_trials', 'create_alerts'])->get();
-        $userRole->permissions()->sync($userPermissions->pluck('id'));
+        Role::where('name', RoleName::User->value)->firstOrFail()
+            ->permissions()->sync(
+                Permission::whereIn('name', array_map(fn (PermissionName $p): string => $p->value, PermissionName::forRegularUsers()))->pluck('id'),
+            );
 
-        $this->command->info('Plans, Roles, and Permissions seeded successfully!');
+        $this->command?->info('Plans, roles and permissions seeded.');
     }
 }
