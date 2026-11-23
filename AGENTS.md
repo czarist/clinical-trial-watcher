@@ -35,7 +35,7 @@ Proceed with ordinary implementation choices supported by the repository. Ask on
 
 ## Project context
 
-Clinical Trial Watcher is a Laravel 13 application (PHP 8.6, MySQL 8.4) that imports clinical studies from the ClinicalTrials.gov API v2, serves them through an API with JWT authentication, and ships a Vue 3 web app in `resources/js/`. It runs with Docker Compose. Keep new code in the layer it belongs to:
+Clinical Trial Watcher is a Laravel 13 application (PHP 8.6, MySQL 8.4, Redis cache through Predis) that imports clinical studies from the ClinicalTrials.gov API v2, serves them through an API with JWT authentication, and ships a Vue 3 web app in `resources/js/`. It runs with Docker Compose. Keep new code in the layer it belongs to:
 
 - `app/Console/Commands/FetchClinicalTrials.php` is the import's CLI entry point; the work is in `app/Services/ClinicalTrials/Import/` (`StudyMapper` maps the API's `protocolSection` and `derivedSection` modules, `ClinicalTrialSynchronizer` persists). Studies are matched by `nct_id`; keep imports idempotent so a run can be repeated safely.
 - `app/Models/ClinicalTrials/` holds `ClinicalTrial` and one model per related list. Every related table has a `clinical_trial_id` foreign key and a `hasMany` relation on `ClinicalTrial`. When you add a field, add it to the migration, the model's `$fillable`, and the import mapping; a field missing from `$fillable` is silently dropped.

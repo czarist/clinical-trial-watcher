@@ -148,7 +148,7 @@ Web app: Laravel serves resources/views/app.blade.php → Vue 3 + Vue Router + P
 - `app/Services/ClinicalTrials/Search/` builds the search from small `TrialFilter` classes registered in `AppServiceProvider`. Alerts reuse the same criteria and filters.
 - `app/Services/Alerts/` enforces the plan limit, matches imports and sends emails. `app/Services/Billing/` holds the plan rules; Stripe is reached through the `SubscriptionGateway` interface.
 - `app/Http/` keeps controllers thin: Form Requests validate, services decide, API Resources shape the JSON.
-- The Docker stack has six services: `app` (PHP 8.6 FPM), `queue`, `scheduler`, `mysql` (MySQL 8.4), `nginx` and `node` (Node.js 26 and Vite).
+- The Docker stack has seven services: `app` (PHP 8.6 FPM), `queue`, `scheduler`, `mysql` (MySQL 8.4), `redis` (Redis 8.10, the cache store, also used by the rate limiter and the JWT blacklist), `nginx` and `node` (Node.js 26 and Vite). Laravel talks to Redis through Predis (`REDIS_CLIENT=predis`), because the phpredis extension does not build on PHP 8.6 yet.
 
 ## Development
 

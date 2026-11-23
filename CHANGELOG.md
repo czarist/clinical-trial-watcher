@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Permission middleware on every protected route, and administration endpoints for users, plans, roles and imports, with the new `manage_imports` permission.
 - Vue 3 web app (Vue Router, Pinia, TypeScript) served by Laravel: search, study pages, alerts, account and plan, and administration.
 - Import runs (`import_runs`) and study changes (`clinical_trial_changes`), a queued import job scheduled daily, and `queue` and `scheduler` Docker services.
+- Redis 8.10 service as the cache store (also used by rate limiting and the JWT blacklist), through the Predis client.
 - `clinicaltrials:fetch` options `--since`, `--full`, `--max-pages` and `--queue`.
 - `primary_completion_date` and `has_results` are stored; search indexes and a full-text index on titles and summary.
 - Model factories for the clinical trial tables, alerts and users; PHPUnit tests for the API, the import (with a recorded API response and `Http::fake()`), alerts, billing and administration; Vitest tests for the web app; a GitHub Actions workflow.

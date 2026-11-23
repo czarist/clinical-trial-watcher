@@ -72,7 +72,7 @@ Objective: catch regressions in the import and the API.
 - [X] Import tests with `Http::fake()` and recorded API responses, covering partial dates, missing modules and re-runs.
 - [X] Run tests on a dedicated database (SQLite in memory or a test MySQL schema).
 - [X] Run Pint in check mode.
-- [ ] GitHub Actions running tests and Pint on pushes and pull requests. The workflow is in `.github/workflows/ci.yml`; check it off after its first green run on GitHub.
+- [X] GitHub Actions running tests and Pint on pushes and pull requests. The workflow is in `.github/workflows/ci.yml`; check it off after its first green run on GitHub.
 
 Acceptance: `php artisan test` passes locally and in CI, with tests for every API route and the import command.
 

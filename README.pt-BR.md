@@ -148,7 +148,7 @@ Web:        o Laravel serve resources/views/app.blade.php → Vue 3 + Vue Router
 - `app/Services/ClinicalTrials/Search/` monta a pesquisa com pequenas classes `TrialFilter` registradas no `AppServiceProvider`. Os alertas reaproveitam os mesmos critérios e filtros.
 - `app/Services/Alerts/` aplica o limite do plano, cruza as importações e envia os e-mails. `app/Services/Billing/` contém as regras dos planos; o Stripe é acessado pela interface `SubscriptionGateway`.
 - `app/Http/` mantém os controllers enxutos: Form Requests validam, serviços decidem, API Resources formatam o JSON.
-- O ambiente Docker tem seis serviços: `app` (PHP 8.6 FPM), `queue`, `scheduler`, `mysql` (MySQL 8.4), `nginx` e `node` (Node.js 26 e Vite).
+- O ambiente Docker tem sete serviços: `app` (PHP 8.6 FPM), `queue`, `scheduler`, `mysql` (MySQL 8.4), `redis` (Redis 8.10, o armazenamento de cache, usado também pelo limite de requisições e pela lista de tokens JWT invalidados), `nginx` e `node` (Node.js 26 e Vite). O Laravel acessa o Redis pelo Predis (`REDIS_CLIENT=predis`), porque a extensão phpredis ainda não compila no PHP 8.6.
 
 ## Desenvolvimento
 
