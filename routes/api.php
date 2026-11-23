@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\Admin\DigestRunController;
 use App\Http\Controllers\Api\Admin\ImportRunController;
 use App\Http\Controllers\Api\Admin\PlanController as AdminPlanController;
+use App\Http\Controllers\Api\Admin\RegistryAccessController;
 use App\Http\Controllers\Api\Admin\RoleController;
 use App\Http\Controllers\Api\Admin\TrialLinkController;
 use App\Http\Controllers\Api\Admin\UserController;
@@ -110,6 +111,7 @@ Route::middleware('auth:api')->group(function () use ($permission): void {
         });
 
         Route::middleware($permission(PermissionName::ManageImports))->group(function (): void {
+            Route::get('registries', RegistryAccessController::class);
             Route::get('imports', [ImportRunController::class, 'index']);
             Route::post('imports', [ImportRunController::class, 'store']);
             Route::get('digests', [DigestRunController::class, 'index']);

@@ -78,6 +78,49 @@ return [
     ],
 
     /*
+    | Guidance shown to operators in the admin panel (Admin > Registry access) on
+    | getting access to restricted data: whom to contact, which key or written
+    | permission each registry needs, and registries that cannot be imported yet.
+    | Draft messages for every request are in docs/registry-access-requests.md.
+    | "confirm" marks registries imported under their published terms whose
+    | written confirmation is still advisable.
+    */
+    'guidance' => [
+        'ctis' => ['contact' => 'https://www.ema.europa.eu/en/about-us/contacts-european-medicines-agency', 'confirm' => true],
+        'euctr' => ['contact' => 'https://www.ema.europa.eu/en/about-us/contacts-european-medicines-agency', 'confirm' => true],
+        'isrctn' => ['contact' => 'mailto:info@isrctn.com', 'confirm' => true],
+        'drks' => ['contact' => 'mailto:drks@bfarm.de', 'confirm' => true],
+        'rebec' => ['contact' => 'https://ensaiosclinicos.gov.br/'],
+        'ppb_kenya' => ['contact' => 'mailto:cta@pharmacyboardkenya.org'],
+        'eda_egypt' => ['contact' => 'https://www.edaegypt.gov.eg/'],
+        'moz_ukraine' => ['contact' => 'https://moz.gov.ua/'],
+        'nci_cts' => ['contact' => 'https://clinicaltrialsapi.cancer.gov/', 'key' => ['config' => 'registries.options.nci_cts.api_key', 'env' => 'REGISTRY_NCI_CTS_API_KEY']],
+        'mfds' => ['contact' => 'https://www.data.go.kr/', 'key' => ['config' => 'registries.options.mfds.service_key', 'env' => 'REGISTRY_MFDS_SERVICE_KEY']],
+        'cris' => ['contact' => 'https://www.data.go.kr/', 'key' => ['config' => 'registries.options.cris.service_key', 'env' => 'REGISTRY_CRIS_SERVICE_KEY']],
+        'anzctr' => ['contact' => 'https://www.anzctr.org.au/', 'permission' => 'REGISTRY_PERMISSION_ANZCTR'],
+        'umin' => ['contact' => 'https://www.umin.ac.jp/ctr/', 'permission' => 'REGISTRY_PERMISSION_UMIN'],
+        'hra' => ['contact' => 'https://www.hra.nhs.uk/', 'permission' => 'REGISTRY_PERMISSION_HRA'],
+        'sukl' => ['contact' => 'https://www.sukl.cz/', 'permission' => 'REGISTRY_PERMISSION_SUKL'],
+        'orphanet' => ['contact' => 'https://www.orphadata.com/', 'permission' => 'REGISTRY_PERMISSION_ORPHANET', 'settings' => ['REGISTRY_ORPHANET_DUMP_URL' => 'registries.options.orphanet.dump_url']],
+    ],
+
+    /*
+    | Registries surveyed that cannot be imported yet. reason: robots (robots.txt
+    | disallows the data), anti_bot (a bot challenge on every page), firewall,
+    | offline, duplicate (the same trials come from another registry) or
+    | missing_fields (public pages lack identifiers, phase or status).
+    */
+    'unavailable' => [
+        ['name' => 'WHO ICTRP', 'reason' => 'robots', 'contact' => 'https://www.who.int/tools/clinical-trials-registry-platform'],
+        ['name' => 'HMA-EMA catalogue of real-world data studies', 'reason' => 'robots', 'contact' => 'https://catalogues.ema.europa.eu/'],
+        ['name' => 'CDE/NMPA (China)', 'reason' => 'anti_bot', 'contact' => 'https://www.cde.org.cn/'],
+        ['name' => 'TİTCK Clinical Research Portal (Turkey)', 'reason' => 'firewall', 'contact' => 'https://www.titck.gov.tr/'],
+        ['name' => 'INCa cancer trials registry (France)', 'reason' => 'offline', 'contact' => 'https://www.cancer.fr/'],
+        ['name' => 'RNEC (Portugal)', 'reason' => 'duplicate', 'contact' => 'https://www.infarmed.pt/'],
+        ['name' => 'Plataforma Brasil (CEP/Conep)', 'reason' => 'missing_fields', 'contact' => 'https://conselho.saude.gov.br/'],
+    ],
+
+    /*
     | Per-source settings. Every value has a default in its source class; set
     | these only to point an importer elsewhere, e.g. to a newer file when a
     | registry publishes it under a new address.

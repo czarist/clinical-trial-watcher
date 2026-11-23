@@ -169,6 +169,32 @@ export interface Role {
     permissions: { id: number; name: string }[];
 }
 
+export type RegistryAccessStatus = 'active' | 'confirmation_advised' | 'paid_use_unconfirmed' | 'needs_key' | 'needs_permission';
+
+/** What a registry needs before its data can be used (admin). Setting values are never sent, only whether they are set. */
+export interface RegistryAccess {
+    key: string;
+    name: string;
+    method: 'api' | 'download' | 'scraping';
+    status: RegistryAccessStatus;
+    terms_url: string;
+    licence: string;
+    attribution: string | null;
+    reviewed_on: string;
+    automated_access_allowed: boolean;
+    commercial_use: boolean;
+    contact: string | null;
+    settings: { name: string; is_set: boolean }[];
+    last_run: { status: ImportRun['status']; finished_at: string | null; error: string | null } | null;
+}
+
+export interface RegistryAccessGuide {
+    data: RegistryAccess[];
+    unavailable: { name: string; reason: 'robots' | 'anti_bot' | 'firewall' | 'offline' | 'duplicate' | 'missing_fields'; contact: string | null }[];
+    /** Repository path of the draft request messages. */
+    drafts: string;
+}
+
 export interface ImportRun {
     id: number;
     status: 'running' | 'succeeded' | 'partial' | 'failed';

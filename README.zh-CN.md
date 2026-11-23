@@ -16,6 +16,8 @@
   <img alt="Laravel 13" src="https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square&logo=laravel&logoColor=white">
   <img alt="Vue 3" src="https://img.shields.io/badge/Vue-3-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white">
   <img alt="TypeScript 7" src="https://img.shields.io/badge/TypeScript-7-3178C6?style=flat-square&logo=typescript&logoColor=white">
+  <img alt="Node.js 26" src="https://img.shields.io/badge/Node.js-26-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white">
+  <img alt="npm 12.2.3" src="https://img.shields.io/badge/npm-12.2.3-CB3837?style=flat-square&logo=npm&logoColor=white">
   <img alt="MySQL 8.4" src="https://img.shields.io/badge/MySQL-8.4-4479A1?style=flat-square&logo=mysql&logoColor=white">
   <img alt="Redis 8.10" src="https://img.shields.io/badge/Redis-8.10-FF4438?style=flat-square&logo=redis&logoColor=white">
   <img alt="Stripe" src="https://img.shields.io/badge/billing-Stripe-635BFF?style=flat-square&logo=stripe&logoColor=white">
@@ -174,7 +176,7 @@ Web 应用、API 消息、电子邮件和 AI 摘要提供以下语言：英语�
 | 前端构建 | Vite 8.3、`laravel-vite-plugin` 3.2、`@vitejs/plugin-vue` 6.0 |
 | PHP 测试与质量 | PHPUnit 13.4、Mockery 1.6、Faker 1.24、Collision 8.9、Laravel Pint 1.32、Ignition 2.13（错误页面） |
 | 前端测试与质量 | Vitest 5.1、Vue Test Utils 2.6、jsdom 31、`vue-tsc` 3.3（基于 `@typescript/typescript6` 6.0） |
-| 工具 | Composer 2.11、Node.js 26、npm、Laravel Tinker 3.2 |
+| 工具 | Composer 2.11、Node.js 26、npm 12.2.3、Laravel Tinker 3.2 |
 | 容器 | Docker Compose：PHP-FPM、队列进程、调度器、MySQL、Redis、nginx 1.30、Node.js（Vite） |
 | CI | GitHub Actions |
 | AI | 任何兼容 OpenAI 的 chat completions API，通过 Laravel HTTP 客户端访问（可选） |
@@ -210,7 +212,7 @@ docker-compose exec app php artisan clinicaltrials:fetch --max-pages=1
 
 在 `.env` 中将 `REGISTRY_CONTACT` 设为注册库运营方可以联系到你的 URL 或电子邮件地址；未设置时，通过下载或网页进行的导入会拒绝运行。拉取对 `Dockerfile` 的更改后（它为 PDF 注册库安装 `poppler-utils`），用 `docker-compose up -d --build` 重新构建镜像。然后一次导入一个注册库，例如 `docker-compose exec app php artisan clinicaltrials:fetch --source=isrctn --max-pages=1`。
 
-需要运营方密钥的注册库从 `REGISTRY_<KEY>_SERVICE_KEY` 或 `REGISTRY_<KEY>_API_KEY` 读取密钥（见 `.env.example`）。需要书面许可的注册库在通过 `REGISTRY_PERMISSION_<KEY>=true` 记录许可之前保持关闭；请仅在注册库以书面形式授予许可后再设置。
+管理面板的 **注册库访问** 页面列出每个注册库仍缺少的内容（密钥、书面许可、付费使用确认）、联系对象以及需要遵循的步骤。需要运营方密钥的注册库从 `REGISTRY_<KEY>_SERVICE_KEY` 或 `REGISTRY_<KEY>_API_KEY` 读取密钥（见 `.env.example`）。需要书面许可的注册库在通过 `REGISTRY_PERMISSION_<KEY>=true` 记录许可之前保持关闭；请仅在注册库以书面形式授予许可后再设置。
 
 ### 计费配置
 
@@ -285,6 +287,7 @@ AI_MODEL=...                            # a model name the provider accepts
 | `GET` `PUT` | `/admin/roles`, `/admin/permissions`, `/admin/roles/{id}/permissions` | `manage_roles` | 管理角色权限 |
 | `GET` `POST` | `/admin/imports` | `manage_imports` | 导入运行记录；将导入加入队列（202） |
 | `GET` | `/admin/digests` | `manage_imports` | 摘要各期的状态、生成方式、回退原因和指标（不含内容） |
+| `GET` | `/admin/registries` | `manage_imports` | 按注册库列出：使用其数据还缺少什么（`status`：`active`、`confirmation_advised`、`paid_use_unconfirmed`、`needs_key`、`needs_permission`）、联系对象、需要更改哪些设置以及每项是否已设置（绝不显示其值）、其许可证和最近一次导入；另附尚无法导入的注册库。在 Web 应用中位于 管理 > 注册库访问 |
 | `GET` | `/admin/trial-links` | `manage_imports` | 共享某个注册标识符的记录之间的关联；`status` = `conflict`（默认）、`auto`、`confirmed` 或 `rejected` |
 | `PATCH` | `/admin/trial-links/{id}` | `manage_imports` | 确认或拒绝一个关联（`status`：`confirmed` 或 `rejected`）；相关记录会重新分组 |
 

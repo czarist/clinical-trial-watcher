@@ -16,6 +16,8 @@
   <img alt="Laravel 13" src="https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square&logo=laravel&logoColor=white">
   <img alt="Vue 3" src="https://img.shields.io/badge/Vue-3-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white">
   <img alt="TypeScript 7" src="https://img.shields.io/badge/TypeScript-7-3178C6?style=flat-square&logo=typescript&logoColor=white">
+  <img alt="Node.js 26" src="https://img.shields.io/badge/Node.js-26-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white">
+  <img alt="npm 12.2.3" src="https://img.shields.io/badge/npm-12.2.3-CB3837?style=flat-square&logo=npm&logoColor=white">
   <img alt="MySQL 8.4" src="https://img.shields.io/badge/MySQL-8.4-4479A1?style=flat-square&logo=mysql&logoColor=white">
   <img alt="Redis 8.10" src="https://img.shields.io/badge/Redis-8.10-FF4438?style=flat-square&logo=redis&logoColor=white">
   <img alt="Stripe" src="https://img.shields.io/badge/billing-Stripe-635BFF?style=flat-square&logo=stripe&logoColor=white">
@@ -174,7 +176,7 @@ Versions installed on 2026-11-23. Constraints are in `composer.json` and `packag
 | Front-end build | Vite 8.3, `laravel-vite-plugin` 3.2, `@vitejs/plugin-vue` 6.0 |
 | PHP tests and quality | PHPUnit 13.4, Mockery 1.6, Faker 1.24, Collision 8.9, Laravel Pint 1.32, Ignition 2.13 (error pages) |
 | Front-end tests and quality | Vitest 5.1, Vue Test Utils 2.6, jsdom 31, `vue-tsc` 3.3 (on `@typescript/typescript6` 6.0) |
-| Tooling | Composer 2.11, Node.js 26, npm, Laravel Tinker 3.2 |
+| Tooling | Composer 2.11, Node.js 26, npm 12.2.3, Laravel Tinker 3.2 |
 | Containers | Docker Compose: PHP-FPM, queue worker, scheduler, MySQL, Redis, nginx 1.30, Node.js (Vite) |
 | CI | GitHub Actions |
 | AI | Any OpenAI-compatible chat completions API, through the Laravel HTTP client (optional) |
@@ -210,7 +212,7 @@ To build the web app instead of running the dev server: `docker-compose run --rm
 
 Set `REGISTRY_CONTACT` in `.env` to a URL or email address registry operators can use to reach you; imports by download or web page refuse to run without it. After pulling changes to the `Dockerfile` (it installs `poppler-utils` for PDF registries), rebuild the image with `docker-compose up -d --build`. Then import one registry at a time, for example `docker-compose exec app php artisan clinicaltrials:fetch --source=isrctn --max-pages=1`.
 
-Registries that need an operator key read it from `REGISTRY_<KEY>_SERVICE_KEY` or `REGISTRY_<KEY>_API_KEY` (see `.env.example`). Registries that need written permission stay off until it is recorded with `REGISTRY_PERMISSION_<KEY>=true`; set it only after the registry granted it in writing.
+The admin panel's **Registry access** page lists, for every registry, what is still missing (a key, a written permission, a confirmation of paid use), whom to contact and the steps to follow. Registries that need an operator key read it from `REGISTRY_<KEY>_SERVICE_KEY` or `REGISTRY_<KEY>_API_KEY` (see `.env.example`). Registries that need written permission stay off until it is recorded with `REGISTRY_PERMISSION_<KEY>=true`; set it only after the registry granted it in writing.
 
 ### Billing setup
 
@@ -285,6 +287,7 @@ All routes are under `/api` and return JSON. Protected routes need `Authorizatio
 | `GET` `PUT` | `/admin/roles`, `/admin/permissions`, `/admin/roles/{id}/permissions` | `manage_roles` | Manage role permissions |
 | `GET` `POST` | `/admin/imports` | `manage_imports` | Import runs; queue an import (202) |
 | `GET` | `/admin/digests` | `manage_imports` | Digest editions with status, generation, fallback reason and metrics (no content) |
+| `GET` | `/admin/registries` | `manage_imports` | Per registry: what is missing to use its data (`status`: `active`, `confirmation_advised`, `paid_use_unconfirmed`, `needs_key`, `needs_permission`), whom to contact, which settings to change and whether each is set (never its value), its licence and last import; plus the registries that cannot be imported yet. Shown in the web app under Admin > Registry access |
 | `GET` | `/admin/trial-links` | `manage_imports` | Links between records that share a registry identifier; `status` = `conflict` (default), `auto`, `confirmed` or `rejected` |
 | `PATCH` | `/admin/trial-links/{id}` | `manage_imports` | Confirm or reject a link (`status`: `confirmed` or `rejected`); the records are regrouped |
 

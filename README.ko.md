@@ -16,6 +16,8 @@
   <img alt="Laravel 13" src="https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square&logo=laravel&logoColor=white">
   <img alt="Vue 3" src="https://img.shields.io/badge/Vue-3-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white">
   <img alt="TypeScript 7" src="https://img.shields.io/badge/TypeScript-7-3178C6?style=flat-square&logo=typescript&logoColor=white">
+  <img alt="Node.js 26" src="https://img.shields.io/badge/Node.js-26-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white">
+  <img alt="npm 12.2.3" src="https://img.shields.io/badge/npm-12.2.3-CB3837?style=flat-square&logo=npm&logoColor=white">
   <img alt="MySQL 8.4" src="https://img.shields.io/badge/MySQL-8.4-4479A1?style=flat-square&logo=mysql&logoColor=white">
   <img alt="Redis 8.10" src="https://img.shields.io/badge/Redis-8.10-FF4438?style=flat-square&logo=redis&logoColor=white">
   <img alt="Stripe" src="https://img.shields.io/badge/billing-Stripe-635BFF?style=flat-square&logo=stripe&logoColor=white">
@@ -174,7 +176,7 @@ Laravel이 제공하는 Vue 3 단일 페이지 앱입니다. 검색 및 연구 �
 | 프런트엔드 빌드 | Vite 8.3, `laravel-vite-plugin` 3.2, `@vitejs/plugin-vue` 6.0 |
 | PHP 테스트 및 품질 | PHPUnit 13.4, Mockery 1.6, Faker 1.24, Collision 8.9, Laravel Pint 1.32, Ignition 2.13 (오류 페이지) |
 | 프런트엔드 테스트 및 품질 | Vitest 5.1, Vue Test Utils 2.6, jsdom 31, `vue-tsc` 3.3 (`@typescript/typescript6` 6.0 기반) |
-| 도구 | Composer 2.11, Node.js 26, npm, Laravel Tinker 3.2 |
+| 도구 | Composer 2.11, Node.js 26, npm 12.2.3, Laravel Tinker 3.2 |
 | 컨테이너 | Docker Compose: PHP-FPM, 대기열 작업자, 스케줄러, MySQL, Redis, nginx 1.30, Node.js (Vite) |
 | CI | GitHub Actions |
 | AI | Laravel HTTP 클라이언트를 통한 OpenAI 호환 채팅 완성(chat completions) API (선택 사항) |
@@ -210,7 +212,7 @@ docker-compose exec app php artisan clinicaltrials:fetch --max-pages=1
 
 `.env`의 `REGISTRY_CONTACT`에 레지스트리 운영자가 연락할 수 있는 URL 또는 이메일 주소를 설정하세요. 이 값이 없으면 다운로드나 웹 페이지를 통한 가져오기는 실행되지 않습니다. `Dockerfile` 변경 사항을 가져온 뒤에는(PDF 레지스트리용 `poppler-utils`를 설치합니다) `docker-compose up -d --build`로 이미지를 다시 빌드하세요. 그런 다음 레지스트리를 하나씩 가져오세요. 예: `docker-compose exec app php artisan clinicaltrials:fetch --source=isrctn --max-pages=1`.
 
-운영자 키가 필요한 레지스트리는 `REGISTRY_<KEY>_SERVICE_KEY` 또는 `REGISTRY_<KEY>_API_KEY`에서 키를 읽습니다(`.env.example` 참고). 서면 허가가 필요한 레지스트리는 `REGISTRY_PERMISSION_<KEY>=true`로 허가가 기록될 때까지 꺼져 있습니다. 레지스트리가 서면으로 허가한 뒤에만 설정하세요.
+관리 패널의 **레지스트리 접근** 페이지는 레지스트리마다 아직 부족한 것(키, 서면 허가, 유료 사용 확인), 연락처, 따라야 할 절차를 보여 줍니다. 운영자 키가 필요한 레지스트리는 `REGISTRY_<KEY>_SERVICE_KEY` 또는 `REGISTRY_<KEY>_API_KEY`에서 키를 읽습니다(`.env.example` 참고). 서면 허가가 필요한 레지스트리는 `REGISTRY_PERMISSION_<KEY>=true`로 허가가 기록될 때까지 꺼져 있습니다. 레지스트리가 서면으로 허가한 뒤에만 설정하세요.
 
 ### 결제 설정
 
@@ -285,6 +287,7 @@ AI_MODEL=...                            # a model name the provider accepts
 | `GET` `PUT` | `/admin/roles`, `/admin/permissions`, `/admin/roles/{id}/permissions` | `manage_roles` | 역할 권한 관리 |
 | `GET` `POST` | `/admin/imports` | `manage_imports` | 가져오기 실행 내역, 가져오기를 대기열에 추가(202) |
 | `GET` | `/admin/digests` | `manage_imports` | 상태, 생성 방식, 대체 사유, 지표가 포함된 다이제스트 회차(내용 제외) |
+| `GET` | `/admin/registries` | `manage_imports` | 레지스트리별로 데이터를 쓰는 데 부족한 것(`status`: `active`, `confirmation_advised`, `paid_use_unconfirmed`, `needs_key`, `needs_permission`), 연락처, 변경할 설정과 각 설정의 지정 여부(값은 절대 표시하지 않음), 라이선스와 마지막 가져오기, 그리고 아직 가져올 수 없는 레지스트리. 웹 앱의 관리 > 레지스트리 접근에 표시 |
 | `GET` | `/admin/trial-links` | `manage_imports` | 레지스트리 식별자를 공유하는 레코드 간 연결. `status` = `conflict`(기본값), `auto`, `confirmed`, `rejected` |
 | `PATCH` | `/admin/trial-links/{id}` | `manage_imports` | 연결 확정 또는 거부(`status`: `confirmed` 또는 `rejected`). 레코드가 다시 그룹화됨 |
 

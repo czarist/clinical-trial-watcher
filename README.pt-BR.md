@@ -16,6 +16,8 @@
   <img alt="Laravel 13" src="https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square&logo=laravel&logoColor=white">
   <img alt="Vue 3" src="https://img.shields.io/badge/Vue-3-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white">
   <img alt="TypeScript 7" src="https://img.shields.io/badge/TypeScript-7-3178C6?style=flat-square&logo=typescript&logoColor=white">
+  <img alt="Node.js 26" src="https://img.shields.io/badge/Node.js-26-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white">
+  <img alt="npm 12.2.3" src="https://img.shields.io/badge/npm-12.2.3-CB3837?style=flat-square&logo=npm&logoColor=white">
   <img alt="MySQL 8.4" src="https://img.shields.io/badge/MySQL-8.4-4479A1?style=flat-square&logo=mysql&logoColor=white">
   <img alt="Redis 8.10" src="https://img.shields.io/badge/Redis-8.10-FF4438?style=flat-square&logo=redis&logoColor=white">
   <img alt="Stripe" src="https://img.shields.io/badge/cobran%C3%A7a-Stripe-635BFF?style=flat-square&logo=stripe&logoColor=white">
@@ -174,7 +176,7 @@ Versões instaladas em 23/11/2026. As restrições de versão estão em `compose
 | Build do front-end | Vite 8.3, `laravel-vite-plugin` 3.2, `@vitejs/plugin-vue` 6.0 |
 | Testes e qualidade do PHP | PHPUnit 13.4, Mockery 1.6, Faker 1.24, Collision 8.9, Laravel Pint 1.32, Ignition 2.13 (páginas de erro) |
 | Testes e qualidade do front-end | Vitest 5.1, Vue Test Utils 2.6, jsdom 31, `vue-tsc` 3.3 (com `@typescript/typescript6` 6.0) |
-| Ferramentas | Composer 2.11, Node.js 26, npm, Laravel Tinker 3.2 |
+| Ferramentas | Composer 2.11, Node.js 26, npm 12.2.3, Laravel Tinker 3.2 |
 | Contêineres | Docker Compose: PHP-FPM, worker da fila, agendador, MySQL, Redis, nginx 1.30, Node.js (Vite) |
 | CI | GitHub Actions |
 | IA | Qualquer API de chat completions compatível com a OpenAI, pelo cliente HTTP do Laravel (opcional) |
@@ -210,7 +212,7 @@ Para gerar o build da aplicação web em vez de usar o servidor de desenvolvimen
 
 Defina `REGISTRY_CONTACT` no `.env` com uma URL ou endereço de e-mail pelo qual os operadores dos registros possam falar com você; importações por download ou página web não rodam sem ele. Depois de puxar mudanças no `Dockerfile` (ele instala o `poppler-utils` para os registros em PDF), reconstrua a imagem com `docker-compose up -d --build`. Em seguida, importe um registro de cada vez, por exemplo `docker-compose exec app php artisan clinicaltrials:fetch --source=isrctn --max-pages=1`.
 
-Registros que exigem uma chave do operador a leem de `REGISTRY_<KEY>_SERVICE_KEY` ou `REGISTRY_<KEY>_API_KEY` (veja o `.env.example`). Registros que exigem permissão por escrito ficam desligados até que ela seja registrada com `REGISTRY_PERMISSION_<KEY>=true`; defina isso só depois que o registro a concedeu por escrito.
+A página **Acesso aos registros** do painel de administração mostra, para cada registro, o que ainda falta (uma chave, uma permissão por escrito, uma confirmação de uso pago), quem contatar e os passos a seguir. Registros que exigem uma chave do operador a leem de `REGISTRY_<KEY>_SERVICE_KEY` ou `REGISTRY_<KEY>_API_KEY` (veja o `.env.example`). Registros que exigem permissão por escrito ficam desligados até que ela seja registrada com `REGISTRY_PERMISSION_<KEY>=true`; defina isso só depois que o registro a concedeu por escrito.
 
 ### Configurar a cobrança
 
@@ -285,6 +287,7 @@ Todas as rotas ficam em `/api` e respondem em JSON. Rotas protegidas exigem `Aut
 | `GET` `PUT` | `/admin/roles`, `/admin/permissions`, `/admin/roles/{id}/permissions` | `manage_roles` | Gerencia as permissões dos papéis |
 | `GET` `POST` | `/admin/imports` | `manage_imports` | Execuções da importação; coloca uma importação na fila (202) |
 | `GET` | `/admin/digests` | `manage_imports` | Edições de digest com status, forma de geração, motivo da alternativa e métricas (sem conteúdo) |
+| `GET` | `/admin/registries` | `manage_imports` | Por registro: o que falta para usar seus dados (`status`: `active`, `confirmation_advised`, `paid_use_unconfirmed`, `needs_key`, `needs_permission`), quem contatar, quais configurações alterar e se cada uma está definida (nunca o seu valor), sua licença e a última importação; além dos registros que ainda não podem ser importados. Exibido no app web em Administração > Acesso aos registros |
 | `GET` | `/admin/trial-links` | `manage_imports` | Vínculos entre registros que compartilham um identificador; `status` = `conflict` (padrão), `auto`, `confirmed` ou `rejected` |
 | `PATCH` | `/admin/trial-links/{id}` | `manage_imports` | Confirma ou rejeita um vínculo (`status`: `confirmed` ou `rejected`); os registros são reagrupados |
 

@@ -256,7 +256,8 @@ review does not allow automated access, and stops a run on HTTP 401/403 or a
 challenge page; the operator then asks the registry for permission or an export.
 Importers of registries that need written permission are built but refuse every
 request until the operator records the permission (`REGISTRY_PERMISSION_<KEY>`
-in `config/registries.php`).
+in `config/registries.php`). Draft requests to each registry are in
+[registry-access-requests.md](registry-access-requests.md).
 
 Commercial use: the product sells automation (AI digests), while registry data
 is shown for free. When a registry's terms do not clearly allow commercial

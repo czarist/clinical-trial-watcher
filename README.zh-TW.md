@@ -16,6 +16,8 @@
   <img alt="Laravel 13" src="https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square&logo=laravel&logoColor=white">
   <img alt="Vue 3" src="https://img.shields.io/badge/Vue-3-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white">
   <img alt="TypeScript 7" src="https://img.shields.io/badge/TypeScript-7-3178C6?style=flat-square&logo=typescript&logoColor=white">
+  <img alt="Node.js 26" src="https://img.shields.io/badge/Node.js-26-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white">
+  <img alt="npm 12.2.3" src="https://img.shields.io/badge/npm-12.2.3-CB3837?style=flat-square&logo=npm&logoColor=white">
   <img alt="MySQL 8.4" src="https://img.shields.io/badge/MySQL-8.4-4479A1?style=flat-square&logo=mysql&logoColor=white">
   <img alt="Redis 8.10" src="https://img.shields.io/badge/Redis-8.10-FF4438?style=flat-square&logo=redis&logoColor=white">
   <img alt="Stripe" src="https://img.shields.io/badge/billing-Stripe-635BFF?style=flat-square&logo=stripe&logoColor=white">
@@ -174,7 +176,7 @@
 | 前端建置 | Vite 8.3、`laravel-vite-plugin` 3.2、`@vitejs/plugin-vue` 6.0 |
 | PHP 測試與品質 | PHPUnit 13.4、Mockery 1.6、Faker 1.24、Collision 8.9、Laravel Pint 1.32、Ignition 2.13（錯誤頁面） |
 | 前端測試與品質 | Vitest 5.1、Vue Test Utils 2.6、jsdom 31、`vue-tsc` 3.3（執行於 `@typescript/typescript6` 6.0） |
-| 工具 | Composer 2.11、Node.js 26、npm、Laravel Tinker 3.2 |
+| 工具 | Composer 2.11、Node.js 26、npm 12.2.3、Laravel Tinker 3.2 |
 | 容器 | Docker Compose：PHP-FPM、佇列工作程序、排程器、MySQL、Redis、nginx 1.30、Node.js（Vite） |
 | CI | GitHub Actions |
 | AI | 任何相容於 OpenAI 的 chat completions API，透過 Laravel HTTP 用戶端呼叫（選用） |
@@ -210,7 +212,7 @@ docker-compose exec app php artisan clinicaltrials:fetch --max-pages=1
 
 在 `.env` 中將 `REGISTRY_CONTACT` 設為登錄資料庫營運者可以聯絡到你的 URL 或電子郵件地址；未設定時，透過下載或網頁進行的匯入會拒絕執行。拉取 `Dockerfile` 的變更後（它會為 PDF 登錄資料庫安裝 `poppler-utils`），請以 `docker-compose up -d --build` 重新建置映像檔。接著一次匯入一個登錄資料庫，例如 `docker-compose exec app php artisan clinicaltrials:fetch --source=isrctn --max-pages=1`。
 
-需要營運者金鑰的登錄資料庫會從 `REGISTRY_<KEY>_SERVICE_KEY` 或 `REGISTRY_<KEY>_API_KEY` 讀取金鑰（見 `.env.example`）。需要書面許可的登錄資料庫在以 `REGISTRY_PERMISSION_<KEY>=true` 記錄許可之前保持關閉；請僅在登錄資料庫以書面授予許可後才設定。
+管理面板的 **登錄資料庫存取** 頁面會列出每個登錄資料庫仍缺少的項目（金鑰、書面許可、付費使用確認）、聯絡對象以及應遵循的步驟。需要營運者金鑰的登錄資料庫會從 `REGISTRY_<KEY>_SERVICE_KEY` 或 `REGISTRY_<KEY>_API_KEY` 讀取金鑰（見 `.env.example`）。需要書面許可的登錄資料庫在以 `REGISTRY_PERMISSION_<KEY>=true` 記錄許可之前保持關閉；請僅在登錄資料庫以書面授予許可後才設定。
 
 ### 計費設定
 
@@ -285,6 +287,7 @@ AI_MODEL=...                            # a model name the provider accepts
 | `GET` `PUT` | `/admin/roles`, `/admin/permissions`, `/admin/roles/{id}/permissions` | `manage_roles` | 管理角色權限 |
 | `GET` `POST` | `/admin/imports` | `manage_imports` | 匯入執行紀錄；將匯入排入佇列（202） |
 | `GET` | `/admin/digests` | `manage_imports` | 摘要各期的狀態、產生方式、改用事實摘要的原因及指標（不含內容） |
+| `GET` | `/admin/registries` | `manage_imports` | 依登錄資料庫列出：使用其資料還缺少什麼（`status`：`active`、`confirmation_advised`、`paid_use_unconfirmed`、`needs_key`、`needs_permission`）、聯絡對象、需要變更哪些設定以及每項是否已設定（絕不顯示其值）、其授權條款與最近一次匯入；另附尚無法匯入的登錄資料庫。在 Web 應用程式中位於 管理 > 登錄資料庫存取 |
 | `GET` | `/admin/trial-links` | `manage_imports` | 共用某個登錄識別碼的紀錄之間的連結；`status` = `conflict`（預設）、`auto`、`confirmed` 或 `rejected` |
 | `PATCH` | `/admin/trial-links/{id}` | `manage_imports` | 確認或拒絕連結（`status`：`confirmed` 或 `rejected`）；相關紀錄會重新分組 |
 
