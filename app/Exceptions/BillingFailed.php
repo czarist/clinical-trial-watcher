@@ -8,27 +8,27 @@ final class BillingFailed extends ApplicationException
 {
     public static function planNotPurchasable(): self
     {
-        return new self('This plan cannot be purchased online.');
+        return new self(__('errors.billing.plan_not_purchasable'));
     }
 
     public static function noSubscription(): self
     {
-        return new self('You do not have an active subscription.');
+        return new self(__('errors.billing.no_subscription'));
     }
 
     public static function alreadySubscribed(): self
     {
-        return new self('You already have a subscription; change its plan instead.');
+        return new self(__('errors.billing.already_subscribed'));
     }
 
     public static function priceMisconfigured(): self
     {
-        return new self('This plan is temporarily unavailable for purchase. Please try again later.');
+        return new self(__('errors.billing.price_misconfigured'));
     }
 
     public static function notResumable(): self
     {
-        return new self('The subscription is not in its cancellation grace period.');
+        return new self(__('errors.billing.not_resumable'));
     }
 
     #[\Override]

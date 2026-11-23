@@ -7,7 +7,8 @@ import TrialFilters from '@/components/TrialFilters.vue';
 import { api, ApiError } from '@/api/client';
 import type { Paginated, SearchCriteria, TrialSummary } from '@/api/types';
 import { criteriaFromQuery, criteriaToQuery } from '@/criteria';
-import { DISCLAIMER, formatDate, phaseLabel } from '@/registry';
+import { formatDate, t } from '@/i18n';
+import { phaseLabel } from '@/registry';
 import { useAuthStore } from '@/stores/auth';
 
 const route = useRoute();
@@ -30,7 +31,7 @@ async function load(): Promise<void> {
     try {
         results.value = await api.get<Paginated<TrialSummary>>('/trials', { ...criteria.value, sort: sort.value, page: page.value, per_page: 20 });
     } catch (exception) {
-        error.value = exception instanceof ApiError ? exception.message : 'Could not load studies. Check your connection and try again.';
+        error.value = exception instanceof ApiError ? exception.message : t('search.loadFailed');
     } finally {
         loading.value = false;
     }
@@ -58,7 +59,7 @@ function followThisSearch(): void {
     <div class="page search">
         <aside class="search__filters" :class="{ 'is-open': filtersOpen }">
             <button class="button secondary search__toggle" type="button" :aria-expanded="filtersOpen" @click="filtersOpen = !filtersOpen">
-                {{ filtersOpen ? 'Hide filters' : 'Show filters' }}
+                {{ filtersOpen ? t('search.hideFilters') : t('search.showFilters') }}
             </button>
             <div class="search__filters-body">
                 <TrialFilters v-model="criteria" @submit="search(1)" />
@@ -67,38 +68,38 @@ function followThisSearch(): void {
 
         <section class="search__results" aria-live="polite">
             <div class="search__head">
-                <h1>Studies</h1>
+                <h1>{{ t('search.title') }}</h1>
                 <div class="search__tools">
-                    <label for="sort" class="visually-hidden">Sort by</label>
+                    <label for="sort" class="visually-hidden">{{ t('search.sortBy') }}</label>
                     <select id="sort" v-model="sort" @change="search(1)">
-                        <option value="-last_update_post_date">Recently updated</option>
-                        <option value="-study_first_post_date">Recently posted</option>
-                        <option value="-start_date">Start date, newest</option>
-                        <option value="start_date">Start date, oldest</option>
-                        <option value="brief_title">Title, A to Z</option>
-                        <option value="relevance" :disabled="!criteria.q">Best match for your words</option>
+                        <option value="-last_update_post_date">{{ t('search.sort.updated') }}</option>
+                        <option value="-study_first_post_date">{{ t('search.sort.posted') }}</option>
+                        <option value="-start_date">{{ t('search.sort.startNewest') }}</option>
+                        <option value="start_date">{{ t('search.sort.startOldest') }}</option>
+                        <option value="brief_title">{{ t('search.sort.title') }}</option>
+                        <option value="relevance" :disabled="!criteria.q">{{ t('search.sort.relevance') }}</option>
                     </select>
-                    <button v-if="hasFilters && auth.can('create_alerts')" class="button" type="button" @click="followThisSearch">Follow this search</button>
+                    <button v-if="hasFilters && auth.can('create_alerts')" class="button" type="button" @click="followThisSearch">{{ t('search.follow') }}</button>
                 </div>
             </div>
-            <p class="muted disclaimer">{{ DISCLAIMER }}</p>
+            <p class="muted disclaimer">{{ t('app.disclaimer') }}</p>
 
             <p v-if="error" class="notice error" role="alert">{{ error }}</p>
-            <p v-else-if="loading && !results" class="muted">Loading studies…</p>
+            <p v-else-if="loading && !results" class="muted">{{ t('search.loading') }}</p>
             <template v-else-if="results">
-                <p class="muted count">{{ results.meta.total.toLocaleString() }} {{ results.meta.total === 1 ? 'study' : 'studies' }}</p>
-                <p v-if="results.data.length === 0" class="notice">No study matches these filters. Remove a filter or search for a broader condition.</p>
+                <p class="muted count">{{ t('search.count', { count: results.meta.total }) }}</p>
+                <p v-if="results.data.length === 0" class="notice">{{ t('search.empty') }}</p>
                 <ol class="results" :class="{ 'is-loading': loading }">
                     <li v-for="trial in results.data" :key="trial.nct_id" class="result">
                         <div class="result__main">
                             <p class="result__id nct">{{ trial.nct_id }}<span v-if="trial.acronym" class="muted"> ({{ trial.acronym }})</span></p>
                             <h2 class="result__title"><RouterLink :to="`/studies/${trial.nct_id}`">{{ trial.brief_title }}</RouterLink></h2>
-                            <p v-if="trial.conditions?.length" class="result__conditions">{{ trial.conditions.slice(0, 4).join(', ') }}<template v-if="trial.conditions.length > 4"> and {{ trial.conditions.length - 4 }} more</template></p>
+                            <p v-if="trial.conditions?.length" class="result__conditions">{{ trial.conditions.slice(0, 4).join(', ') }}<template v-if="trial.conditions.length > 4"> {{ t('search.moreConditions', { count: trial.conditions.length - 4 }) }}</template></p>
                             <dl class="result__facts">
-                                <div v-if="trial.phases.length"><dt>Phase</dt><dd>{{ phaseLabel(trial.phases) }}</dd></div>
-                                <div v-if="trial.sponsor_name"><dt>Sponsor</dt><dd>{{ trial.sponsor_name }}</dd></div>
-                                <div><dt>Sites</dt><dd>{{ trial.locations_count ?? 0 }}</dd></div>
-                                <div><dt>Updated</dt><dd>{{ formatDate(trial.last_update_post_date) }}</dd></div>
+                                <div v-if="trial.phases.length"><dt>{{ t('search.phase') }}</dt><dd>{{ phaseLabel(trial.phases) }}</dd></div>
+                                <div v-if="trial.sponsor_name"><dt>{{ t('search.sponsor') }}</dt><dd>{{ trial.sponsor_name }}</dd></div>
+                                <div><dt>{{ t('search.sites') }}</dt><dd>{{ trial.locations_count ?? 0 }}</dd></div>
+                                <div><dt>{{ t('search.updated') }}</dt><dd>{{ formatDate(trial.last_update_post_date) }}</dd></div>
                             </dl>
                         </div>
                         <StatusTrack class="result__track" :status="trial.overall_status" />

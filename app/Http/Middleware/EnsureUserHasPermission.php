@@ -20,11 +20,11 @@ final class EnsureUserHasPermission
         $user = $request->user();
 
         if (! $user instanceof User) {
-            abort(401, 'Unauthenticated.');
+            abort(401, __('errors.unauthenticated'));
         }
 
         if (! $user->hasPermission($permission)) {
-            abort(403, 'You do not have permission to perform this action.');
+            abort(403, __('errors.forbidden'));
         }
 
         return $next($request);

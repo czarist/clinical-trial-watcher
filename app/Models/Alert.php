@@ -6,7 +6,7 @@ namespace App\Models;
 
 use App\Enums\AlertFrequency;
 use App\Enums\DigestFrequency;
-use App\Enums\DigestLanguage;
+use App\Enums\Locale;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -52,7 +52,7 @@ class Alert extends Model
             'is_active' => 'boolean',
             'ai_digest_enabled' => 'boolean',
             'ai_digest_frequency' => DigestFrequency::class,
-            'ai_digest_language' => DigestLanguage::class,
+            'ai_digest_language' => Locale::class,
             'last_notified_at' => 'datetime',
         ];
     }

@@ -2,27 +2,26 @@
 import { onMounted, ref } from 'vue';
 import { api, ApiError } from '@/api/client';
 import type { Alert, Paginated } from '@/api/types';
-import { formatDate } from '@/registry';
+import { formatDate, t } from '@/i18n';
 
 const alerts = ref<Paginated<Alert> | null>(null);
 const error = ref<string | null>(null);
 
-const frequencyLabel = { instant: 'As soon as a study matches', daily: 'Daily summary', weekly: 'Weekly summary' } as const;
 
 function describe(alert: Alert): string {
     const c = alert.criteria;
     const parts = [c.q && `“${c.q}”`, c.condition, c.mesh_term, c.keyword, c.sponsor, c.city, c.country].filter(Boolean);
-    if (c.status?.length) parts.push(`${c.status.length} status filter(s)`);
-    if (c.phase?.length) parts.push(`${c.phase.length} phase filter(s)`);
-    if (c.radius_km) parts.push(`within ${c.radius_km} km`);
-    return parts.join(', ') || 'All studies';
+    if (c.status?.length) parts.push(t('alerts.statusFilters', { count: c.status.length }));
+    if (c.phase?.length) parts.push(t('alerts.phaseFilters', { count: c.phase.length }));
+    if (c.radius_km) parts.push(t('alerts.within', { km: c.radius_km }));
+    return parts.join(', ') || t('alerts.allStudies');
 }
 
 onMounted(async () => {
     try {
         alerts.value = await api.get<Paginated<Alert>>('/alerts');
     } catch (exception) {
-        error.value = exception instanceof ApiError ? exception.message : 'Could not load your alerts.';
+        error.value = exception instanceof ApiError ? exception.message : t('alerts.loadFailed');
     }
 });
 </script>
@@ -30,18 +29,18 @@ onMounted(async () => {
 <template>
     <div class="page">
         <div class="head">
-            <h1>Alerts</h1>
-            <RouterLink class="button" to="/alerts/new">New alert</RouterLink>
+            <h1>{{ t('alerts.title') }}</h1>
+            <RouterLink class="button" to="/alerts/new">{{ t('alerts.new') }}</RouterLink>
         </div>
-        <p class="muted">An alert saves a search. When the daily import finds a new study, an update or a change of recruitment status that matches it, we email you.</p>
+        <p class="muted">{{ t('alerts.intro') }}</p>
 
         <p v-if="error" class="notice error" role="alert">{{ error }}</p>
         <template v-else-if="alerts">
             <p class="muted">
-                You are using {{ alerts.meta.total }} of {{ alerts.meta.alerts_limit }} saved searches. Basic alerts are free.
-                <template v-if="!alerts.meta.ai_digests_available">AI digests come with Pro AI: <RouterLink to="/digests/samples">see samples</RouterLink>.</template>
+                {{ t('alerts.usage', { used: alerts.meta.total, limit: alerts.meta.alerts_limit ?? 0 }) }}
+                <template v-if="!alerts.meta.ai_digests_available">{{ t('alerts.aiUpsell') }} <RouterLink to="/digests/samples">{{ t('alerts.seeSamples') }}</RouterLink>.</template>
             </p>
-            <p v-if="alerts.data.length === 0" class="notice">You have no alerts yet. Search for studies and choose “Follow this search”, or create one here.</p>
+            <p v-if="alerts.data.length === 0" class="notice">{{ t('alerts.empty') }}</p>
             <ul class="alerts">
                 <li v-for="alert in alerts.data" :key="alert.id" class="alert" :class="{ 'is-paused': !alert.is_active }">
                     <div>
@@ -49,10 +48,10 @@ onMounted(async () => {
                         <p>{{ describe(alert) }}</p>
                     </div>
                     <dl>
-                        <dt>Email</dt><dd>{{ alert.is_active ? frequencyLabel[alert.frequency] : 'Paused' }}</dd>
-                        <dt>Waiting to be sent</dt><dd>{{ alert.pending_matches_count ?? 0 }}</dd>
-                        <dt>Last email</dt><dd>{{ formatDate(alert.last_notified_at) }}</dd>
-                        <dt>AI digest</dt><dd>{{ alert.ai_digest.enabled ? (alert.ai_digest.frequency === 'daily' ? 'Daily' : 'Weekly') : 'Off' }}</dd>
+                        <dt>{{ t('alerts.email') }}</dt><dd>{{ alert.is_active ? t(`alerts.frequency.${alert.frequency}`) : t('alerts.paused') }}</dd>
+                        <dt>{{ t('alerts.waiting') }}</dt><dd>{{ alert.pending_matches_count ?? 0 }}</dd>
+                        <dt>{{ t('alerts.lastEmail') }}</dt><dd>{{ formatDate(alert.last_notified_at) }}</dd>
+                        <dt>{{ t('alerts.aiDigest') }}</dt><dd>{{ alert.ai_digest.enabled ? t(`alerts.${alert.ai_digest.frequency}`) : t('alerts.off') }}</dd>
                     </dl>
                 </li>
             </ul>

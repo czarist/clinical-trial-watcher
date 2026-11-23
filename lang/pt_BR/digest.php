@@ -77,6 +77,7 @@ return [
     ],
 
     'subject' => 'Digest com IA: :name (:period)',
+    'subject_fallback' => 'Digest com IA',
     'title' => 'Digest com IA de ":name"',
     'period' => ':start a :end',
     'intro' => ':count atualização(ões) de estudos correspondentes entre :start e :end.',
@@ -86,6 +87,7 @@ return [
     'updated_on' => 'Atualização publicada no registro em :date',
     'view_registry' => 'Ver no ClinicalTrials.gov',
     'view_report' => 'Abrir o relatório',
+    'why_matches' => 'Por que corresponde',
     'notice' => 'Este digest descreve registros públicos do ClinicalTrials.gov. Não é aconselhamento médico, não avalia elegibilidade para nenhum estudo e não interpreta resultados. Confira cada fato na página do registro indicada.',
     'missing_fact' => 'O registro não informou este dado.',
     'manage' => 'Você recebe este e-mail porque os digests com IA estão ativados nesta busca salva. Você pode desativá-los nas configurações da busca; os alertas básicos continuam funcionando.',

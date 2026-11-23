@@ -13,8 +13,8 @@ final readonly class SummaryValidator
 {
     /**
      * Wording that would turn registry facts into advice, an eligibility decision or a claim
-     * about efficacy. Matched case-insensitively at the start of a word ("cure" matches
-     * "cured" but not "secure").
+     * about efficacy, in every offered language. Matched case-insensitively at the start of a
+     * word ("cure" matches "cured" but not "secure").
      */
     private const array FORBIDDEN = [
         // English
@@ -23,6 +23,23 @@ final readonly class SummaryValidator
         // Brazilian Portuguese
         'recomend', 'você deve', 'elegív', 'elegibilidade', 'eficác', 'eficaz', 'comprovad', 'cura',
         'consulte seu', 'inscreva-se',
+        // Spanish
+        'usted debe', 'debería', 'elegib', 'eficaci', 'comprobad', 'consulte a su', 'inscríbase',
+    ];
+
+    /**
+     * The same wording in Chinese, Japanese and Korean, where words are not separated by
+     * spaces (or carry attached particles), so it is matched anywhere in the text.
+     */
+    private const array FORBIDDEN_ANYWHERE = [
+        // Simplified Chinese
+        '推荐', '建议您', '您应该', '符合条件', '资格', '疗效', '有效', '证实', '治愈', '咨询您的医生', '立即报名',
+        // Traditional Chinese
+        '推薦', '建議您', '您應該', '符合條件', '資格', '療效', '證實', '治癒', '諮詢您的醫生', '立即報名',
+        // Japanese
+        '推奨', 'おすすめ', 'お勧め', 'すべき', '適格', '有効', '効果的', '証明され', '医師に相談', '今すぐ登録',
+        // Korean
+        '추천', '권장', '해야 합니다', '자격', '적격', '효능', '효과적', '유효', '입증', '완치', '의사와 상담', '지금 등록',
     ];
 
     public function __construct(private int $maxSummaryChars) {}
@@ -87,6 +104,12 @@ final readonly class SummaryValidator
 
         foreach (self::FORBIDDEN as $term) {
             if (preg_match('/(?<![\p{L}\p{N}])'.preg_quote($term, '/').'/iu', $summary) === 1) {
+                return false;
+            }
+        }
+
+        foreach (self::FORBIDDEN_ANYWHERE as $term) {
+            if (mb_stripos($summary, $term) !== false) {
                 return false;
             }
         }

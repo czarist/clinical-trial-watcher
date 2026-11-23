@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Auth;
 
+use App\Enums\Locale;
 use App\Enums\RoleName;
 use App\Exceptions\InvalidCredentials;
 use App\Models\Role;
@@ -48,12 +49,13 @@ final readonly class AuthService
      *
      * @return array{0: User, 1: IssuedToken}
      */
-    public function register(string $name, string $email, string $password): array
+    public function register(string $name, string $email, string $password, Locale $locale): array
     {
-        $user = $this->db->transaction(function () use ($name, $email, $password): User {
+        $user = $this->db->transaction(function () use ($name, $email, $password, $locale): User {
             $user = User::create([
                 'name' => $name,
                 'email' => $email,
+                'locale' => $locale,
                 'password' => $password,
                 'plan_id' => $this->plans->freePlan()?->id,
             ]);

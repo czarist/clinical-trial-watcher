@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateLocaleRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Resources\UserResource;
@@ -26,6 +27,15 @@ final class AccountController extends Controller
             $request->string('name')->toString(),
             $request->string('email')->toString(),
         );
+
+        return new UserResource($user->load(['roles.permissions', 'plan']));
+    }
+
+    public function updateLocale(UpdateLocaleRequest $request): UserResource
+    {
+        /** @var User $user */
+        $user = $request->user();
+        $user = $this->accounts->updateLocale($user, $request->locale());
 
         return new UserResource($user->load(['roles.permissions', 'plan']));
     }

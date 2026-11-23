@@ -25,6 +25,7 @@ final class AuthController extends Controller
             $request->string('name')->toString(),
             $request->string('email')->toString(),
             $request->string('password')->toString(),
+            $request->locale(),
         );
 
         return response()->json([

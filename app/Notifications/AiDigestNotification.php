@@ -14,7 +14,11 @@ use Illuminate\Notifications\Notification;
  */
 final class AiDigestNotification extends Notification
 {
-    public function __construct(public readonly Digest $digest) {}
+    public function __construct(public readonly Digest $digest)
+    {
+        // The whole email, including the mail template's own text, uses the digest's language.
+        $this->locale = $digest->language->value;
+    }
 
     /**
      * @return list<string>
@@ -30,7 +34,7 @@ final class AiDigestNotification extends Notification
         $content = $this->digest->content ?? [];
 
         return (new MailMessage)
-            ->subject((string) ($content['subject'] ?? 'AI digest'))
+            ->subject((string) ($content['subject'] ?? __('digest.subject_fallback')))
             ->markdown('mail.digest', [
                 'content' => $content,
                 'reportUrl' => rtrim((string) config('app.frontend_url'), '/').'/digests/'.$this->digest->id,

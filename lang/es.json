@@ -1,0 +1,19 @@
+{
+    "Hello!": "¡Hola!",
+    "Whoops!": "¡Vaya!",
+    "Regards,": "Saludos,",
+    "All rights reserved.": "Todos los derechos reservados.",
+    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser:": "Si tiene problemas para hacer clic en el botón «:actionText», copie y pegue la siguiente URL\nen su navegador web:",
+    "Verify Email Address": "Verificar dirección de correo",
+    "Verify your email address": "Verifique su dirección de correo",
+    "Please click the button below to verify your email address.": "Haga clic en el botón de abajo para verificar su dirección de correo.",
+    "If you did not create an account, no further action is required.": "Si no creó una cuenta, no es necesario hacer nada más.",
+    "Reset Password": "Restablecer contraseña",
+    "Reset your password": "Restablezca su contraseña",
+    "You are receiving this email because we received a password reset request for your account.": "Recibe este correo porque recibimos una solicitud para restablecer la contraseña de su cuenta.",
+    "This password reset link will expire in :count minutes.": "Este enlace para restablecer la contraseña caducará en :count minutos.",
+    "If you did not request a password reset, no further action is required.": "Si no solicitó restablecer la contraseña, no es necesario hacer nada más.",
+    "The given data was invalid.": "Los datos proporcionados no son válidos.",
+    "(and :count more error)": "(y :count error más)",
+    "(and :count more errors)": "(y :count errores más)"
+}

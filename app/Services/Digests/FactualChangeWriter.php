@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Digests;
 
-use App\Enums\DigestLanguage;
+use App\Enums\Locale;
 use App\Enums\TrialChangeType;
 use App\Models\ClinicalTrials\ClinicalTrialChange;
 
@@ -23,7 +23,7 @@ final class FactualChangeWriter
     /**
      * @return list<string>
      */
-    public function facts(ClinicalTrialChange $change, DigestLanguage $language): array
+    public function facts(ClinicalTrialChange $change, Locale $language): array
     {
         $locale = $language->value;
 
@@ -86,12 +86,12 @@ final class FactualChangeWriter
     /**
      * The factual summary used when no AI summary is available.
      */
-    public function summary(ClinicalTrialChange $change, DigestLanguage $language): string
+    public function summary(ClinicalTrialChange $change, Locale $language): string
     {
         return implode(' ', array_slice($this->facts($change, $language), 0, 3));
     }
 
-    public function status(?string $status, DigestLanguage $language): string
+    public function status(?string $status, Locale $language): string
     {
         $key = 'digest.status.'.($status ?? 'none');
         $label = trans($key, [], $language->value);
@@ -102,7 +102,7 @@ final class FactualChangeWriter
     /**
      * @param  array{date?: string, type?: string|null}|null  $date
      */
-    public function date(?array $date, DigestLanguage $language): string
+    public function date(?array $date, Locale $language): string
     {
         $locale = $language->value;
         $value = $date['date'] ?? null;
@@ -142,7 +142,7 @@ final class FactualChangeWriter
     /**
      * @param  array<string, mixed>  $detail
      */
-    private function site(array $detail, DigestLanguage $language): string
+    private function site(array $detail, Locale $language): string
     {
         $locale = $language->value;
         $place = $this->place((array) ($detail['site'] ?? []));

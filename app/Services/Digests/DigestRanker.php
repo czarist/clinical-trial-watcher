@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Digests;
 
-use App\Enums\DigestLanguage;
+use App\Enums\Locale;
 use App\Enums\StudyStatus;
 use App\Enums\TrialChangeType;
 use App\Models\ClinicalTrials\ClinicalTrialChange;
@@ -28,7 +28,7 @@ final readonly class DigestRanker
      * @param  iterable<ClinicalTrialChange>  $changes
      * @return list<RankedChange> most relevant first
      */
-    public function rank(iterable $changes, TrialSearchCriteria $criteria, DigestLanguage $language): array
+    public function rank(iterable $changes, TrialSearchCriteria $criteria, Locale $language): array
     {
         $matchLine = $this->matchLine($criteria, $language);
         $ranked = [];
@@ -51,7 +51,7 @@ final readonly class DigestRanker
     /**
      * @return array{0: int, 1: list<string>}
      */
-    private function score(ClinicalTrialChange $change, TrialSearchCriteria $criteria, DigestLanguage $language): array
+    private function score(ClinicalTrialChange $change, TrialSearchCriteria $criteria, Locale $language): array
     {
         $locale = $language->value;
 
@@ -155,7 +155,7 @@ final readonly class DigestRanker
     /**
      * "Matches this saved search: condition "asthma", country Brazil."
      */
-    private function matchLine(TrialSearchCriteria $criteria, DigestLanguage $language): ?string
+    private function matchLine(TrialSearchCriteria $criteria, Locale $language): ?string
     {
         $locale = $language->value;
         $parts = [];

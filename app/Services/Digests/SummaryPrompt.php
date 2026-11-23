@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Digests;
 
-use App\Enums\DigestLanguage;
+use App\Enums\Locale;
 
 /**
  * The instructions and input for the model. The input holds only public registry facts:
@@ -12,7 +12,7 @@ use App\Enums\DigestLanguage;
  */
 final class SummaryPrompt
 {
-    public function system(DigestLanguage $language): string
+    public function system(Locale $language): string
     {
         return <<<PROMPT
             You write short factual summaries of changes to clinical study registry entries from ClinicalTrials.gov.

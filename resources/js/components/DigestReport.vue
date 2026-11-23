@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { DigestContent } from '@/api/types';
+import { matchLocale, t, tagOf } from '@/i18n';
 
 /**
  * Renders a digest edition from the same stored content the email uses, so the report page
@@ -7,11 +8,12 @@ import type { DigestContent } from '@/api/types';
  */
 defineProps<{ content: DigestContent; sampleLabel?: string }>();
 
-const portuguese = (content: DigestContent): boolean => content.language === 'pt_BR';
+/** The edition keeps the language it was written in, whatever the page language is. */
+const languageTag = (content: DigestContent): string => tagOf(matchLocale(content.language) ?? 'en');
 </script>
 
 <template>
-    <article class="digest" :lang="portuguese(content) ? 'pt-BR' : 'en'">
+    <article class="digest" :lang="languageTag(content)">
         <p v-if="sampleLabel" class="digest__sample">{{ sampleLabel }}</p>
         <header class="digest__head">
             <h2>{{ content.title }}</h2>
@@ -30,7 +32,7 @@ const portuguese = (content: DigestContent): boolean => content.language === 'pt
                 <ul class="item__facts">
                     <li v-for="fact in item.facts" :key="fact">{{ fact }}</li>
                 </ul>
-                <ul class="item__reasons" :aria-label="portuguese(content) ? 'Por que corresponde' : 'Why it matches'">
+                <ul class="item__reasons" :aria-label="content.labels.why_matches ?? t('digests.whyMatches')">
                     <li v-for="reason in item.reasons" :key="reason">{{ reason }}</li>
                 </ul>
                 <p class="item__meta">

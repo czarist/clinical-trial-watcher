@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue';
 import { api } from '@/api/client';
 import type { Role } from '@/api/types';
+import { t } from '@/i18n';
 
 interface Permission {
     id: number;
@@ -19,7 +20,7 @@ async function toggle(role: Role, permission: Permission): Promise<void> {
     else ids.add(permission.id);
     const updated = (await api.put<{ data: Role }>(`/admin/roles/${role.id}/permissions`, { permission_ids: [...ids] })).data;
     role.permissions = updated.permissions;
-    message.value = `${role.name} permissions saved.`;
+    message.value = t('admin.permissionsSaved', { role: role.name });
 }
 
 onMounted(async () => {
@@ -34,13 +35,13 @@ onMounted(async () => {
 
 <template>
     <section>
-        <p class="muted">Changes apply on each user's next request.</p>
+        <p class="muted">{{ t('admin.rolesIntro') }}</p>
         <p v-if="message" class="notice" role="status">{{ message }}</p>
         <div class="table-scroll">
             <table>
                 <thead>
                     <tr>
-                        <th>Permission</th>
+                        <th>{{ t('admin.permission') }}</th>
                         <th v-for="role in roles" :key="role.id">{{ role.name }}</th>
                     </tr>
                 </thead>

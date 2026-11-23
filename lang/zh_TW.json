@@ -1,0 +1,19 @@
+{
+    "Hello!": "您好！",
+    "Whoops!": "糟糕！",
+    "Regards,": "敬祝 順心，",
+    "All rights reserved.": "版權所有。",
+    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser:": "如果您無法點選「:actionText」按鈕，請複製下方網址\n並貼到您的網頁瀏覽器中：",
+    "Verify Email Address": "驗證電子郵件地址",
+    "Verify your email address": "驗證您的電子郵件地址",
+    "Please click the button below to verify your email address.": "請點選下方按鈕以驗證您的電子郵件地址。",
+    "If you did not create an account, no further action is required.": "如果您並未建立帳戶，無須採取任何動作。",
+    "Reset Password": "重設密碼",
+    "Reset your password": "重設您的密碼",
+    "You are receiving this email because we received a password reset request for your account.": "您收到這封電子郵件，是因為我們收到了您帳戶的密碼重設要求。",
+    "This password reset link will expire in :count minutes.": "此密碼重設連結將於 :count 分鐘後失效。",
+    "If you did not request a password reset, no further action is required.": "如果您並未要求重設密碼，無須採取任何動作。",
+    "The given data was invalid.": "提供的資料無效。",
+    "(and :count more error)": "（及其他 :count 個錯誤）",
+    "(and :count more errors)": "（及其他 :count 個錯誤）"
+}

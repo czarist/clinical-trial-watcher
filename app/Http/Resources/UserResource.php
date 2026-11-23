@@ -24,6 +24,7 @@ final class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'email_verified' => $this->hasVerifiedEmail(),
+            'locale' => $this->locale->value,
             'trial_ends_at' => $this->trial_ends_at?->toIso8601String(),
             'plan' => new PlanResource($this->whenLoaded('plan')),
             'roles' => $this->whenLoaded('roles', fn () => $this->roles->map(fn (Role $role): array => ['id' => $role->id, 'name' => $role->name])),
