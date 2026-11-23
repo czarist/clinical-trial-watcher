@@ -46,9 +46,35 @@
 - **Mudanças são registradas com o valor anterior e o novo.** Um estudo novo é registrado como novo e vira a base de comparação. Nas importações seguintes são comparados o status geral de recrutamento, os centros (adicionados, removidos ou com status do centro alterado), as datas de início e de conclusão (com a precisão original: uma data só com mês continua sendo um mês) e a publicação de resultados, e as diferenças ficam gravadas de forma estruturada. As listas de centros são comparadas por instituição e local, então uma mudança na ordem em que o registro os lista não é uma mudança. Cada mudança tem uma impressão digital estável, então uma importação repetida não consegue registrá-la nem notificá-la duas vezes.
 - **Datas parciais são normalizadas** (`2024` → `2024-01-01`, `2024-06` → `2024-06-01`), e o payload completo do estudo fica em `raw_json`.
 
+### Outros registros
+
+Outros doze registros podem ser importados com `php artisan clinicaltrials:fetch --source=<chave>`. Só o ClinicalTrials.gov roda no agendamento diário.
+
+| Chave | Registro | Lido por | Incremental | Uso comercial |
+|---|---|---|---|---|
+| `ctis` | CTIS (UE/EEE) | API JSON do portal | Sim (última atualização) | Sim, com crédito à EMA |
+| `isrctn` | ISRCTN | API XML | Sim (última edição) | Sim (CC BY / CC0) |
+| `euctr` | EU Clinical Trials Register | Exportação em texto simples | Só estudos novos | Sim, com crédito ao registro |
+| `drks` | DRKS (Alemanha) | Dump JSON; só registros CC BY 4.0 (registrados ou atualizados a partir de 2025) | Sim (última atualização) | Sim (CC BY 4.0) |
+| `reec` | REEC (Espanha) | API REST | Inscrições dos últimos 90 dias | Sim, citando a AEMPS |
+| `rebec` | ReBEC (Brasil) | Páginas web | Sim (última aprovação) | Não confirmado |
+| `renis` | RENIS (Argentina) | Arquivo XLSX | Não | Sim (CC BY 4.0) |
+| `health_canada` | Health Canada | API JSON | Não | Sim (OGL Canada) |
+| `tfda` | TFDA (Taiwan) | ZIP de CSV | Não | Sim (Open Government Data License) |
+| `ppb_kenya` | Pharmacy and Poisons Board (Quênia) | Páginas web | Sim (data de aprovação) | Não confirmado |
+| `eda_egypt` | Egyptian Drug Authority | PDF | Não | Não confirmado |
+| `moz_ukraine` | Portarias do Ministério da Saúde da Ucrânia | Anexos em PDF | Portarias mais recentes | Não confirmado |
+
+- **Cada importador passou por uma revisão jurídica**, registrada na sua classe de origem e em [docs/registries-evaluation.md](docs/registries-evaluation.md) (seção 7), que também lista os registros que ainda não podem ser importados e o que cada um exige (WHO ICTRP, UMIN-CTR, CRIS, ANZCTR, HRA e outros).
+- **Registros de origens cujos termos não confirmam o uso comercial aparecem de graça com atribuição, mas ficam fora dos digests com IA**, até que o registro confirme a reutilização por escrito.
+- **Acesso educado.** As requisições levam um user agent com endereço de contato (`REGISTRY_CONTACT`, obrigatório para downloads e páginas web), seguem o robots.txt e o seu Crawl-delay em downloads e páginas web, vão uma por vez por registro com pelo menos `REGISTRY_MIN_INTERVAL_MS` de intervalo e são repetidas um número limitado de vezes. Um login, captcha ou HTTP 401/403 interrompe a execução: peça permissão ou uma exportação ao registro. Nada é contornado.
+- **Páginas guardadas.** Todo corpo de resposta é guardado (`storage/app/registry-raw/`) com o seu `ETag`/`Last-Modified`, então páginas sem mudança não são baixadas de novo, e `clinicaltrials:fetch --source=<chave> --from-cache` lê de novo as páginas guardadas depois de uma correção no parser (passe o mesmo `--since` ou `--full` da execução repetida).
+- **O registro como publicado** (XML, linha de CSV, página web, texto do PDF) fica guardado com cada estudo, e um estudo cujo conteúdo normalizado não mudou não é regravado.
+- **Mudanças de layout.** Uma execução completa de um registro lido por download ou página web que extrai muito menos registros que a anterior, ou qualquer execução cuja parcela de campos preenchidos cai bruscamente, fica marcada como `partial` com o motivo. As importações nunca apagam estudos.
+
 ### Registros duplicados
 
-A importação foi preparada para mais de um registro (`config/registries.php`; hoje só o ClinicalTrials.gov é importado, os outros estão planejados no roadmap). Cada registro guarda a sua origem (`source`) e o seu identificador nela (`source_id`), único por origem, então importar o mesmo registro de novo o atualiza.
+Cada registro guarda a sua origem (`source`) e o seu identificador nela (`source_id`), único por origem, então importar o mesmo registro de novo o atualiza. Os registros estão listados em `config/registries.php`.
 
 - **Estudos registrados mais de uma vez aparecem uma vez só.** Os identificadores de registro de cada estudo (o próprio e os que ele cita, como um número ISRCTN ou EudraCT entre os IDs secundários do ClinicalTrials.gov) são normalizados (`ISRCTN 12345678` e `isrctn12345678` são o mesmo) e comparados. Registros que compartilham um deles são ligados e agrupados: aparece o registro da origem listada primeiro em `config/registries.php`, e os outros ficam como inscrições adicionais do estudo. Números de protocolo do patrocinador, números de financiamento e títulos nunca são usados para juntar estudos.
 - **Correspondências duvidosas esperam uma pessoa.** Dois registros da mesma origem que compartilham um identificador, ou um grupo que ficaria com dois registros da mesma origem, não são juntados: os vínculos ficam como `conflict`. Os operadores listam os vínculos em `GET /api/admin/trial-links` e os confirmam ou rejeitam; a decisão é mantida pelas importações seguintes. Um vínculo cujo identificador compartilhado desaparece é removido e o grupo é recalculado.
@@ -266,7 +292,7 @@ Web:        o Laravel serve resources/views/app.blade.php → Vue 3 + Vue Router
 ```
 
 - `app/Services/ClinicalTrials/Import/` contém a importação. Cada registro é uma `RegistrySource` (`app/Services/Registries/`) com um `StudyRegistryClient` e um `StudyPayloadMapper`; `clinicaltrials:fetch --source=<chave>` escolhe um (padrão `clinicaltrials_gov`), e cada registro tem o seu próprio ponto de importação incremental. O mapeador é uma função pura do payload e o sincronizador cuida da gravação.
-- `app/Services/Registries/` contém a lista de registros (`SourceRegistry`), a normalização de identificadores (`IdentifierParser`) e a deduplicação (`DuplicateLinker`, executada na transação de cada estudo).
+- `app/Services/Registries/` contém a lista de registros (`SourceRegistry`), a normalização de identificadores (`IdentifierParser`) e a deduplicação (`DuplicateLinker`, executada na transação de cada estudo). `Fetching/RegistryFetcher` é o único caminho dos importadores até um registro; `Parsing/` contém os leitores de HTML, CSV, XLSX, texto de PDF e tabelas de largura fixa; `Sources/<Registro>/` contém cada importador (origem com a sua revisão jurídica, cliente, mapeador).
 - `app/Services/ClinicalTrials/Search/` monta a pesquisa com pequenas classes `TrialFilter` registradas no `AppServiceProvider`. Os alertas reaproveitam os mesmos critérios e filtros.
 - `app/Services/ClinicalTrials/Changes/` contém os fatos acompanhados de um estudo e o `ChangeDetector`, uma função pura que os compara.
 - `app/Services/Alerts/` aplica o limite de buscas salvas, cruza as importações e envia os e-mails. `app/Services/Billing/` contém as regras dos planos e o `Entitlements`; o Stripe é acessado pela interface `SubscriptionGateway`. `app/Services/Teams/` gerencia equipes e convites.
@@ -300,8 +326,9 @@ app/
   Models/                User, Role, Permission, Plan, Subscription, Alert, AlertMatch, ImportRun,
                          Team, TeamMember, TeamInvitation, Digest, DigestItem, DigestDelivery, ChangeSummary
   Models/ClinicalTrials/ ClinicalTrial, suas listas relacionadas e ClinicalTrialChange
-  Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
-config/                  clinicaltrials.php, billing.php, ai.php, auth.php, jwt.php
+  Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Registries/{Fetching,Parsing,Sources,...},
+                         Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
+config/                  clinicaltrials.php, registries.php, billing.php, ai.php, auth.php, jwt.php
 lang/                    textos da API, dos e-mails e dos digests por idioma (en, pt_BR, es, zh_CN, zh_TW, ja, ko)
 database/                migrations/, factories/, seeders/
 docs/                    logo, avaliação de registros
@@ -312,7 +339,7 @@ tests/                   Feature/, Unit/, Fixtures/
 
 ## Fonte dos dados
 
-Os dados dos estudos vêm do [ClinicalTrials.gov](https://clinicaltrials.gov/), mantido pela National Library of Medicine dos EUA. Os registros descrevem estudos cadastrados e não são orientação médica. Confira o registro oficial antes de confiar em qualquer detalhe de um estudo. [docs/registries-evaluation.md](docs/registries-evaluation.md) avalia outros registros (WHO ICTRP, EU CTR/CTIS e ReBEC).
+Os dados dos estudos vêm do [ClinicalTrials.gov](https://clinicaltrials.gov/), mantido pela National Library of Medicine dos EUA. Os registros descrevem estudos cadastrados e não são orientação médica. Confira o registro oficial antes de confiar em qualquer detalhe de um estudo. Os outros registros estão listados em [Outros registros](#outros-registros); os dados de cada um aparecem com a sua atribuição. [docs/registries-evaluation.md](docs/registries-evaluation.md) registra a revisão jurídica de cada registro analisado.
 
 ## Licença
 

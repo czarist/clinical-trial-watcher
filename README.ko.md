@@ -46,9 +46,35 @@
 - **변경 전후 값으로 변경 사항을 추적.** 새 연구는 신규로 기록되어 기준점이 됩니다. 이후 가져오기에서는 전체 모집 상태, 연구 기관(추가, 제거, 기관별 상태 변경), 시작일과 완료일(원래 정밀도 유지: 월까지만 있는 날짜는 월 단위로 유지), 게시된 결과를 비교해 구조화된 세부 정보로 저장합니다. 연구 기관 목록은 기관과 위치로 비교하므로 레지스트리의 나열 순서가 바뀐 것은 변경으로 보지 않습니다. 각 변경에는 고정된 지문(fingerprint)이 있어, 재시도하거나 반복한 가져오기에서도 같은 변경이 두 번 기록되거나 알림으로 발송되지 않습니다.
 - **부분 날짜는 정규화되며**(`2024` → `2024-01-01`, `2024-06` → `2024-06-01`), 연구 페이로드 전체는 `raw_json`에 보관됩니다.
 
+### 기타 레지스트리
+
+12개 레지스트리를 추가로 `php artisan clinicaltrials:fetch --source=<key>`로 가져올 수 있습니다. 매일 일정에 따라 실행되는 것은 ClinicalTrials.gov뿐입니다.
+
+| 키 | 레지스트리 | 읽기 방식 | 증분 | 상업적 이용 |
+|---|---|---|---|---|
+| `ctis` | CTIS(EU/EEA) | 포털 JSON API | 예(최종 업데이트) | 예, EMA 출처 표시 |
+| `isrctn` | ISRCTN | XML API | 예(최종 수정) | 예(CC BY / CC0) |
+| `euctr` | EU Clinical Trials Register | 일반 텍스트 내보내기 | 새 임상시험만 | 예, 레지스트리 출처 표시 |
+| `drks` | DRKS(독일) | JSON 덤프, CC BY 4.0 레코드만(2025년부터 등록 또는 업데이트) | 예(최종 업데이트) | 예(CC BY 4.0) |
+| `reec` | REEC(스페인) | REST API | 최근 90일간의 등록 | 예, AEMPS 인용 |
+| `rebec` | ReBEC(브라질) | 웹 페이지 | 예(최종 승인) | 확인되지 않음 |
+| `renis` | RENIS(아르헨티나) | XLSX 파일 | 아니요 | 예(CC BY 4.0) |
+| `health_canada` | Health Canada | JSON API | 아니요 | 예(OGL Canada) |
+| `tfda` | TFDA(대만) | CSV ZIP | 아니요 | 예(Open Government Data License) |
+| `ppb_kenya` | Pharmacy and Poisons Board(케냐) | 웹 페이지 | 예(승인일) | 확인되지 않음 |
+| `eda_egypt` | Egyptian Drug Authority | PDF | 아니요 | 확인되지 않음 |
+| `moz_ukraine` | 우크라이나 보건부 명령 | PDF 부속서 | 최신 명령 | 확인되지 않음 |
+
+- **모든 가져오기 도구는 법률 검토를 통과했습니다.** 검토 내용은 각 소스 클래스와 [docs/registries-evaluation.md](docs/registries-evaluation.md)(7절)에 기록되어 있으며, 이 문서에는 아직 가져올 수 없는 레지스트리와 각각에 필요한 사항(WHO ICTRP, UMIN-CTR, CRIS, ANZCTR, HRA 등)도 나와 있습니다.
+- **약관에서 상업적 이용이 확인되지 않는 레지스트리의 레코드는 출처를 밝혀 무료로 표시하지만 AI 다이제스트에서는 제외합니다.** 레지스트리가 재사용을 서면으로 확인할 때까지 이렇게 처리합니다.
+- **예의 바른 접근.** 요청에는 연락처 주소가 포함된 user agent(`REGISTRY_CONTACT`, 다운로드와 웹 페이지에 필수)를 붙이고, 다운로드와 웹 페이지에서는 robots.txt와 그 Crawl-delay를 따르며, 레지스트리별로 한 번에 하나씩 최소 `REGISTRY_MIN_INTERVAL_MS` 간격으로 보내고, 제한된 횟수만큼 재시도합니다. 로그인, 캡차 또는 HTTP 401/403을 만나면 실행을 중단합니다. 이 경우 레지스트리에 허가나 내보내기 파일을 요청하세요. 어떤 제한도 우회하지 않습니다.
+- **저장된 페이지.** 모든 응답 본문은 `ETag`/`Last-Modified`와 함께 저장되므로(`storage/app/registry-raw/`) 바뀌지 않은 페이지는 다시 내려받지 않으며, 파서를 수정한 뒤에는 `clinicaltrials:fetch --source=<key> --from-cache`로 저장된 페이지를 다시 파싱합니다(반복하려는 실행과 같은 `--since` 또는 `--full`을 지정하세요).
+- **게시된 그대로의 레코드**(XML, CSV 행, 웹 페이지, PDF 텍스트)는 각 연구와 함께 보관되며, 정규화된 내용이 바뀌지 않은 연구는 다시 쓰지 않습니다.
+- **레이아웃 변경.** 다운로드나 웹 페이지로 읽는 레지스트리에서 전체 실행이 이전보다 훨씬 적은 레코드를 파싱하거나, 어떤 실행이든 채워진 필드의 비율이 급격히 떨어지면 그 실행은 사유와 함께 `partial`로 기록됩니다. 가져오기는 연구를 절대 삭제하지 않습니다.
+
 ### 중복 등록
 
-가져오기는 여러 레지스트리를 지원하도록 설계되었습니다(`config/registries.php`. 현재는 ClinicalTrials.gov만 가져오며, 나머지는 로드맵에 계획되어 있습니다). 각 레코드는 해당 레지스트리(`source`)와 그 레지스트리에서의 식별자(`source_id`, 레지스트리별로 고유)를 보관하므로, 같은 레코드를 다시 가져오면 업데이트됩니다.
+각 레코드는 해당 레지스트리(`source`)와 그 레지스트리에서의 식별자(`source_id`, 레지스트리별로 고유)를 보관하므로, 같은 레코드를 다시 가져오면 업데이트됩니다. 레지스트리 목록은 `config/registries.php`에 있습니다.
 
 - **여러 번 등록된 연구는 한 번만 표시.** 각 레코드의 레지스트리 식별자(자신의 식별자와, ClinicalTrials.gov 보조 ID에 있는 ISRCTN 또는 EudraCT 번호처럼 레코드가 인용하는 식별자)는 정규화한 뒤(`ISRCTN 12345678`과 `isrctn12345678`은 같음) 비교합니다. 식별자를 공유하는 레코드는 연결되어 하나의 그룹으로 묶입니다. `config/registries.php`에서 가장 먼저 나열된 레지스트리의 레코드가 표시되고, 나머지는 그 연구의 다른 등록으로 보관됩니다. 후원 기관의 프로토콜 번호, 연구비 번호, 제목은 연구를 병합하는 데 절대 사용하지 않습니다.
 - **불확실한 일치는 사람이 판단.** 같은 레지스트리의 두 레코드가 식별자를 공유하거나, 한 레지스트리의 레코드 두 개를 포함하게 되는 그룹은 병합하지 않고 해당 연결을 `conflict`로 표시합니다. 운영자는 `GET /api/admin/trial-links`에서 연결 목록을 보고 확정하거나 거부하며, 이 결정은 이후 가져오기에서도 유지됩니다. 공유하던 식별자가 사라진 연결은 제거되고 그룹이 다시 계산됩니다.
@@ -266,7 +292,7 @@ Web app: Laravel serves resources/views/app.blade.php → Vue 3 + Vue Router + P
 ```
 
 - `app/Services/ClinicalTrials/Import/`에 가져오기가 있습니다. 각 레지스트리는 `StudyRegistryClient`와 `StudyPayloadMapper`를 갖춘 `RegistrySource`(`app/Services/Registries/`)이며, `clinicaltrials:fetch --source=<key>`로 하나를 선택하고(기본값 `clinicaltrials_gov`), 레지스트리마다 자체 증분 커서를 유지합니다. 매퍼는 페이로드만으로 결과가 정해지는 순수 함수이며, 동기화기(synchronizer)가 영속화를 담당합니다.
-- `app/Services/Registries/`에는 레지스트리 목록(`SourceRegistry`), 식별자 정규화(`IdentifierParser`), 중복 제거(`DuplicateLinker`, 각 연구의 트랜잭션 안에서 실행)가 있습니다.
+- `app/Services/Registries/`에는 레지스트리 목록(`SourceRegistry`), 식별자 정규화(`IdentifierParser`), 중복 제거(`DuplicateLinker`, 각 연구의 트랜잭션 안에서 실행)가 있습니다. 가져오기 도구가 레지스트리에 접근하는 유일한 경로는 `Fetching/RegistryFetcher`입니다. `Parsing/`에는 HTML, CSV, XLSX, PDF 텍스트, 고정 폭 표 리더가 있고, `Sources/<Registry>/`에는 각 가져오기 도구(법률 검토가 담긴 소스, 클라이언트, 매퍼)가 있습니다.
 - `app/Services/ClinicalTrials/Search/`는 `AppServiceProvider`에 등록된 작은 `TrialFilter` 클래스들로 검색을 구성합니다. 알림도 같은 조건과 필터를 재사용합니다.
 - `app/Services/ClinicalTrials/Changes/`에는 연구의 추적 대상 사실과 이를 비교하는 순수 클래스 `ChangeDetector`가 있습니다.
 - `app/Services/Alerts/`는 저장된 검색 한도를 적용하고, 가져온 연구와 일치 여부를 판단하며, 이메일을 보냅니다. `app/Services/Billing/`에는 요금제 규칙과 `Entitlements`가 있으며, Stripe는 `SubscriptionGateway` 인터페이스를 통해서만 호출합니다. `app/Services/Teams/`는 팀과 초대를 관리합니다.
@@ -300,8 +326,9 @@ app/
   Models/                User, Role, Permission, Plan, Subscription, Alert, AlertMatch, ImportRun,
                          Team, TeamMember, TeamInvitation, Digest, DigestItem, DigestDelivery, ChangeSummary
   Models/ClinicalTrials/ ClinicalTrial, its related lists and ClinicalTrialChange
-  Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
-config/                  clinicaltrials.php, billing.php, ai.php, auth.php, jwt.php
+  Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Registries/{Fetching,Parsing,Sources,...},
+                         Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
+config/                  clinicaltrials.php, registries.php, billing.php, ai.php, auth.php, jwt.php
 lang/                    API, email and digest text per language (en, pt_BR, es, zh_CN, zh_TW, ja, ko)
 database/                migrations/, factories/, seeders/
 docs/                    logo, registries evaluation
@@ -312,7 +339,7 @@ tests/                   Feature/, Unit/, Fixtures/
 
 ## 데이터 출처
 
-연구 데이터는 미국 국립의학도서관(U.S. National Library of Medicine)이 운영하는 [ClinicalTrials.gov](https://clinicaltrials.gov/)에서 가져옵니다. 기록은 등록된 연구를 설명할 뿐 의학적 조언이 아닙니다. 연구의 세부 정보를 근거로 삼기 전에 공식 기록을 확인하세요. [docs/registries-evaluation.md](docs/registries-evaluation.md)에서 다른 레지스트리(WHO ICTRP, EU CTR/CTIS, ReBEC)를 평가합니다.
+연구 데이터는 미국 국립의학도서관(U.S. National Library of Medicine)이 운영하는 [ClinicalTrials.gov](https://clinicaltrials.gov/)에서 가져옵니다. 기록은 등록된 연구를 설명할 뿐 의학적 조언이 아닙니다. 연구의 세부 정보를 근거로 삼기 전에 공식 기록을 확인하세요. 다른 레지스트리는 [기타 레지스트리](#기타-레지스트리)에 나열되어 있으며, 각 레지스트리의 데이터는 출처와 함께 표시됩니다. [docs/registries-evaluation.md](docs/registries-evaluation.md)에는 조사한 모든 레지스트리의 법률 검토가 기록되어 있습니다.
 
 ## 라이선스
 

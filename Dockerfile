@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     libsqlite3-dev \
     libmagickwand-dev --no-install-recommends \
+    poppler-utils \
     netcat-openbsd  # para esperar o MySQL no entrypoint
 
 # Instala extensões do PHP que Laravel geralmente usa

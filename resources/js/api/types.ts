@@ -73,6 +73,7 @@ export interface TrialSummary {
     conditions?: string[];
     locations_count?: number;
     registry_url: string | null;
+    attribution: string | null;
 }
 
 /** Another record of the same study, in this or another registry. */

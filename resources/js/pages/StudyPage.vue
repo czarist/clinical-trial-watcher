@@ -110,6 +110,7 @@ watch(locale, setTitle);
                         <dt>{{ t('study.lastUpdate') }}</dt><dd>{{ formatDate(trial.last_update_post_date) }}</dd>
                     </dl>
                     <a v-if="trial.registry_url" class="button secondary" :href="trial.registry_url" target="_blank" rel="noopener">{{ t('study.openRegistry', { registry: trial.registry }) }}</a>
+                    <p v-if="trial.attribution" class="muted study__attribution">{{ trial.attribution }}</p>
                     <template v-if="trial.also_registered_as?.length">
                         <h2 class="study__registrations">{{ t('study.alsoRegistered') }}</h2>
                         <ul>

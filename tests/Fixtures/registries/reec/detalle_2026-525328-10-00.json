@@ -1,0 +1,193 @@
+{
+ "id": 34367,
+ "identificador": "2026-525328-10-00",
+ "protocolo": "MEDOPP0958",
+ "acronimo": "",
+ "enfermedadRara": "0",
+ "calendario": {
+  "fechaAutorizacionAEMPS": "12-08-2026",
+  "fechaClasificacion": "",
+  "fechaRegistro": "03-06-2026",
+  "fechaInicioPrevista": "",
+  "fechaFinPrevista": "",
+  "fechaInicioReal": "30-09-2026",
+  "fechaFinRealEspana": "",
+  "fechaFinRealGlobal": "",
+  "fechaInterrupcion": "",
+  "fechaReinicio": "",
+  "fechaFinPrematuro": ""
+ },
+ "informacion": {
+  "tituloPublico": "ESTUDIO DE FASE II, DE DOS ETAPAS Y UN SOLO GRUPO, DE ZONGERTINIB MÁS FULVESTRANT EN PARTICIPANTES CON CÁNCER DE MAMA AVANZADO CON RECEPTORES HORMONALES POSITIVOS Y HER2 NEGATIVO CON MUTACIONES EN HER2 (AGATHA)",
+  "tituloPublico_en": "A TWO-STAGE, SINGLE-ARM, PHASE II STUDY OF ZONGERTINIB PLUS FULVESTRANT IN PARTICIPANTS WITH HORMONE RECEPTOR-POSITIVE/HER2- NEGATIVE ADVANCED BREAST CANCER HARBORING HER2 MUTATIONS (AGATHA)",
+  "tituloCientifico": "ESTUDIO DE FASE II, DE DOS ETAPAS Y UN SOLO GRUPO, DE ZONGERTINIB MÁS FULVESTRANT EN PARTICIPANTES CON CÁNCER DE MAMA AVANZADO CON RECEPTORES HORMONALES POSITIVOS Y HER2 NEGATIVO CON MUTACIONES EN HER2 (AGATHA)",
+  "tituloCientifico_en": "A TWO-STAGE, SINGLE-ARM, PHASE II STUDY OF ZONGERTINIB PLUS FULVESTRANT IN PARTICIPANTS WITH HORMONE RECEPTOR-POSITIVE/HER2-NEGATIVE ADVANCED BREAST CANCER HARBORING HER2 MUTATIONS (AGATHA)",
+  "indicacionPublica": "Cáncer de mama avanzado con receptores hormonales positivos y HER2 negativo con mutación en el gen HER2.",
+  "indicacionPublica_en": "HR-positive/HER2-negative advanced breast cancer<br/>",
+  "indicacionCientifica": "",
+  "indicacionCientifica_en": "",
+  "criteriosInclusion": "El participante o su representante legal (si procede) debe ser capaz de comprender el propósito del estudio y haber firmado el formulario de consentimiento informado (FCI) por escrito antes de comenzar los procedimientos específicos del protocolo.\nLos participantes no deben haber recibido más de dos pautas de quimioterapia previas para la enfermedad avanzada (un ciclo de quimioterapia adyuvante se considera una línea de quimioterapia).\nNo se permite ningún tratamiento previo con un inhibidor de la tirosina quinasa dirigido a HER2, pero otros agentes dirigidos a HER2 (como T-DXd) y fulvestrant están permitidos en cualquier contexto.\nEl participante debe tener función medular, hepática y renal adecuadas:\na.\nValores hematológicos (sin transfusión de plaquetas, eritrocitos y/o apoyo de factor estimulante de colonias de granulocitos en los 7 días anteriores a la primera dosis de tratamiento del estudio): recuento de leucocitos >3,0 × 109/l, recuento absoluto de neutrófilos ¿1,5 × 109/l, recuento de plaquetas ¿100,0 × 109/l, y hemoglobina ¿9,0 g/dl.\nb.\nValores hepáticos: albúmina en suero ¿2,5 g/dl; bilirrubina total ¿1,5 x límite superior de la normalidad (LSN), excepto en participantes con síndrome de Gilbert, que pueden incluirse si la bilirrubina en suero total es ¿3 x LSN o la bilirrubina directa ¿1,5 x LSN; fosfatasa alcalina ¿5 x LSN; aspartato-transaminasa y alanina-transaminasa ¿3 x LSN (¿5 x LSN en participantes con metástasis en hígado). Tasa de filtración glomerular estimada (TFGe) ¿30 ml/min/1,73m2 calculada utilizando la fórmula de Epidemiología de la Enfermedad Renal Crónica (CKD-EPI).\nc.\nValores renales: creatinina en suero ¿1,5 veces el LSN o aclaramiento de creatinina estimado ¿50 ml/min calculados según la ecuación de Cockcroft-Gault.\nd.\nCoagulación: Razón normalizada internacional ¿1,5 x LSN.\nResolución de todos los efectos secundarios agudos de los tratamientos antineoplásicos previos a grado ¿1 según lo determinado por los criterios terminológicos comunes para acontecimientos adversos del National Cancer Institute (CTCAE del NCI) de EE. UU., versión 6.0 (v.6.0) (excepto la alopecia u otras toxicidades que no se consideren un riesgo para la seguridad del participante, según el criterio del investigador).\nVoluntad para proporcionar el tejido o bloque tumoral fijado en formol e incluido en parafina (FFIP) disponible más recientemente o de archivo, si está disponible, antes de iniciar el tratamiento del estudio. La presentación de una muestra de tejido tumoral es opcional y no obligatoria para la inclusión en el estudio.\nLas mujeres con capacidad de procrear que sean sexualmente activas con una pareja masculina no esterilizada deben tener una prueba de embarazo en suero negativa en los 7 días anteriores a la dosis del tratamiento del estudio. Además, deben aceptar utilizar un método anticonceptivo de alta eficacia desde el momento de la selección hasta 2 años después de la última dosis de los tratamientos del estudio. Las participantes de sexo femenino deben abstenerse de donar óvulos y de la lactancia materna durante este mismo periodo de tiempo. Las mujeres que están amamantando pueden incluirse si dejan de hacerlo. En este caso, la paciente no podrá reanudar la lactancia hasta 30 días después de la última dosis del tratamiento del estudio.\nLos participantes varones que son sexualmente activos con una pareja femenina en edad fértil deben ser quirúrgicamente estériles o usar un método anticonceptivo aceptable desde el momento de la selección hasta 2 años después de la última dosis del tratamiento del estudio. Los participantes de sexo masculino no deben donar ni almacenar esperma durante este mismo periodo.\nEsperanza de vida mínima ¿12 semanas en el momento de la selección.\nParticipantes de ambos sexos ¿18 años de edad en el momento de firmar el FCI.\nMujeres pre y perimenopáusicas y varones, siempre y cuando estén siendo tratados con análogos de LHRH durante al menos 28 días (si es menos, deben confirmarse analíticamente las concentraciones posmenopáusicas de estradiol/hormona foliculoestimulante [FSH] en suero) antes del inicio del tratamiento del estudio, o mujeres posmenopáusicas.\nDiagnóstico histológico o citológico confirmado de adenocarcinoma de mama con evidencia de enfermedad metastásica o localmente avanzada irresecable confirmada mediante tomografía computarizada (TC) o imagen por resonancia magnética (RMN), no tributario de resección con intención curativa.\nConfirmación de tumor RH positivo (expresión del receptor de estrógenos [RE] y/o el receptor de progesterona [RPg] en ¿1 % de células tumorales) y HER2 negativo (0¿1+ por inmunohistoquímica [IHQ] o 2+ y negativo por hibridación in situ [HIS]) según las directrices más recientes de la Sociedad Estadounidense de Oncología Clínica (ASCO)/Colegio de Anatomopatólogos Estadounidenses (CAP), según la evaluación local en la biopsia analizada más recientemente.\nMutación activadora conocida de HER2 confirmada centralmente mediante la prueba Guardant360® CDx-CGP (Guardant Health) de ácido desoxirribonucleico tumoral circulante (ADNtc) antes del ingreso al estudio (las mutaciones aceptables se enumeran en el Anexo 2). Los participantes con mutaciones HER2 no especificadas previamente también pueden ser elegibles, si cuentan con el respaldo de la literatura científica (por ejemplo, OncoKB) y la aprobación del Monitor Médico.\nEnfermedad medible según los criterios RECIST v.1.1.\nEstado funcional del ECOG de 0-1.\nLos participantes deben haber experimentado una progresión de la enfermedad después de al menos una línea de terapia endocrina (incluidos los inhibidores de CDK4/6). Los pacientes que han recibido tratamiento con inhibidores de CDK4/6 como tratamiento adyuvante también son elegibles, siempre que la progresión de la enfermedad se produzca después de al menos 12 meses de tratamiento, pero no más de 12 meses después de la finalización del tratamiento con inhibidores de CDK4/6",
+  "criteriosInclusion_en": "Participant, or legal representative (if applicable), must be capable to understand the purpose of the Study and have signed written informed consent form (ICF) prior to beginning specific protocol procedures.<br/>Participants must not have received more than two prior chemotherapy regimens for advanced disease (an ADC is counted as one line of chemotherapy).<br/>No prior treatment with a HER2-directed tyrosine kinase inhibitor is permitted, but other HER2-targeted agents (such as T-DXd) and fulvestrant are allowed in any setting.<br/>Participants must have adequate bone marrow, liver, and renal function: a. Hematological (without platelet, red blood cell transfusion, and/or granulocyte colony-stimulating factor support within 7 days before first Study treatment dose): White blood cell count &gt; 3.0 x 109/L, absolute neutrophil count  1.5 x 109/L, platelet count  100.0 x109/L, and hemoglobin  9.0 g/dL. b. Hepatic: Serum albumin  2.5 g/dL; total bilirubin  1.5 times upper limit of normal (ULN) except for participants with Gilberts syndrome who may be included if the total serum bilirubin is  3 x ULN or direct bilirubin  1.5 x ULN; alkaline phosphatase  5 x ULN; aspartate transaminase and alanine transaminase  3 x ULN ( 5 x ULN in participants with liver metastases). Estimated Glomerular Filtration Rate (eGFR) 30 mL/min/1.73m2 calculated using Chronic Kidney Disease Epidemiology (CKDEPI) formula. c. Renal: Serum creatinine  1.5 x ULN or estimated creatinine clearance  50 mL/min as calculated by Cockcroft-Gault equation. d. Coagulation: International normalized ratio  1.5 x ULN.<br/>Resolution of all acute toxic effects of prior anticancer therapy to grade  1 as determined by the US National Cancer Institute (NCI)-Common Terminology Criteria for Adverse Events (CTCAE) version 6.0 (v.6.0) (except for alopecia or other toxicities not considered a safety risk for the participant at investigator's discretion).<br/>Willing to provide the most recently available or archival formalin-fixed paraffin-embedded (FFPE) tumor tissue block, if available, prior initiation of Study treatment. Provision of tumor tissue sample is optional and not mandatory for Study enrollment.<br/>Women of childbearing potential who are sexually active with a non-sterilized male partner must have a negative serum pregnancy test within 7 days before Study treatment dose. In addition, they must agree to use one highly effective method of birth control from the time of screening until 2 years after the last dose of Study treatments. Female participants must refrain from egg cell donation and breastfeeding during this same period. Women who are nursing can be enrolled if they stop nursing. In this case, the patient cannot resume nursing until 30 days after the last dose of Study treatment.<br/>Male participants who are sexually active with a female partner of childbearing potential must be surgically sterile or using an acceptable method of contraception from the time of screening until 2 years after the last dose of Study treatment. Male participants must not donate or bank sperm during this same period.<br/>Minimum life expectancy of  12 weeks at screening.<br/>Female or male participants  18 years of age at the time of signing ICF.<br/>Pre- or perimenopausal women and men provided they are being treated with a LHRH analogue for at least 28 days (if shorter, post-menopausal levels of serum estradiol/follicle-stimulating hormone [FSH] must be confirmed analytically) prior to initiation of the Study treatment, or post-menopausal women.<br/>Histologically- or cytologically proven diagnosis of adenocarcinoma of the breast with evidence of either unresectable locally advanced or metastatic disease confirmed by computerized tomography (CT) scan or magnetic resonance imaging (MRI) that is not amenable to resection with curative intent.<br/>Documentation of HR-positive (estrogen receptor [ER] and/or progesterone receptor [PgR] expression in 1% of tumor cells) and HER2-negative (01+ by immunohistochemistry [IHC] or 2+ and negative by in situ hybridization [ISH] test) tumor according to the most recent American Society of Clinical Oncology (ASCO)/College of American Pathologists (CAP) guidelines as per local assessment on the most recent analyzed biopsy.<br/>Known activating HER2 mutation centrally confirmed by the Guardant360&reg; CDx-CGP panel (Guardant Health) test of circulating tumor deoxyribonucleic acid (ctDNA) prior to Study entry (acceptable mutations are listed in the Appendix 2). Participants with HER2 mutations that were not prespecified are also potentially eligible, if supported by scientific literature (i.e. OncoKB) and approved by the Medical Monitor.<br/>Measurable disease according to RECIST v.1.1.<br/>ECOG performance status of 0-1.<br/>Participants must have experienced disease progression after at least one line of endocrine therapy (including CDK4/6 inhibitor). Participants who have received CDK4/6 inhibitor-based therapy in the adjuvant setting are also eligible provided that disease progression occurred after at least 12 months of treatment but within 12 months following completion of the CDK4/6 inhibitor.<br/>",
+  "criteriosExclusion": "Participación en otro ensayo clínico, intervencionista u observacional, hasta la visita de seguridad del estudio.\nEnfermedad cardiovascular/cerebrovascular clínicamente relevante y/o disfunción cardíaca o anomalías de la conducción que incluyen, entre otras, cualquiera de las siguientes:\na.\nPericarditis sintomática, angina de pecho inestable, infarto de miocardio confirmado, derivación de arteria periférica/coronaria, insuficiencia cardíaca sintomática (Asociación de Cardiología de Nueva York [NYHA] de clase II-IV), o accidente cerebrovascular, incluido un ataque isquémico transitorio en los 6 meses anteriores a la inclusión en el estudio.\nb.\nFibrilación auricular no controlada concurrente u otras arritmias cardíacas en curso de grado ¿2 según lo determinado por criterios CTCAE del NCI v.6.0, QTcF prolongado >470 ms (mujeres) o >450 ms (hombres), o cualquier afección que predisponga a la prolongación del QTc, incluido el síndrome de QT largo congénito, antecedentes familiares (familiares de primer grado) de síndrome de QT largo o muerte súbita inexplicable antes de los 40 años de edad, o uso concomitante de medicamentos que se sabe que prolongan el intervalo QT.\nc.\nFracción de eyección del ventrículo izquierdo (FEVI) <50 %, determinada por una ventriculografía nuclear (MUGA, multiple gated acquisition) o un ecocardiograma (ECO).\nAntecedentes activos o previos conocidos de enfermedad pulmonar intersticial (EPI)/neumonitis no infecciosa que requirió corticosteroides o sospecha de EPI/neumonitis que no se puede descartar mediante imágenes en la selección.\nCoagulopatía o cualquier antecedente de coagulopatía en los 6 meses anteriores a la inclusión en el estudio, incluidos antecedentes de trombosis venosa profunda o embolia pulmonar. Sin embargo, se permitirá la participación de participantes con las siguientes afecciones:\n¿\nTrombosis venosa relacionada con catéter tratada adecuadamente que ocurrió más de 28 días antes de la inclusión en el estudio.\n¿\nTratamiento con un anticoagulante (p. ej., warfarina o heparina) para un acontecimiento trombótico que ocurrió más de seis meses antes de la aleatorización, o para una afección médica estable y permitida (p. ej., fibrilación auricular bien controlada), siempre que los parámetros de dosis y coagulación (según lo definido por el tratamiento de referencia local) estén estables durante al menos 28 días antes de la inclusión en el estudio. Debido a su vía de administración por vía intramuscular, fulvestrant debe utilizarse con precaución en pacientes que reciben tratamiento anticoagulante.\nParticipantes con infección crónica por el virus de la hepatitis B (VHB) con enfermedad activa que cumplen los criterios para la terapia anti-VHB (de acuerdo con el tratamiento de referencia local/institucional) y que no han recibido tratamiento con terapia antiviral supresora antes del inicio de los tratamientos del estudio o pacientes con antecedentes de infección por el virus de la hepatitis C (VHC) que cumplen uno o ambos de los siguientes criterios:\n¿ Actualmente están recibiendo tratamiento antiviral curativo.\n¿ La carga viral del VHC está por encima del límite de cuantificación (ARN del VHC positivo).\nParticipantes con antecedentes de infección por el virus de la inmunodeficiencia humana (VIH) que cumplan uno o más de los siguientes criterios:\n¿ Recuento de CD4+ <350 células/¿l.\n¿ Carga viral >400 copias/¿l (evaluación del laboratorio local).\n¿ Participantes que no reciben terapia antirretroviral o que la han recibido durante menos de 4 semanas antes del inicio del tratamiento del estudio.\n¿ Antecedentes de infecciones oportunistas definitorias del SIDA en los 12 meses previos al inicio del tratamiento del estudio.\nOtra infección activa no controlada en el momento de la inclusión.\nParticipantes con insuficiencia hepática grave (clasificada como Child-Pugh C o puntuación de 10 a 15).\nAntecedentes de convulsiones no controladas, trastornos del SNC o discapacidad psiquiátrica preexistente inestable y/o grave que el investigador considere clínicamente significativa y que afecte negativamente al cumplimiento con el tratamiento del estudio o interfiera con la seguridad del participante.\nAbuso de sustancias conocido o cualquier otro trastorno médico grave o no controlado concomitante que, según el criterio del investigador, sería una contraindicación para la participación del participante.\nMujeres embarazadas o en periodo de lactancia o participantes que no deseen usar métodos anticonceptivos de elevada eficacia según lo definido en el protocolo.\nTratamiento con cualquier terapia antineoplásica aprobada o en fase de investigación en los 21 días o 5 semividas (lo que sea más corto) previos al inicio de los tratamientos del estudio, excepto fulvestrant, que puede administrarse en un intervalo más corto.\nCualquier afección médica grave o anomalía en los análisis clínicos que, a criterio del investigador, impida la participación segura del participante en el estudio y la finalización del mismo.\nIncapacidad o falta de voluntad para cumplir con los requisitos del protocolo, según el criterio del investigador.\nParticipantes que deban o deseen continuar tomando medicamentos restringidos o cualquier fármaco que se considere que pueda interferir con la seguridad en el desarrollo del ensayo.\nMetástasis no controladas activas o sintomáticas conocidas del sistema nervioso central (SNC) y/o enfermedad leptomeníngea indicada por los síntomas clínicos, edema cerebral y/o neoplasia progresiva.\nNeoplasia maligna concurrente o neoplasia maligna en los 5 años anteriores a la inclusión en el estudio, con excepción de carcinoma in situ del cuello uterino, carcinoma de la piel de tipo no melanoma o cáncer de útero endometrioide en estadio I que hayan sido tratados previamente con intención curativa. En el caso de otros tipos de cáncer que se consideran de bajo riesgo de recidiva, es necesario consultar con el monitor médico del promotor.\nAlergia o reacción de hipersensibilidad conocidas a cualquier medicamento en investigación (MI) (zongertinib y fulvestrant) o sus sustancias incorporadas.\nAntecedentes de síndrome de mala absorción u otra afección que pudiera interferir en la absorción intestinal a juicio del investigador (por ejemplo, obstrucción gastrointestinal/trastorno de motilidad en curso, síndrome de mala absorción, náuseas, vómitos, enfermedad de Crohn, colitis ulcerosa, diarrea crónica o derivación gástrica previa) o que resulte en la incapacidad o falta de voluntad para tragar pastillas.\nRadioterapia en las 2 semanas previas a la primera dosis de los tratamientos del estudio, excepto la radioterapia paliativa en regiones distintas del tórax, que está permitida hasta 1 semana antes de la primera dosis de los tratamientos del estudio.\nProcedimiento quirúrgico mayor o lesión traumática significativa en los 14 días anteriores a la primera dosis de los tratamientos del estudio o previsión de necesidad de cirugía mayor durante el tratamiento del estudio",
+  "criteriosExclusion_en": "Participation in another clinical trial, interventional or observational, until the Study's safety visit.<br/>Clinically relevant cardiovascular/cerebrovascular disease and/or cardiac dysfunction or conduction abnormalities including, but not confined, to any of the following: a. Symptomatic pericarditis, unstable angina pectoris, documented myocardial infarction, coronary/peripheral artery bypass graft, symptomatic cardiac heart failure (New York Heart Association [NYHA] Class II-IV), or cerebrovascular accident, including transient ischemic attack, within 6 months before Study enrollment. b. Concurrent uncontrolled atrial fibrillation or other ongoing cardiac dysrhythmias grade  2 as determined by NCICTCAE v.6.0, prolonged QTcF &gt;470 msec (females) or &gt;450 msec (males), or any condition predisposing to QTc prolongation, including congenital long QT syndrome, family history (first-degree relatives) of long QT syndrome or unexplained sudden death before 40 years of age, or concomitant use of medications known to prolong the QT interval. c. Left ventricular ejection fraction (LVEF) &lt; 50% as determined by multigated acquisition (MUGA) scan or echocardiogram (ECHO).<br/>Active or known pre-existing history of non-infectious interstitial lung disease (ILD)/pneumonitis that required steroids, or suspected ILD/pneumonitis that cannot be ruled out by imaging at screening.<br/>Coagulopathy or any history of coagulopathy within 6 months before Study enrollment, including history of deep vein thrombosis or pulmonary embolism. However, participants with the following conditions will be allowed to participate: Adequately treated catheter-related venous thrombosis occurring more than 28 days prior to Study entry. Treatment with an anticoagulant (e.g., warfarin or heparin) for a thrombotic event occurring more than 6 months before randomization, or for an otherwise stable and allowed medical condition (e.g., well controlled atrial fibrillation), provided dose and coagulation parameters (as defined by local standard of care) are stable for at least 28 days prior to Study entry. Due to the intramuscular route of administration, fulvestrant should be used with caution in patients with anticoagulant treatment.<br/>Participants with chronic hepatitis B virus (HBV) infection with active disease who meet the criteria for anti HBV therapy (according to local/institutional standard) and who have not been treated with suppressive antiviral therapy prior to initiation of Study treatments or patients with a history of hepatitis C virus (HCV) infection who meet one or both of the following criteria:  Currently receiving curative antiviral treatment.  HCV viral load is above the limit of quantification (HCV RNA positive).<br/>Participants with history of human immunodeficiency virus (HIV) infection who meet one or more of the following criteria:  CD4+ count &lt; 350 cells/L.  Viral load &gt; 400 copies/L (local lab assessment).  Participants not receiving antiretroviral therapy, or who have received established antiretroviral therapy for less than 4 weeks prior to initiation of Study treatment.  History of AIDS-defining opportunistic infections within 12 months prior to start of Study treatment.<br/>Other active uncontrolled infection at the time of enrollment.<br/>Patients with severe hepatic impairment (classified as Child-Pugh C or score 10-15).<br/>A history of uncontrolled seizures, CNS disorders, or serious and/or unstable pre-existing psychiatric disability judged by the Investigator to be clinically significant and adversely affecting compliance to Study treatment or interfering with participants safety.<br/>Known substance abuse or any other concurrent severe and/or uncontrolled medical condition that would, in the investigators judgment, contraindicate participant participation.<br/>Pregnant or lactating women or participants not willing to apply highly effective contraception as defined in the protocol.<br/>Treatment with any approved or investigational cancer therapy within 21 days or 5 half-lives (whichever is shorter) prior to initiation of Study treatments, except for fulvestrant, which may be administered within a shorter interval.<br/>Any serious medical condition or abnormality in clinical laboratory tests that, in the investigator's judgment, precludes the participant's safe participation in and completion of the Study<br/>Inability or unwillingness to comply with the requirements of the protocol in the opinion of the investigator.<br/>Participants who must or wish to continue the intake of restricted medication or any drug considered likely to interfere with the safe conduct of the trial.<br/>Known active uncontrolled or symptomatic central nervous system (CNS) metastases and/or leptomeningeal disease as indicated by clinical symptoms, cerebral edema, and/or progressive growth.<br/>Have a concurrent malignancy or malignancy within 5 years of Study enrollment with the exception of carcinoma in situ of the cervix, non-melanoma skin carcinoma, or stage I endometrioid uterine cancer that have been previously treated with curative intent. For other cancers considered to have a low risk of recurrence, discussion with the Sponsors Medical Monitor is required.<br/>Known allergy or hypersensitivity reaction to any investigational medicinal products (IMPs) (zongertinib and fulvestrant) or their incorporated substances.<br/>History of malabsorption syndrome or any other condition that would interfere with enteral absorption in the opinion of the investigator (e.g., ongoing gastrointestinal obstruction/motility disorder, malabsorption syndrome, nausea, vomiting, Crohns disease, ulcerative colitis, chronic diarrhea, prior gastric bypass) or results in the inability or unwillingness to swallow pills.<br/>Radiotherapy within 2 weeks prior to the first dose of Study treatments, except palliative radiotherapy to regions other than the chest, which is allowed up to 1 week before the first dose of Study treatments.<br/>Major surgical procedure or significant traumatic injury within 14 days before the first dose of Study treatments or anticipation of need for major surgery within the course of the Study treatment.<br/>",
+  "variablesPrincipales": "TRO, definida como la tasa de participantes con respuesta completa (RC) o respuesta parcial (RP), según lo determine localmente el investigador utilizando los criterios RECIST v.1.1",
+  "variablesPrincipales_en": "ORR, defined as the rate of participants with complete response (CR) or partial response (PR), as determined locally by the investigator using RECIST v.1.1.<br/>",
+  "variablesSecundarias": "PFS: period from treatment initiation until to the first occurrence of disease progression as determined locally by the investigator assessment using RECIST v.1.1 or death from any cause, whichever occurs first.<br/>CBR: rate of participants with objective response (CR or PR), or stable disease for at least 24 weeks, as determined locally by the investigator using RECIST v.1.1.<br/>TTR: period from treatment initiation to the first objective tumor response (tumor shrinkage of  30%) observed for participants who achieved a CR or PR, as determined locally by the investigator using RECIST v.1.1.<br/>DoR: period from the first occurrence of a documented objective response to disease progression or death from any cause, whichever occurs first, as determined locally by the investigator using RECIST v.1.1.<br/>Best percentage of change from baseline in the size of target tumor lesions, defined as the biggest decrease, or smallest increase if no decrease will be observed, as determined locally by the investigator using RECIST v.1.1.<br/>OS: period from treatment initiation to death from any cause, as determined locally by the investigator.<br/>",
+  "variablesSecundarias_en": "PFS: period from treatment initiation until to the first occurrence of disease progression as determined locally by the investigator assessment using RECIST v.1.1 or death from any cause, whichever occurs first.<br/>CBR: rate of participants with objective response (CR or PR), or stable disease for at least 24 weeks, as determined locally by the investigator using RECIST v.1.1.<br/>TTR: period from treatment initiation to the first objective tumor response (tumor shrinkage of  30%) observed for participants who achieved a CR or PR, as determined locally by the investigator using RECIST v.1.1.<br/>DoR: period from the first occurrence of a documented objective response to disease progression or death from any cause, whichever occurs first, as determined locally by the investigator using RECIST v.1.1.<br/>Best percentage of change from baseline in the size of target tumor lesions, defined as the biggest decrease, or smallest increase if no decrease will be observed, as determined locally by the investigator using RECIST v.1.1.<br/>OS: period from treatment initiation to death from any cause, as determined locally by the investigator.<br/>",
+  "objetivoPrincipal": "Evaluar la tasa de respuesta objetiva (TRO) valorada por el investigador en todos los participantes",
+  "objetivoPrincipal_en": "To evaluate the investigator-assessed objective response rate (ORR) in all participants.",
+  "objetivoSecundario": "Evaluar la eficacia de la combinación de zongertinib y fulvestrant en términos de SLP en todos los participantes.\nEvaluar la eficacia de la combinación de zongertinib y fulvestrant, definida como TBC, en todos los participantes.\nEvaluar la eficacia de la combinación de zongertinib y fulvestrant en términos de THR en todos los participantes.\nEvaluar la eficacia, definida como DR, de la combinación de zongertinib y fulvestrant en todos los participantes.\nEvaluar la eficacia de la combinación de zongertinib y fulvestrant, definida como el mejor porcentaje de cambio en el tumor, en todos los participantes.\nEvaluar la eficacia de la combinación de zongertinib y fulvestrant en términos de SG en todos los participantes",
+  "objetivoSecundario_en": "To assess the efficacy of zongertinib plus fulvestrant in terms of PFS in all participants.<br/>To assess the efficacy of zongertinib plus fulvestrant defined as CBR in all participants.<br/>To assess the efficacy in terms of TTR of zongertinib plus fulvestrant in all participants.<br/>To assess the efficacy defined as DoR of zongertinib plus fulvestrant in all participants.<br/>To determine the efficacy of zongertinib plus fulvestrant defined as best percentage of change in tumor in all participants.<br/>To evaluate the efficacy of zongertinib plus fulvestrant in all participants in terms of OS.<br/>",
+  "momentosPrincipales": "",
+  "momentosPrincipales_en": "",
+  "momentosSecundarios": "",
+  "momentosSecundarios_en": "",
+  "justificacion": "No aportado",
+  "justificacion_en": "Not provided"
+ },
+ "organismo": {
+  "promotor": "Medica Scientia Innovation Research S.L.",
+  "domicilio": "Carrer De Pere IV 128 3rd Floor",
+  "telefono": "Redacted",
+  "fax": "",
+  "mail": "Redacted",
+  "personaContacto": "Redacted",
+  "financiador": ""
+ },
+ "proposito": {
+  "atencionPrimaria": 0,
+  "atencionPersonalizada": 0,
+  "hospitalizacion": 0,
+  "medico": 0,
+  "farmaceutico": 0,
+  "historialClinico": 0,
+  "basesDatos": 0,
+  "otrasFuentes": 0,
+  "diagnostico": 0,
+  "profilaxis": 0,
+  "tratamiento": 0,
+  "seguridad": 1,
+  "eficacia": 1,
+  "farmacocinetica": 0,
+  "farmacodinamica": 1,
+  "bioequivalencia": 0,
+  "dosis": 0,
+  "farmacogenetica": 0,
+  "farmacogenomica": 0,
+  "farmacoeconomica": 0,
+  "faseUno": 0,
+  "faseDos": 1,
+  "faseTres": 0,
+  "faseCuatro": 0
+ },
+ "poblacion": {
+  "voluntariossanos": 0,
+  "pacientes": 0,
+  "pobvulnerable": 0,
+  "mujerusa": 0,
+  "mujernousa": 0,
+  "embarazadas": 0,
+  "lactancia": 0,
+  "urgencia": 0,
+  "incapaces": 0,
+  "intrauteros": 0,
+  "prematuros": 0,
+  "reciennacido": 0,
+  "preescolar": 0,
+  "ninos": 0,
+  "adolescentes": 0,
+  "adultos": 1,
+  "ancianos": 1,
+  "menores": 0,
+  "total": 0
+ },
+ "centros": {
+  "centro": [
+   {
+    "tipo": "0",
+    "referencia": "ORG-100032608",
+    "situacion": "0",
+    "nombre": "Fundacion Instituto Valenciano De Oncologia",
+    "domicilio": "Calle Professor Beltran Baguena 8",
+    "localidad": "Valencia",
+    "codPostal": "46009",
+    "provincia": "VALENCIA",
+    "ccaa": "COMUNITAT VALENCIANA",
+    "departamento": "Oncology",
+    "investigador": "Redacted"
+   },
+   {
+    "tipo": "0",
+    "referencia": "ORG-100048975",
+    "situacion": "1",
+    "nombre": "Hospital Beata Maria Ana",
+    "domicilio": "Calle Del Doctor Esquerdo No. 83",
+    "localidad": "Madrid",
+    "codPostal": "28007",
+    "provincia": "MADRID",
+    "ccaa": "MADRID, COMUNIDAD DE",
+    "departamento": "Oncology",
+    "investigador": "Redacted"
+   },
+   {
+    "tipo": "0",
+    "referencia": "ORG-100028622",
+    "situacion": "1",
+    "nombre": "Hospital De La Santa Creu I Sant Pau",
+    "domicilio": "Carrer De San Quinti 89",
+    "localidad": "Barcelona",
+    "codPostal": "08041",
+    "provincia": "BARCELONA",
+    "ccaa": "CATALUÑA",
+    "departamento": "Oncology",
+    "investigador": "Redacted"
+   }
+  ]
+ },
+ "intervenciones": {
+  "intervencion": [
+   {
+    "nombreComercial": "BI 1810631",
+    "nombreCientifico": "BI 1810631",
+    "codigo": "PRD10363333",
+    "sustancias": "",
+    "huerfano": "0",
+    "atcs": "",
+    "viasAdministracion": "ORAL",
+    "formaFarmaceutica": "Not indicated",
+    "formaFarmaceutica_en": "No Indicado"
+   },
+   {
+    "nombreComercial": "-",
+    "nombreCientifico": "-",
+    "codigo": "SCP111850463",
+    "sustancias": "",
+    "huerfano": "0",
+    "atcs": "",
+    "viasAdministracion": "IMPLANTATION",
+    "formaFarmaceutica": "Not indicated",
+    "formaFarmaceutica_en": "No Indicado"
+   },
+   {
+    "nombreComercial": "-",
+    "nombreCientifico": "-",
+    "codigo": "SCP15544179",
+    "sustancias": "",
+    "huerfano": "0",
+    "atcs": "",
+    "viasAdministracion": "INJECTION",
+    "formaFarmaceutica": "Not indicated",
+    "formaFarmaceutica_en": "No Indicado"
+   }
+  ]
+ },
+ "areasTerapeuticas": {
+  "area": [
+   {
+    "eutct": "999999000425",
+    "nombre_es": "Enfermedades [C] - Cáncer [C04]",
+    "nombre_en": "Diseases [C] - Cancer [C04]"
+   }
+  ]
+ }
+}

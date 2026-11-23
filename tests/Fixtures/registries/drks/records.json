@@ -1,0 +1,1693 @@
+[
+  {
+    "drksId": "DRKS00041448",
+    "trialStatus": "REGISTERED",
+    "registrationDrks": "2026-10-30",
+    "registrationType": "RETROSPECTIVE",
+    "lastUpdate": "2026-10-30",
+    "sponsored": true,
+    "url": null,
+    "trialDescriptions": [
+      {
+        "idLocale": {
+          "locale": "de"
+        },
+        "acronym": null,
+        "title": "Der Einfluss des Gallengangmikrobioms, eines Gallengangsstents und einer verlängerten\r\nAntibiotikaprophylaxe auf die postoperative Morbidität bei Pankreaskopfresektionen –\r\nEine retrospektive, unizentrische Analyse",
+        "summary": "Die Pankreaskopfresektion ist ein komplexer chirurgischer Eingriff. Nach der Operation treten vergleichsweise häufig Komplikationen auf. Um die Patientensicherheit zu erhöhen, sollten mögliche Einflussfaktoren auf die Komplikationsrate analysiert werden. \r\nEinige Patienten erhalten vor einer Operation bei einem Stau der Galle einen Stent in den Gallengang. Der Nutzen des Verfahrens ist umstritten. Ein Grund ist, dass dadurch Bakterien in die sonst bakterienfreie Galle gelangen können. Das kann wiederum mit einem erhöhten Risiko für Komplikationen verbunden sein.  Ein möglicher Ansatzpunkt zur Senkung der Komplikationsrate bieten verlängerte Antibiotikaprophylaxen. Um weitere Erkenntnisse in diesem Forschungsgebiet zu erlangen und die zukünftige Behandlung nach Pankreaskopfresektionen zu verbessern, soll in dieser Studie die Häufigkeit von Komplikationen nach einer Pankreaskopfresektion ausgewertet werden. Außerdem soll der Zusammenhang zwischen dem Auftreten von Komplikationen und der bakteriellen Besiedlung der Galle, eines präoperativ eingesetzten Gallengangsstents und der Antibiotikagabe untersucht werden.",
+        "scientificSummary": "Die Pankreaskopfresektion ist ein komplexer chirurgischer Eingriff mit vergleichsweise hoher postoperativer Morbiditätsrate. Um die Patientensicherheit zu erhöhen, sollten mögliche Einflussfaktoren auf die Komplikationsrate analysiert werden. \r\nBei präoperativ bestehender Cholestase können Patienten eine präoperative biliäre Drainage (preoperative biliary drainage, PBD) erhalten. Das Verfahren ist umstritten, da es unter anderem zu einer bakteriellen Kontamination der sonst sterilen Galle führen kann. Die Bakteriobilie ist wiederum mit einem erhöhten Risiko für Komplikationen assoziiert. Es kommt aus chirurgischer Sicht die Frage auf, wie sich das perioperative Management dieser Patientengruppe optimieren lässt. Einen Ansatzpunkt bietet die Anwendung einer antibiotischen Prophylaxe.  Zur Reduktion von postoperativen Wundinfektionen und Folgekomplikationen empfiehlt die Arbeitsgemeinschaft der Wissenschaftlichen Medizinischen Fachgesellschaften e.V. (AWMF) die Gabe einer perioperativen Antibiotikaprophylaxe (PAP) bei Operationen am Pankreas. Dabei handelt es sich um eine single-shot Gabe eines Antibiotikums 30(-60) Minuten vor Hautschnitt. In den letzten Jahren rückte zunehmend die Frage in den Fokus, ob eine prophylaktische Antibiotikagabe über den perioperativen Zeitraum hinaus zusätzliche Vorteile bietet, insbesondere bei Patienten mit PBD und einem entsprechend erhöhten Risiko für eine Bakteriobilie. So zeigt sich für Patienten mit einer PBD eine Reduktion von intraabdominellen Infektionen, sowie anderer schwerer Komplikationen bei verlängerter Antibiotikaprophylaxe. Allerdings gibt es aktuell keine Empfehlungen für den Einsatz verlängerter Antibiotikaprophylaxen, folglich liegt die Entscheidung bei dem behandelnden Operateur selbst.\r\nUm weitere Erkenntnisse in diesem Forschungsgebiet zu erlangen und die zukünftige Behandlung nach Pankreaskopfresektionen zu verbessern, soll die Morbidität mit Hinblick auf verschiedene Aspekte untersucht werden. Im Vordergrund dieser Studie soll der Einfluss des Gallengangmikrobioms, einer PBD sowie einer verlängerten Antibiotikaprophylaxe auf die Morbidität der Patienten stehen."
+      },
+      {
+        "idLocale": {
+          "locale": "en"
+        },
+        "acronym": null,
+        "title": "The effects of bile microbioma, biliary stenting and antibiotic therapy on postoperative morbidity in pancreatic head resections - A single-center, retrospective analysis",
+        "summary": null,
+        "scientificSummary": "Pancreatic head resections are associated with elevated postoperative morbidity. Therefore, it is important to identify adjustable factors that influence post-pancreatectomy morbidity.\r\nPatients presenting with preoperative cholestasis may receive preoperative biliary drainage (PBD). The use of PBD is controversial. One point of critique is that bile, which is naturally sterile, can be contaminated with bacteria. Bacteriobilia is associated with an increased risk of postoperative complications. This leads to the question of how the perioperative management of these patients can be optimized. One potential approach is antibiotic therapy.\r\nGerman guideline (Arbeitsgemeinschaft der Wissenschaftlichen Medizinischen Fachgesellschaften e.V.; AWMF) recommends perioperative antibiotic prophylaxis(PAP) for pancreatic surgery to reduce the risk of surgical site infections and following complications. Standard PAP is a single dose of an antibiotic administered 30-60 minutes before skin incision. Over the past few years, studies have investigated potential benefits of prolonged antibiotic prophylaxis. However, practical clinical consequences and management for antimicrobial prophylaxis are not standardized.\r\nThe aim of this analysis is to explore whether the presence of bacteria in bile, the presence of a bile duct stent or antibiotic prophylaxis influence the postoperative morbidity after pancreatic head resections."
+      }
+    ],
+    "observationalGroups": [
+      {
+        "idArm": {
+          "arm": 1,
+          "locale": "de"
+        },
+        "comment": "Retrospektive Analyse aller Patienten und Patientinnen, die sich zwischen 2016 und 2024 einer Pankreaskopfresektion am Universitätsklinikum Köln unterzogen haben"
+      },
+      {
+        "idArm": {
+          "arm": 1,
+          "locale": "en"
+        },
+        "comment": "retrospective analysis of all patients who underwent a pancreatic head resection at the university hospital of Cologne between 2016 and 2024"
+      }
+    ],
+    "trialContacts": [
+      {
+        "idContactIdType": {
+          "type": "PRIMARY_SPONSOR"
+        },
+        "otherType": null,
+        "contact": {
+          "streetAndNo": "Kerpener Str. 62",
+          "city": "Köln",
+          "zip": "50937",
+          "country": "DE",
+          "email": null,
+          "fax": null,
+          "firstName": null,
+          "lastName": null,
+          "phone": null,
+          "title": null,
+          "url": null,
+          "affiliation": "Klinik und Poliklinik für Allgemein-, Viszeral-,  Thorax- und Transplantationschirurgie Universitätsklinikum Köln"
+        }
+      },
+      {
+        "idContactIdType": {
+          "type": "PRINCIPAL_COORDINATING_INVESTIGATOR"
+        },
+        "otherType": null,
+        "contact": {
+          "streetAndNo": "Kerpener Str. 62",
+          "city": "Köln",
+          "zip": "50937",
+          "country": "DE",
+          "email": "Redacted",
+          "fax": null,
+          "firstName": "Redacted",
+          "lastName": "Redacted",
+          "phone": "Redacted",
+          "title": "Redacted",
+          "url": null,
+          "affiliation": "Klinik und Poliklinik für Allgemein-, Viszeral-, Thorax- und Transplantationschirurgie Universitätsklinikum Köln"
+        }
+      },
+      {
+        "idContactIdType": {
+          "type": "PUBLIC_QUERIES"
+        },
+        "otherType": null,
+        "contact": {
+          "streetAndNo": "Kerpener Str. 62",
+          "city": "Köln",
+          "zip": "50937",
+          "country": "DE",
+          "email": "Redacted",
+          "fax": null,
+          "firstName": "Redacted",
+          "lastName": "Redacted",
+          "phone": "Redacted",
+          "title": "Redacted",
+          "url": null,
+          "affiliation": "Klinik und Poliklinik für Allgemein-, Viszeral-, Thorax- und Transplantationschirurgie Universitätsklinikum Köln"
+        }
+      },
+      {
+        "idContactIdType": {
+          "type": "SCIENTIFIC_QUERIES"
+        },
+        "otherType": null,
+        "contact": {
+          "streetAndNo": "Kerpener Str. 62",
+          "city": "Köln",
+          "zip": "50937",
+          "country": "DE",
+          "email": "Redacted",
+          "fax": null,
+          "firstName": "Redacted",
+          "lastName": "Redacted",
+          "phone": "Redacted",
+          "title": "Redacted",
+          "url": null,
+          "affiliation": "Klinik und Poliklinik für Allgemein-, Viszeral-, Thorax- und Transplantationschirurgie Universitätsklinikum Köln"
+        }
+      }
+    ],
+    "materialSupports": [
+      {
+        "contact": {
+          "streetAndNo": null,
+          "city": "Köln",
+          "zip": "50937",
+          "country": "DE",
+          "email": null,
+          "fax": null,
+          "firstName": null,
+          "lastName": null,
+          "phone": null,
+          "title": null,
+          "url": null,
+          "affiliation": "Klinik und Poliklinik für Allgemein-, Viszeral-,  Thorax- und Transplantationschirurgie Universitätsklinikum Köln"
+        },
+        "type": "INSTITUTIONAL"
+      }
+    ],
+    "studyCharacteristic": {
+      "type": "NON_INTERVENTIONAL",
+      "allocation": null,
+      "assignment": null,
+      "blindingType": null,
+      "blindingWhoList": [],
+      "controlTypes": [],
+      "phase": null,
+      "purpose": "TREATMENT",
+      "characteristicDescriptions": [
+        {
+          "idLocale": {
+            "locale": "de"
+          },
+          "primaryOutcome": "Auswertung des Auftretens von Komplikationen nach Pankreaskopfresektionen, Erhebung und Auswertung erfolgt retrospektiv",
+          "secondaryOutcome": "Untersuchung der Assoziation zwischen der postoperativen Morbidität und folgenden Punkten: Vorliegen eines Gallengangsstents, Gallengangsmikrobiom und der verabreichten Antibiotika",
+          "typeOfHiddenAllocation": null,
+          "typeOfSequenceGeneration": null
+        },
+        {
+          "idLocale": {
+            "locale": "en"
+          },
+          "primaryOutcome": "Analysis of complications following a pancreatic head resection. Data will be collected and analyzed retrospectively",
+          "secondaryOutcome": "Our secondary outcome is to evaluate associations between bile microbiome, bile duct stents, administered antibiotics and postoperative morbidity",
+          "typeOfHiddenAllocation": null,
+          "typeOfSequenceGeneration": null
+        }
+      ],
+      "timing": "RETROSPECTIVE",
+      "duration": null
+    },
+    "trialResults": {
+      "ipdSharingPlan": false,
+      "trialResultsDescriptions": [
+        {
+          "idLocale": {
+            "locale": "de"
+          },
+          "ipdSharingPlanDescription": "aktuell  ist keine Weitergabe der Daten geplant",
+          "briefSummaryOfResultsDescription": null
+        },
+        {
+          "idLocale": {
+            "locale": "en"
+          },
+          "ipdSharingPlanDescription": null,
+          "briefSummaryOfResultsDescription": null
+        }
+      ],
+      "plannedPublication": null,
+      "firstPublication": null,
+      "firstResultPublication": null,
+      "publications": [],
+      "relatedDrksTrials": []
+    },
+    "secondaryIds": {
+      "otherPrimaryRegisterId": null,
+      "otherPrimaryRegisterName": null,
+      "universalTrialNumber": null,
+      "eudraCtNumber": null,
+      "eudamedNumber": null,
+      "noOtherIdentificationNumbersAvailable": true
+    },
+    "otherSecondaryIds": [],
+    "studiedHealthConditions": [
+      {
+        "type": "MAIN",
+        "catalog": "FREETEXT",
+        "code": null,
+        "studiedHealthConditionDescriptions": [
+          {
+            "idLocale": {
+              "locale": "de"
+            },
+            "comment": "Komplikationen/ postoperative Morbidität nach Pankreaskopfresektionen"
+          },
+          {
+            "idLocale": {
+              "locale": "en"
+            },
+            "comment": "complications/ postoperative morbidity after pancreatic head resections"
+          }
+        ]
+      }
+    ],
+    "recruitment": {
+      "institutes": [
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": "Klinik und Poliklinik für Allgemein-, Viszeral-, Thorax- und Transplantationschirurgie",
+          "city": "Köln"
+        }
+      ],
+      "countries": [
+        {
+          "idCountry": {
+            "code": "DE"
+          }
+        }
+      ],
+      "centricType": "MONOCENTRIC",
+      "gender": "ALL",
+      "minimumAge": {
+        "amount": 18,
+        "unit": "YEARS"
+      },
+      "maximumAge": {
+        "amount": null,
+        "unit": "NO_MAX_AGE"
+      },
+      "totalParticipants": 445,
+      "plannedParticipants": 445,
+      "status": "COMPLETE_FOLLOW_UP_COMPLETE",
+      "recruitmentDescriptions": [
+        {
+          "idLocale": {
+            "locale": "de"
+          },
+          "reasonDescription": null,
+          "exclusionCriteria": "unvollständige klinische Daten",
+          "inclusionCriteria": "Patienten die sich im Beobachtungszeitraum (2016-2024) einer Pankreaskopfresektion unterzogen haben"
+        },
+        {
+          "idLocale": {
+            "locale": "en"
+          },
+          "reasonDescription": null,
+          "exclusionCriteria": "incomplete clinical data",
+          "inclusionCriteria": "pancreatic head resection between 2016 and 2024"
+        }
+      ],
+      "scheduledStartDate": null,
+      "scheduledCompletionDate": null,
+      "actualStartDate": "2026-08-13",
+      "actualCompletionDate": "2026-10-15",
+      "healthyVolunteers": false
+    },
+    "ethicsCommittee": {
+      "applicationDate": "2026-08-03",
+      "number": "26-1338-Antrag-Retro",
+      "ethicVotes": [
+        {
+          "dateOfVote": "2026-08-13",
+          "vote": "APPROVED",
+          "type": "ETHICS_COMMITTEE",
+          "contact": {
+            "streetAndNo": "Gleueler Str. 269",
+            "city": "Köln",
+            "zip": "50935",
+            "country": "DE",
+            "email": "Redacted",
+            "fax": null,
+            "firstName": null,
+            "lastName": null,
+            "phone": "Redacted",
+            "title": null,
+            "url": "medfak.uni-koeln.de/forschung/forschungsfoerderung/klinische-forschung/ethikkommission",
+            "affiliation": "Ethikkommission der Medizinischen Fakultät der Universität zu Köln"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "drksId": "DRKS00034741",
+    "trialStatus": "UPDATED",
+    "registrationDrks": "2025-03-13",
+    "registrationType": "PROSPECTIVE",
+    "lastUpdate": "2026-08-15",
+    "sponsored": true,
+    "url": "https://www.pics-dach.eu",
+    "trialDescriptions": [
+      {
+        "idLocale": {
+          "locale": "de"
+        },
+        "acronym": "PICS-DACH",
+        "title": "Post-Intensive Care Syndrom: Multizentrische prospektive Registerstudie der D-A-CH Region",
+        "summary": "Das Post-Intensive Care Syndrom (PICS) bezeichnet langfristige kognitive, körperliche und psychische Beeinträchtigungen, die nach einer Intensivbehandlung auftreten können. Diese Symptome können innerhalb von 24 Stunden nach der Aufnahme auf die Intensivstation beginnen und über Jahre hinweg anhalten. Betroffene Patienten und ihre Angehörigen (PICS-F) sind mit erheblichen Belastungen konfrontiert; bis zu 94 % der Angehörigen sind davon betroffen. Angesichts der hohen Prävalenz und der sozioökonomischen Auswirkungen zielt diese prospektive Registerstudie darauf ab, Risikofaktoren und langfristige Folgen von PICS und PICS-F zu identifizieren.\r\n\r\nDie Studie besteht aus sechs Modulen, beginnend mit der Datenerhebung während des Aufenthalts auf der Intensivstation und fortgesetzt mit Nachuntersuchungen in verschiedenen Zeitabständen nach der Entlassung (bis zu fünf Jahre). Das primäre Ziel ist die Untersuchung diagnostischer und therapeutischer Strategien, während zu den sekundären Zielen die Identifizierung von Risikofaktoren, die Bestimmung des Schweregrads der Beeinträchtigungen und die Erforschung biologischer Mechanismen gehören. Zur Datenerhebung werden standardisierte Fragebögen und biologische Proben (Blut) verwendet.\r\n\r\nDiese Studie wurde auf ClinicalTrials.gov (NCT07290712) registriert. Hier folgen je nach Studienfortschritt regelmäßige Updates.",
+        "scientificSummary": "HINTERGRUND \r\nDas Post-Intensive Care Syndrom (PICS) bezeichnet neu auftretende oder sich verstärkende kognitive, körperliche und psychische Langzeitfolgen sowie Schmerzen und sozioökonomische Auswirkungen, die auf die Behandlung auf der Intensivstation zurückzuführen sind. Die Symptome können bereits 24 Stunden nach der Aufnahme auf die Intensivstation (ITS) auftreten und noch 5 bis 15 Jahre nach der Entlassung anhalten. Die Betroffenheitsrate ist sehr hoch. Drei Monate nach der Entlassung aufgrund einer intensivmedizinisch behandelten Erkrankung wiesen 64 % der Überlebenden Beeinträchtigungen in mindestens einem der drei Funktionsbereiche auf, nach 12 Monaten waren es noch 56 %. Der Krankenhausaufenthalt eines nahen Angehörigen auf der Intensivstation wirkt sich auf das gesamte Familiensystem aus, d. h. auf alle Menschen, zu denen die Patienten eine bedeutende Beziehung haben. Die Auswirkungen auf die Familie oder die Angehörigen werden als Post-Intensive Care Syndrom Family (PICS-F) bezeichnet, das für bis zu 94 % der Angehörigen eine erhebliche Belastung darstellt. PICS und PICS-F sind daher von hoher sozioökonomischer Bedeutung.\r\n\r\nRELEVANZ \r\nAngesichts der erheblichen Auswirkungen von PICS auf Patienten, ihre Familien und das sozioökonomische System ist es von großem Wert, Erkenntnisse über die Prävalenz von Risikofaktoren und PICS-Kriterien während des Aufenthalts auf der Intensivstation sowie über PICS und PICS-F nach der Entlassung aus der Intensivstation und dem Krankenhaus zu gewinnen.\r\n\r\nDESIGN\r\n\r\nDie Studie gliedert sich in die folgenden sechs Module:\r\nIntensivstation-Modul\r\nPost-Intensivstation-Modul 2: a) 1–3 Monate + 6 Monate, b) 1, 2, 5 Jahre\r\nUmfeld-Modul\r\nPsychiatrie-Modul\r\nTranslationsmodul\r\nFamiliensystem-Modul (PICS-F)\r\n\r\nDie teilnehmenden Zentren nehmen mindestens am ersten Modul, dem Intensivmodul, teil, in dem die Risikofaktoren sowie die PICS- und PICS-F-Domänen während des Aufenthalts auf der Intensivstation erfasst werden. Je nach den örtlichen Gegebenheiten, Kapazitäten und Ressourcen nehmen die teilnehmenden Zentren optional an den Modulen 2 bis 6 teil. In den einzelnen Modulen besteht zudem die Möglichkeit, in einem für alle Zentren verfügbaren Modus oder in einem auf einzelne Zentren spezialisierten Modus teilzunehmen (z. B. Funktionstests, die nur in einer PICS-Ambulanz (PICA) durchgeführt werden können). Für Zentren ohne PICA erfolgt die Nachbeobachtung beispielsweise über Fragebögen. Die entsprechende Teilnahmemöglichkeit mit und ohne PICA wird in den einzelnen Modulen entsprechend angezeigt.\r\n\r\nHAUPTZIEL\r\n\r\nDas Hauptziel des prospektiven Registers ist es, die Risikofaktoren sowie die diagnostischen und therapeutischen Möglichkeiten für PICS und PICS-F zu erfassen und zu untersuchen.\r\n\r\nSEKUNDÄRE ZIELE\r\n\r\nErfassung der Häufigkeit multipler Risikofaktoren für PICS und PICS-F sowie deren Auftreten während und nach der Behandlung auf einer Intensivstation.\r\nErfassung der Häufigkeit von Risikofaktoren, insbesondere der modifizierbaren Risikofaktoren für PICS, bei verschiedenen Krankheitsbildern wie Sepsis, Delirium und anderen Grunderkrankungen, die eine Intensivbehandlung erfordern.\r\nErmittlung von Schwellenwerten und Häufigkeiten signifikanter kognitiver, körperlicher und psychischer Beeinträchtigungen sowie von Schmerzen.\r\nBewertung der Bedeutung der einzelnen PICS-Dimensionen für PICS sowohl untereinander als auch innerhalb der einzelnen Dimensionen.\r\nSchätzung der Inzidenz auf der Grundlage von Risikofaktoren oder unterschiedlichen Schwellenwerten für Scores zur Definition signifikanter Einschränkungen auf kognitiver, körperlicher und psychischer Ebene sowie chronischer Schmerzen.\r\nErmittlung und Untersuchung des Einflusses relevanter externer und interner Umweltfaktoren, die zur Entstehung und zum Verlauf von PICS/PICS-F beitragen.\r\nIdentifizierung molekularbiologischer oder pathophysiologischer Prozesse von PICS.\r\n\r\nSTUDIENABLAUF\r\n\r\nUntersuchung mittels standardisierter Fragebögen während des Aufenthalts auf der Intensivstation. Ziel ist es, kognitive, körperliche und psychische Funktionsbeeinträchtigungen sowie Schmerzen (= PICS- und PICS-F-Werte) bereits während des Aufenthalts auf der Intensivstation zu erfassen. Dabei werden der Patient sowie seine Angehörigen und Freunde befragt.\r\nNachuntersuchung mittels standardisierter Fragebögen in der PICS-Ambulanz 1–3 und 6 Monate nach Entlassung aus der Intensivstation. Ziel dieser Termine ist es, kognitive, körperliche und psychische Funktionsbeeinträchtigungen sowie Schmerzen zu erfassen.\r\nAusfüllen standardisierter Fragebögen zur Erfassung kognitiver, körperlicher und psychischer Funktionsbeeinträchtigungen sowie von Schmerzen (1, 2 und 5 Jahre nach Entlassung aus der Intensivstation; dies kann telefonisch, elektronisch, per Post, telemedizinisch oder in der PICA erfolgen).\r\nBlutproben für die Einrichtung einer Biobank (abhängig von den Nachsorgeterminen in der PICS-Studienambulanz: 4–7 Mal jeweils 27 ml; Zeitpunkt: während des Aufenthalts auf der Intensivstation (Aufnahme (> 72 Stunden Intensivaufenthalt) und Entlassung aus der Intensivstation), 1–3 Monate, 6 Monate sowie gegebenenfalls 1, 2 und 5 Jahre nach der Entlassung aus der Intensivstation."
+      },
+      {
+        "idLocale": {
+          "locale": "en"
+        },
+        "acronym": "PICS-DACH",
+        "title": "Post-Intensive Care Syndrome - Multicentre Prospective Registry Database of the DACH Region",
+        "summary": "Post-Intensive Care Syndrome (PICS) refers to long-term cognitive, physical, and psychological impairments that can arise after intensive care treatment. These symptoms may begin within 24 hours of ICU admission and persist for years. Affected patients and their families (PICS-F) face significant burdens, with up to 94% of relatives impacted. Given its high prevalence and socioeconomic impact, this prospective registry study aims to identify risk factors and long-term consequences of PICS and PICS-F.\r\n\r\nThe study consists of six modules, starting with data collection during ICU stays and continuing with follow-ups at various intervals post-discharge (up to five years). The primary goal is to investigate diagnostic and therapeutic strategies, while secondary objectives include identifying risk factors, determining impairment severity, and exploring biological mechanisms. Standardized questionnaires and biological samples (blood) are used for data collection.\r\n\r\nThis study was registered at ClinicalTrials.gov (NCT07290712). Future updates will be published at the respective study website.",
+        "scientificSummary": "BACKGROUND \r\nPost-Intensive Care Syndrome (PICS) refers to newly occurring or intensified cognitive, physical, and psychological long-term effects, as well as pain and socioeconomic effects resulting from intensive care treatment. Symptoms can appear as early as 24 hours after admission to the intensive care unit (ICU) and persist for 5-15 years after discharge. The rate of affected individuals is very high. Three months after discharge due to an illness requiring intensive care, 64% of survivors were impaired in at least one of the three functional areas, and 56% were impaired after 12 months. The hospitalization of a close relative in the ICU affects the entire family system, i.e., all people with whom the patients have a significant relationship. The effects on the family or relatives are referred to as Post-Intensive Care Syndrome-Family (PICS-F), which represents a significant burden for up to 94% of relatives. PICS and PICS-F are therefore of high socioeconomic importance.\r\n\r\nRELEVANCE \r\nGiven the significant impact of PICS on patients, their families, and the socioeconomic system, gaining insights into the prevalence of risk factors and PICS criteria during ICU stay, as well as PICS and PICS-F after ICU discharge and hospital release, is highly valuable.\r\n\r\nDESIGN\r\n\r\nThe study is divided into the following six modules:\r\n\r\nICU module\r\nPost-ICU module 2: a) 1-3 months + 6 months, b) 1, 2, 5 years\r\nEnvironment module\r\nPsychiatry module\r\nTranslational module\r\nFamily system module (PICS-F) The participating centers take part in at least the first module, the ICU module, in which the risk factors and PICS as well as PICS-F domains are recorded during the intensive care stay. Depending on local conditions, capacity, and resources, the participating centers optionally participate in modules 2 to 6. In the individual modules, there is also the option of participating in a mode available to all centers or specialized for individual centers (e.g., functional tests that can only be performed in a PICS outpatient clinic (PICA)). For centers without PICA, follow-up observation is carried out, for example, via questionnaires. The corresponding mode of participation with and without PICA is displayed accordingly in the individual modules.\r\n\r\nPRIMARY OBJECTIVE\r\n\r\nThe primary objective of the prospective registry is to record and investigate the risk factors, diagnostic and therapeutic options for PICS and PICS-F.\r\n\r\nSECONDARY OBJECTIVES\r\n\r\nRecording the frequency of multiple risk factors for and the manifestation of PICS and PICS-F during and after treatment in an intensive care unit.\r\nRecording the rate of risk factors, especially the modifiable risk factors of PICS in different disease entities, such as sepsis, delirium, and other underlying diseases requiring intensive care.\r\nDetermination of cut-off values and rates of significant cognitive, physical and psychological impairments as well as pain.\r\nAssessment of the significance for PICS between and within individual dimensions of PICS.\r\nEstimation of incidence based on risk factors or different cut-off values for scores to define significant limitations at the cognitive, physical and psychological levels as well as chronic pain.\r\nDetermination and investigation of the influence of relevant external and internal environmental factors that contribute to the development and course of PICS/PICS-F.\r\nIdentification of molecular biological or pathophysiological processes of PICS.\r\n\r\nPROCEDURE\r\n\r\nExamination using standardized questionnaires during intensive care. The aim is to record cognitive, physical, and psychological functional impairments as well as pain (= PICS and PICS-F rates) while still in the intensive care unit. The patient and their relatives and friends are interviewed.\r\nFollow-up examination using standardized questionnaires in the PICS outpatient clinic 1-3 and 6 months after discharge from the intensive care unit. The aim of these appointments is to record cognitive, physical, and psychological functional impairments as well as pain.\r\nCompletion of standardized questionnaires to record cognitive, physical, and psychological functional impairments as well as pain (1, 2, and 5 years after discharge from the intensive care unit; this can be done by telephone, electronically, by mail, via telemedicine, or in PICA).\r\nBlood samples for the creation of a biobank (depending on follow-up appointments at the PICS study outpatient clinic: 4-7x 27ml each; timing: during ICU (inclusion (> 72h ICU stay) and ICU discharge), 1-3 months, 6 months and, if applicable, 1, 2, and 5 years after ICU discharge."
+      }
+    ],
+    "observationalGroups": [
+      {
+        "idArm": {
+          "arm": 1,
+          "locale": "de"
+        },
+        "comment": "Alle volljährigen Patienten, die im Zeitraum von Februar 2025 bis (mindestens, noch kein definitives Ende festgelegt, richtet sich nach Erreichen der Studienpopulation) Februar 2029 auf die Intensivstation \r\n- des Universitätsklinikums Augsburgs (DE)\r\n- des Universitätsklinikums Würzburgs (DE)\r\n- des Universitätsklinikums Berlin Charité (DE)\r\n- der Medizinischen Universität Wien AKH (A) \r\n\r\nfür mindestens 72h aufgenommen und behandelt werden, können über die Studie aufgeklärt werden. Sollte eine Einwilligungserklärung vorliegen, werden prospektiv folgende beispielhaften Daten pseudonymisiert aus der elektronischen Patientenkurve extrahiert:\r\n\r\n- demographische Daten (Alter, Geschlecht, Gewicht, Größe, \r\n   BMI)\r\n- Anamnese (Grund für Krankenhaus- bzw. ITS Aufnahme)\r\n- Diagnosen nach ICD 10 und Komorbiditäten\r\n- Operationen und zugehörige Fachdisziplin\r\n- Beatmungsparameter und -dauer\r\n- Medikation und Transfusionen (EK, FFP, TK)\r\n- Laborparameter\r\n- Daten zur Nierenersatztherapie / extrakorporalen Verfahren \r\n   (Kontinuierliche veno-venöse Hämofiltration, veno-venöse ECMO, veno-arterielle ECMO, etc.)\r\n- Scores bezüglich Krankheitsschwere bzw Organdysfunktionen \r\n   (SOFA, SAPS II, APACHE, ICDSC)\r\n- Überlebensstatus\r\n- Verweildauer sowie Wiederaufnahme auf die Intensivstation\r\n\r\nZudem werden folgende Tests (\"Module\", standortspezifisch) durchgeführt:\r\nAlle der folgenden Daten werden jeweils zu den Zeitpunkten erhoben: während des ICU Aufenthaltes, 3 und 6 Monate nach dem ICU Aufenthalt sowie 1, 2 und 5 Jahre nach dem ICU Aufenthalt.\r\n\r\nModul 1, 2a und 2b (Basismodul)\r\n- Ausfüllen standardisierter Fragebögen mit validierten Scores \r\n- funktionelle Tests (Barthel Index, Handkraftmessung)\r\n- Erhebung von Routinedaten (s.o.)\r\n- Blutabnahme (nur bei Zustimmung zur Teilnahme am Modul 5)\r\n\r\nModul 3 (Umweltmodul)\r\n- Erfassung von Routinedaten\r\n- Erhebung der Umweltexposition mittels EnviroData/AEMN und frei zugänglichen \r\n   Datenquellen von Messstationen für Umwelt/Deutscher Wetterdienst/Europäische  \r\n   Umweltagentur oder ähnlichen Institutionen zum gleichen Zeitpunkt wie Abfrage der  \r\n   Scores nach ICU-Aufenthalt\r\n- Messung der Umweltexposition mittels HIAwear/Sensorboxen sowie im häuslichen \r\n   Umfeld der Patienten zum gleichen Zeitpunkt wie Abfrage der Lebensqualität mittels \r\n   EQ-5D-5L\r\n\r\nModul 4 (Psychiatriemodul)\r\n- 11-point numeric noise-annoyance scale sowie 5-point response (verbal) scale (nur  \r\n  während des ICU Aufenthaltes)\r\n- Scores zur Exploration verschiedener psychiatrischer Symptomkomplexe: CTQ, PHQ-9, BDI, McGill Pain Questionnaire, PANAS, LEF-K \r\n\r\nModul 5 (Translationales Modul)\r\n- Blutabnahme: während des ICU Aufenthaltes, und zu allen Follow-Up Zeitpunkten)\r\n- mit den Blutproben erfolgt eine Multi-Omics Analyse\r\n\r\nModul 6 (PICS-Family)\r\n- sofern Angehörige in die Teilnahme an der Studie einwilligen, werden validierte Instrumente und Fragebögen angewendet, um Symptombelastung und -schwere zu erfassen"
+      },
+      {
+        "idArm": {
+          "arm": 1,
+          "locale": "en"
+        },
+        "comment": "This study involves adult patients who are admitted to the Intensive Care Unit (ICU) of \r\n- the University Hospital of Augsburg \r\n- the University Hospital of Würzburg (Germany)\r\n- the Charité – University Hospital Berlin (Germany)\r\n- the Medical University Vienna (AKH) (Austria)\r\n\r\nfor at least 72 hours. The patients will be informed about the study during their ICU stay. If a consent form is provided, the following data (examples) will be pseudonymized and extracted prospectively from the electronic patient records:\r\n\r\n- Demographic Data: age, gender, weight, height, BMI\r\n- Medical History: Reason for hospitalization and ICU admission\r\n- Diagnoses: ICD-10 codes and comorbidities\r\n- Surgeries: Related specialties and details of surgeries\r\n- Ventilation Parameters: Duration and settings of mechanical ventilation\r\n- Medications and Transfusions: Red blood cell (RBC) transfusions, fresh frozen plasma  \r\n  (FFP), thrombocyte (TK) transfusions\r\n- Laboratory Parameters: Relevant lab values\r\n- Renal Replacement Therapy (RRT) / Extracorporeal Procedures: Continuous veno-venous \r\n   hemofiltration, veno-venous ECMO, veno-arterial ECMO, etc.\r\n- Disease Severity and Organ Dysfunction Scores: SOFA, SAPS II, APACHE, ICDSC\r\n- Survival Status: Patient outcome\r\n- ICU Stay: Length of ICU stay and re-admissions to ICU\r\n\r\nAdditionally, the following tests (in respective modules) will be conducted at specific time points: during the ICU stay, 3 and 6 months after the ICU stay, and 1, 2, and 5 years after the ICU stay.\r\n\r\nModule 1, 2a, and 2b (Core Module):\r\n- Completion of standardized questionnaires with validated scores\r\n- Functional tests (e.g., Barthel Index, handgrip strength measurement)\r\n- Collection of routine data (as described above)\r\n- Blood samples (only if consent is provided for Module 5)\r\n\r\nModule 3 (Environmental Module):\r\n- Collection of routine data\r\n- Assessment of environmental exposure using EnviroData/AEMN and publicly available \r\n   data from environmental monitoring stations (e.g., German Weather Service, European \r\n   Environmental Agency) for the same time periods as the scores are recorded post-ICU \r\n   stay\r\n- Measurement of environmental exposure using HIAwear/Sensor boxes in the patients' \r\n   home environments, in parallel with quality of life assessments (EQ-5D-5L)\r\n\r\nModule 4 (Psychiatric Module):\r\n- Noise Annoyance Scales: 11-point numeric noise annoyance scale and 5-point response \r\n   scale (only during ICU stay)\r\n- Psychiatric Symptoms Scores: CTQ, PHQ-9, BDI, McGill Pain Questionnaire, PANAS, LEF-\r\n   K \r\n\r\nModule 5 (Translational Module):\r\n- Blood samples: collected during the ICU stay, and at all follow-up time points\r\n- The blood samples will be used for Multi-Omics analysis\r\n\r\nModule 6 (PICS-Family):\r\n- If family members consent to participate, validated questionnaires will be used to investigate PICS-F symptom burden"
+      }
+    ],
+    "trialContacts": [
+      {
+        "idContactIdType": {
+          "type": "PUBLIC_QUERIES"
+        },
+        "otherType": null,
+        "contact": {
+          "streetAndNo": "Stenglinstraße 2",
+          "city": "Augsburg",
+          "zip": "86156",
+          "country": "DE",
+          "email": "Redacted",
+          "fax": null,
+          "firstName": "Redacted",
+          "lastName": "Redacted",
+          "phone": "Redacted",
+          "title": "Redacted",
+          "url": null,
+          "affiliation": "Universtitätsklinikum Augsburg"
+        }
+      },
+      {
+        "idContactIdType": {
+          "type": "SCIENTIFIC_QUERIES"
+        },
+        "otherType": null,
+        "contact": {
+          "streetAndNo": "Stenglinstraße 2",
+          "city": "Augsburg",
+          "zip": "86156",
+          "country": "DE",
+          "email": "Redacted",
+          "fax": null,
+          "firstName": "Redacted",
+          "lastName": "Redacted",
+          "phone": "Redacted",
+          "title": "Redacted",
+          "url": null,
+          "affiliation": "Universtitätsklinikum Augsburg"
+        }
+      },
+      {
+        "idContactIdType": {
+          "type": "PRIMARY_SPONSOR"
+        },
+        "otherType": null,
+        "contact": {
+          "streetAndNo": null,
+          "city": "Augsburg",
+          "zip": "86156",
+          "country": "DE",
+          "email": "Redacted",
+          "fax": null,
+          "firstName": null,
+          "lastName": null,
+          "phone": null,
+          "title": null,
+          "url": null,
+          "affiliation": "PICS-DACH Steering Committee"
+        }
+      },
+      {
+        "idContactIdType": {
+          "type": "PRINCIPAL_COORDINATING_INVESTIGATOR"
+        },
+        "otherType": null,
+        "contact": {
+          "streetAndNo": "Stenglinstraße 2",
+          "city": "Augsburg",
+          "zip": "86156",
+          "country": "DE",
+          "email": "Redacted",
+          "fax": null,
+          "firstName": "Redacted",
+          "lastName": "Redacted",
+          "phone": "Redacted",
+          "title": "Redacted",
+          "url": null,
+          "affiliation": "Universtitätsklinikum Augsburg"
+        }
+      }
+    ],
+    "materialSupports": [
+      {
+        "contact": {
+          "streetAndNo": null,
+          "city": "Augsburg",
+          "zip": "86156",
+          "country": "DE",
+          "email": null,
+          "fax": null,
+          "firstName": null,
+          "lastName": null,
+          "phone": null,
+          "title": null,
+          "url": null,
+          "affiliation": "Universitätsklinikum Augsburg"
+        },
+        "type": "INSTITUTIONAL"
+      },
+      {
+        "contact": {
+          "streetAndNo": null,
+          "city": "Berlin",
+          "zip": "13353",
+          "country": "DE",
+          "email": null,
+          "fax": null,
+          "firstName": null,
+          "lastName": null,
+          "phone": null,
+          "title": null,
+          "url": null,
+          "affiliation": "Charité - Universitätsmedizin Berlin"
+        },
+        "type": "INSTITUTIONAL"
+      },
+      {
+        "contact": {
+          "streetAndNo": null,
+          "city": "Wien",
+          "zip": "1090",
+          "country": "AT",
+          "email": null,
+          "fax": null,
+          "firstName": null,
+          "lastName": null,
+          "phone": null,
+          "title": null,
+          "url": null,
+          "affiliation": "Medizinische Universität Wien"
+        },
+        "type": "INSTITUTIONAL"
+      },
+      {
+        "contact": {
+          "streetAndNo": null,
+          "city": "Würzburg",
+          "zip": "97080",
+          "country": "DE",
+          "email": null,
+          "fax": null,
+          "firstName": null,
+          "lastName": null,
+          "phone": null,
+          "title": null,
+          "url": null,
+          "affiliation": "Universitätsklinikum Würzburg"
+        },
+        "type": "INSTITUTIONAL"
+      }
+    ],
+    "studyCharacteristic": {
+      "type": "NON_INTERVENTIONAL",
+      "allocation": null,
+      "assignment": null,
+      "blindingType": null,
+      "blindingWhoList": [],
+      "controlTypes": [],
+      "phase": null,
+      "purpose": "DIAGNOSTIC",
+      "characteristicDescriptions": [
+        {
+          "idLocale": {
+            "locale": "de"
+          },
+          "primaryOutcome": "Diagnose eines Post-Intensive Care Syndroms (PICS), definiert als das Vorliegen mindestens einer neuen oder verstärkten Beeinträchtigung in einer der PICS-Domänen (Anzahl/Prozent)",
+          "secondaryOutcome": "- Rate von PICS bei Intensivpatienten und PICS-F im Familiensystem inkl. des zeitlichen \r\n   Verlaufs\r\n\r\n- Korrelation des Auftretens von PICS-Kriterien und PICS nach Behandlung auf einer \r\n   Intensivstation mit den detektierten Risikofaktoren.\r\n\r\n- Rate von PICS-Kriterien in einzelnen bzw. mehreren PICS-Dimensionen (körperlich, \r\n   kognitiv, psychisch, chronischer Schmerz), sowie gleichartige Einschränkungen bereits \r\n   während des Intensivaufenthalts\r\n\r\n- Ausprägungsgrad von PICS-Kriterien in einzelnen bzw. mehreren PICS-Dimensionen (\r\n   körperlich, kognitiv, psychisch, Schmerz), sowie gleichartige Einschränkungen bereits \r\n   während des Intensivaufenthalts\r\n\r\n- Risikoklassifikation für PICS (z.B. nach Paretoprinzip oder Klassifikation in niedrige, \r\n   mittlere und hohe Risikogruppe) sowie anhand von Scoringsystemen.",
+          "typeOfHiddenAllocation": null,
+          "typeOfSequenceGeneration": null
+        },
+        {
+          "idLocale": {
+            "locale": "en"
+          },
+          "primaryOutcome": "Diagnosis of Post-Intensive Care Syndrome (PICS), defined as the presence of at least one new or worsened impairment in one of the PICS domains (number/percentage)",
+          "secondaryOutcome": "- Incidence of PICS in ICU patients and PICS-F (Family System) including the temporal \r\n  progression.\r\n\r\n- Correlation between the occurrence of PICS criteria and PICS after treatment in an ICU \r\n   with detected risk factors.\r\n\r\n- Incidence of PICS criteria in individual or multiple PICS dimensions (physical, cognitive, \r\n   psychological, chronic pain), as well as similar impairments during the ICU stay.\r\n\r\n- Severity of PICS criteria in individual or multiple PICS dimensions (physical, cognitive, \r\n   psychological, pain), as well as similar impairments during the ICU stay.\r\n\r\n- Risk classification for PICS (e.g., using the Pareto principle or classification into low, \r\n   medium, and high-risk groups) based on scoring systems.",
+          "typeOfHiddenAllocation": null,
+          "typeOfSequenceGeneration": null
+        }
+      ],
+      "timing": "PROSPECTIVE",
+      "duration": "LONGITUDINAL"
+    },
+    "trialResults": {
+      "ipdSharingPlan": true,
+      "trialResultsDescriptions": [
+        {
+          "idLocale": {
+            "locale": "de"
+          },
+          "ipdSharingPlanDescription": "Das Studienprotokoll wird öffentlich zugänglich sein. Individuelle Patientendaten (IPD) dürfen nur im Rahmen einer Forschungskooperation mit anderen Forschern weitergegeben werden, sofern die Datenschutzbestimmungen dies zulassen und nachdem ein Vertrag über den Datenaustausch und die Forschungskooperation unterzeichnet wurde.",
+          "briefSummaryOfResultsDescription": null
+        },
+        {
+          "idLocale": {
+            "locale": "en"
+          },
+          "ipdSharingPlanDescription": "The Study Protocol will be public. IPD can only be shared in a research collaboration with other researchers if data protection regulations allow it and after signing a data sharing and research collaboration contract.",
+          "briefSummaryOfResultsDescription": null
+        }
+      ],
+      "plannedPublication": null,
+      "firstPublication": null,
+      "firstResultPublication": null,
+      "publications": [],
+      "relatedDrksTrials": []
+    },
+    "secondaryIds": {
+      "otherPrimaryRegisterId": "NCT07290712",
+      "otherPrimaryRegisterName": "ClinicalTrials.gov",
+      "universalTrialNumber": null,
+      "eudraCtNumber": null,
+      "eudamedNumber": null,
+      "noOtherIdentificationNumbersAvailable": false
+    },
+    "otherSecondaryIds": [],
+    "studiedHealthConditions": [
+      {
+        "type": "MAIN",
+        "catalog": "FREETEXT",
+        "code": null,
+        "studiedHealthConditionDescriptions": [
+          {
+            "idLocale": {
+              "locale": "de"
+            },
+            "comment": "Jegliche Einschränkungen auf kognitiver, physischer und psychischer Ebene, die in Zusammenhang mit dem Aufenthalt auf einer Intensivstation stehen oder bei denen der Verdacht auf einen Zusammenhang steht."
+          },
+          {
+            "idLocale": {
+              "locale": "en"
+            },
+            "comment": "Any cognitive, physical, and psychological impairment that is associated with an ICU stay or is suspected to be associated with it."
+          }
+        ]
+      }
+    ],
+    "recruitment": {
+      "institutes": [
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": "Universitätsklinikum Augsburg",
+          "city": "Augsburg"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": "Universitätsklinikum Würzburg",
+          "city": "Würzburg"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": "Universitätsklinikum Berlin Charite",
+          "city": "Berlin"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": "Medizinische Universität Wien",
+          "city": "Wien"
+        }
+      ],
+      "countries": [
+        {
+          "idCountry": {
+            "code": "AT"
+          }
+        },
+        {
+          "idCountry": {
+            "code": "DE"
+          }
+        }
+      ],
+      "centricType": "MULTICENTRIC",
+      "gender": "ALL",
+      "minimumAge": {
+        "amount": 18,
+        "unit": "YEARS"
+      },
+      "maximumAge": {
+        "amount": null,
+        "unit": "NO_MAX_AGE"
+      },
+      "totalParticipants": null,
+      "plannedParticipants": 5000,
+      "status": "RECRUITING",
+      "recruitmentDescriptions": [
+        {
+          "idLocale": {
+            "locale": "de"
+          },
+          "reasonDescription": null,
+          "exclusionCriteria": "Patienten, die zum Zeitpunkt des Screenings, End-of-Life Care erhalten oder bei denen ein Therapierückzug oder -versagen mit hoher Wahrscheinlichkeit zu erwarten ist bzw. ein Überleben der Intensivstation von dem Behandlungsteam nicht erwartet wird.",
+          "inclusionCriteria": "1) Alle Patienten, die im Zeitraum von Februar 2025 bis (mindestens) Februar 2029 auf die Intensivstationen der teilnehmenden Universitätsklinika für mindestens 72h aufgenommen und behandelt werden\r\n\r\n2) Schriftliche Einwilligungserklärung durch den Patienten oder gesetzlichen Vertreter sowie für das PICS-F Modul Einwilligung der Angehörigen"
+        },
+        {
+          "idLocale": {
+            "locale": "en"
+          },
+          "reasonDescription": null,
+          "exclusionCriteria": "Patients who, at the time of screening, are receiving end-of-life care or for whom treatment withdrawal or failure is highly likely, or for whom the treatment team does not expect survival beyond the ICU stay.",
+          "inclusionCriteria": "1) All patients admitted to the ICUs of participating university hospitals for at least 72 hours between February 2025 and (at least) February 2029, and who are treated during this period.\r\n\r\n2) Written informed consent by the patient or legal proxy (spouse or consular physician procedure), and for the PICS-F module, consent from the family members."
+        }
+      ],
+      "scheduledStartDate": "2025-10-01",
+      "scheduledCompletionDate": "2030-01-01",
+      "actualStartDate": "2026-02-24",
+      "actualCompletionDate": null,
+      "healthyVolunteers": false
+    },
+    "ethicsCommittee": {
+      "applicationDate": "2025-01-14",
+      "number": "25-0050",
+      "ethicVotes": [
+        {
+          "dateOfVote": "2025-03-10",
+          "vote": "APPROVED",
+          "type": "ETHICS_COMMITTEE",
+          "contact": {
+            "streetAndNo": "Pettenkoferstraße 8",
+            "city": "München",
+            "zip": "80336",
+            "country": "DE",
+            "email": "Redacted",
+            "fax": null,
+            "firstName": null,
+            "lastName": null,
+            "phone": "Redacted",
+            "title": null,
+            "url": "www.med.uni-muenchen.de/einrichtungen/ethik/index.html",
+            "affiliation": "Ethikkommission der Med. Fakultät der LMU"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "drksId": "DRKS00021160",
+    "trialStatus": "UPDATED",
+    "registrationDrks": "2020-05-26",
+    "registrationType": "PROSPECTIVE",
+    "lastUpdate": "2026-11-20",
+    "sponsored": true,
+    "url": null,
+    "trialDescriptions": [
+      {
+        "idLocale": {
+          "locale": "de"
+        },
+        "acronym": "Randomet2017",
+        "title": "Randomisierte, multizentrische, offene, Phase III, Äquivalenzstudie (non-inferiority) für Patienten mit Nierentumor des Kindesalters im Stadium IV zum Vergleich der präoperativen Chemotherapie bestehend aus Vincristin, Actinomycin – D und Doxorubicin (VAD, Standardarm) mit der präoperativen Chemotherapie bestehend aus Vincristin, Carboplatin und Etoposid (VCE, Vergleichsarm)",
+        "summary": "Die Randomet2017 Studie ist für Kinder und Jugendliche im Alter von 3 Monaten bis 18 Jahren, die an einem  Nierentumor mit Metastase(n) erkrankt sind. \r\nIn dieser Studie werden zwei verschiedene Kombinationen von Chemotherapie miteinander verglichen. Die Chemotherapie besteht entweder aus den Medikamenten Vincristin, ActinomycinD und Doxorubicin (VAD) oder Vincristin, Carboplatin und Etoposid. Dadurch soll herausgefunden werden, welche der zwei Therapien besser ist in Bezug auf Wirksamkeit (Heilungswahrscheinlichkeit/Fähigkeit die Metastasen verschwinden zu lassen) und Schädlichkeit (kurz- und langfristige Nebenwirkungen). \r\nDie gesamte Studienbehandlung umfasst die 6 – wöchige präoperative Chemotherapie. Die Medikamente werden durch Randomisierung (Münzwurf) zugeordnet.",
+        "scientificSummary": "Randomisierte, multizentrische, offene, Phase III, Äquivalenzstudie (non-inferiority) für Patienten mit Nierentumor des Kindesalters im Stadium IV zum Vergleich der präoperativen Chemotherapie bestehend aus Vincristin, Actinomycin – D und Doxorubicin (VAD, Standardarm) mit der präoperativen Chemotherapie bestehend aus Vincristin, Carboplatin und Etoposid (VCE, Vergleichsarm)\r\nBegleitend werden Analysen zur Bedeutung des absoluten Blastemvolumens und des Zugewinns von 1q für die Prognose von metastasierten Nephroblastomen untersucht werden."
+      },
+      {
+        "idLocale": {
+          "locale": "en"
+        },
+        "acronym": "Randomet2017",
+        "title": "Randomized multi-centre open-label non-inferiority phase 3 clinical trial for patients with a stage IV childhood renal tumour comparing upfront Vincristine, Actinomycin-D and Doxorubicin (VAD, standard arm) with upfront Vincristine, Carboplatin and Etoposide (VCE, experimental arm)",
+        "summary": "The Randomet2017 study will be conducted in children and adolescents aged 3 months to 18 years who have a kidney tumor with metastasis(s). In this study, two different combinations of chemotherapeutic agents will be compared. The chemotherapy include either the drugs vincristine,   actinomycin D and doxorubicin  (VAD) or vincristine, carboplatin and etoposide (VCE).\r\nThe aim is to find out which of the two therapies is better in terms of effectiveness (probability of cure/ability to make the metastases disappear) and harmfulness (short and long-term side effects). \r\nThe entire study treatment includes 6 weeks of preoperative chemotherapy. Which therapy (VAD or VCE) is given is decided randomly, like a coin toss.",
+        "scientificSummary": "Randomized multi-centre open-label non-inferiority phase 3 clinical trial for patients with a stage IV childhood renal tumour comparing upfront Vincristine, Actinomycin-D and Doxorubicin (VAD, standard arm) with upfront Vincristine, Carboplatin and Etoposide (VCE, experimental arm).\r\nAdditionally, importance of absolute blastemal volume and the gain of 1q for the prognosis of metastasized nephroblastoma will be investigated."
+      }
+    ],
+    "observationalGroups": [
+      {
+        "idArm": {
+          "arm": 1,
+          "locale": "de"
+        },
+        "comment": "Präoperative Chemotherapie mit Vincristin, Actinomycin D und Doxorubicin:\r\n- Actinomycin D \t1 x 45 µg/kg IV, Tag  1 in Woche 1, 3, 5\r\n- Vincristin \t1 x 1,5 mg/m2 IV , Tag 1 in Woche 1, 2, 3, 4, 5, 6\r\n- Doxorubicin , 1 x 50 mg/m2 6h IV-Infusion\tTag 1 in Woche 1, 5 \r\n\r\nGesamtdauer: 6 Wochen"
+      },
+      {
+        "idArm": {
+          "arm": 1,
+          "locale": "en"
+        },
+        "comment": "Preoperative chemotherapy with vincristine, actinomycin D and doxorubicin.\r\n- Actinomycin D, 1 x 45 µg/kg IV\tday 1 in week 1, 3, 5\r\n- Vincristine, 1 x 1,5 mg/m2 IV day 1 in week 1, 2, 3, 4, 5, 6\r\n- Doxorubicin, 1 x 50 mg/m2 6h IV-Infusion\tday 1 in week 1, 5 \r\nTotal duration: 6 weeks"
+      },
+      {
+        "idArm": {
+          "arm": 2,
+          "locale": "de"
+        },
+        "comment": "Präoperative Chemotherapie mit Vincristin, Carboplatin und Etoposid.\r\n- Vincristine, 1 x 1,5 mg/m2 IV ,Tag 1 in Woche 1, 2, 3, 4, 5, 6\r\n- Carboplatin, 3 x 200 mg/m2 1h Infusion, Tag 1,2,3 in Woche 1, 4\r\n- Etoposide, 3 x 100 mg/m2 1h Infusion, Tag 1,2,3 in Woche 1, 4\r\nGesamtdauer: 6 Wochen"
+      },
+      {
+        "idArm": {
+          "arm": 2,
+          "locale": "en"
+        },
+        "comment": "Preoperative chemotherapy with vincristine, carboplatin and etoposide.\r\n- Vincristine, 1 x 1,5 mg/m2 IV day 1 in week 1, 2, 3, 4, 5, 6\r\n- Carboplatin, 3 x 200 mg/m2 1h Infusion day 1,2,3 in week 1, 4\r\n- Etoposide, 3 x 100 mg/m2 1h Infusion day 1,2,3 in week 1, 4\r\nTotal duration: 6 weeks"
+      }
+    ],
+    "trialContacts": [
+      {
+        "idContactIdType": {
+          "type": "SCIENTIFIC_QUERIES"
+        },
+        "otherType": null,
+        "contact": {
+          "streetAndNo": "Campus Gebäude 9",
+          "city": "Homburg",
+          "zip": "66421",
+          "country": "DE",
+          "email": "Redacted",
+          "fax": "Redacted",
+          "firstName": "Redacted",
+          "lastName": "Redacted",
+          "phone": "Redacted",
+          "title": "Redacted",
+          "url": "https://www.uks.eu/de/",
+          "affiliation": "Universitätsklinikum des Saarlandes Kinderklinik"
+        }
+      },
+      {
+        "idContactIdType": {
+          "type": "PRIMARY_SPONSOR"
+        },
+        "otherType": null,
+        "contact": {
+          "streetAndNo": "Chausseestraße 128/129",
+          "city": "Berlin",
+          "zip": "10115",
+          "country": "DE",
+          "email": "Redacted",
+          "fax": null,
+          "firstName": "Redacted",
+          "lastName": "Redacted",
+          "phone": null,
+          "title": "Redacted",
+          "url": null,
+          "affiliation": "GPOH gGmbH"
+        }
+      },
+      {
+        "idContactIdType": {
+          "type": "PUBLIC_QUERIES"
+        },
+        "otherType": null,
+        "contact": {
+          "streetAndNo": "Universitätsklinikum Gebäude 9",
+          "city": "Homburg",
+          "zip": "66421",
+          "country": "DE",
+          "email": "Redacted",
+          "fax": "Redacted",
+          "firstName": "Redacted",
+          "lastName": "Redacted",
+          "phone": "Redacted",
+          "title": "Redacted",
+          "url": "https://www.uks.eu/de/",
+          "affiliation": "Universitätsklinikum des Saarlandes Klinik für Pädiatrische Onkologie und Hämatologie"
+        }
+      },
+      {
+        "idContactIdType": {
+          "type": "PRINCIPAL_COORDINATING_INVESTIGATOR"
+        },
+        "otherType": null,
+        "contact": {
+          "streetAndNo": "Campus, Gebäude 9",
+          "city": "Homburg",
+          "zip": "66421",
+          "country": "DE",
+          "email": "Redacted",
+          "fax": "Redacted",
+          "firstName": "Redacted",
+          "lastName": "Redacted",
+          "phone": "Redacted",
+          "title": "Redacted",
+          "url": null,
+          "affiliation": "Universitätsklinikum des Saarlandes, Kinderklinik"
+        }
+      }
+    ],
+    "materialSupports": [
+      {
+        "contact": {
+          "streetAndNo": "Buschstrasse 32",
+          "city": "Bonn",
+          "zip": "53113",
+          "country": "DE",
+          "email": null,
+          "fax": null,
+          "firstName": null,
+          "lastName": null,
+          "phone": null,
+          "title": null,
+          "url": null,
+          "affiliation": "Deutsche Krebshilfe"
+        },
+        "type": "PUBLIC_FUNDING"
+      }
+    ],
+    "studyCharacteristic": {
+      "type": "INTERVENTIONAL",
+      "allocation": "RANDOMIZED_CONTROLLED_TRIAL",
+      "assignment": "PARALLEL",
+      "blindingType": "OPEN",
+      "blindingWhoList": [],
+      "controlTypes": [
+        {
+          "idControlType": {
+            "controlType": "ACTIVE_CONTROL"
+          }
+        }
+      ],
+      "phase": "PHASE_III",
+      "purpose": "TREATMENT",
+      "characteristicDescriptions": [
+        {
+          "idLocale": {
+            "locale": "de"
+          },
+          "primaryOutcome": "Prozentualer Anteil der Patienten mit vollständigem radiologischen Ansprechen (CR) einer Metastase und/oder sehr gutem partiellem Ansprechen (VGPR) der Lungenmetastasen des kindlichen Nierentumors nach 6 Wochen präoperativer Chemotherapie.",
+          "secondaryOutcome": "Radiologisches Ansprechen auf die präoperative Therapie:\r\n1. Anteil der Patienten nach 6 Wochen präoperativer Chemotherapie, die nach operativer Entfernung der Metastasen ein vollständiges Ansprechen (CR) erzielen zum Zeitpunkt der Nephrektomie\r\n2.Anteil der Patienten mit CR und/oder sehr gutem partiellem Ansprechen (VGPR) der (Lungen-) Metastasen des Nephroblastoms nach 6 Wochen präoperativer Chemotherapie\r\n3. Anteil der Patienten mit verbliebenen Metastasen nach Operation, die nach 9 Wochen adjuvanter Chemotherapie eine CR erreichen\r\n4. Anteil der Patienten mit CR und/oder VGPR der (Lungen-) Metastasen des Nephroblastoms nach 6 Wochen präoperativer Chemotherapie + 9 Wochen adjuvanter Therapie.\r\n5. Anteil der Patienten mit CR und/oder VGPR der (Lungen-) Metastasen des Nephroblastoms nach präoperativer Chemotherapie + 9 Wochen adjuvanter Chemotherapie & Metastasektomie\r\n6. Anteil der Patienten mit CR +/- VGPR der (Lungen-) Metastasen des Nephroblastoms nach adjuvanter Chemotherapie ± Metastasektomie ± Bestrahlung\r\n7. Volumenabnahme des Primärtumors nach 6 Wochen präoperativer Chemotherapie\r\n8. Volumen des Primärtumors nach 6 Wochen präoperativer Chemotherapie\r\n9.Anzahl der Metastasen bei Diagnose und nach der präoperativen Chemotherapie\r\n10. Durchmesser der größten Metastase bei Diagnose und nach der präoperativen Therapie\r\nBehandlungsbelastung, Komplikationen, Nebenwirkungen und Toxizität:\r\n1. Anteil der Patienten, bei denen eine Bestrahlung der Lunge in der Primärtherapie erforderlich ist\r\n2. Anteil der Patienten die während der präoperativen Chemotherapie eine SOS (entsprechend der EBMT Kriterien) entwickeln\r\n3. Anteil der Patienten die eine Grad 4 oder 5 (CTCAE) Toxizität während der präoperativen Therapie entwickeln\r\n4.  Gesamtdauer der präoperativen Therapie in Abhängigkeit des Behandlungsarms, definiert als Tag 1 der Chemotherapie bis Datum der OP, \r\n5.  Verzögerung der Tumornephrektomie: Anteil  der Patienten mit mehr als 8 Wochen präoperativer Therapiedauer wegen Toxizität\r\n6. Anteil der peri-/intraoperativen Komplikationen (Blutung, Ruptur, Thrombembolie)\r\nBehandlungsergebnis:\r\n1. Ereignisfreies Überleben nach 2 und 5 Jahren für die gesamte Kohorte und nach Studienarm (VCE/AVD) und nach 1q Gain\r\n2.  Gesamtüberleben nach 2 und 5 Jahren für die gesamte Kohorte und nach Studienarm (VCE/AVD) und nach 1qGain",
+          "typeOfHiddenAllocation": null,
+          "typeOfSequenceGeneration": null
+        },
+        {
+          "idLocale": {
+            "locale": "en"
+          },
+          "primaryOutcome": "Percentage of patients with radiologic complete response (CR) of any metastasis and/or Very Good Partial Response (VGPR) of lung metastasis of childhood renal tumours after 6 weeks of preoperative chemotherapy.",
+          "secondaryOutcome": "Radiologic response to preoperative treatment:\r\n1.\tPercentage of patients after 6 weeks of preoperative chemotherapy achieving a CR after surgery of metastasis at time of nephrectomy\r\n2.\tPercentage of patients with radiologic complete response (CR) of any metastasis or Very Good Partial Response (VGPR) of lung metastasis of nephroblastoma after 6 weeks of preoperative chemotherapy \r\n3.\tPercentage of patients with remaining metastatic disease after surgery that achieve a CR at week 9 of adjuvant chemotherapy \r\n4.\tPercentage of patients with complete response +/- VGPR of (pulmonary) metastasis of nephroblastoma after 6 weeks of preoperative chemotherapy + 9 weeks adjuvant chemotherapy.\r\n5.\tPercentage of patients with complete response +/- VGPR of (pulmonary) metastasis of nephroblastoma after preoperative chemotherapy + 9 weeks adjuvant chemotherapy + metastasectomy\r\n6.\tPercentage of patients with complete response +/- VGPR of (pulmonary) metastasis of nephroblastoma at the end of adjuvant chemotherapy ± metastasectomy ± RT\r\n7.\tPrimary tumour volume shrinkage after 6 weeks of preoperative chemotherapy\r\n8.\tPrimary tumour volume after 6 weeks of preoperative chemotherapy\r\n9.\tNumber of metastases at diagnosis and after preoperative treatment\r\n10.\tMaximum diameters of the largest metastases at diagnosis and after preoperative treatment\r\nTreatment burden, complications, side effects and toxicity:\r\n1.\tPercentage of patients requiring pulmonary radiotherapy in first line\r\n2.\tPercentage of patients suffering from SOS during preoperative treatment according to EBMT criteria\r\n3.\tPercentage of patients suffering any Grade 4 or grade 5 (CTCAE) toxicity during preoperative chemotherapy.\r\n4.\tOverall duration of preoperative treatment per arm as determined as interval D1 – date of nephrectomy\r\n5.\tDelay in timing of nephrectomy: % of patients with more than 8 weeks since start of preoperative chemotherapy because of toxicity\r\n6.\tPercentage of (peri-)operative complications (haemorrhage, rupture, thromboembolism)\r\nOutcome:\r\n1.\t Event-free survival at 2 and 5 years for the whole cohort and according to study arm (VAD/VCE) and according to 1qGain\r\n2.\tOverall survival at 2 and 5 years for the whole cohort and according to study arm (VAD/VCE) and according to 1qGain",
+          "typeOfHiddenAllocation": null,
+          "typeOfSequenceGeneration": null
+        }
+      ],
+      "timing": null,
+      "duration": null
+    },
+    "trialResults": {
+      "ipdSharingPlan": true,
+      "trialResultsDescriptions": [
+        {
+          "idLocale": {
+            "locale": "de"
+          },
+          "ipdSharingPlanDescription": "Die Daten werden im Rahmen integrierter Forschungsprojekte anonymisiert anderen Forschern zu Verfügung gestellt, soweit es durch das Einverständnis der Datenweitergabe gedeckt ist.",
+          "briefSummaryOfResultsDescription": null
+        },
+        {
+          "idLocale": {
+            "locale": "en"
+          },
+          "ipdSharingPlanDescription": "Within the framework of integrated research projects, the data will be made available to other researchers in anonymised form, insofar as this is covered by the data transfer agreement.",
+          "briefSummaryOfResultsDescription": null
+        }
+      ],
+      "plannedPublication": null,
+      "firstPublication": null,
+      "firstResultPublication": null,
+      "publications": [],
+      "relatedDrksTrials": []
+    },
+    "secondaryIds": {
+      "otherPrimaryRegisterId": "2023-508926-91-00",
+      "otherPrimaryRegisterName": "EUCT",
+      "universalTrialNumber": null,
+      "eudraCtNumber": "2018-000533-13",
+      "eudamedNumber": null,
+      "noOtherIdentificationNumbersAvailable": false
+    },
+    "otherSecondaryIds": [],
+    "studiedHealthConditions": [
+      {
+        "type": "MAIN",
+        "catalog": "FREETEXT",
+        "code": null,
+        "studiedHealthConditionDescriptions": [
+          {
+            "idLocale": {
+              "locale": "de"
+            },
+            "comment": "Metastasierter kindlicher Nierentumor"
+          },
+          {
+            "idLocale": {
+              "locale": "en"
+            },
+            "comment": "Metastatic childhood renal tumour"
+          }
+        ]
+      },
+      {
+        "type": "OTHER",
+        "catalog": "ICD10",
+        "code": "C64",
+        "studiedHealthConditionDescriptions": [
+          {
+            "idLocale": {
+              "locale": "de"
+            },
+            "comment": "Bösartige Neubildung der Niere, ausgenommen Nierenbecken"
+          },
+          {
+            "idLocale": {
+              "locale": "en"
+            },
+            "comment": "Malignant neoplasm of kidney, except renal pelvis"
+          }
+        ]
+      }
+    ],
+    "recruitment": {
+      "institutes": [
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Leipzig"
+        },
+        {
+          "type": "MEDICAL_CENTER",
+          "name": "Evangelisches Klinikum Bethel",
+          "city": "Bielefeld"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Heidelberg"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Erlangen"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Freiburg im Breisgau"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": "Universitätsklinikum Schleswig-Holstein Campus Lübeck",
+          "city": "Lübeck"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": "Klinikum der LMU Dr. von Haunersches Kinderspital",
+          "city": "München"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Frankfurt a.M."
+        },
+        {
+          "type": "MEDICAL_CENTER",
+          "name": "Asklepios Klinik St. Augustin",
+          "city": "Sankt Augustin"
+        },
+        {
+          "type": "MEDICAL_CENTER",
+          "name": "Städtisches Klinikum Braunschweig gGmbH",
+          "city": "Braunschweig"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Greifswald"
+        },
+        {
+          "type": "MEDICAL_CENTER",
+          "name": "Franz Lust Klinik für Kinder - und Jugendmedizin am städtischen Klinikum",
+          "city": "Karlsruhe"
+        },
+        {
+          "type": "MEDICAL_CENTER",
+          "name": "Gesundheit Nordhessen; Klinikum Kassel GmbH",
+          "city": "Kassel"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Homburg"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Bonn"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": "Klinikum München Schwabing Kinderklinik der techn. Universität München",
+          "city": "München"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Berlin"
+        },
+        {
+          "type": "MEDICAL_CENTER",
+          "name": "Gesundheit Nord Klinikum Bremen Mitte",
+          "city": "Bremen"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Essen"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Göttingen"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Mannheim"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Hamburg"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Halle Saale"
+        },
+        {
+          "type": "MEDICAL_CENTER",
+          "name": "Helios Klinikum Erfurt GmbH",
+          "city": "Erfurt"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Hannover"
+        },
+        {
+          "type": "MEDICAL_CENTER",
+          "name": "Kliniken der Stadt Köln gGmbH Kinderkrankenhaus",
+          "city": "Köln"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Düsseldorf"
+        },
+        {
+          "type": "MEDICAL_CENTER",
+          "name": "Diakonie Neuendettelsau KdöR Klinik Hallerwiese/ Cnopfsche Kinderklinik",
+          "city": "Nürnberg"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Ulm"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Köln"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Tübingen"
+        },
+        {
+          "type": "MEDICAL_CENTER",
+          "name": "Helios Berlin Buch GmbH",
+          "city": "Berlin"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Münster"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Regensburg"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Aachen"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Mainz"
+        },
+        {
+          "type": "MEDICAL_CENTER",
+          "name": "Klinikum Oldenburg AöR",
+          "city": "Oldenburg"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": "Universitätsklinikum Schleswig-Holstein, Campus Kiel",
+          "city": "Kiel"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Würzburg"
+        },
+        {
+          "type": "MEDICAL_CENTER",
+          "name": "Klinikum Dortmund gGmbH",
+          "city": "Dortmund"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": "Universitätsklinikum Gießen und Marburg GmbH Standort Gießen",
+          "city": "Giessen"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Dresden"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Jena"
+        },
+        {
+          "type": "MEDICAL_CENTER",
+          "name": "Klinikum Stuttgart - Olgahospital",
+          "city": "Stuttgart"
+        },
+        {
+          "type": "MEDICAL_CENTER",
+          "name": "Klinikum Heilbronn GmbH Klinikum am Gesundbrunnen",
+          "city": "Heilbronn"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Rostock"
+        },
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": null,
+          "city": "Augsburg"
+        }
+      ],
+      "countries": [
+        {
+          "idCountry": {
+            "code": "AT"
+          }
+        },
+        {
+          "idCountry": {
+            "code": "BE"
+          }
+        },
+        {
+          "idCountry": {
+            "code": "BR"
+          }
+        },
+        {
+          "idCountry": {
+            "code": "CH"
+          }
+        },
+        {
+          "idCountry": {
+            "code": "CZ"
+          }
+        },
+        {
+          "idCountry": {
+            "code": "DE"
+          }
+        },
+        {
+          "idCountry": {
+            "code": "DK"
+          }
+        },
+        {
+          "idCountry": {
+            "code": "ES"
+          }
+        },
+        {
+          "idCountry": {
+            "code": "FR"
+          }
+        },
+        {
+          "idCountry": {
+            "code": "GB"
+          }
+        },
+        {
+          "idCountry": {
+            "code": "GR"
+          }
+        },
+        {
+          "idCountry": {
+            "code": "HU"
+          }
+        },
+        {
+          "idCountry": {
+            "code": "IT"
+          }
+        },
+        {
+          "idCountry": {
+            "code": "NL"
+          }
+        },
+        {
+          "idCountry": {
+            "code": "VA"
+          }
+        }
+      ],
+      "centricType": "MULTICENTRIC",
+      "gender": "ALL",
+      "minimumAge": {
+        "amount": 3,
+        "unit": "MONTHS"
+      },
+      "maximumAge": {
+        "amount": 18,
+        "unit": "YEARS"
+      },
+      "totalParticipants": null,
+      "plannedParticipants": 406,
+      "status": "RECRUITING",
+      "recruitmentDescriptions": [
+        {
+          "idLocale": {
+            "locale": "de"
+          },
+          "reasonDescription": null,
+          "exclusionCriteria": "- Ablehnung der Einwilligung zur Studienteilnahme und Randomisierung\r\n- Nachverfolgung des Patienten bis zwei Jahre nach Behandlungsende ist nicht möglich\r\n- Primäre Nephrektomie \r\n- Eine andere bekannte Histologie als Nephroblastom\r\n- Bereits erfolgte Chemotherapie vor Studieneinschluß\r\n- Schwangerschaft oder Stillzeit\r\n- Zeugungsfähige Patienten, die die Nutzung einer effektiven Verhütung ablehnen\r\n- Behandlung mit einem der Studienmedikamente in den letzten 4 Wochen vor Einschluss\r\n- Überempfindlichkeit gegen eine der aktiven Substanzen oder der Galenik, die in der Studienmedikation vorkommt und in der Fachinformation (SmPC) aufgeführt ist, oder in der Prüfarzt Broschüre.\r\n- Vorerkrankung, die eine sichere Behandlung in der Studie signifikant beeinträchtigt \r\n- mangelnde Bereitschaft, angemessene unterstützende Maßnahmen zu ergreifen, einschließlich der Transfusion von Blutprodukten, falls medizinisch notwendig\r\n- Protokoll gemäße Behandlung ist nicht möglich, dies gilt insbesondere für Patienten mit\r\na. akutem Nierenversagen, das eine Dialyse erfordert\r\nb. bereits bestehende periphere Neuropathie\r\n- Aktive, unkontrollierte lebensbedrohliche Infektion (z.B. akute Hepatitis, Lungenentzündung, AIDS, Varizella)\r\n- bekannte chromosomale Instabilität (z.B. Fanconi-Anämie, Nijmegen-Bruch-Syndrom)\r\n- GleichtzeitigeTeilnahme an anderen interventionellen Studien (die Registrierung in nicht-interventionellen Beobachtungsstudien ist zulässig)\r\n- Alter bei Behandlungsbeginn <3 Monate oder >18 Jahre",
+          "inclusionCriteria": "- Kinder <18 Jahre und älter als 3 Monate\r\n- Patienten, die bei Erstdiagnose an einem metastasierten Nierentumor erkrankt sind und bei denen mindestens ein umschriebener, nicht kalzifizierter (pulmonaler) Knoten festgestellt wurde (oder eine andere Läsion bei der ein hochgradiger Verdacht auf Metastasen gemäß den Kriterien für eine Metastasierung besteht), dessen/ deren Größe  ≥3 mm beträgt ermittelt durch  Thorax-CT-Scan und Abdominellem-CT-Scan/MRI.\r\n- Die Metastasierung muss durch ein zentrales Review bestätigt werden.\r\n- Unterzeichnete Einverständniserklärung(en) vor Studieneintritt gemäß nationalen Richtlinien und GCP-Richtlinien\r\n- Patienten (wo möglich), Eltern/ gesetzliche Vertreter müssen freiwillig Einverständnis erteilen vor Durchführung jegliche studienspezifischer Verfahren.\r\n-Es muss den Patienten möglich sein, sich an den Studienplan und andere Protokollanforderungen einzuhalten.\r\n- Keine vorbestehende und anhaltende kardiale Erkrankung (Insuffizienz, maligne Arrhythmien)\r\n- Keine vorbestehende und anhaltende, nicht kontrollierbare Leberfunktionsstörung"
+        },
+        {
+          "idLocale": {
+            "locale": "en"
+          },
+          "reasonDescription": null,
+          "exclusionCriteria": "- Patient and/or parental/legal representative(s) denied study participation and randomization\r\n- inability to be followed until two years after treatment\r\n- primary nephrectomy\r\n- histology other than nephroblastoma\r\n- other chemotherapy prior to enrolment\r\n- pregnancy or lactation\r\n- Fertile female with child bearing potential and fertile male subjects who refuse using highly effective contraceptive measures\r\n- Treated by any investigational agent in a clinical study within previous 4 weeks\r\n- Hypersensitivity to the active substances or other excipients contained in the investigational medical products listed in the summary of product characteristics (SmPC) or Investigators Brochure (IB).\r\n- any other medical condition incompatible with the protocol treatment\r\n- unwillingness to follow adequate supportive measures including transfusion of blood products if medically needed\r\n- inability to receive chemotherapy according to the protocol, this is particulary true for:\r\na. acute kidney failure needing dialysis treatment\r\nb. pre-existing peripheral neuropathy\r\n- Active, uncontrolled life threatening Infection (e.g. Acute Hepatitis, Pneumonia, AIDS, Varizella)\r\n- known chromosomal instability/susceptibility (e.g. Fanconi Anemia, Nijmegen Breakage Syndrome)\r\n- participation in other interventional trials (registration in observational non-interventional studies is acceptable)\r\n- age at start of treatment <3 months or >18 years",
+          "inclusionCriteria": "- Children <18 years at date of diagnosis and >3months\r\n- Patients suffering from metastatic renal tumour at initial diagnosis, having at least one circumscript, non-calcified (pulmonary) nodule (or other lesion highly suspicious of metastasis according to criteria for metastatic disease) ≥3 mm as determined by chest CT-scan and abdominal CT-scan/MRI.\r\n- Metastatic childhood renal tumour must be confirmed by central review.\r\n- Signed informed consent form(s) prior to study entry according to national guidelines and GCP guidelines\r\n- Voluntarily provide permission (subjects and when applicable, parental/legal representative(s)) to the ICF prior to conducting any study related assessments/procedures\r\n- Able to adhere to the study visit schedule and other protocol requirements\r\n- No pre-existing and ongoing cardiac malfunction disease (insufficiency, malign arrhythmias)\r\n- No pre-existing and ongoing liver function deficiency that is not controllable by substitution"
+        }
+      ],
+      "scheduledStartDate": "2021-11-30",
+      "scheduledCompletionDate": "2030-10-01",
+      "actualStartDate": "2022-03-04",
+      "actualCompletionDate": null,
+      "healthyVolunteers": false
+    },
+    "ethicsCommittee": {
+      "applicationDate": "2019-07-22",
+      "number": "169/19",
+      "ethicVotes": [
+        {
+          "dateOfVote": "2019-12-05",
+          "vote": "APPROVED",
+          "type": "ETHICS_COMMITTEE",
+          "contact": {
+            "streetAndNo": "Faktoreistr. 4",
+            "city": "Saarbrücken",
+            "zip": "66111",
+            "country": "DE",
+            "email": "Redacted",
+            "fax": null,
+            "firstName": null,
+            "lastName": null,
+            "phone": "Redacted",
+            "title": null,
+            "url": null,
+            "affiliation": "Ethikkommission bei der Ärztekammer des Saarlandes"
+          }
+        },
+        {
+          "dateOfVote": "2024-05-28",
+          "vote": "APPROVED",
+          "type": "OTHER_ETHICS_COMMITTEE",
+          "contact": {
+            "streetAndNo": "Robert-Koch-Str. 9-11",
+            "city": "Essen",
+            "zip": "45147",
+            "country": "DE",
+            "email": "Redacted",
+            "fax": null,
+            "firstName": null,
+            "lastName": null,
+            "phone": "Redacted",
+            "title": null,
+            "url": "www.uni-due.de/ethikkommission/",
+            "affiliation": "Ethik-Kommission der Medizinischen Fakultät der Universität Duisburg-Essen"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "drksId": "DRKS00012345",
+    "trialStatus": "REGISTERED",
+    "registrationDrks": "2019-02-01",
+    "registrationType": "RETROSPECTIVE",
+    "lastUpdate": "2024-05-01",
+    "sponsored": true,
+    "url": null,
+    "trialDescriptions": [
+      {
+        "idLocale": {
+          "locale": "de"
+        },
+        "acronym": null,
+        "title": "Der Einfluss des Gallengangmikrobioms, eines Gallengangsstents und einer verlängerten\r\nAntibiotikaprophylaxe auf die postoperative Morbidität bei Pankreaskopfresektionen –\r\nEine retrospektive, unizentrische Analyse",
+        "summary": "Die Pankreaskopfresektion ist ein komplexer chirurgischer Eingriff. Nach der Operation treten vergleichsweise häufig Komplikationen auf. Um die Patientensicherheit zu erhöhen, sollten mögliche Einflussfaktoren auf die Komplikationsrate analysiert werden. \r\nEinige Patienten erhalten vor einer Operation bei einem Stau der Galle einen Stent in den Gallengang. Der Nutzen des Verfahrens ist umstritten. Ein Grund ist, dass dadurch Bakterien in die sonst bakterienfreie Galle gelangen können. Das kann wiederum mit einem erhöhten Risiko für Komplikationen verbunden sein.  Ein möglicher Ansatzpunkt zur Senkung der Komplikationsrate bieten verlängerte Antibiotikaprophylaxen. Um weitere Erkenntnisse in diesem Forschungsgebiet zu erlangen und die zukünftige Behandlung nach Pankreaskopfresektionen zu verbessern, soll in dieser Studie die Häufigkeit von Komplikationen nach einer Pankreaskopfresektion ausgewertet werden. Außerdem soll der Zusammenhang zwischen dem Auftreten von Komplikationen und der bakteriellen Besiedlung der Galle, eines präoperativ eingesetzten Gallengangsstents und der Antibiotikagabe untersucht werden.",
+        "scientificSummary": "Die Pankreaskopfresektion ist ein komplexer chirurgischer Eingriff mit vergleichsweise hoher postoperativer Morbiditätsrate. Um die Patientensicherheit zu erhöhen, sollten mögliche Einflussfaktoren auf die Komplikationsrate analysiert werden. \r\nBei präoperativ bestehender Cholestase können Patienten eine präoperative biliäre Drainage (preoperative biliary drainage, PBD) erhalten. Das Verfahren ist umstritten, da es unter anderem zu einer bakteriellen Kontamination der sonst sterilen Galle führen kann. Die Bakteriobilie ist wiederum mit einem erhöhten Risiko für Komplikationen assoziiert. Es kommt aus chirurgischer Sicht die Frage auf, wie sich das perioperative Management dieser Patientengruppe optimieren lässt. Einen Ansatzpunkt bietet die Anwendung einer antibiotischen Prophylaxe.  Zur Reduktion von postoperativen Wundinfektionen und Folgekomplikationen empfiehlt die Arbeitsgemeinschaft der Wissenschaftlichen Medizinischen Fachgesellschaften e.V. (AWMF) die Gabe einer perioperativen Antibiotikaprophylaxe (PAP) bei Operationen am Pankreas. Dabei handelt es sich um eine single-shot Gabe eines Antibiotikums 30(-60) Minuten vor Hautschnitt. In den letzten Jahren rückte zunehmend die Frage in den Fokus, ob eine prophylaktische Antibiotikagabe über den perioperativen Zeitraum hinaus zusätzliche Vorteile bietet, insbesondere bei Patienten mit PBD und einem entsprechend erhöhten Risiko für eine Bakteriobilie. So zeigt sich für Patienten mit einer PBD eine Reduktion von intraabdominellen Infektionen, sowie anderer schwerer Komplikationen bei verlängerter Antibiotikaprophylaxe. Allerdings gibt es aktuell keine Empfehlungen für den Einsatz verlängerter Antibiotikaprophylaxen, folglich liegt die Entscheidung bei dem behandelnden Operateur selbst.\r\nUm weitere Erkenntnisse in diesem Forschungsgebiet zu erlangen und die zukünftige Behandlung nach Pankreaskopfresektionen zu verbessern, soll die Morbidität mit Hinblick auf verschiedene Aspekte untersucht werden. Im Vordergrund dieser Studie soll der Einfluss des Gallengangmikrobioms, einer PBD sowie einer verlängerten Antibiotikaprophylaxe auf die Morbidität der Patienten stehen."
+      },
+      {
+        "idLocale": {
+          "locale": "en"
+        },
+        "acronym": null,
+        "title": "The effects of bile microbioma, biliary stenting and antibiotic therapy on postoperative morbidity in pancreatic head resections - A single-center, retrospective analysis",
+        "summary": null,
+        "scientificSummary": "Pancreatic head resections are associated with elevated postoperative morbidity. Therefore, it is important to identify adjustable factors that influence post-pancreatectomy morbidity.\r\nPatients presenting with preoperative cholestasis may receive preoperative biliary drainage (PBD). The use of PBD is controversial. One point of critique is that bile, which is naturally sterile, can be contaminated with bacteria. Bacteriobilia is associated with an increased risk of postoperative complications. This leads to the question of how the perioperative management of these patients can be optimized. One potential approach is antibiotic therapy.\r\nGerman guideline (Arbeitsgemeinschaft der Wissenschaftlichen Medizinischen Fachgesellschaften e.V.; AWMF) recommends perioperative antibiotic prophylaxis(PAP) for pancreatic surgery to reduce the risk of surgical site infections and following complications. Standard PAP is a single dose of an antibiotic administered 30-60 minutes before skin incision. Over the past few years, studies have investigated potential benefits of prolonged antibiotic prophylaxis. However, practical clinical consequences and management for antimicrobial prophylaxis are not standardized.\r\nThe aim of this analysis is to explore whether the presence of bacteria in bile, the presence of a bile duct stent or antibiotic prophylaxis influence the postoperative morbidity after pancreatic head resections."
+      }
+    ],
+    "observationalGroups": [
+      {
+        "idArm": {
+          "arm": 1,
+          "locale": "de"
+        },
+        "comment": "Retrospektive Analyse aller Patienten und Patientinnen, die sich zwischen 2016 und 2024 einer Pankreaskopfresektion am Universitätsklinikum Köln unterzogen haben"
+      },
+      {
+        "idArm": {
+          "arm": 1,
+          "locale": "en"
+        },
+        "comment": "retrospective analysis of all patients who underwent a pancreatic head resection at the university hospital of Cologne between 2016 and 2024"
+      }
+    ],
+    "trialContacts": [
+      {
+        "idContactIdType": {
+          "type": "PRIMARY_SPONSOR"
+        },
+        "otherType": null,
+        "contact": {
+          "streetAndNo": "Kerpener Str. 62",
+          "city": "Köln",
+          "zip": "50937",
+          "country": "DE",
+          "email": null,
+          "fax": null,
+          "firstName": null,
+          "lastName": null,
+          "phone": null,
+          "title": null,
+          "url": null,
+          "affiliation": "Klinik und Poliklinik für Allgemein-, Viszeral-,  Thorax- und Transplantationschirurgie Universitätsklinikum Köln"
+        }
+      },
+      {
+        "idContactIdType": {
+          "type": "PRINCIPAL_COORDINATING_INVESTIGATOR"
+        },
+        "otherType": null,
+        "contact": {
+          "streetAndNo": "Kerpener Str. 62",
+          "city": "Köln",
+          "zip": "50937",
+          "country": "DE",
+          "email": "Redacted",
+          "fax": null,
+          "firstName": "Redacted",
+          "lastName": "Redacted",
+          "phone": "Redacted",
+          "title": "Redacted",
+          "url": null,
+          "affiliation": "Klinik und Poliklinik für Allgemein-, Viszeral-, Thorax- und Transplantationschirurgie Universitätsklinikum Köln"
+        }
+      },
+      {
+        "idContactIdType": {
+          "type": "PUBLIC_QUERIES"
+        },
+        "otherType": null,
+        "contact": {
+          "streetAndNo": "Kerpener Str. 62",
+          "city": "Köln",
+          "zip": "50937",
+          "country": "DE",
+          "email": "Redacted",
+          "fax": null,
+          "firstName": "Redacted",
+          "lastName": "Redacted",
+          "phone": "Redacted",
+          "title": "Redacted",
+          "url": null,
+          "affiliation": "Klinik und Poliklinik für Allgemein-, Viszeral-, Thorax- und Transplantationschirurgie Universitätsklinikum Köln"
+        }
+      },
+      {
+        "idContactIdType": {
+          "type": "SCIENTIFIC_QUERIES"
+        },
+        "otherType": null,
+        "contact": {
+          "streetAndNo": "Kerpener Str. 62",
+          "city": "Köln",
+          "zip": "50937",
+          "country": "DE",
+          "email": "Redacted",
+          "fax": null,
+          "firstName": "Redacted",
+          "lastName": "Redacted",
+          "phone": "Redacted",
+          "title": "Redacted",
+          "url": null,
+          "affiliation": "Klinik und Poliklinik für Allgemein-, Viszeral-, Thorax- und Transplantationschirurgie Universitätsklinikum Köln"
+        }
+      }
+    ],
+    "materialSupports": [
+      {
+        "contact": {
+          "streetAndNo": null,
+          "city": "Köln",
+          "zip": "50937",
+          "country": "DE",
+          "email": null,
+          "fax": null,
+          "firstName": null,
+          "lastName": null,
+          "phone": null,
+          "title": null,
+          "url": null,
+          "affiliation": "Klinik und Poliklinik für Allgemein-, Viszeral-,  Thorax- und Transplantationschirurgie Universitätsklinikum Köln"
+        },
+        "type": "INSTITUTIONAL"
+      }
+    ],
+    "studyCharacteristic": {
+      "type": "NON_INTERVENTIONAL",
+      "allocation": null,
+      "assignment": null,
+      "blindingType": null,
+      "blindingWhoList": [],
+      "controlTypes": [],
+      "phase": null,
+      "purpose": "TREATMENT",
+      "characteristicDescriptions": [
+        {
+          "idLocale": {
+            "locale": "de"
+          },
+          "primaryOutcome": "Auswertung des Auftretens von Komplikationen nach Pankreaskopfresektionen, Erhebung und Auswertung erfolgt retrospektiv",
+          "secondaryOutcome": "Untersuchung der Assoziation zwischen der postoperativen Morbidität und folgenden Punkten: Vorliegen eines Gallengangsstents, Gallengangsmikrobiom und der verabreichten Antibiotika",
+          "typeOfHiddenAllocation": null,
+          "typeOfSequenceGeneration": null
+        },
+        {
+          "idLocale": {
+            "locale": "en"
+          },
+          "primaryOutcome": "Analysis of complications following a pancreatic head resection. Data will be collected and analyzed retrospectively",
+          "secondaryOutcome": "Our secondary outcome is to evaluate associations between bile microbiome, bile duct stents, administered antibiotics and postoperative morbidity",
+          "typeOfHiddenAllocation": null,
+          "typeOfSequenceGeneration": null
+        }
+      ],
+      "timing": "RETROSPECTIVE",
+      "duration": null
+    },
+    "trialResults": {
+      "ipdSharingPlan": false,
+      "trialResultsDescriptions": [
+        {
+          "idLocale": {
+            "locale": "de"
+          },
+          "ipdSharingPlanDescription": "aktuell  ist keine Weitergabe der Daten geplant",
+          "briefSummaryOfResultsDescription": null
+        },
+        {
+          "idLocale": {
+            "locale": "en"
+          },
+          "ipdSharingPlanDescription": null,
+          "briefSummaryOfResultsDescription": null
+        }
+      ],
+      "plannedPublication": null,
+      "firstPublication": null,
+      "firstResultPublication": null,
+      "publications": [],
+      "relatedDrksTrials": []
+    },
+    "secondaryIds": {
+      "otherPrimaryRegisterId": null,
+      "otherPrimaryRegisterName": null,
+      "universalTrialNumber": null,
+      "eudraCtNumber": null,
+      "eudamedNumber": null,
+      "noOtherIdentificationNumbersAvailable": true
+    },
+    "otherSecondaryIds": [],
+    "studiedHealthConditions": [
+      {
+        "type": "MAIN",
+        "catalog": "FREETEXT",
+        "code": null,
+        "studiedHealthConditionDescriptions": [
+          {
+            "idLocale": {
+              "locale": "de"
+            },
+            "comment": "Komplikationen/ postoperative Morbidität nach Pankreaskopfresektionen"
+          },
+          {
+            "idLocale": {
+              "locale": "en"
+            },
+            "comment": "complications/ postoperative morbidity after pancreatic head resections"
+          }
+        ]
+      }
+    ],
+    "recruitment": {
+      "institutes": [
+        {
+          "type": "UNI_MEDICAL_CENTER",
+          "name": "Klinik und Poliklinik für Allgemein-, Viszeral-, Thorax- und Transplantationschirurgie",
+          "city": "Köln"
+        }
+      ],
+      "countries": [
+        {
+          "idCountry": {
+            "code": "DE"
+          }
+        }
+      ],
+      "centricType": "MONOCENTRIC",
+      "gender": "ALL",
+      "minimumAge": {
+        "amount": 18,
+        "unit": "YEARS"
+      },
+      "maximumAge": {
+        "amount": null,
+        "unit": "NO_MAX_AGE"
+      },
+      "totalParticipants": 445,
+      "plannedParticipants": 445,
+      "status": "COMPLETE_FOLLOW_UP_COMPLETE",
+      "recruitmentDescriptions": [
+        {
+          "idLocale": {
+            "locale": "de"
+          },
+          "reasonDescription": null,
+          "exclusionCriteria": "unvollständige klinische Daten",
+          "inclusionCriteria": "Patienten die sich im Beobachtungszeitraum (2016-2024) einer Pankreaskopfresektion unterzogen haben"
+        },
+        {
+          "idLocale": {
+            "locale": "en"
+          },
+          "reasonDescription": null,
+          "exclusionCriteria": "incomplete clinical data",
+          "inclusionCriteria": "pancreatic head resection between 2016 and 2024"
+        }
+      ],
+      "scheduledStartDate": null,
+      "scheduledCompletionDate": null,
+      "actualStartDate": "2026-08-13",
+      "actualCompletionDate": "2026-10-15",
+      "healthyVolunteers": false
+    },
+    "ethicsCommittee": {
+      "applicationDate": "2026-08-03",
+      "number": "26-1338-Antrag-Retro",
+      "ethicVotes": [
+        {
+          "dateOfVote": "2026-08-13",
+          "vote": "APPROVED",
+          "type": "ETHICS_COMMITTEE",
+          "contact": {
+            "streetAndNo": "Gleueler Str. 269",
+            "city": "Köln",
+            "zip": "50935",
+            "country": "DE",
+            "email": "Redacted",
+            "fax": null,
+            "firstName": null,
+            "lastName": null,
+            "phone": "Redacted",
+            "title": null,
+            "url": "medfak.uni-koeln.de/forschung/forschungsfoerderung/klinische-forschung/ethikkommission",
+            "affiliation": "Ethikkommission der Medizinischen Fakultät der Universität zu Köln"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "drksId": "DRKS00040000",
+    "trialStatus": "REGISTERED",
+    "registrationDrks": "2025-06-01",
+    "registrationType": null,
+    "lastUpdate": "2025-06-02",
+    "trialDescriptions": [
+      {
+        "idLocale": {
+          "locale": "de"
+        },
+        "acronym": null,
+        "title": "Nur ein deutscher Titel",
+        "summary": null,
+        "scientificSummary": null
+      }
+    ],
+    "observationalGroups": null,
+    "trialContacts": null,
+    "studyCharacteristic": null,
+    "secondaryIds": null,
+    "otherSecondaryIds": null,
+    "studiedHealthConditions": null,
+    "recruitment": null,
+    "trialResults": null
+  }
+]

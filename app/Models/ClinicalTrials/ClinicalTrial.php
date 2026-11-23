@@ -65,6 +65,10 @@ class ClinicalTrial extends Model
         'last_update_post_date',
         'has_results',
         'raw_json',
+        'raw_format',
+        'raw_document',
+        'raw_url',
+        'content_hash',
         'acronym',
         'responsible_party_type',
         'is_fda_regulated_drug',
@@ -74,7 +78,7 @@ class ClinicalTrial extends Model
         'tracked_facts',
     ];
 
-    protected $hidden = ['raw_json', 'tracked_facts'];
+    protected $hidden = ['raw_json', 'raw_document', 'tracked_facts', 'content_hash'];
 
     #[\Override]
     protected function casts(): array

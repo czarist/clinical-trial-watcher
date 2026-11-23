@@ -1,0 +1,41 @@
+{
+ "showWarning": false,
+ "pagination": {
+  "totalRecords": 3,
+  "currentPage": 2,
+  "totalPages": 2,
+  "nextPage": false,
+  "prevPage": true
+ },
+ "data": [
+  {
+   "ctNumber": "2025-520887-17-00",
+   "ctStatus": 2,
+   "ctTitle": "Dexamethasone for the treatment of traumatic brain injured patients with brain contusions and pericontusional edema: Study protocol for a prospective, randomized and double blind trial",
+   "shortTitle": "",
+   "conditions": "Traumatic brain injury",
+   "trialCountries": [
+    "Spain:2"
+   ],
+   "decisionDateOverall": "26/03/2026",
+   "decisionDate": "ES: 26/03/2026",
+   "therapeuticAreas": [],
+   "sponsor": "Redacted sponsor",
+   "sponsorType": "Pharmaceutical company",
+   "trialPhase": "Therapeutic use (Phase IV)",
+   "endPoint": "",
+   "product": "",
+   "ageRangeSecondary": [
+    ""
+   ],
+   "ageGroup": "18-64 years",
+   "gender": "Female, Male",
+   "trialRegion": 1,
+   "totalNumberEnrolled": "1",
+   "primaryEndPoint": "",
+   "resultsFirstReceived": "No",
+   "lastUpdated": "26/03/2026",
+   "lastPublicationUpdate": "27/03/2026"
+  }
+ ]
+}

@@ -46,9 +46,35 @@
 - **变更会连同变更前后的值一起记录。** 新研究被记录为新增，并成为基线。在后续导入中，会比较总体招募状态、研究机构（新增、移除或机构状态变化）、开始和完成日期（保留原始精度：只有月份的日期仍然只到月份）以及已发布的结果，并以结构化详情保存。研究机构列表按机构名称和地点比较，因此注册库中列出顺序的变化不算变更。每项变更都有稳定的指纹，因此重试或重复的导入不会将其记录或通知两次。
 - **不完整的日期会被规范化**（`2024` → `2024-01-01`，`2024-06` → `2024-06-01`），完整的研究数据保存在 `raw_json` 中。
 
+### 其他注册库
+
+另有十二个注册库可通过 `php artisan clinicaltrials:fetch --source=<key>` 导入。只有 ClinicalTrials.gov 按每日计划运行。
+
+| 键 | 注册库 | 读取方式 | 增量 | 商业使用 |
+|---|---|---|---|---|
+| `ctis` | CTIS（欧盟/欧洲经济区） | 门户 JSON API | 是（最后更新） | 是，需注明 EMA |
+| `isrctn` | ISRCTN | XML API | 是（最后编辑） | 是（CC BY / CC0） |
+| `euctr` | EU Clinical Trials Register | 纯文本导出 | 仅新试验 | 是，需注明该注册库 |
+| `drks` | DRKS（德国） | JSON 转储；仅 CC BY 4.0 记录（2025 年起注册或更新） | 是（最后更新） | 是（CC BY 4.0） |
+| `reec` | REEC（西班牙） | REST API | 最近 90 天的注册 | 是，需注明 AEMPS |
+| `rebec` | ReBEC（巴西） | 网页 | 是（最后批准） | 未确认 |
+| `renis` | RENIS（阿根廷） | XLSX 文件 | 否 | 是（CC BY 4.0） |
+| `health_canada` | Health Canada | JSON API | 否 | 是（OGL Canada） |
+| `tfda` | TFDA（台湾） | CSV 的 ZIP 包 | 否 | 是（Open Government Data License） |
+| `ppb_kenya` | Pharmacy and Poisons Board（肯尼亚） | 网页 | 是（批准日期） | 未确认 |
+| `eda_egypt` | Egyptian Drug Authority | PDF | 否 | 未确认 |
+| `moz_ukraine` | 乌克兰卫生部命令 | PDF 附件 | 最新命令 | 未确认 |
+
+- **每个导入器都通过了法律审查**，审查记录在其源类和 [docs/registries-evaluation.md](docs/registries-evaluation.md)（第 7 节）中；该文档还列出了暂时无法导入的注册库及各自所需条件（WHO ICTRP、UMIN-CTR、CRIS、ANZCTR、HRA 等）。
+- **条款未确认允许商业使用的注册库，其记录会附带署名免费显示，但不纳入 AI 摘要**，直到该注册库以书面形式确认允许再利用。
+- **礼貌访问。** 请求带有包含联系地址的 user agent（`REGISTRY_CONTACT`，下载和网页必填），下载和网页遵守 robots.txt 及其 Crawl-delay，每个注册库同一时间只发一个请求且间隔至少 `REGISTRY_MIN_INTERVAL_MS`，重试次数有上限。遇到登录、验证码或 HTTP 401/403 时会停止运行：请向该注册库申请许可或导出文件。绝不绕过任何限制。
+- **存储页面。** 每个响应正文都会连同其 `ETag`/`Last-Modified` 一起存储（`storage/app/registry-raw/`），因此未变化的页面不会重复下载；修复解析器后，`clinicaltrials:fetch --source=<key> --from-cache` 会重新解析已存储的页面（传入与被重复的运行相同的 `--since` 或 `--full`）。
+- **按发布原样保存的记录**（XML、CSV 行、网页、PDF 文本）随每项研究保存，规范化内容未变化的研究不会被重写。
+- **版面变化。** 通过下载或网页读取的注册库，若完整运行解析出的记录远少于上次，或任何运行中已填写字段的比例骤降，该运行会被记录为 `partial` 并注明原因。导入绝不会删除研究。
+
 ### 重复注册
 
-导入功能支持多个注册库（`config/registries.php`；目前只导入 ClinicalTrials.gov，其他注册库已列入路线图）。每条记录都保存其所属注册库（`source`）及其在该注册库中的标识符（`source_id`），该标识符在每个注册库内唯一，因此再次导入同一条记录会更新它。
+每条记录都保存其所属注册库（`source`）及其在该注册库中的标识符（`source_id`），该标识符在每个注册库内唯一，因此再次导入同一条记录会更新它。注册库列在 `config/registries.php` 中。
 
 - **多次注册的研究只显示一次。** 每条记录的注册标识符（自身的标识符以及它引用的标识符，例如 ClinicalTrials.gov 次要 ID 中的 ISRCTN 或 EudraCT 编号）会先规范化（`ISRCTN 12345678` 与 `isrctn12345678` 视为相同）再进行比较。共享某个标识符的记录会被关联并归为一组：显示 `config/registries.php` 中排在最前的注册库的记录，其他记录作为它的其他注册保留。申办方方案编号、资助编号和标题绝不会用于合并研究。
 - **存疑的匹配由人工判断。** 同一注册库中共享某个标识符的两条记录，或会包含同一注册库两条记录的分组，不会被合并：它们的关联会被标记为 `conflict`。运维人员可在 `GET /api/admin/trial-links` 列出关联并确认或拒绝；后续导入会保留该决定。共享标识符消失的关联会被删除，分组会重新计算。
@@ -266,7 +292,7 @@ Web app: Laravel serves resources/views/app.blade.php → Vue 3 + Vue Router + P
 ```
 
 - `app/Services/ClinicalTrials/Import/` 包含导入逻辑。每个注册库都是一个 `RegistrySource`（`app/Services/Registries/`），带有一个 `StudyRegistryClient` 和一个 `StudyPayloadMapper`；`clinicaltrials:fetch --source=<key>` 用于选择注册库（默认 `clinicaltrials_gov`），每个注册库都有各自的增量游标。映射器是只依赖数据内容的纯函数，同步器负责持久化。
-- `app/Services/Registries/` 包含注册库列表（`SourceRegistry`）、标识符规范化（`IdentifierParser`）和去重（`DuplicateLinker`，在每项研究的事务中运行）。
+- `app/Services/Registries/` 包含注册库列表（`SourceRegistry`）、标识符规范化（`IdentifierParser`）和去重（`DuplicateLinker`，在每项研究的事务中运行）。`Fetching/RegistryFetcher` 是导入器访问注册库的唯一途径；`Parsing/` 包含 HTML、CSV、XLSX、PDF 文本和固定宽度表格的读取器；`Sources/<Registry>/` 包含各个导入器（附带法律审查的源类、客户端、映射器）。
 - `app/Services/ClinicalTrials/Search/` 由在 `AppServiceProvider` 中注册的小型 `TrialFilter` 类组合构建搜索。提醒复用相同的条件和筛选器。
 - `app/Services/ClinicalTrials/Changes/` 包含研究的跟踪事实，以及负责比较这些事实的纯函数式 `ChangeDetector`。
 - `app/Services/Alerts/` 负责执行已保存搜索的数量上限、匹配导入结果并发送邮件。`app/Services/Billing/` 包含套餐规则和 `Entitlements`；通过 `SubscriptionGateway` 接口访问 Stripe。`app/Services/Teams/` 管理团队和邀请。
@@ -300,8 +326,9 @@ app/
   Models/                User, Role, Permission, Plan, Subscription, Alert, AlertMatch, ImportRun,
                          Team, TeamMember, TeamInvitation, Digest, DigestItem, DigestDelivery, ChangeSummary
   Models/ClinicalTrials/ ClinicalTrial, its related lists and ClinicalTrialChange
-  Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
-config/                  clinicaltrials.php, billing.php, ai.php, auth.php, jwt.php
+  Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Registries/{Fetching,Parsing,Sources,...},
+                         Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
+config/                  clinicaltrials.php, registries.php, billing.php, ai.php, auth.php, jwt.php
 lang/                    API, email and digest text per language (en, pt_BR, es, zh_CN, zh_TW, ja, ko)
 database/                migrations/, factories/, seeders/
 docs/                    logo, registries evaluation
@@ -312,7 +339,7 @@ tests/                   Feature/, Unit/, Fixtures/
 
 ## 数据来源
 
-研究数据来自 [ClinicalTrials.gov](https://clinicaltrials.gov/)，由美国国家医学图书馆（U.S. National Library of Medicine）运营。这些记录描述的是已注册的研究，不构成医疗建议。在依赖任何研究细节之前，请先核对官方记录。[docs/registries-evaluation.md](docs/registries-evaluation.md) 评估了其他注册库（WHO ICTRP、EU CTR/CTIS 和 ReBEC）。
+研究数据来自 [ClinicalTrials.gov](https://clinicaltrials.gov/)，由美国国家医学图书馆（U.S. National Library of Medicine）运营。这些记录描述的是已注册的研究，不构成医疗建议。在依赖任何研究细节之前，请先核对官方记录。其他注册库列于[其他注册库](#其他注册库)；每个注册库的数据都会附带其署名显示。[docs/registries-evaluation.md](docs/registries-evaluation.md) 记录了所调研的每个注册库的法律审查。
 
 ## 许可证
 

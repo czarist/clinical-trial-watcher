@@ -1,0 +1,1726 @@
+{
+ "ctNumber": "2023-505807-21-00",
+ "ctStatus": "Authorised",
+ "startDateEU": "2021-11-16",
+ "decisionDate": "2024-11-07T11:50:47.985",
+ "publishDate": "2026-09-02T03:32:06.583514473",
+ "ctPublicStatusCode": 5,
+ "authorizedApplication": {
+  "authorizedPartI": {
+   "id": 137159,
+   "rowSubjectCount": 324,
+   "rowCountriesInfo": [
+    {
+     "eutctId": 100000000557,
+     "name": "United States",
+     "isoNumber": 840,
+     "isoAlpha2Code": "US",
+     "isoAlpha3Code": "USA",
+     "current": true
+    },
+    {
+     "eutctId": 100000000346,
+     "name": "Brazil",
+     "isoNumber": 76,
+     "isoAlpha2Code": "BR",
+     "isoAlpha3Code": "BRA",
+     "current": true
+    },
+    {
+     "eutctId": 100000000549,
+     "name": "Turkey",
+     "isoNumber": 792,
+     "isoAlpha2Code": "TR",
+     "isoAlpha3Code": "TUR",
+     "current": true
+    },
+    {
+     "eutctId": 100000000506,
+     "name": "Russian Federation",
+     "isoNumber": 643,
+     "isoAlpha2Code": "RU",
+     "isoAlpha3Code": "RUS",
+     "current": true
+    },
+    {
+     "eutctId": 100000000556,
+     "name": "United Kingdom",
+     "isoNumber": 826,
+     "isoAlpha2Code": "GB",
+     "isoAlpha3Code": "GBR",
+     "current": true
+    },
+    {
+     "eutctId": 100000000329,
+     "name": "Australia",
+     "isoNumber": 36,
+     "isoAlpha2Code": "AU",
+     "isoAlpha3Code": "AUS",
+     "current": true
+    },
+    {
+     "eutctId": 100000000432,
+     "name": "Japan",
+     "isoNumber": 392,
+     "isoAlpha2Code": "JP",
+     "isoAlpha3Code": "JPN",
+     "current": true
+    },
+    {
+     "eutctId": 100000000362,
+     "name": "China",
+     "isoNumber": 156,
+     "isoAlpha2Code": "CN",
+     "isoAlpha3Code": "CHN",
+     "current": true
+    },
+    {
+     "eutctId": 100000000538,
+     "name": "Taiwan",
+     "isoNumber": 158,
+     "isoAlpha2Code": "TW",
+     "isoAlpha3Code": "TWN",
+     "current": true
+    },
+    {
+     "eutctId": 100000000439,
+     "name": "Korea, Republic of",
+     "isoNumber": 410,
+     "isoAlpha2Code": "KR",
+     "isoAlpha3Code": "KOR",
+     "current": true
+    }
+   ],
+   "products": [
+    {
+     "id": 570912,
+     "part1MpRoleTypeCode": "1",
+     "productDictionaryInfo": {
+      "productPk": "10301343",
+      "euMpNumber": "PRD9583109",
+      "prodAuthStatus": 1,
+      "sponsorProductCode": "RO 703-0816/F02-03",
+      "euSubstNumber": "SUB193314",
+      "nameOrg": "ROCHE REGISTRATION GMBH (RRG)",
+      "productSubstances": [
+       {
+        "productPk": "10301343",
+        "substancePk": "309484",
+        "nameOrg": "ROCHE REGISTRATION GMBH (RRG)",
+        "substanceOrigin": "Protein - Other",
+        "actSubstOrigin": "Protein - Other",
+        "substanceEvCode": "SUB193314"
+       }
+      ],
+      "activeSubstanceOtherDescriptiveName": ""
+     },
+     "isPaediatricFormulation": false,
+     "mpRoleInTrial": "1",
+     "orphanDrugEdit": false,
+     "evCode": "PRD9583109",
+     "sponsorProductCodeEdit": "RO 703-0816/F02-03",
+     "devices": [],
+     "characteristics": [
+      "7"
+     ],
+     "allSubstancesChemicals": false
+    },
+    {
+     "id": 570916,
+     "part1MpRoleTypeCode": "1",
+     "productDictionaryInfo": {
+      "productPk": "10738688",
+      "euMpNumber": "PRD9264283",
+      "marketingAuthNumber": "EU/1/07/391/002",
+      "prodAuthStatus": 2,
+      "euSubstNumber": "SUB25389",
+      "authorisationCountryCode": "EU",
+      "mrpNumber": "EMEA/H/C/000717",
+      "nameOrg": "BRISTOL-MYERS SQUIBB PHARMA EEIG",
+      "productSubstances": [
+       {
+        "productPk": "10738688",
+        "substancePk": "336016",
+        "nameOrg": "BRISTOL-MYERS SQUIBB PHARMA EEIG",
+        "substanceOrigin": "Chemical",
+        "actSubstOrigin": "Chemical",
+        "substanceEvCode": "SUB25389"
+       }
+      ],
+      "activeSubstanceOtherDescriptiveName": "lenalidomide"
+     },
+     "isPaediatricFormulation": false,
+     "mpRoleInTrial": "1",
+     "orphanDrugEdit": false,
+     "productChangedRelationMA": true,
+     "productChangeDescription": "Re-packaged and relabeled for clinical use",
+     "otherMedicinalProduct": "Chemical",
+     "evCode": "PRD9264283",
+     "devices": [],
+     "characteristics": [
+      "11"
+     ],
+     "allSubstancesChemicals": true
+    },
+    {
+     "id": 570917,
+     "part1MpRoleTypeCode": "1",
+     "productDictionaryInfo": {
+      "productPk": "10738690",
+      "euMpNumber": "PRD9264282",
+      "marketingAuthNumber": "EU/1/07/391/003",
+      "prodAuthStatus": 2,
+      "euSubstNumber": "SUB25389",
+      "authorisationCountryCode": "EU",
+      "mrpNumber": "EMEA/H/C/000717",
+      "nameOrg": "BRISTOL-MYERS SQUIBB PHARMA EEIG",
+      "productSubstances": [
+       {
+        "productPk": "10738690",
+        "substancePk": "336016",
+        "nameOrg": "BRISTOL-MYERS SQUIBB PHARMA EEIG",
+        "substanceOrigin": "Chemical",
+        "actSubstOrigin": "Chemical",
+        "substanceEvCode": "SUB25389"
+       }
+      ],
+      "activeSubstanceOtherDescriptiveName": "lenalidomide"
+     },
+     "isPaediatricFormulation": false,
+     "mpRoleInTrial": "1",
+     "orphanDrugEdit": false,
+     "productChangedRelationMA": true,
+     "productChangeDescription": "Re-packaged and relabeled for clinical use",
+     "otherMedicinalProduct": "Chemical",
+     "evCode": "PRD9264282",
+     "devices": [],
+     "characteristics": [
+      "11"
+     ],
+     "allSubstancesChemicals": true
+    },
+    {
+     "id": 570914,
+     "part1MpRoleTypeCode": "1",
+     "productDictionaryInfo": {
+      "productPk": "9946016",
+      "euMpNumber": "PRD2154622",
+      "marketingAuthNumber": "EU/1/08/492/003",
+      "prodAuthStatus": 2,
+      "euSubstNumber": "SUB20313",
+      "authorisationCountryCode": "IS",
+      "mrpNumber": "EMEA/H/C/000955",
+      "nameOrg": "ROCHE REGISTRATION GMBH",
+      "productSubstances": [
+       {
+        "productPk": "9946016",
+        "substancePk": "287359",
+        "nameOrg": "ROCHE REGISTRATION GMBH",
+        "substanceOrigin": "Protein - Other",
+        "actSubstOrigin": "Protein - Other",
+        "substanceEvCode": "SUB20313"
+       }
+      ],
+      "activeSubstanceOtherDescriptiveName": "tocilizumab"
+     },
+     "isPaediatricFormulation": false,
+     "mpRoleInTrial": "1",
+     "orphanDrugEdit": false,
+     "productChangedRelationMA": true,
+     "productChangeDescription": "Re-packaged and relabeled for clinical use",
+     "evCode": "PRD2154622",
+     "devices": [],
+     "characteristics": [
+      "7"
+     ],
+     "allSubstancesChemicals": false
+    },
+    {
+     "id": 570915,
+     "part1MpRoleTypeCode": "1",
+     "productDictionaryInfo": {
+      "productPk": "10738701",
+      "euMpNumber": "PRD9264267",
+      "marketingAuthNumber": "EU/1/07/391/009",
+      "prodAuthStatus": 2,
+      "euSubstNumber": "SUB25389",
+      "authorisationCountryCode": "EU",
+      "mrpNumber": "EMEA/H/C/000717",
+      "nameOrg": "BRISTOL-MYERS SQUIBB PHARMA EEIG",
+      "productSubstances": [
+       {
+        "productPk": "10738701",
+        "substancePk": "336016",
+        "nameOrg": "BRISTOL-MYERS SQUIBB PHARMA EEIG",
+        "substanceOrigin": "Chemical",
+        "actSubstOrigin": "Chemical",
+        "substanceEvCode": "SUB25389"
+       }
+      ],
+      "activeSubstanceOtherDescriptiveName": "lenalidomide"
+     },
+     "isPaediatricFormulation": false,
+     "mpRoleInTrial": "1",
+     "orphanDrugEdit": false,
+     "productChangedRelationMA": true,
+     "productChangeDescription": "Re-packaged and relabeled for clinical use",
+     "otherMedicinalProduct": "Chemical",
+     "evCode": "PRD9264267",
+     "devices": [],
+     "characteristics": [
+      "11"
+     ],
+     "allSubstancesChemicals": true
+    },
+    {
+     "id": 570913,
+     "part1MpRoleTypeCode": "1",
+     "productDictionaryInfo": {
+      "productPk": "10301342",
+      "euMpNumber": "PRD9583110",
+      "prodAuthStatus": 1,
+      "sponsorProductCode": "RO 703-0816/F02-04",
+      "euSubstNumber": "SUB193314",
+      "nameOrg": "ROCHE REGISTRATION GMBH (RRG)",
+      "productSubstances": [
+       {
+        "productPk": "10301342",
+        "substancePk": "309484",
+        "nameOrg": "ROCHE REGISTRATION GMBH (RRG)",
+        "substanceOrigin": "Protein - Other",
+        "actSubstOrigin": "Protein - Other",
+        "substanceEvCode": "SUB193314"
+       }
+      ],
+      "activeSubstanceOtherDescriptiveName": ""
+     },
+     "isPaediatricFormulation": false,
+     "mpRoleInTrial": "1",
+     "orphanDrugEdit": false,
+     "evCode": "PRD9583110",
+     "sponsorProductCodeEdit": "RO 703-0816/F02-04",
+     "devices": [],
+     "characteristics": [
+      "7"
+     ],
+     "allSubstancesChemicals": false
+    },
+    {
+     "id": 570911,
+     "part1MpRoleTypeCode": "1",
+     "productDictionaryInfo": {
+      "productPk": "10449689",
+      "euMpNumber": "PRD2159307",
+      "marketingAuthNumber": "EU/1/98/067/002",
+      "prodAuthStatus": 2,
+      "euSubstNumber": "SUB12570MIG",
+      "authorisationCountryCode": "NO",
+      "mrpNumber": "EMEA/H/C/000165",
+      "nameOrg": "ROCHE REGISTRATION GMBH",
+      "productSubstances": [
+       {
+        "productPk": "10449689",
+        "substancePk": "286944",
+        "nameOrg": "ROCHE REGISTRATION GMBH",
+        "substanceOrigin": "Protein - Other",
+        "actSubstOrigin": "Protein - Other",
+        "substanceEvCode": "SUB12570MIG"
+       }
+      ],
+      "activeSubstanceOtherDescriptiveName": "rituximab"
+     },
+     "isPaediatricFormulation": false,
+     "mpRoleInTrial": "1",
+     "orphanDrugEdit": false,
+     "productChangedRelationMA": true,
+     "productChangeDescription": "Re-packaged and relabeled for clinical use",
+     "evCode": "PRD2159307",
+     "devices": [],
+     "characteristics": [
+      "7"
+     ],
+     "allSubstancesChemicals": false
+    },
+    {
+     "id": 570918,
+     "part1MpRoleTypeCode": "1",
+     "productDictionaryInfo": {
+      "productPk": "10738684",
+      "euMpNumber": "PRD9264284",
+      "marketingAuthNumber": "EU/1/07/391/001",
+      "prodAuthStatus": 2,
+      "euSubstNumber": "SUB25389",
+      "authorisationCountryCode": "EU",
+      "mrpNumber": "EMEA/H/C/000717",
+      "nameOrg": "BRISTOL-MYERS SQUIBB PHARMA EEIG",
+      "productSubstances": [
+       {
+        "productPk": "10738684",
+        "substancePk": "336016",
+        "nameOrg": "BRISTOL-MYERS SQUIBB PHARMA EEIG",
+        "substanceOrigin": "Chemical",
+        "actSubstOrigin": "Chemical",
+        "substanceEvCode": "SUB25389"
+       }
+      ],
+      "activeSubstanceOtherDescriptiveName": "lenalidomide"
+     },
+     "isPaediatricFormulation": false,
+     "mpRoleInTrial": "1",
+     "orphanDrugEdit": false,
+     "productChangedRelationMA": true,
+     "productChangeDescription": "Re-packaged and relabeled for clinical use",
+     "otherMedicinalProduct": "Chemical",
+     "evCode": "PRD9264284",
+     "devices": [],
+     "characteristics": [
+      "11"
+     ],
+     "allSubstancesChemicals": true
+    }
+   ],
+   "trialDetails": {
+    "clinicalTrialIdentifiers": {
+     "fullTitle": "Phase III Randomized, Open-Label, Multicenter Study Evaluating Efficacy and Safety of Mosunetuzumab in Combination with Lenalidomide in Comparison to Rituximab in Combination with Lenalidomide with a Non-Randomized, Single Arm US Extension of Mosunetuzumab in Combination with Lenalidomide in Patients with Follicular Lymphoma After at Least One Line of Systemic Therapy",
+     "publicTitle": "A Study to Evaluate Efficacy and Safety of Mosunetuzumab in Combination with Lenalidomide in Comparison to Rituximab in Combination with Lenalidomide in Patients with Follicular Lymphoma",
+     "shortTitle": "GO42909",
+     "secondaryIdentifyingNumbers": {
+      "additionalRegistries": []
+     }
+    },
+    "trialInformation": {
+     "trialCategory": {
+      "isLowIntervention": false,
+      "trialPhase": "5",
+      "trialCategory": "2",
+      "justificationForTrialCategory": "This is a Phase III study - is a confirmatory/registrational trial and the development program for the molecule is ongoing",
+      "trialCategoryId": 126615
+     },
+     "medicalCondition": {
+      "partIMedicalConditions": [
+       {
+        "id": 143496,
+        "medicalCondition": "Relapsed/refractory follicular lymphoma",
+        "isConditionRareDisease": false
+       }
+      ],
+      "meddraConditionTerms": [
+       {
+        "termId": 200000018168,
+        "version": "27.0",
+        "level": "PT",
+        "termName": "Follicular lymphoma",
+        "classificationCode": "10085128",
+        "organClass": 100000004864,
+        "active": false
+       }
+      ]
+     },
+     "trialObjective": {
+      "trialScopes": [
+       {
+        "code": "6",
+        "trialScopeId": 416665
+       },
+       {
+        "code": "4",
+        "trialScopeId": 416666
+       },
+       {
+        "code": "13",
+        "otherDescription": "Biomarker, Immunogenicity",
+        "trialScopeId": 416667
+       },
+       {
+        "code": "5",
+        "trialScopeId": 416668
+       }
+      ],
+      "mainObjective": "Arm A and Arm B: To evaluate the efficacy of mosunetuzumab in combination with lenalidomide (M+Len) compared with rituximab in combination with lenalidomide (R+Len) based on progression-free survival as determined by the independent review committee (IRC) Arm C: The primary efficacy objective for the non-randomized single arm extension is to evaluate the efficacy of M + Len based on Objective response rate (ORR) as determined by the independent review committee (IRC)",
+      "secondaryObjectives": [
+       {
+        "id": 489048,
+        "number": 1,
+        "secondaryObjective": "Arm A and Arm B: To evaluate the efficacy of M+Len compared with R+Len based on progression-free survival as determined by the investigator, complete response rate as determined by the IRC and investigator, objective response rate as determined by the IRC and investigator, overall survival, duration of objective response, duration of complete response (CR), time to deterioration in physical functioning and fatigue and time to deterioration in lymphoma symptoms, time to next anti-lymphoma treatment"
+       },
+       {
+        "id": 489049,
+        "number": 2,
+        "secondaryObjective": "Arm A and Arm B: To evaluate the safety and tolerability of M+Len compared with R+Len"
+       },
+       {
+        "id": 489050,
+        "number": 3,
+        "secondaryObjective": "Arm A and Arm B: To characterize the pharmacokinetic (PK) profile of M+Len and R+Len"
+       },
+       {
+        "id": 489051,
+        "number": 4,
+        "secondaryObjective": "Arm A and Arm B: To evaluate the immune response to mosunetuzumab and rituximab"
+       },
+       {
+        "id": 489052,
+        "number": 5,
+        "secondaryObjective": "Arm C: Efficacy objective for the non-randomized single arm extension is to evaluate the efficacy of M + Len"
+       },
+       {
+        "id": 489053,
+        "number": 6,
+        "secondaryObjective": "Arm C: The safety objective for the non-randomized single arm extension is to evaluate the safety of M + Len"
+       },
+       {
+        "id": 489054,
+        "number": 7,
+        "secondaryObjective": "Arm C: To characterize the pharmacokinetic (PK) profile of M+Len"
+       },
+       {
+        "id": 489055,
+        "number": 8,
+        "secondaryObjective": "Arm C: To evaluate the immune response to mosunetuzumab"
+       }
+      ]
+     },
+     "eligibilityCriteria": {
+      "principalInclusionCriteria": [
+       {
+        "id": 932218,
+        "number": 1,
+        "principalInclusionCriteria": "Histologically documented CD20 + follicular lymphoma (FL) (Grades 1-3a)"
+       },
+       {
+        "id": 932219,
+        "number": 2,
+        "principalInclusionCriteria": "Requiring systemic therapy assessed by investigator based on tumor size and/or Groupe d'Etude des Lymphomes Folliculaires (GELF) criteria"
+       },
+       {
+        "id": 932220,
+        "number": 3,
+        "principalInclusionCriteria": "Received at least one prior systemic lymphoma therapy, which included prior immunotherapy or chemoimmunotherapy"
+       },
+       {
+        "id": 932221,
+        "number": 4,
+        "principalInclusionCriteria": "Availability of a representative tumor specimen and the corresponding pathology report at the time of relapse/persistence for confirmation of the diagnosis of FL"
+       },
+       {
+        "id": 932222,
+        "number": 5,
+        "principalInclusionCriteria": "Agreement to comply with all local requirements of the lenalidomide risk minimization plan, which includes the global pregnancy prevention program"
+       },
+       {
+        "id": 932223,
+        "number": 6,
+        "principalInclusionCriteria": "Adequate hematologic and organ function"
+       }
+      ],
+      "principalExclusionCriteria": [
+       {
+        "id": 1593144,
+        "number": 1,
+        "principalExclusionCriteria": "Any history of Grade 3b FL and transformation of indolent disease to diffuse large B-cell lymphoma (DLBCL or transformed FL)"
+       },
+       {
+        "id": 1593145,
+        "number": 2,
+        "principalExclusionCriteria": "Known active bacterial, viral, fungal, or other infection, or any major episode of infection requiring treatment with IV antibiotics within 4 weeks of Day 1 of Cycle 1"
+       },
+       {
+        "id": 1593146,
+        "number": 3,
+        "principalExclusionCriteria": "Documented refractoriness to lenalidomide, defined as no response within 6 months of therapy"
+       },
+       {
+        "id": 1593147,
+        "number": 4,
+        "principalExclusionCriteria": "Positive SARS-CoV-2 test within 7 days prior to enrollment."
+       },
+       {
+        "id": 1593148,
+        "number": 5,
+        "principalExclusionCriteria": "Known or suspected history of central nervous system (CNS) lymphoma or leptomeningeal infiltration, HLH (hemophagocytic lymphohistiocytosis) and progressive multifocal leukoencephalopathy (PML)"
+       },
+       {
+        "id": 1593149,
+        "number": 6,
+        "principalExclusionCriteria": "Evidence of any significant, uncontrolled concomitant disease that could affect compliance with the protocol or interpretation of results, including, but not limited to, significant cardiovascular disease or significant pulmonary disease"
+       }
+      ]
+     },
+     "endPoint": {
+      "primaryEndPoints": [
+       {
+        "id": 1089154,
+        "number": 1,
+        "endPoint": "Arm A and Arm B : 1. Progression-free survival as determined by the IRC with use of the 2014 Lugano Response Criteria or death from any cause in the intent-to-treat (ITT) population",
+        "isPrimary": true
+       },
+       {
+        "id": 1089155,
+        "number": 2,
+        "endPoint": "Arm C : 2. Objective response rate, as defined as the proportion of patients whose best overall response is a PR or a CR during the study, as determined by the IRC",
+        "isPrimary": true
+       }
+      ],
+      "secondaryEndPoints": [
+       {
+        "id": 1089156,
+        "number": 1,
+        "endPoint": "1. Arm A and Arm B: Progression-free survival as determined by the investigator in the ITT population. Arm C: Progression-free survival as determined by the investigator and IRC in the ITT population.",
+        "isPrimary": false
+       },
+       {
+        "id": 1089157,
+        "number": 2,
+        "endPoint": "2. Arm A, Arm B and Arm C: Complete response rate in the ITT population as determined by the IRC and investigator",
+        "isPrimary": false
+       },
+       {
+        "id": 1089158,
+        "number": 3,
+        "endPoint": "3. Arm A, Arm B and Arm C: Objective response rate in the ITT population as determined by the IRC and investigator",
+        "isPrimary": false
+       },
+       {
+        "id": 1089159,
+        "number": 4,
+        "endPoint": "4. Arm A, Arm B and Arm C: Overall survival in the ITT population",
+        "isPrimary": false
+       },
+       {
+        "id": 1089160,
+        "number": 5,
+        "endPoint": "5. Arm A, Arm B and Arm C: Duration of objective response (DOR)",
+        "isPrimary": false
+       },
+       {
+        "id": 1089161,
+        "number": 6,
+        "endPoint": "6. Arm A, Arm B and Arm C: Duration of CR",
+        "isPrimary": false
+       },
+       {
+        "id": 1089162,
+        "number": 7,
+        "endPoint": "7. Arm A, Arm B and Arm C: Time to deterioration in physical functioning as measured by the European Organization for Research and Treatment of Cancer Quality of Life-Core 30 Questionnaire (EORTC QLQ-C30)",
+        "isPrimary": false
+       },
+       {
+        "id": 1089163,
+        "number": 8,
+        "endPoint": "8. Arm A, Arm B and Arm C: Time to deterioration in fatigue, as measured by the EORTC QLQC30",
+        "isPrimary": false
+       },
+       {
+        "id": 1089164,
+        "number": 9,
+        "endPoint": "9. Arm A, Arm B and Arm C: Time to deterioration in lymphoma symptoms, as measured by the Functional Assessment of Cancer Therapy-Lymphoma Subscale (FACT-LymS)",
+        "isPrimary": false
+       },
+       {
+        "id": 1089165,
+        "number": 10,
+        "endPoint": "10. Arm A, Arm B and Arm C : Time to new anti-lymphoma treatment (TTNALT), defined as the time from randomization to the first documented administration of a new anti-lymphoma treatment",
+        "isPrimary": false
+       },
+       {
+        "id": 1089166,
+        "number": 11,
+        "endPoint": "11. Arm A, Arm B and Arm C: Incidence and severity of adverse events, with severity determined according to the NCI CTCAE, v5.0, including cytokine release syndrome (CRS), with severity determined according to the American Society for Transplantation and Cellular Therapy (ASTCT) CRS grading criteria",
+        "isPrimary": false
+       },
+       {
+        "id": 1089167,
+        "number": 12,
+        "endPoint": "12. Arm A, Arm B and Arm C: Change from baseline in targeted vital signs",
+        "isPrimary": false
+       },
+       {
+        "id": 1089168,
+        "number": 13,
+        "endPoint": "13. Arm A, Arm B and Arm C: Change from baseline in targeted clinical laboratory test results",
+        "isPrimary": false
+       },
+       {
+        "id": 1089169,
+        "number": 14,
+        "endPoint": "14. Arm A, Arm B and Arm C: Tolerability, as assessed by dose interruptions, dose reductions, and dose intensity, and study treatment discontinuation because of adverse events",
+        "isPrimary": false
+       },
+       {
+        "id": 1089170,
+        "number": 15,
+        "endPoint": "15. Arm A, Arm B and Arm C: Minimum observed concentration (Cmin) of Mosunetuzumab",
+        "isPrimary": false
+       },
+       {
+        "id": 1089171,
+        "number": 16,
+        "endPoint": "16. Arm A, Arm B and Arm C: Cmin of Lenalidomide",
+        "isPrimary": false
+       },
+       {
+        "id": 1089172,
+        "number": 17,
+        "endPoint": "17. Arm A, Arm B and Arm C: Maximum observed concentration (Cmax) of Mosunetuzumab",
+        "isPrimary": false
+       },
+       {
+        "id": 1089173,
+        "number": 18,
+        "endPoint": "18. Arm A, Arm B and Arm C: Cmax of Lenalidomide",
+        "isPrimary": false
+       },
+       {
+        "id": 1089174,
+        "number": 19,
+        "endPoint": "19. Arm A, Arm B and Arm C: Area under the concentration-time curve (AUC) of Mosunetuzumab",
+        "isPrimary": false
+       },
+       {
+        "id": 1089175,
+        "number": 20,
+        "endPoint": "20. Arm A, Arm B and Arm C: AUC of Lenalidomide",
+        "isPrimary": false
+       },
+       {
+        "id": 1089176,
+        "number": 21,
+        "endPoint": "21. Arm A, Arm B and Arm C: Prevalence of anti-drug antibodies (ADAs) against mosunetuzumab at baseline",
+        "isPrimary": false
+       },
+       {
+        "id": 1089177,
+        "number": 22,
+        "endPoint": "22. Arm A and Arm B: Prevalence of ADAs against rituximab at baseline",
+        "isPrimary": false
+       },
+       {
+        "id": 1089178,
+        "number": 23,
+        "endPoint": "23. Arm A, Arm B and Arm C: Incidence of ADAs against mosunetuzumab during the study",
+        "isPrimary": false
+       },
+       {
+        "id": 1089179,
+        "number": 24,
+        "endPoint": "24. Arm A and Arm B: Incidence of ADAs against rituximab during the study",
+        "isPrimary": false
+       },
+       {
+        "id": 1089180,
+        "number": 25,
+        "endPoint": "25. Arm A and Arm B: Cmin of Rituximab",
+        "isPrimary": false
+       },
+       {
+        "id": 1089181,
+        "number": 26,
+        "endPoint": "26. Arm A and Arm B: Cmax of Rituximab",
+        "isPrimary": false
+       },
+       {
+        "id": 1089182,
+        "number": 27,
+        "endPoint": "27. Arm A and Arm B: AUC of Rituximab",
+        "isPrimary": false
+       }
+      ]
+     },
+     "trialDuration": {
+      "estimatedGlobalEndDate": "2029-12-31",
+      "estimatedEndDate": "2029-04-24",
+      "estimatedRecruitmentStartDate": "2021-11-29"
+     },
+     "sourceOfMonetarySupport": [
+      {
+       "id": 100826,
+       "organisationName": "F. Hoffmann-La Roche Ltd"
+      }
+     ],
+     "populationOfTrialSubjects": {
+      "ageRanges": [
+       {
+        "id": 376872,
+        "ageRangeCategoryCode": "4",
+        "ageRangeCategory": "4"
+       },
+       {
+        "id": 376871,
+        "ageRangeCategoryCode": "3",
+        "ageRangeCategory": "3"
+       }
+      ],
+      "ageRangeSecondaryIds": [
+       {
+        "id": 376874,
+        "ageRangeCategoryCode": "4",
+        "ctAgeRangeCode": "7",
+        "ctAgeRange": "7",
+        "ageRangeCategory": "4"
+       },
+       {
+        "id": 376873,
+        "ageRangeCategoryCode": "4",
+        "ctAgeRangeCode": "8",
+        "ctAgeRange": "8",
+        "ageRangeCategory": "4"
+       }
+      ],
+      "clinicalTrialGroups": [
+       {
+        "code": "2",
+        "name": "Patients"
+       }
+      ],
+      "isFemaleSubjects": true,
+      "isMaleSubjects": true,
+      "isVulnerablePopulationSelected": true
+     },
+     "individualParticipantData": {
+      "planToShareIPD": "3",
+      "planDescription": "N/A"
+     }
+    },
+    "protocolInformation": {},
+    "scientificAdviceAndPip": {
+     "scientificAdvices": [],
+     "paediatricInvestigationPlan": []
+    },
+    "associatedClinicalTrials": [],
+    "references": [],
+    "pubmedCode": [],
+    "pubmedUrl": []
+   },
+   "assessmentOutcome": "acceptable",
+   "therapeuticAreas": [
+    {
+     "code": "4",
+     "name": "Diseases [C] - Neoplasms [C04]"
+    }
+   ],
+   "medicalConditions": [
+    {
+     "id": 143496,
+     "medicalCondition": "Relapsed/refractory follicular lymphoma",
+     "isConditionRareDisease": false
+    }
+   ],
+   "sponsors": [
+    {
+     "id": 156054,
+     "primary": true,
+     "publicContacts": [
+      {
+       "id": 460618,
+       "type": "Public",
+       "functionalName": "Redacted",
+       "functionalEmailAddress": "Redacted",
+       "telephone": "Redacted",
+       "organisation": {
+        "id": 138980,
+        "type": "Pharmaceutical company",
+        "typeCode": "10",
+        "name": "F. Hoffmann-La Roche AG",
+        "commercial": true,
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100001445",
+        "organisationLocationStatus": "Active"
+       }
+      }
+     ],
+     "scientificContacts": [
+      {
+       "id": 460619,
+       "type": "Scientific",
+       "functionalName": "Redacted",
+       "functionalEmailAddress": "Redacted",
+       "telephone": "Redacted",
+       "organisation": {
+        "id": 138980,
+        "type": "Pharmaceutical company",
+        "typeCode": "10",
+        "name": "F. Hoffmann-La Roche AG",
+        "commercial": true,
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100001445",
+        "organisationLocationStatus": "Active"
+       }
+      }
+     ],
+     "thirdParties": [
+      {
+       "id": 710621,
+       "organisationAddress": {
+        "id": 440128,
+        "organisation": {
+         "id": 472382,
+         "type": "Non-Pharmaceutical company",
+         "typeCode": "11",
+         "name": "Yprime LLC",
+         "commercial": true,
+         "isBusinessKeyValidated": true,
+         "businessKey": "ORG-100042888",
+         "organisationLocationStatus": "Active"
+        },
+        "address": {
+         "addressId": 471237,
+         "oneLine": "9 Great Valley Parkway",
+         "addressLine1": "9 Great Valley Parkway",
+         "addressLine2": "",
+         "addressLine3": "",
+         "addressLine4": "",
+         "city": "Malvern",
+         "postcode": "19355-1304",
+         "country": 840,
+         "countryName": "United States"
+        },
+        "phone": "Redacted",
+        "email": "Redacted",
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100042888"
+       },
+       "sponsorDuties": [
+        {
+         "id": 1102499,
+         "code": "15",
+         "value": "ePRO"
+        }
+       ],
+       "phoneNumber": "Redacted",
+       "email": "Redacted"
+      },
+      {
+       "id": 710623,
+       "organisationAddress": {
+        "id": 440117,
+        "organisation": {
+         "id": 472371,
+         "type": "Pharmaceutical company",
+         "typeCode": "10",
+         "name": "IQVIA Limited",
+         "commercial": true,
+         "isBusinessKeyValidated": true,
+         "businessKey": "ORG-100008655",
+         "organisationLocationStatus": "Active"
+        },
+        "address": {
+         "addressId": 471224,
+         "oneLine": "3 Forbury Place, 23 Forbury Road",
+         "addressLine1": "3 Forbury Place",
+         "addressLine2": "23 Forbury Road",
+         "addressLine3": "",
+         "addressLine4": "",
+         "city": "Reading",
+         "postcode": "RG1 3JH",
+         "country": 826,
+         "countryName": "United Kingdom"
+        },
+        "phone": "Redacted",
+        "email": "Redacted",
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100008655"
+       },
+       "sponsorDuties": [
+        {
+         "id": 1102501,
+         "code": "15",
+         "value": "Monitoring"
+        }
+       ],
+       "phoneNumber": "Redacted",
+       "email": "Redacted"
+      },
+      {
+       "id": 710620,
+       "organisationAddress": {
+        "id": 440103,
+        "organisation": {
+         "id": 472357,
+         "type": "Pharmaceutical company",
+         "typeCode": "10",
+         "name": "Almac Clinical Technologies LLC",
+         "commercial": true,
+         "isBusinessKeyValidated": true,
+         "businessKey": "ORG-100043036",
+         "organisationLocationStatus": "Active"
+        },
+        "address": {
+         "addressId": 471210,
+         "oneLine": "25 Fretz Road",
+         "addressLine1": "25 Fretz Road",
+         "addressLine2": "",
+         "addressLine3": "",
+         "addressLine4": "",
+         "city": "Souderton",
+         "postcode": "18964-2610",
+         "country": 840,
+         "countryName": "United States"
+        },
+        "phone": "Redacted",
+        "email": "Redacted",
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100043036"
+       },
+       "sponsorDuties": [
+        {
+         "id": 1102498,
+         "code": "3"
+        }
+       ],
+       "phoneNumber": "Redacted",
+       "email": "Redacted"
+      },
+      {
+       "id": 710622,
+       "organisationAddress": {
+        "id": 440124,
+        "organisation": {
+         "id": 472378,
+         "type": "Pharmaceutical company",
+         "typeCode": "10",
+         "name": "Pharmaceutical Product Development LLC",
+         "commercial": true,
+         "isBusinessKeyValidated": true,
+         "businessKey": "ORG-100016999",
+         "organisationLocationStatus": "Active"
+        },
+        "address": {
+         "addressId": 471232,
+         "oneLine": "2244 Dabney Road",
+         "addressLine1": "2244 Dabney Road",
+         "addressLine2": "",
+         "addressLine3": "",
+         "addressLine4": "",
+         "city": "Richmond",
+         "postcode": "23230-3323",
+         "country": 840,
+         "countryName": "United States"
+        },
+        "phone": "Redacted",
+        "email": "Redacted",
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100016999"
+       },
+       "sponsorDuties": [
+        {
+         "id": 1102500,
+         "code": "4"
+        }
+       ],
+       "phoneNumber": "Redacted",
+       "email": "Redacted"
+      },
+      {
+       "id": 710618,
+       "organisationAddress": {
+        "id": 440126,
+        "organisation": {
+         "id": 472380,
+         "type": "Pharmaceutical company",
+         "typeCode": "10",
+         "name": "QPS Netherlands B.V.",
+         "commercial": true,
+         "isBusinessKeyValidated": true,
+         "businessKey": "ORG-100009393",
+         "organisationLocationStatus": "Active"
+        },
+        "address": {
+         "addressId": 471234,
+         "oneLine": "Professor Rankestraat 42",
+         "addressLine1": "Professor Rankestraat 42",
+         "addressLine2": "",
+         "addressLine3": "",
+         "addressLine4": "",
+         "city": "Groningen",
+         "postcode": "9713 GG",
+         "country": 2029,
+         "countryName": "Netherlands"
+        },
+        "phone": "Redacted",
+        "email": "Redacted",
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100009393"
+       },
+       "sponsorDuties": [
+        {
+         "id": 1102496,
+         "code": "4"
+        }
+       ],
+       "phoneNumber": "Redacted",
+       "email": "Redacted"
+      },
+      {
+       "id": 710619,
+       "organisationAddress": {
+        "id": 440115,
+        "organisation": {
+         "id": 472369,
+         "type": "Laboratory/Research/Testing facility",
+         "typeCode": "9",
+         "name": "CellCarta",
+         "commercial": true,
+         "isBusinessKeyValidated": true,
+         "businessKey": "ORG-100039881",
+         "organisationLocationStatus": "Active"
+        },
+        "address": {
+         "addressId": 471222,
+         "oneLine": "Sint-Bavostraat 78",
+         "addressLine1": "Sint-Bavostraat 78",
+         "addressLine2": "",
+         "addressLine3": "",
+         "addressLine4": "",
+         "city": "Antwerp",
+         "postcode": "2610",
+         "country": 2002,
+         "countryName": "Belgium"
+        },
+        "phone": "Redacted",
+        "email": "Redacted",
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100039881"
+       },
+       "sponsorDuties": [
+        {
+         "id": 1102497,
+         "code": "4"
+        }
+       ],
+       "phoneNumber": "Redacted",
+       "email": "Redacted"
+      },
+      {
+       "id": 710624,
+       "organisationAddress": {
+        "id": 440107,
+        "organisation": {
+         "id": 472361,
+         "type": "Laboratory/Research/Testing facility",
+         "typeCode": "9",
+         "name": "Bioclinica Inc.",
+         "commercial": true,
+         "isBusinessKeyValidated": true,
+         "businessKey": "ORG-100033079",
+         "organisationLocationStatus": "Active"
+        },
+        "address": {
+         "addressId": 471214,
+         "oneLine": "211 Carnegie Center",
+         "addressLine1": "211 Carnegie Center",
+         "addressLine2": "",
+         "addressLine3": "",
+         "addressLine4": "",
+         "city": "Princeton",
+         "postcode": "08540-6299",
+         "country": 840,
+         "countryName": "United States"
+        },
+        "phone": "Redacted",
+        "email": "Redacted",
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100033079"
+       },
+       "sponsorDuties": [
+        {
+         "id": 1102502,
+         "code": "15",
+         "value": "Imaging"
+        }
+       ],
+       "phoneNumber": "Redacted",
+       "email": "Redacted"
+      },
+      {
+       "id": 710625,
+       "organisationAddress": {
+        "id": 440120,
+        "organisation": {
+         "id": 472374,
+         "type": "Pharmaceutical company",
+         "typeCode": "10",
+         "name": "Labcorp Central Laboratory Services SARL",
+         "commercial": true,
+         "isBusinessKeyValidated": true,
+         "businessKey": "ORG-100011524",
+         "organisationLocationStatus": "Active"
+        },
+        "address": {
+         "addressId": 471227,
+         "oneLine": "Rue Moise-Marcinhes 7",
+         "addressLine1": "Rue Moise-Marcinhes 7",
+         "addressLine2": "",
+         "addressLine3": "",
+         "addressLine4": "",
+         "city": "Meyrin",
+         "postcode": "1217",
+         "country": 756,
+         "countryName": "Switzerland"
+        },
+        "phone": "Redacted",
+        "email": "Redacted",
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100011524"
+       },
+       "sponsorDuties": [
+        {
+         "id": 1102503,
+         "code": "4"
+        }
+       ],
+       "phoneNumber": "Redacted",
+       "email": "Redacted"
+      }
+     ],
+     "organisation": {
+      "id": 138980,
+      "type": "Pharmaceutical company",
+      "typeCode": "10",
+      "name": "F. Hoffmann-La Roche AG",
+      "commercial": true,
+      "isBusinessKeyValidated": true,
+      "businessKey": "ORG-100001445",
+      "organisationLocationStatus": "Active"
+     },
+     "addresses": [
+      {
+       "id": 135897,
+       "organisation": {
+        "id": 138980,
+        "type": "Pharmaceutical company",
+        "typeCode": "10",
+        "name": "F. Hoffmann-La Roche AG",
+        "commercial": true,
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100001445",
+        "organisationLocationStatus": "Active"
+       },
+       "address": {
+        "addressId": 143259,
+        "oneLine": "Grenzacherstrasse 124",
+        "addressLine1": "Grenzacherstrasse 124",
+        "addressLine2": "",
+        "addressLine3": "",
+        "addressLine4": "",
+        "city": "Basel",
+        "postcode": "4058",
+        "country": 756,
+        "countryName": "Switzerland"
+       },
+       "isBusinessKeyValidated": true,
+       "businessKey": "LOC-100000954"
+      }
+     ],
+     "isCommercial": true,
+     "commercial": "Commercial"
+    }
+   ],
+   "trialCategoryCode": "2",
+   "trialCategoryJustificationComment": "This is a Phase III study - is a confirmatory/registrational trial and the development program for the molecule is ongoing",
+   "partOneTherapeuticAreas": [
+    {
+     "id": 1202710,
+     "therapeuticArea": {
+      "code": "4",
+      "name": "Diseases [C] - Neoplasms [C04]"
+     }
+    }
+   ],
+   "isLowIntervention": false
+  },
+  "authorizedPartsII": [
+   {
+    "id": 178374,
+    "mscId": 9476,
+    "mscInfo": {
+     "id": 9476,
+     "clinicalTrialId": 6146,
+     "countryOrganisationId": 2027,
+     "reportingStatusCode": "Authorised",
+     "fromDate": "2024-10-31",
+     "toDate": "2024-10-31",
+     "isProposedRms": false,
+     "expressDecision": "unwilling",
+     "countryName": "Spain",
+     "organisationInfo": {},
+     "firstDecisionDate": "2024-11-07",
+     "trialStatus": "Authorised",
+     "trialPeriod": [
+      {
+       "id": 46242,
+       "trialStartDate": "2021-11-30",
+       "fromDate": "2024-12-17"
+      },
+      {
+       "id": 46243,
+       "trialStartDate": "2021-11-30",
+       "fromDate": "2024-12-17"
+      },
+      {
+       "id": 46241,
+       "trialStartDate": "2021-11-30",
+       "fromDate": "2024-12-17"
+      }
+     ],
+     "trialRecruitmentPeriod": [
+      {
+       "id": 61323,
+       "recruitmentStartDate": "2021-12-14",
+       "recruitmentEndDate": "2023-05-31",
+       "fromDate": "2024-12-17"
+      },
+      {
+       "id": 61324,
+       "recruitmentStartDate": "2021-12-14",
+       "recruitmentEndDate": "2023-05-31",
+       "fromDate": "2024-12-17"
+      },
+      {
+       "id": 61319,
+       "recruitmentStartDate": "2021-12-14",
+       "fromDate": "2024-12-17"
+      },
+      {
+       "id": 61320,
+       "recruitmentStartDate": "2021-12-14",
+       "fromDate": "2024-12-17"
+      }
+     ],
+     "hasRecruitmentStarted": true,
+     "activeTrialPeriod": {
+      "id": 63549,
+      "trialStartDate": "2021-11-30",
+      "fromDate": "2024-12-17"
+     },
+     "activeTrialRecruitmentPeriod": {
+      "recruitmentStartDate": "2021-12-14",
+      "recruitmentEndDate": "2023-05-31"
+     },
+     "isWillingAtDayThreeView": false,
+     "clinicalTrialStatusHistory": [
+      {
+       "id": 56670,
+       "mscId": 9476,
+       "trialStatus": "Under evaluation",
+       "trialStatusDate": "2024-10-14T08:46:32.551"
+      },
+      {
+       "id": 61361,
+       "mscId": 9476,
+       "trialStatus": "Authorised",
+       "trialStatusDate": "2024-11-07T11:50:44.956"
+      }
+     ],
+     "applicationTypeMsc": "1",
+     "mscName": "Spain",
+     "assessmentOutcome": "acceptable",
+     "assessmentOutcomeDate": "2025-03-21",
+     "decision": "authorized",
+     "decisionDate": "2024-11-07"
+    },
+    "decisionDate": "2024-11-07",
+    "recruitmentSubjectCount": 18,
+    "trialSites": [
+     {
+      "id": 1147983,
+      "organisationAddressInfo": {
+       "id": 324107,
+       "organisation": {
+        "id": 353534,
+        "type": "Hospital/Clinic/Other health care facility",
+        "typeCode": "8",
+        "name": "Hospital General Universitario Morales Meseguer",
+        "commercial": false,
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100028583",
+        "organisationLocationStatus": "Active"
+       },
+       "address": {
+        "addressId": 346115,
+        "oneLine": "Avenida Del Marques De Los Velez S/n",
+        "addressLine1": "Avenida Del Marques De Los Velez S/n",
+        "addressLine2": "",
+        "addressLine3": "",
+        "addressLine4": "",
+        "city": "Murcia",
+        "postcode": "30008",
+        "country": 2027,
+        "countryName": "Spain"
+       },
+       "phone": "Redacted",
+       "email": "Redacted",
+       "isBusinessKeyValidated": true,
+       "businessKey": "ORG-100028583"
+      },
+      "personInfo": {
+       "id": 1283611,
+       "firstName": "Redacted",
+       "lastName": "Redacted",
+       "telephone": "Redacted",
+       "email": "Redacted",
+       "title": "1"
+      },
+      "departmentName": "Hematology"
+     },
+     {
+      "id": 1147985,
+      "organisationAddressInfo": {
+       "id": 324110,
+       "organisation": {
+        "id": 353537,
+        "type": "Hospital/Clinic/Other health care facility",
+        "typeCode": "8",
+        "name": "University Hospital Virgen Del Rocio S.L.",
+        "commercial": false,
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100030783",
+        "organisationLocationStatus": "Active"
+       },
+       "address": {
+        "addressId": 346118,
+        "oneLine": "Avenida De Manuel Siurot S/n",
+        "addressLine1": "Avenida De Manuel Siurot S/n",
+        "addressLine2": "",
+        "addressLine3": "",
+        "addressLine4": "",
+        "city": "Sevilla",
+        "postcode": "41013",
+        "country": 2027,
+        "countryName": "Spain"
+       },
+       "phone": "Redacted",
+       "email": "Redacted",
+       "isBusinessKeyValidated": true,
+       "businessKey": "ORG-100030783"
+      },
+      "personInfo": {
+       "id": 1283613,
+       "firstName": "Redacted",
+       "lastName": "Redacted",
+       "telephone": "Redacted",
+       "email": "Redacted",
+       "title": "1"
+      },
+      "departmentName": "Hematology"
+     }
+    ],
+    "applicationStatusCode": "Authorised"
+   },
+   {
+    "id": 178373,
+    "mscId": 9475,
+    "mscInfo": {
+     "id": 9475,
+     "clinicalTrialId": 6146,
+     "countryOrganisationId": 2018,
+     "reportingStatusCode": "Authorised",
+     "fromDate": "2024-10-31",
+     "toDate": "2024-10-31",
+     "isProposedRms": false,
+     "expressDecision": "unwilling",
+     "countryName": "Italy",
+     "organisationInfo": {},
+     "firstDecisionDate": "2024-11-18",
+     "trialStatus": "Authorised",
+     "trialPeriod": [
+      {
+       "id": 43181,
+       "trialStartDate": "2022-01-19",
+       "fromDate": "2024-11-21"
+      },
+      {
+       "id": 43182,
+       "trialStartDate": "2022-01-19",
+       "fromDate": "2024-11-21"
+      }
+     ],
+     "trialRecruitmentPeriod": [
+      {
+       "id": 60429,
+       "recruitmentStartDate": "2022-03-15",
+       "recruitmentEndDate": "2023-05-31",
+       "fromDate": "2024-12-11"
+      },
+      {
+       "id": 60430,
+       "recruitmentStartDate": "2022-03-15",
+       "recruitmentEndDate": "2023-05-31",
+       "fromDate": "2024-12-11"
+      },
+      {
+       "id": 56829,
+       "recruitmentStartDate": "2022-03-15",
+       "fromDate": "2024-11-21"
+      },
+      {
+       "id": 56830,
+       "recruitmentStartDate": "2022-03-15",
+       "fromDate": "2024-11-21"
+      }
+     ],
+     "hasRecruitmentStarted": true,
+     "activeTrialPeriod": {
+      "id": 58705,
+      "trialStartDate": "2022-01-19",
+      "fromDate": "2024-11-21"
+     },
+     "activeTrialRecruitmentPeriod": {
+      "recruitmentStartDate": "2022-03-15",
+      "recruitmentEndDate": "2023-05-31"
+     },
+     "isWillingAtDayThreeView": false,
+     "clinicalTrialStatusHistory": [
+      {
+       "id": 56669,
+       "mscId": 9475,
+       "trialStatus": "Under evaluation",
+       "trialStatusDate": "2024-10-14T08:46:32.534"
+      },
+      {
+       "id": 69694,
+       "mscId": 9475,
+       "trialStatus": "Authorised",
+       "trialStatusDate": "2024-11-18T23:59:59"
+      }
+     ],
+     "applicationTypeMsc": "1",
+     "mscName": "Italy",
+     "assessmentOutcome": "acceptable",
+     "assessmentOutcomeDate": "2025-03-31",
+     "decision": "authorized",
+     "decisionDate": "2024-11-18"
+    },
+    "decisionDate": "2024-11-18",
+    "recruitmentSubjectCount": 20,
+    "trialSites": [
+     {
+      "id": 1147978,
+      "organisationAddressInfo": {
+       "id": 330544,
+       "organisation": {
+        "id": 359998,
+        "type": "Hospital/Clinic/Other health care facility",
+        "typeCode": "8",
+        "name": "Azienda Ospedaliera Ospedali Riuniti Villa Sofia Cervello",
+        "commercial": false,
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100043019",
+        "organisationLocationStatus": "Active"
+       },
+       "address": {
+        "addressId": 353016,
+        "oneLine": "Viale Strasburgo 233",
+        "addressLine1": "Viale Strasburgo 233",
+        "addressLine2": "",
+        "addressLine3": "",
+        "addressLine4": "",
+        "city": "Palermo",
+        "postcode": "90146",
+        "country": 2018,
+        "countryName": "Italy"
+       },
+       "phone": "Redacted",
+       "email": "Redacted",
+       "isBusinessKeyValidated": true,
+       "businessKey": "ORG-100043019"
+      },
+      "personInfo": {
+       "id": 1283606,
+       "firstName": "Redacted",
+       "lastName": "Redacted",
+       "telephone": "Redacted",
+       "email": "Redacted",
+       "title": "2"
+      },
+      "departmentName": "U.O. Ematologia I"
+     },
+     {
+      "id": 1147980,
+      "organisationAddressInfo": {
+       "id": 667404,
+       "organisation": {
+        "id": 705459,
+        "type": "Hospital/Clinic/Other health care facility",
+        "typeCode": "8",
+        "name": "Azienda Unita Sanitaria Locale Della Romagna",
+        "commercial": false,
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100010533",
+        "organisationLocationStatus": "Active"
+       },
+       "address": {
+        "addressId": 726467,
+        "oneLine": "Viale Vincenzo Randi 5",
+        "addressLine1": "Viale Vincenzo Randi 5",
+        "addressLine2": "",
+        "addressLine3": "",
+        "addressLine4": "",
+        "city": "Ravenna",
+        "postcode": "48121",
+        "country": 2018,
+        "countryName": "Italy"
+       },
+       "phone": "Redacted",
+       "email": "Redacted",
+       "isBusinessKeyValidated": true,
+       "businessKey": "ORG-100010533"
+      },
+      "personInfo": {
+       "id": 1283608,
+       "firstName": "Redacted",
+       "lastName": "Redacted",
+       "telephone": "Redacted",
+       "email": "Redacted"
+      },
+      "departmentName": "U.O. di Ematologia di Ravenna"
+     }
+    ],
+    "applicationStatusCode": "Authorised"
+   }
+  ],
+  "trialGlobalEnd": [],
+  "memberStatesConcerned": [
+   {
+    "mscName": "France",
+    "mscId": 9473,
+    "firstDecisionDate": "2024-12-03T14:45:59.208",
+    "lastDecisionDate": "2026-09-01T10:46:18.184",
+    "mscPublicStatusCode": 5
+   },
+   {
+    "mscName": "Italy",
+    "mscId": 9475,
+    "firstDecisionDate": "2024-11-18T00:00:00",
+    "lastDecisionDate": "2026-07-01T13:00:53.761",
+    "mscPublicStatusCode": 5
+   },
+   {
+    "mscName": "Germany",
+    "mscId": 9474,
+    "firstDecisionDate": "2024-11-13T14:02:07.13",
+    "lastDecisionDate": "2026-07-01T12:01:29.959",
+    "mscPublicStatusCode": 5
+   },
+   {
+    "mscName": "Spain",
+    "mscId": 9476,
+    "firstDecisionDate": "2024-11-07T11:50:47.985",
+    "lastDecisionDate": "2026-07-01T15:11:38.54",
+    "mscPublicStatusCode": 5
+   },
+   {
+    "mscName": "Poland",
+    "mscId": 9477,
+    "firstDecisionDate": "2024-11-11T21:53:09.072",
+    "lastDecisionDate": "2026-07-01T08:26:22.698",
+    "mscPublicStatusCode": 5
+   }
+  ],
+  "eudraCt": {
+   "isTransitioned": true,
+   "eudraCtCode": "2020-005239-53"
+  }
+ },
+ "events": {
+  "temporaryHaltList": [],
+  "trialEvents": [
+   {
+    "mscId": 9473,
+    "mscName": "France",
+    "events": [
+     {
+      "notificationType": "START_OF_TRIAL",
+      "date": "2021-11-16"
+     },
+     {
+      "notificationType": "START_OF_RECRUITMENT",
+      "date": "2021-11-22"
+     },
+     {
+      "notificationType": "END_OF_RECRUITMENT",
+      "date": "2023-05-31"
+     }
+    ]
+   },
+   {
+    "mscId": 9474,
+    "mscName": "Germany",
+    "events": [
+     {
+      "notificationType": "START_OF_TRIAL",
+      "date": "2022-02-11"
+     },
+     {
+      "notificationType": "START_OF_RECRUITMENT",
+      "date": "2022-02-16"
+     },
+     {
+      "notificationType": "END_OF_RECRUITMENT",
+      "date": "2023-05-31"
+     }
+    ]
+   },
+   {
+    "mscId": 9475,
+    "mscName": "Italy",
+    "events": [
+     {
+      "notificationType": "START_OF_TRIAL",
+      "date": "2022-01-19"
+     },
+     {
+      "notificationType": "START_OF_RECRUITMENT",
+      "date": "2022-03-15"
+     },
+     {
+      "notificationType": "END_OF_RECRUITMENT",
+      "date": "2023-05-31"
+     }
+    ]
+   },
+   {
+    "mscId": 9476,
+    "mscName": "Spain",
+    "events": [
+     {
+      "notificationType": "START_OF_TRIAL",
+      "date": "2021-11-30"
+     },
+     {
+      "notificationType": "START_OF_RECRUITMENT",
+      "date": "2021-12-14"
+     },
+     {
+      "notificationType": "END_OF_RECRUITMENT",
+      "date": "2023-05-31"
+     }
+    ]
+   },
+   {
+    "mscId": 9477,
+    "mscName": "Poland",
+    "events": [
+     {
+      "notificationType": "START_OF_TRIAL",
+      "date": "2022-01-14"
+     },
+     {
+      "notificationType": "START_OF_RECRUITMENT",
+      "date": "2022-01-18"
+     },
+     {
+      "notificationType": "END_OF_RECRUITMENT",
+      "date": "2023-05-31"
+     }
+    ]
+   }
+  ],
+  "unexpectedEvents": [],
+  "seriousBreaches": [],
+  "urgentSafetyMeasures": []
+ },
+ "results": {},
+ "trialRegion": "Both",
+ "trialRegionCode": 3,
+ "correctiveMeasures": []
+}

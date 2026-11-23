@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * One execution of the ClinicalTrials.gov import, with its counters.
+ * One execution of a registry import, with its counters.
  */
 class ImportRun extends Model
 {
@@ -36,6 +36,7 @@ class ImportRun extends Model
         'studies_updated',
         'studies_unchanged',
         'studies_failed',
+        'field_fill_ratio',
         'error',
         'started_at',
         'finished_at',
@@ -54,6 +55,7 @@ class ImportRun extends Model
             'studies_updated' => 'integer',
             'studies_unchanged' => 'integer',
             'studies_failed' => 'integer',
+            'field_fill_ratio' => 'decimal:4',
         ];
     }
 
@@ -68,6 +70,12 @@ class ImportRun extends Model
     public function scopeSucceeded(Builder $query): void
     {
         $query->where('status', ImportRunStatus::Succeeded);
+    }
+
+    /** Records read in this run, whether they were saved or failed. */
+    public function recordsSeen(): int
+    {
+        return $this->studies_created + $this->studies_updated + $this->studies_unchanged + $this->studies_failed;
     }
 
     /**

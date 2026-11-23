@@ -7,8 +7,11 @@ namespace App\Services\ClinicalTrials\Import;
 use App\Enums\ImportRunStatus;
 use App\Events\ClinicalTrialsImported;
 use App\Exceptions\InvalidStudyPayload;
+use App\Exceptions\RegistryAccessRefused;
 use App\Exceptions\RegistryRequestFailed;
 use App\Models\ImportRun;
+use App\Services\Registries\Fetching\RegistryFetcher;
+use App\Services\Registries\LayoutDriftDetector;
 use App\Services\Registries\RegistrySource;
 use App\Services\Registries\SourceRegistry;
 use Carbon\CarbonImmutable;
@@ -22,6 +25,12 @@ use Psr\Log\LoggerInterface;
  *
  * Remote pages are fetched outside database transactions; each study is persisted in its
  * own transaction, so a failing study does not leave partial relations or stop the run.
+ *
+ * With fromCache the pages are read from their stored copies (RegistryFetcher), so a parser
+ * fix can run again without requests. A refused request (legal review, robots.txt, a block
+ * by the registry) fails the run and is never retried. For registries read by download or
+ * web page, a run that parses far fewer records or fields than the last one is marked
+ * partial (LayoutDriftDetector).
  */
 final readonly class ClinicalTrialImporter
 {
@@ -30,6 +39,8 @@ final readonly class ClinicalTrialImporter
         private ClinicalTrialSynchronizer $synchronizer,
         private Dispatcher $events,
         private LoggerInterface $logger,
+        private RegistryFetcher $fetcher,
+        private LayoutDriftDetector $drift,
     ) {}
 
     public function import(ImportOptions $options): ImportRun
@@ -42,13 +53,18 @@ final readonly class ClinicalTrialImporter
             'started_at' => now(),
         ]);
 
+        $fill = new FieldFill;
+        $this->fetcher->replayFromCache($options->fromCache);
+
         try {
-            $reachedPageLimit = $this->importPages($source, $run, $options);
-            $run->status = $run->studies_failed > 0 || $reachedPageLimit
+            $reachedPageLimit = $this->importPages($source, $run, $options, $fill);
+            $run->field_fill_ratio = $fill->ratio();
+            $drift = $reachedPageLimit ? null : $this->drift->check($source, $run);
+            $run->status = $run->studies_failed > 0 || $reachedPageLimit || $drift !== null
                 ? ImportRunStatus::Partial
                 : ImportRunStatus::Succeeded;
-            $run->error = $reachedPageLimit ? "Stopped after {$run->pages} page(s) because of the page limit." : null;
-        } catch (RegistryRequestFailed $exception) {
+            $run->error = $reachedPageLimit ? "Stopped after {$run->pages} page(s) because of the page limit." : $drift;
+        } catch (RegistryRequestFailed|RegistryAccessRefused $exception) {
             $run->status = ImportRunStatus::Failed;
             $run->error = $exception->getMessage();
         } catch (\Throwable $exception) {
@@ -57,6 +73,7 @@ final readonly class ClinicalTrialImporter
 
             throw $exception;
         } finally {
+            $this->fetcher->replayFromCache(false);
             $run->finished_at = now();
             $run->save();
         }
@@ -75,7 +92,7 @@ final readonly class ClinicalTrialImporter
     /**
      * @return bool true when pages remained but the page limit was reached
      */
-    private function importPages(RegistrySource $source, ImportRun $run, ImportOptions $options): bool
+    private function importPages(RegistrySource $source, ImportRun $run, ImportOptions $options, FieldFill $fill): bool
     {
         $pageToken = null;
 
@@ -84,7 +101,7 @@ final readonly class ClinicalTrialImporter
             $run->pages++;
 
             foreach ($page->studies as $payload) {
-                $this->importStudy($source, $payload, $run);
+                $this->importStudy($source, $payload, $run, $fill);
             }
 
             $run->save();
@@ -98,10 +115,12 @@ final readonly class ClinicalTrialImporter
     /**
      * @param  array<string, mixed>  $payload
      */
-    private function importStudy(RegistrySource $source, array $payload, ImportRun $run): void
+    private function importStudy(RegistrySource $source, array $payload, ImportRun $run, FieldFill $fill): void
     {
         try {
-            $outcome = $this->synchronizer->sync($source->mapper()->map($payload), $run);
+            $study = $source->mapper()->map($payload);
+            $fill->add($study);
+            $outcome = $this->synchronizer->sync($study, $run);
         } catch (InvalidStudyPayload|QueryException $exception) {
             $run->studies_failed++;
             $this->logger->warning('Clinical trial could not be imported', [

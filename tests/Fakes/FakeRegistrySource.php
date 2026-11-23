@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace Tests\Fakes;
 
+use App\Enums\AccessMethod;
 use App\Exceptions\InvalidStudyPayload;
+use App\Exceptions\RegistryAccessRefused;
 use App\Models\ClinicalTrials\ClinicalTrial;
 use App\Services\ClinicalTrials\Import\MappedStudy;
+use App\Services\ClinicalTrials\Import\RawDocument;
 use App\Services\ClinicalTrials\Import\StudyPage;
 use App\Services\ClinicalTrials\Import\StudyPayloadMapper;
 use App\Services\ClinicalTrials\Import\StudyRegistryClient;
 use App\Services\Registries\RegistrySource;
+use App\Services\Registries\SourceAccess;
 use Carbon\CarbonInterface;
 
 /**
@@ -24,6 +28,17 @@ final class FakeRegistrySource implements RegistrySource, StudyPayloadMapper, St
     /** @var list<array<string, mixed>> */
     public static array $payloads = [];
 
+    public static AccessMethod $method = AccessMethod::Api;
+
+    public static bool $allowed = true;
+
+    public static function reset(): void
+    {
+        self::$payloads = [];
+        self::$method = AccessMethod::Api;
+        self::$allowed = true;
+    }
+
     public function key(): string
     {
         return self::KEY;
@@ -32,6 +47,11 @@ final class FakeRegistrySource implements RegistrySource, StudyPayloadMapper, St
     public function name(): string
     {
         return 'Test Registry';
+    }
+
+    public function access(): SourceAccess
+    {
+        return new SourceAccess(self::$method, 'https://registry.test/terms', 'Test data.', 'Source: Test Registry', '2026-11-23', self::$allowed);
     }
 
     public function client(): StudyRegistryClient
@@ -51,6 +71,10 @@ final class FakeRegistrySource implements RegistrySource, StudyPayloadMapper, St
 
     public function fetchPage(int $pageSize, ?string $pageToken = null, ?CarbonInterface $updatedSince = null): StudyPage
     {
+        if (! self::$allowed) {
+            throw RegistryAccessRefused::notAllowed($this->name());
+        }
+
         return new StudyPage(self::$payloads, null);
     }
 
@@ -75,8 +99,11 @@ final class FakeRegistrySource implements RegistrySource, StudyPayloadMapper, St
                 'brief_title' => $payload['title'] ?? 'Untitled study',
                 'overall_status' => $payload['status'] ?? null,
                 'last_update_post_date' => $payload['updated'] ?? '2026-11-20',
+                'phase' => $payload['phase'] ?? null,
+                'sponsor_name' => $payload['sponsor'] ?? null,
             ],
             relations: $relations,
+            raw: isset($payload['raw']) ? new RawDocument('html', $payload['raw'], 'https://registry.test/'.$payload['id']) : null,
         );
     }
 }

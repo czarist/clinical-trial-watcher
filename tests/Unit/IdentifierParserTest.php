@@ -33,6 +33,11 @@ final class IdentifierParserTest extends TestCase
         yield 'CTRI' => ['CTRI/2020/05/025123', null, IdentifierScheme::Ctri, 'CTRI/2020/05/025123'];
         yield 'ReBEC' => ['RBR-7XJ3K9', null, IdentifierScheme::Rbr, 'RBR-7xj3k9'];
         yield 'UTN' => ['U1111-1234-5678', null, IdentifierScheme::Utn, 'U1111-1234-5678'];
+        yield 'IRAS with prefix' => ['IRAS ID: 312345', null, IdentifierScheme::Iras, 'IRAS312345'];
+        yield 'IRAS typed, digits only' => ['312345', 'IRAS', IdentifierScheme::Iras, 'IRAS312345'];
+        yield 'digits alone are not an IRAS number' => ['312345', null, null, null];
+        yield 'CAAE without dots' => ['12345678912345678', null, IdentifierScheme::Caae, '12345678.9.1234.5678'];
+        yield 'CAAE with prefix' => ['CAAE: 12345678.9.1234.5678', null, IdentifierScheme::Caae, '12345678.9.1234.5678'];
         yield 'sponsor protocol number is ignored' => ['ABC-123-2020', 'OTHER', null, null];
         yield 'a grant number is ignored' => ['R01 HL123456', 'NIH', null, null];
         yield 'empty' => ['  ', null, null, null];

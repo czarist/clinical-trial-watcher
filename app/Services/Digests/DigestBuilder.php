@@ -45,7 +45,12 @@ final readonly class DigestBuilder
         $changes = ClinicalTrialChange::query()
             ->whereIn('id', AlertMatch::query()->where('alert_id', $alert->id)->whereNotNull('clinical_trial_change_id')->select('clinical_trial_change_id'))
             ->where('created_at', '>=', $digest->period_start)
-            ->where('created_at', '<', $digest->period_end);
+            ->where('created_at', '<', $digest->period_end)
+            // Registries whose terms do not allow commercial use stay out of the paid digest.
+            ->when($this->sources->withoutCommercialUse() !== [], fn ($query) => $query->whereHas(
+                'trial',
+                fn ($trial) => $trial->whereNotIn('source', $this->sources->withoutCommercialUse()),
+            ));
 
         // Studies, not change records: a study updated in two registries counts once.
         $total = AlertMatch::query()
@@ -60,7 +65,7 @@ final readonly class DigestBuilder
             return;
         }
 
-        $candidates = $changes->with('trial:id,source,source_id,canonical_trial_id,nct_id,brief_title,overall_status,last_update_post_date')
+        $candidates = $changes->with('trial:id,source,source_id,canonical_trial_id,nct_id,brief_title,overall_status,last_update_post_date,raw_url')
             ->latest('id')
             ->limit(self::MAX_RANKED)
             ->get();
@@ -90,7 +95,7 @@ final readonly class DigestBuilder
                 'source_id' => $trial?->source_id,
                 'registry' => $trial !== null ? $this->sources->name($trial->source) : null,
                 'title' => $trial?->brief_title,
-                'url' => $trial !== null ? $this->sources->recordUrl($trial->source, $trial->source_id) : null,
+                'url' => $trial !== null ? $this->sources->urlFor($trial) : null,
                 'update_date' => $trial?->last_update_post_date?->toDateString(),
                 'update_date_label' => $trial?->last_update_post_date !== null
                     ? $this->writer->date(['date' => $trial->last_update_post_date->toDateString()], $language)

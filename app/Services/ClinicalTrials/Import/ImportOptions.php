@@ -14,6 +14,7 @@ final readonly class ImportOptions
      * @param  CarbonImmutable|null  $updatedSince  explicit lower bound for LastUpdatePostDate; overrides the last run
      * @param  int|null  $maxPages  stop after this many pages; the run is then recorded as partial
      * @param  string  $source  key of the registry to import from (config/registries.php)
+     * @param  bool  $fromCache  parse the stored copies of the pages instead of fetching (after a parser fix)
      */
     public function __construct(
         public int $pageSize = 100,
@@ -21,5 +22,6 @@ final readonly class ImportOptions
         public ?CarbonImmutable $updatedSince = null,
         public ?int $maxPages = null,
         public string $source = ClinicalTrialsGovSource::KEY,
+        public bool $fromCache = false,
     ) {}
 }

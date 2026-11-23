@@ -27,6 +27,10 @@ enum IdentifierScheme: string
     case Rbr = 'rbr';
     case Pactr = 'pactr';
     case Utn = 'utn';
+    /** UK Integrated Research Application System number, cited by ISRCTN and HRA records. */
+    case Iras = 'iras';
+    /** Brazilian ethics approval number (CAAE), cited by ReBEC records. */
+    case Caae = 'caae';
 
     /**
      * Pattern of a whole identifier, matched case-insensitively against a trimmed value.
@@ -49,6 +53,8 @@ enum IdentifierScheme: string
             self::Rbr => '/^RBR\s*-\s*([0-9a-z]{6,8})$/i',
             self::Pactr => '/^PACTR\s*-?\s*(\d{15,16})$/i',
             self::Utn => '/^U\s*1111-(\d{4})-(\d{4})$/i',
+            self::Iras => '/^IRAS\s*(?:ID|number|no\.?)?\s*:?\s*(\d{5,7})$/i',
+            self::Caae => '/^(?:CAAE\s*:?\s*)?(\d{8})\.?(\d)\.?(\d{4})\.?(\d{4})$/i',
         };
     }
 
@@ -75,6 +81,8 @@ enum IdentifierScheme: string
             self::Rbr => 'RBR-'.strtolower($groups[0]),
             self::Pactr => 'PACTR'.$groups[0],
             self::Utn => 'U1111-'.implode('-', $groups),
+            self::Iras => 'IRAS'.$groups[0],
+            self::Caae => sprintf('%s.%s.%s.%s', ...$groups),
         };
     }
 }
