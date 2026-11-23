@@ -3,7 +3,8 @@ import { computed, ref, watch } from 'vue';
 import StatusTrack from '@/components/StatusTrack.vue';
 import { api, ApiError } from '@/api/client';
 import type { TrialDetail } from '@/api/types';
-import { DISCLAIMER, formatDate, phaseLabel, statusLabel, STUDY_TYPE_LABELS } from '@/registry';
+import { formatDate, formatNumber, locale, t } from '@/i18n';
+import { phaseLabel, statusLabel, studyTypeLabel } from '@/registry';
 
 const props = defineProps<{ nctId: string }>();
 
@@ -23,56 +24,62 @@ watch(
         error.value = null;
         try {
             trial.value = (await api.get<{ data: TrialDetail }>(`/trials/${nctId}`)).data;
-            document.title = `${trial.value.nct_id} — Clinical Trial Watcher`;
+            setTitle();
         } catch (exception) {
             error.value = exception instanceof ApiError && exception.status === 404
-                ? `There is no study ${nctId} in the database. It may not have been imported yet.`
-                : 'Could not load this study. Check your connection and try again.';
+                ? t('study.notFound', { nctId })
+                : t('study.loadFailed');
         }
     },
     { immediate: true },
 );
+
+function setTitle(): void {
+    if (trial.value) document.title = t('titles.suffix', { title: trial.value.nct_id });
+}
+
+watch(locale, setTitle);
 </script>
 
 <template>
     <div class="page">
-        <p><RouterLink to="/search">Back to search</RouterLink></p>
+        <p><RouterLink to="/search">{{ t('study.back') }}</RouterLink></p>
         <p v-if="error" class="notice error" role="alert">{{ error }}</p>
-        <p v-else-if="!trial" class="muted">Loading study…</p>
+        <p v-else-if="!trial" class="muted">{{ t('study.loading') }}</p>
         <article v-else class="study">
             <header class="study__head">
                 <p class="nct">{{ trial.nct_id }}<span v-if="trial.acronym" class="muted"> ({{ trial.acronym }})</span></p>
                 <h1>{{ trial.brief_title }}</h1>
                 <p v-if="trial.official_title && trial.official_title !== trial.brief_title" class="muted">{{ trial.official_title }}</p>
                 <StatusTrack class="study__track" :status="trial.overall_status" />
-                <p class="notice warning">{{ DISCLAIMER }}</p>
+                <p class="notice warning">{{ t('app.disclaimer') }}</p>
             </header>
 
             <div class="study__body">
                 <div class="study__text">
                     <section v-if="trial.brief_summary">
-                        <h2>Summary</h2>
+                        <h2>{{ t('study.summary') }}</h2>
                         <p class="prose">{{ trial.brief_summary }}</p>
                     </section>
                     <section v-if="trial.interventions.length">
-                        <h2>What is being studied</h2>
+                        <h2>{{ t('study.interventions') }}</h2>
                         <ul>
                             <li v-for="item in trial.interventions" :key="item.name"><strong>{{ item.name }}</strong><span v-if="item.type" class="muted"> ({{ item.type.toLowerCase().replace('_', ' ') }})</span><span v-if="item.description">: {{ item.description }}</span></li>
                         </ul>
                     </section>
                     <section v-if="outcomesByType.PRIMARY.length">
-                        <h2>Primary outcomes</h2>
+                        <h2>{{ t('study.primaryOutcomes') }}</h2>
                         <ul>
                             <li v-for="outcome in outcomesByType.PRIMARY" :key="outcome.measure">{{ outcome.measure }}<span v-if="outcome.time_frame" class="muted"> — {{ outcome.time_frame }}</span></li>
                         </ul>
                     </section>
                     <section v-if="trial.eligibility.criteria">
-                        <h2>Eligibility criteria</h2>
-                        <p class="muted">Ages {{ trial.eligibility.min_age ?? 'not limited' }} to {{ trial.eligibility.max_age ?? 'not limited' }}<template v-if="trial.eligibility.sex">, sex: {{ trial.eligibility.sex.toLowerCase() }}</template>. Only the study team decides who can take part.</p>
+                        <h2>{{ t('study.eligibility') }}</h2>
+                        <p class="muted">{{ t('study.ages', { min: trial.eligibility.min_age ?? t('study.notLimited'), max: trial.eligibility.max_age ?? t('study.notLimited') }) }}<template v-if="trial.eligibility.sex">, {{ t('study.sex', { sex: trial.eligibility.sex.toLowerCase() }) }}</template>. {{ t('study.teamDecides') }}</p>
                         <p class="prose">{{ trial.eligibility.criteria }}</p>
                     </section>
                     <section v-if="trial.references.length">
-                        <h2>Publications</h2>
+                        <h2>{{ t('study.publications') }}</h2>
                         <ul class="references">
                             <li v-for="(reference, index) in trial.references" :key="reference.pmid ?? index">
                                 {{ reference.citation }}
@@ -81,28 +88,28 @@ watch(
                         </ul>
                     </section>
                     <section v-if="trial.status_history.length">
-                        <h2>Status changes we recorded</h2>
+                        <h2>{{ t('study.statusHistory') }}</h2>
                         <ul>
-                            <li v-for="change in trial.status_history" :key="change.detected_at">{{ formatDate(change.detected_at) }}: {{ statusLabel(change.previous_status) }} to {{ statusLabel(change.new_status) }}</li>
+                            <li v-for="change in trial.status_history" :key="change.detected_at">{{ t('study.statusChange', { date: formatDate(change.detected_at), before: statusLabel(change.previous_status), after: statusLabel(change.new_status) }) }}</li>
                         </ul>
                     </section>
                 </div>
 
                 <aside class="study__facts panel">
                     <dl>
-                        <dt>Study type</dt><dd>{{ trial.study_type ? (STUDY_TYPE_LABELS[trial.study_type] ?? trial.study_type) : '—' }}</dd>
-                        <dt>Phase</dt><dd>{{ trial.phases.length ? phaseLabel(trial.phases) : '—' }}</dd>
-                        <dt>Enrollment</dt><dd>{{ trial.enrollment.count ?? '—' }}<span v-if="trial.enrollment.type" class="muted"> ({{ trial.enrollment.type.toLowerCase() }})</span></dd>
-                        <dt>Start</dt><dd>{{ formatDate(trial.start_date) }}</dd>
-                        <dt>Primary completion</dt><dd>{{ formatDate(trial.primary_completion_date) }}</dd>
-                        <dt>Completion</dt><dd>{{ formatDate(trial.completion_date) }}</dd>
-                        <dt>Sponsor</dt><dd>{{ trial.sponsor_name ?? '—' }}</dd>
-                        <dt>Conditions</dt><dd>{{ trial.conditions?.join(', ') || '—' }}</dd>
-                        <dt>Countries</dt><dd>{{ countries.join(', ') || '—' }}</dd>
-                        <dt>Sites</dt><dd>{{ trial.locations.length }}</dd>
-                        <dt>Last update</dt><dd>{{ formatDate(trial.last_update_post_date) }}</dd>
+                        <dt>{{ t('study.studyType') }}</dt><dd>{{ trial.study_type ? studyTypeLabel(trial.study_type) : '—' }}</dd>
+                        <dt>{{ t('study.phase') }}</dt><dd>{{ trial.phases.length ? phaseLabel(trial.phases) : '—' }}</dd>
+                        <dt>{{ t('study.enrollment') }}</dt><dd>{{ trial.enrollment.count !== null ? formatNumber(trial.enrollment.count) : '—' }}<span v-if="trial.enrollment.type" class="muted"> ({{ trial.enrollment.type.toLowerCase() }})</span></dd>
+                        <dt>{{ t('study.start') }}</dt><dd>{{ formatDate(trial.start_date) }}</dd>
+                        <dt>{{ t('study.primaryCompletion') }}</dt><dd>{{ formatDate(trial.primary_completion_date) }}</dd>
+                        <dt>{{ t('study.completion') }}</dt><dd>{{ formatDate(trial.completion_date) }}</dd>
+                        <dt>{{ t('study.sponsor') }}</dt><dd>{{ trial.sponsor_name ?? '—' }}</dd>
+                        <dt>{{ t('study.conditions') }}</dt><dd>{{ trial.conditions?.join(', ') || '—' }}</dd>
+                        <dt>{{ t('study.countries') }}</dt><dd>{{ countries.join(', ') || '—' }}</dd>
+                        <dt>{{ t('study.sites') }}</dt><dd>{{ trial.locations.length }}</dd>
+                        <dt>{{ t('study.lastUpdate') }}</dt><dd>{{ formatDate(trial.last_update_post_date) }}</dd>
                     </dl>
-                    <a class="button secondary" :href="trial.registry_url" target="_blank" rel="noopener">Open on ClinicalTrials.gov</a>
+                    <a class="button secondary" :href="trial.registry_url" target="_blank" rel="noopener">{{ t('study.openRegistry') }}</a>
                 </aside>
             </div>
         </article>

@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { api, ApiError } from '@/api/client';
 import type { Team, TeamInvitation } from '@/api/types';
+import { formatPrice, t } from '@/i18n';
 import { useAuthStore } from '@/stores/auth';
 
 const auth = useAuthStore();
@@ -22,7 +23,7 @@ async function load(): Promise<void> {
             api.get<{ data: TeamInvitation[] }>('/team-invitations').then((r) => r.data),
         ]);
     } catch (exception) {
-        error.value = exception instanceof ApiError ? exception : new ApiError(0, 'Could not load your teams. Check your connection.');
+        error.value = exception instanceof ApiError ? exception : new ApiError(0, t('teams.loadFailed'));
     } finally {
         loading.value = false;
     }
@@ -37,7 +38,7 @@ async function act(action: () => Promise<unknown>): Promise<void> {
         await action();
         await load();
     } catch (exception) {
-        error.value = exception instanceof ApiError ? exception : new ApiError(0, 'Could not reach the server. Check your connection.');
+        error.value = exception instanceof ApiError ? exception : new ApiError(0, t('errors.network'));
     } finally {
         busy.value = false;
     }
@@ -56,50 +57,50 @@ async function create(): Promise<void> {
 
 <template>
     <div class="page">
-        <h1>Teams</h1>
-        <p class="muted">A Team AI team shares saved searches and AI digest reports between its members. Members join only by accepting an invitation.</p>
+        <h1>{{ t('teams.title') }}</h1>
+        <p class="muted">{{ t('teams.intro') }}</p>
 
         <p v-if="error" class="notice error" role="alert">
             {{ error.message }}
-            <RouterLink v-if="error.status === 402" to="/account">See plans</RouterLink>
+            <RouterLink v-if="error.status === 402" to="/account">{{ t('common.seePlans') }}</RouterLink>
         </p>
-        <p v-if="loading" class="muted">Loading teams…</p>
+        <p v-if="loading" class="muted">{{ t('teams.loading') }}</p>
 
         <template v-else>
             <section v-if="invitations.length" class="block">
-                <h2>Invitations</h2>
+                <h2>{{ t('teams.invitations') }}</h2>
                 <ul class="rows">
                     <li v-for="invitation in invitations" :key="invitation.id">
-                        <span><strong>{{ invitation.team?.name }}</strong> <span class="muted">from {{ invitation.team?.owner_name ?? 'the team owner' }}</span></span>
+                        <span><strong>{{ invitation.team?.name }}</strong> <span class="muted">{{ t('teams.from', { owner: invitation.team?.owner_name ?? t('teams.theOwner') }) }}</span></span>
                         <span class="actions">
-                            <button class="button" type="button" :disabled="busy" @click="accept(invitation)">Join team</button>
-                            <button class="button secondary" type="button" :disabled="busy" @click="decline(invitation)">Decline</button>
+                            <button class="button" type="button" :disabled="busy" @click="accept(invitation)">{{ t('teams.join') }}</button>
+                            <button class="button secondary" type="button" :disabled="busy" @click="decline(invitation)">{{ t('teams.decline') }}</button>
                         </span>
                     </li>
                 </ul>
             </section>
 
             <section class="block">
-                <h2>Your teams</h2>
-                <p v-if="teams.length === 0" class="muted">You are not in a team yet.</p>
+                <h2>{{ t('teams.yours') }}</h2>
+                <p v-if="teams.length === 0" class="muted">{{ t('teams.none') }}</p>
                 <ul v-else class="rows">
                     <li v-for="team in teams" :key="team.id">
                         <RouterLink :to="`/teams/${team.id}`">{{ team.name }}</RouterLink>
-                        <span class="muted">{{ team.is_owner ? 'You own this team' : `Owner: ${team.owner.name}` }}<template v-if="!team.is_active"> · inactive</template></span>
+                        <span class="muted">{{ team.is_owner ? t('teams.youOwn') : t('teams.owner', { name: team.owner.name }) }}<template v-if="!team.is_active"> · {{ t('teams.inactive') }}</template></span>
                     </li>
                 </ul>
             </section>
 
             <section v-if="!teams.some((team) => team.is_owner)" class="block">
-                <h2>Create a team</h2>
+                <h2>{{ t('teams.create') }}</h2>
                 <form v-if="auth.billing?.features.team_workspace" class="create" @submit.prevent="create">
-                    <label for="team-name">Team name</label>
+                    <label for="team-name">{{ t('teams.teamName') }}</label>
                     <input id="team-name" v-model.trim="name" maxlength="120" required />
-                    <button class="button" type="submit" :disabled="busy">Create team</button>
+                    <button class="button" type="submit" :disabled="busy">{{ t('teams.createButton') }}</button>
                 </form>
                 <p v-else class="notice">
-                    Creating a team needs Team AI, $99/month per team. <RouterLink to="/account">See plans</RouterLink> ·
-                    <RouterLink to="/digests/samples">See a sample team digest</RouterLink>
+                    {{ t('teams.needsTeamAi', { price: formatPrice(99, 'usd') }) }} <RouterLink to="/account">{{ t('common.seePlans') }}</RouterLink> ·
+                    <RouterLink to="/digests/samples">{{ t('teams.sampleTeamDigest') }}</RouterLink>
                 </p>
             </section>
         </template>

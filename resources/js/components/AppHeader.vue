@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
+import LanguageSelect from '@/components/LanguageSelect.vue';
+import { t } from '@/i18n';
 import { useAuthStore } from '@/stores/auth';
 
 const auth = useAuthStore();
@@ -13,24 +15,25 @@ async function logOut(): Promise<void> {
 
 <template>
     <header class="header">
-        <nav class="header__inner" aria-label="Main">
+        <nav class="header__inner" :aria-label="t('nav.main')">
             <RouterLink to="/search" class="brand">
                 <img src="/logo.svg" alt="" width="32" height="32" />
-                <span>Clinical Trial Watcher</span>
+                <span>{{ t('app.name') }}</span>
             </RouterLink>
             <ul class="links">
-                <li v-if="auth.can('view_clinical_trials')"><RouterLink to="/search">Search</RouterLink></li>
-                <li v-if="auth.can('create_alerts')"><RouterLink to="/alerts">Alerts</RouterLink></li>
-                <li><RouterLink to="/digests">AI digests</RouterLink></li>
-                <li><RouterLink to="/teams">Teams</RouterLink></li>
-                <li><RouterLink to="/account">Account</RouterLink></li>
-                <li v-if="auth.isAdmin"><RouterLink to="/admin">Admin</RouterLink></li>
+                <li v-if="auth.can('view_clinical_trials')"><RouterLink to="/search">{{ t('nav.search') }}</RouterLink></li>
+                <li v-if="auth.can('create_alerts')"><RouterLink to="/alerts">{{ t('nav.alerts') }}</RouterLink></li>
+                <li><RouterLink to="/digests">{{ t('nav.digests') }}</RouterLink></li>
+                <li><RouterLink to="/teams">{{ t('nav.teams') }}</RouterLink></li>
+                <li><RouterLink to="/account">{{ t('nav.account') }}</RouterLink></li>
+                <li v-if="auth.isAdmin"><RouterLink to="/admin">{{ t('nav.admin') }}</RouterLink></li>
             </ul>
-            <button class="logout" type="button" @click="logOut">Log out</button>
+            <LanguageSelect dark />
+            <button class="logout" type="button" @click="logOut">{{ t('nav.logout') }}</button>
         </nav>
         <p v-if="auth.user && !auth.user.email_verified" class="verify">
-            Confirm your email address to create alerts and manage your plan.
-            <RouterLink to="/account">Send the link again</RouterLink>
+            {{ t('nav.verifyEmail') }}
+            <RouterLink to="/account">{{ t('nav.resendLink') }}</RouterLink>
         </p>
     </header>
 </template>

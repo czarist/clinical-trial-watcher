@@ -2,7 +2,8 @@
 import { reactive, watch } from 'vue';
 import type { SearchCriteria } from '@/api/types';
 import { compactCriteria } from '@/criteria';
-import { PHASE_LABELS, STATUS_LABELS, STUDY_TYPE_LABELS } from '@/registry';
+import { t } from '@/i18n';
+import { MAIN_STATUSES, PHASES, phaseLabel, statusLabel, STUDY_TYPES, studyTypeLabel } from '@/registry';
 
 const model = defineModel<SearchCriteria>({ required: true });
 defineProps<{ submitLabel?: string; showText?: boolean }>();
@@ -11,7 +12,6 @@ const emit = defineEmits<{ submit: [] }>();
 const form = reactive<SearchCriteria>({ ...model.value });
 watch(model, (value) => Object.assign(form, { ...value }), { deep: true });
 
-const mainStatuses = ['NOT_YET_RECRUITING', 'RECRUITING', 'ENROLLING_BY_INVITATION', 'ACTIVE_NOT_RECRUITING', 'COMPLETED', 'SUSPENDED', 'TERMINATED', 'WITHDRAWN'];
 
 function toggle(key: 'status' | 'phase' | 'study_type', value: string): void {
     const current = new Set(form[key] ?? []);
@@ -34,93 +34,93 @@ function clear(): void {
 <template>
     <form class="filters" @submit.prevent="apply">
         <div v-if="showText !== false">
-            <label for="f-q">Words in the title or summary</label>
-            <input id="f-q" v-model.trim="form.q" type="search" placeholder="e.g. inhaled corticosteroids" />
+            <label for="f-q">{{ t('filters.text') }}</label>
+            <input id="f-q" v-model.trim="form.q" type="search" :placeholder="t('filters.textPlaceholder')" />
         </div>
         <div>
-            <label for="f-condition">Condition</label>
-            <input id="f-condition" v-model.trim="form.condition" placeholder="e.g. asthma" />
+            <label for="f-condition">{{ t('filters.condition') }}</label>
+            <input id="f-condition" v-model.trim="form.condition" :placeholder="t('filters.conditionPlaceholder')" />
         </div>
         <div>
-            <label for="f-mesh">MeSH term</label>
-            <input id="f-mesh" v-model.trim="form.mesh_term" placeholder="e.g. Lung Diseases" />
+            <label for="f-mesh">{{ t('filters.meshTerm') }}</label>
+            <input id="f-mesh" v-model.trim="form.mesh_term" :placeholder="t('filters.meshTermPlaceholder')" />
         </div>
         <div>
-            <label for="f-keyword">Keyword</label>
+            <label for="f-keyword">{{ t('filters.keyword') }}</label>
             <input id="f-keyword" v-model.trim="form.keyword" />
         </div>
         <div>
-            <label for="f-sponsor">Sponsor</label>
+            <label for="f-sponsor">{{ t('filters.sponsor') }}</label>
             <input id="f-sponsor" v-model.trim="form.sponsor" />
         </div>
         <div class="pair">
             <div>
-                <label for="f-country">Country</label>
-                <input id="f-country" v-model.trim="form.country" placeholder="Brazil" />
+                <label for="f-country">{{ t('filters.country') }}</label>
+                <input id="f-country" v-model.trim="form.country" :placeholder="t('filters.countryPlaceholder')" />
             </div>
             <div>
-                <label for="f-city">City</label>
+                <label for="f-city">{{ t('filters.city') }}</label>
                 <input id="f-city" v-model.trim="form.city" />
             </div>
         </div>
 
         <fieldset>
-            <legend>Recruitment status</legend>
-            <label v-for="status in mainStatuses" :key="status" class="check">
+            <legend>{{ t('filters.status') }}</legend>
+            <label v-for="status in MAIN_STATUSES" :key="status" class="check">
                 <input type="checkbox" :checked="form.status?.includes(status)" @change="toggle('status', status)" />
-                {{ STATUS_LABELS[status] }}
+                {{ statusLabel(status) }}
             </label>
         </fieldset>
 
         <fieldset>
-            <legend>Phase</legend>
-            <label v-for="(name, phase) in PHASE_LABELS" :key="phase" class="check">
+            <legend>{{ t('filters.phase') }}</legend>
+            <label v-for="phase in PHASES" :key="phase" class="check">
                 <input type="checkbox" :checked="form.phase?.includes(phase)" @change="toggle('phase', phase)" />
-                {{ name }}
+                {{ phaseLabel([phase]) }}
             </label>
         </fieldset>
 
         <fieldset>
-            <legend>Study type</legend>
-            <label v-for="(name, type) in STUDY_TYPE_LABELS" :key="type" class="check">
+            <legend>{{ t('filters.studyType') }}</legend>
+            <label v-for="type in STUDY_TYPES" :key="type" class="check">
                 <input type="checkbox" :checked="form.study_type?.includes(type)" @change="toggle('study_type', type)" />
-                {{ name }}
+                {{ studyTypeLabel(type) }}
             </label>
         </fieldset>
 
         <fieldset>
-            <legend>Start date</legend>
+            <legend>{{ t('filters.startDate') }}</legend>
             <div class="pair">
                 <div>
-                    <label for="f-start-from">From</label>
+                    <label for="f-start-from">{{ t('filters.from') }}</label>
                     <input id="f-start-from" v-model="form.start_date_from" type="date" />
                 </div>
                 <div>
-                    <label for="f-start-to">To</label>
+                    <label for="f-start-to">{{ t('filters.to') }}</label>
                     <input id="f-start-to" v-model="form.start_date_to" type="date" />
                 </div>
             </div>
         </fieldset>
 
         <fieldset>
-            <legend>Near a place</legend>
+            <legend>{{ t('filters.near') }}</legend>
             <div class="pair">
                 <div>
-                    <label for="f-lat">Latitude</label>
+                    <label for="f-lat">{{ t('filters.latitude') }}</label>
                     <input id="f-lat" v-model.number="form.latitude" type="number" step="any" min="-90" max="90" />
                 </div>
                 <div>
-                    <label for="f-lng">Longitude</label>
+                    <label for="f-lng">{{ t('filters.longitude') }}</label>
                     <input id="f-lng" v-model.number="form.longitude" type="number" step="any" min="-180" max="180" />
                 </div>
             </div>
-            <label for="f-radius">Within (km)</label>
+            <label for="f-radius">{{ t('filters.radius') }}</label>
             <input id="f-radius" v-model.number="form.radius_km" type="number" min="1" max="2000" />
         </fieldset>
 
         <div class="actions">
-            <button class="button" type="submit">{{ submitLabel ?? 'Show studies' }}</button>
-            <button class="button secondary" type="button" @click="clear">Clear filters</button>
+            <button class="button" type="submit">{{ submitLabel ?? t('filters.submit') }}</button>
+            <button class="button secondary" type="button" @click="clear">{{ t('filters.clear') }}</button>
         </div>
     </form>
 </template>

@@ -34,6 +34,8 @@ export interface User {
     name: string;
     email: string;
     email_verified: boolean;
+    /** Laravel locale code, e.g. "pt_BR". */
+    locale: string;
     trial_ends_at: string | null;
     plan: Plan | null;
     roles: { id: number; name: string }[];
@@ -112,7 +114,7 @@ export interface SearchCriteria {
 
 export type AlertFrequency = 'instant' | 'daily' | 'weekly';
 export type DigestFrequency = 'daily' | 'weekly';
-export type DigestLanguage = 'en' | 'pt_BR';
+export type DigestLanguage = 'en' | 'pt_BR' | 'es' | 'zh_CN' | 'zh_TW' | 'ja' | 'ko';
 
 export interface AiDigestSettings {
     enabled: boolean;
@@ -216,7 +218,7 @@ export interface DigestContent {
     truncated: boolean;
     intro: string;
     items: DigestItem[];
-    labels: { source_ai: string; source_factual: string; view_registry: string; updated_on: string; missing_fact: string };
+    labels: { source_ai: string; source_factual: string; view_registry: string; updated_on: string; missing_fact: string; why_matches?: string };
     notice: string;
     manage: string;
 }

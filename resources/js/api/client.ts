@@ -1,5 +1,8 @@
+import { localeTag, t } from '@/i18n';
+
 /**
- * Minimal JSON client for the Laravel API. The JWT is sent as a bearer token.
+ * Minimal JSON client for the Laravel API. The JWT is sent as a bearer token, and the chosen
+ * language as Accept-Language so the API answers in it.
  */
 export class ApiError extends Error {
     constructor(
@@ -62,15 +65,20 @@ export function toQueryString(query: Query): string {
 }
 
 export async function request<T>(method: string, path: string, body?: unknown, query: Query = {}): Promise<T> {
-    const headers: Record<string, string> = { Accept: 'application/json' };
+    const headers: Record<string, string> = { Accept: 'application/json', 'Accept-Language': localeTag.value };
     if (body !== undefined) headers['Content-Type'] = 'application/json';
     if (token !== null) headers.Authorization = `Bearer ${token}`;
 
-    const response = await fetch(`/api${path}${toQueryString(query)}`, {
-        method,
-        headers,
-        body: body === undefined ? undefined : JSON.stringify(body),
-    });
+    let response: Response;
+    try {
+        response = await fetch(`/api${path}${toQueryString(query)}`, {
+            method,
+            headers,
+            body: body === undefined ? undefined : JSON.stringify(body),
+        });
+    } catch {
+        throw new ApiError(0, t('errors.network'));
+    }
 
     if (response.status === 204) return undefined as T;
 
@@ -81,7 +89,9 @@ export async function request<T>(method: string, path: string, body?: unknown, q
             setToken(null);
             onUnauthorized?.();
         }
-        throw new ApiError(response.status, payload.message ?? `Request failed (${response.status}).`, payload.errors);
+        // Server errors carry no message meant for people; describe them in the reader's language.
+        const message = response.status >= 500 || !payload.message ? t('errors.server', { status: response.status }) : payload.message;
+        throw new ApiError(response.status, message, payload.errors);
     }
 
     return payload as T;
