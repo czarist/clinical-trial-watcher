@@ -9,8 +9,10 @@ use App\Models\User;
 use Illuminate\Contracts\Config\Repository as Config;
 
 /**
- * Decides which plan's limits apply to a user: an active subscription first,
- * then the free trial, then the plan stored on the account, then the free plan.
+ * Decides which plan applies to a user: the plan of a valid subscription (active, trialing
+ * or in its cancellation grace period, as Cashier defines it), otherwise the free plan.
+ *
+ * A subscription on a legacy plan keeps that plan, which grants no AI features.
  */
 final readonly class PlanResolver
 {
@@ -24,16 +26,12 @@ final readonly class PlanResolver
             return $subscription->plan;
         }
 
-        if ($user->onGenericTrial()) {
-            return $this->planNamed((string) $this->config->get('billing.trial_plan')) ?? $user->plan;
-        }
-
-        return $user->plan ?? $this->freePlan();
+        return $this->freePlan();
     }
 
     public function freePlan(): ?Plan
     {
-        return $this->planNamed((string) $this->config->get('billing.free_plan'));
+        return Plan::query()->where('name', (string) $this->config->get('billing.free_plan'))->first();
     }
 
     public function subscriptionType(): string
@@ -41,8 +39,11 @@ final readonly class PlanResolver
         return (string) $this->config->get('billing.subscription_type', 'default');
     }
 
-    private function planNamed(string $name): ?Plan
+    /**
+     * Saved searches an account or team can create, the same on every plan.
+     */
+    public function savedSearchLimit(): int
     {
-        return Plan::query()->where('name', $name)->first();
+        return (int) $this->config->get('billing.saved_search_limit', 100);
     }
 }

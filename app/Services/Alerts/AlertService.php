@@ -5,46 +5,74 @@ declare(strict_types=1);
 namespace App\Services\Alerts;
 
 use App\Enums\AlertFrequency;
+use App\Enums\DigestFrequency;
+use App\Enums\DigestLanguage;
 use App\Exceptions\AlertLimitReached;
+use App\Exceptions\PaidFeatureRequired;
 use App\Models\Alert;
+use App\Models\Team;
 use App\Models\User;
+use App\Services\Billing\Entitlements;
 use App\Services\Billing\PlanResolver;
 use App\Services\ClinicalTrials\Search\TrialSearchCriteria;
 
 /**
- * Creates and changes saved-search alerts, enforcing the plan's alerts_limit.
+ * Creates and changes saved searches (alerts), personal or shared by a team.
+ *
+ * Basic alerts are free on every plan, up to one configurable limit. AI digests need Pro AI
+ * or Team AI for a personal saved search, and an active Team AI workspace for a shared one.
+ * Turning AI digests off is always allowed and leaves the basic alert running.
  */
 final readonly class AlertService
 {
-    public function __construct(private PlanResolver $plans) {}
+    public function __construct(
+        private PlanResolver $plans,
+        private Entitlements $entitlements,
+    ) {}
 
-    public function limitFor(User $user): int
+    public function limit(): int
     {
-        return $this->plans->effectivePlan($user)?->alertsLimit() ?? 0;
+        return $this->plans->savedSearchLimit();
     }
 
-    public function create(User $user, string $name, TrialSearchCriteria $criteria, AlertFrequency $frequency, bool $notifyStatusChanges): Alert
+    /**
+     * @param  array{name: string, criteria: TrialSearchCriteria, frequency: AlertFrequency, notify_status_changes?: bool, ai_digest_enabled?: bool, ai_digest_frequency?: DigestFrequency, ai_digest_language?: DigestLanguage}  $attributes
+     */
+    public function create(User $user, ?Team $team, array $attributes): Alert
     {
-        $limit = $this->limitFor($user);
-
-        if ($user->alerts()->count() >= $limit) {
-            throw AlertLimitReached::forLimit($limit);
+        if ($team !== null && ! $this->entitlements->teamIsActive($team)) {
+            throw PaidFeatureRequired::teamWorkspace();
         }
 
+        $existing = $team !== null ? $team->alerts()->count() : $user->alerts()->personal()->count();
+
+        if ($existing >= $this->limit()) {
+            throw AlertLimitReached::forLimit($this->limit());
+        }
+
+        if (($attributes['ai_digest_enabled'] ?? false) === true) {
+            $this->assertAiDigestsAllowed($user, $team);
+        }
+
+        $attributes['criteria'] = $attributes['criteria']->toArray();
+
         return $user->alerts()->create([
-            'name' => $name,
-            'criteria' => $criteria->toArray(),
-            'frequency' => $frequency,
-            'notify_status_changes' => $notifyStatusChanges,
+            'notify_status_changes' => true,
+            ...$attributes,
+            'team_id' => $team?->id,
             'is_active' => true,
         ]);
     }
 
     /**
-     * @param  array{name?: string, criteria?: TrialSearchCriteria, frequency?: AlertFrequency, notify_status_changes?: bool, is_active?: bool}  $changes
+     * @param  array<string, mixed>  $changes  validated changes; criteria as TrialSearchCriteria
      */
     public function update(Alert $alert, array $changes): Alert
     {
+        if (($changes['ai_digest_enabled'] ?? false) === true && ! $alert->ai_digest_enabled) {
+            $this->assertAiDigestsAllowed($alert->user, $alert->team);
+        }
+
         if (isset($changes['criteria'])) {
             $changes['criteria'] = $changes['criteria']->toArray();
         }
@@ -57,5 +85,16 @@ final readonly class AlertService
     public function delete(Alert $alert): void
     {
         $alert->delete();
+    }
+
+    private function assertAiDigestsAllowed(?User $user, ?Team $team): void
+    {
+        $allowed = $team !== null
+            ? $this->entitlements->teamIsActive($team)
+            : $user !== null && $this->entitlements->hasPersonalAiDigests($user);
+
+        if (! $allowed) {
+            throw $team !== null ? PaidFeatureRequired::teamWorkspace() : PaidFeatureRequired::aiDigests();
+        }
     }
 }

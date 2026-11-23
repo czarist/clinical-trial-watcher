@@ -9,7 +9,7 @@ use App\Models\Plan;
 final class PlanAdministration
 {
     /**
-     * @param  array{name: string, price: float|string, billing_cycle: string, stripe_price_id?: string|null, trial_days?: int, alerts_limit: int}  $data
+     * @param  array{name: string, price: float|string, billing_cycle: string, stripe_price_id?: string|null, trial_days?: int}  $data
      */
     public function create(array $data): Plan
     {
@@ -37,12 +37,6 @@ final class PlanAdministration
      */
     private function attributes(array $data, ?Plan $plan = null): array
     {
-        $attributes = array_intersect_key($data, array_flip(['name', 'price', 'billing_cycle', 'stripe_price_id', 'trial_days']));
-
-        if (array_key_exists('alerts_limit', $data)) {
-            $attributes['features'] = [...($plan->features ?? []), 'alerts_limit' => (int) $data['alerts_limit']];
-        }
-
-        return $attributes;
+        return array_intersect_key($data, array_flip(['name', 'price', 'billing_cycle', 'stripe_price_id', 'trial_days']));
     }
 }

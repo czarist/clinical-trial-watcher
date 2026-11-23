@@ -1,16 +1,30 @@
 export interface Paginated<T> {
     data: T[];
-    meta: { current_page: number; last_page: number; per_page: number; total: number; disclaimer?: string; alerts_limit?: number };
+    meta: {
+        current_page: number;
+        last_page: number;
+        per_page: number;
+        total: number;
+        disclaimer?: string;
+        alerts_limit?: number;
+        ai_digests_available?: boolean;
+    };
 }
 
+/** A plan; prices are USD per month. */
 export interface Plan {
     id: number;
     name: string;
     price: string;
+    currency: string;
     billing_cycle: string;
+    price_label: string;
     trial_days: number;
     alerts_limit: number;
+    ai_digests: boolean;
+    team_workspace: boolean;
     is_free: boolean;
+    is_legacy: boolean;
     is_purchasable: boolean;
     stripe_price_id?: string | null;
 }
@@ -28,7 +42,9 @@ export interface User {
 }
 
 export interface BillingSummary {
-    effective_plan: { id: number; name: string } | null;
+    effective_plan: { id: number; name: string; price: string; currency: string; is_legacy: boolean } | null;
+    features: { ai_digests: boolean; team_workspace: boolean };
+    saved_search_limit: number;
     alerts_limit: number;
     alerts_count: number;
     on_trial: boolean;
@@ -95,14 +111,24 @@ export interface SearchCriteria {
 }
 
 export type AlertFrequency = 'instant' | 'daily' | 'weekly';
+export type DigestFrequency = 'daily' | 'weekly';
+export type DigestLanguage = 'en' | 'pt_BR';
+
+export interface AiDigestSettings {
+    enabled: boolean;
+    frequency: DigestFrequency;
+    language: DigestLanguage;
+}
 
 export interface Alert {
     id: number;
+    team_id: number | null;
     name: string;
     criteria: SearchCriteria;
     frequency: AlertFrequency;
     notify_status_changes: boolean;
     is_active: boolean;
+    ai_digest: AiDigestSettings;
     pending_matches_count?: number;
     last_notified_at: string | null;
     created_at: string;
@@ -137,4 +163,83 @@ export interface ImportRun {
     error: string | null;
     started_at: string;
     finished_at: string | null;
+}
+
+export interface TeamMemberSummary {
+    id: number;
+    name: string;
+    /** Shown to the team owner only. */
+    email: string | null;
+    role: 'owner' | 'member';
+}
+
+export interface TeamInvitation {
+    id: number;
+    email: string;
+    team?: { id: number; name: string; owner_name: string | null };
+    created_at: string;
+}
+
+export interface Team {
+    id: number;
+    name: string;
+    owner: { id: number; name: string };
+    is_owner: boolean;
+    is_active: boolean;
+    receives_digests: boolean | null;
+    members?: TeamMemberSummary[];
+    invitations?: TeamInvitation[];
+}
+
+export interface DigestItem {
+    rank: number;
+    nct_id: string | null;
+    title: string | null;
+    /** Built by the server from a validated NCT number; null in samples. */
+    url: string | null;
+    update_date_label: string | null;
+    status: string | null;
+    summary: string;
+    summary_source: 'ai' | 'factual';
+    facts: string[];
+    reasons: string[];
+}
+
+/** One digest edition, shared by the email and the report page. */
+export interface DigestContent {
+    name: string;
+    language: DigestLanguage;
+    title: string;
+    period: { start: string; end: string; label: string };
+    total_updates: number;
+    shown_updates: number;
+    truncated: boolean;
+    intro: string;
+    items: DigestItem[];
+    labels: { source_ai: string; source_factual: string; view_registry: string; updated_on: string; missing_fact: string };
+    notice: string;
+    manage: string;
+}
+
+export interface DigestSample extends DigestContent {
+    id: string;
+    sample: true;
+    plan: string;
+    sample_label: string;
+}
+
+export interface Digest {
+    id: number;
+    alert_id: number;
+    team_id: number | null;
+    name: string | null;
+    frequency: DigestFrequency;
+    language: DigestLanguage;
+    period_start: string;
+    period_end: string;
+    total_updates: number;
+    shown_updates: number;
+    generation: 'ai' | 'partial' | 'fallback' | null;
+    generated_at: string | null;
+    content?: DigestContent;
 }

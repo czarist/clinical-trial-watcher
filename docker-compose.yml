@@ -10,6 +10,7 @@ services:
             - .:/var/www/html
         depends_on:
             - mysql
+            - redis
 
     queue:
         image: clinical-trial-watcher-app
@@ -22,6 +23,7 @@ services:
         depends_on:
             - app
             - mysql
+            - redis
 
     scheduler:
         image: clinical-trial-watcher-app
@@ -34,6 +36,7 @@ services:
         depends_on:
             - app
             - mysql
+            - redis
 
     mysql:
         image: mysql:8.4
@@ -49,6 +52,14 @@ services:
         volumes:
             - db-data:/var/lib/mysql
             - ./docker/mysql/init:/docker-entrypoint-initdb.d:ro
+    redis:
+        image: redis:8.10-alpine
+        container_name: clinical_saas_redis
+        restart: always
+        command: redis-server --appendonly yes
+        volumes:
+            - redis-data:/data
+
     node:
         image: node:26-alpine
         container_name: clinical_saas_node
@@ -74,3 +85,4 @@ services:
 
 volumes:
     db-data:
+    redis-data:

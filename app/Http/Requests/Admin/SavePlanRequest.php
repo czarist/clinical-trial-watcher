@@ -30,7 +30,6 @@ final class SavePlanRequest extends FormRequest
             'billing_cycle' => [$required, Rule::in(['monthly', 'yearly'])],
             'stripe_price_id' => ['sometimes', 'nullable', 'string', 'max:255', Rule::unique('plans', 'stripe_price_id')->ignore($ignore)],
             'trial_days' => ['sometimes', 'integer', 'between:0,365'],
-            'alerts_limit' => [$required, 'integer', 'between:0,100000'],
         ];
     }
 }

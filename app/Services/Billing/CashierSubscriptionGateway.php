@@ -6,6 +6,7 @@ namespace App\Services\Billing;
 
 use App\Models\Plan;
 use App\Models\User;
+use Laravel\Cashier\Cashier;
 
 /**
  * Stripe subscriptions through Laravel Cashier.
@@ -52,5 +53,20 @@ final readonly class CashierSubscriptionGateway implements SubscriptionGateway
     public function portalUrl(User $user, string $returnUrl): string
     {
         return $user->billingPortalUrl($returnUrl);
+    }
+
+    #[\Override]
+    public function price(string $priceId): StripePrice
+    {
+        $price = Cashier::stripe()->prices->retrieve($priceId);
+
+        return new StripePrice(
+            id: $price->id,
+            unitAmount: $price->unit_amount,
+            currency: $price->currency,
+            interval: $price->recurring?->interval,
+            intervalCount: (int) ($price->recurring?->interval_count ?? 1),
+            active: (bool) $price->active,
+        );
     }
 }

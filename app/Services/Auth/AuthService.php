@@ -11,7 +11,6 @@ use App\Models\User;
 use App\Services\Billing\PlanResolver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
-use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\ConnectionInterface;
 use Tymon\JWTAuth\JWTGuard;
@@ -26,7 +25,6 @@ final readonly class AuthService
         private ConnectionInterface $db,
         private Dispatcher $events,
         private PlanResolver $plans,
-        private Config $config,
     ) {}
 
     /**
@@ -46,8 +44,7 @@ final readonly class AuthService
     }
 
     /**
-     * Creates a regular account on the free plan with the signup trial and sends the
-     * email verification link.
+     * Creates a regular account on the Free plan (no trial) and sends the email verification link.
      *
      * @return array{0: User, 1: IssuedToken}
      */
@@ -59,7 +56,6 @@ final readonly class AuthService
                 'email' => $email,
                 'password' => $password,
                 'plan_id' => $this->plans->freePlan()?->id,
-                'trial_ends_at' => now()->addDays((int) $this->config->get('billing.trial_days', 14)),
             ]);
 
             $role = Role::query()->where('name', RoleName::User->value)->first();

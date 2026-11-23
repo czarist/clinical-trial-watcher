@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\ClinicalTrials\Import;
 
 use App\Exceptions\InvalidStudyPayload;
+use App\Services\ClinicalTrials\Changes\TrackedFacts;
 use Illuminate\Support\Arr;
 
 /**
@@ -48,6 +49,7 @@ final class StudyMapper
                 'armGroups' => $this->armGroups($protocol),
                 'outcomes' => $this->outcomes($protocol),
             ],
+            facts: TrackedFacts::fromStudy($study),
         );
     }
 
@@ -177,6 +179,7 @@ final class StudyMapper
                 'city' => $this->short($location['city'] ?? null),
                 'state' => $this->short($location['state'] ?? null),
                 'country' => $this->short($location['country'] ?? null),
+                'status' => $this->short($location['status'] ?? null),
                 'zip' => $this->short($location['zip'] ?? null),
                 'latitude' => $location['geoPoint']['lat'] ?? null,
                 'longitude' => $location['geoPoint']['lon'] ?? null,

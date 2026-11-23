@@ -21,6 +21,11 @@ final class BillingFailed extends ApplicationException
         return new self('You already have a subscription; change its plan instead.');
     }
 
+    public static function priceMisconfigured(): self
+    {
+        return new self('This plan is temporarily unavailable for purchase. Please try again later.');
+    }
+
     public static function notResumable(): self
     {
         return new self('The subscription is not in its cancellation grace period.');

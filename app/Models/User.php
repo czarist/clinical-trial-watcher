@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
@@ -64,6 +65,19 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     public function alerts(): HasMany
     {
         return $this->hasMany(Alert::class);
+    }
+
+    public function ownedTeam(): HasOne
+    {
+        return $this->hasOne(Team::class, 'owner_id');
+    }
+
+    public function teams(): BelongsToMany
+    {
+        return $this->belongsToMany(Team::class, 'team_members')
+            ->using(TeamMember::class)
+            ->withPivot(['id', 'role', 'receives_digests'])
+            ->withTimestamps();
     }
 
     public function hasRole(RoleName|string $role): bool

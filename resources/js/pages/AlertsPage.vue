@@ -37,7 +37,10 @@ onMounted(async () => {
 
         <p v-if="error" class="notice error" role="alert">{{ error }}</p>
         <template v-else-if="alerts">
-            <p class="muted">You are using {{ alerts.meta.total }} of {{ alerts.meta.alerts_limit }} alerts in your plan.</p>
+            <p class="muted">
+                You are using {{ alerts.meta.total }} of {{ alerts.meta.alerts_limit }} saved searches. Basic alerts are free.
+                <template v-if="!alerts.meta.ai_digests_available">AI digests come with Pro AI: <RouterLink to="/digests/samples">see samples</RouterLink>.</template>
+            </p>
             <p v-if="alerts.data.length === 0" class="notice">You have no alerts yet. Search for studies and choose “Follow this search”, or create one here.</p>
             <ul class="alerts">
                 <li v-for="alert in alerts.data" :key="alert.id" class="alert" :class="{ 'is-paused': !alert.is_active }">
@@ -49,6 +52,7 @@ onMounted(async () => {
                         <dt>Email</dt><dd>{{ alert.is_active ? frequencyLabel[alert.frequency] : 'Paused' }}</dd>
                         <dt>Waiting to be sent</dt><dd>{{ alert.pending_matches_count ?? 0 }}</dd>
                         <dt>Last email</dt><dd>{{ formatDate(alert.last_notified_at) }}</dd>
+                        <dt>AI digest</dt><dd>{{ alert.ai_digest.enabled ? (alert.ai_digest.frequency === 'daily' ? 'Daily' : 'Weekly') : 'Off' }}</dd>
                     </dl>
                 </li>
             </ul>

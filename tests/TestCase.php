@@ -33,7 +33,7 @@ abstract class TestCase extends BaseTestCase
     protected function userWithRole(RoleName $role = RoleName::User, array $attributes = []): User
     {
         $user = User::factory()->create([
-            'plan_id' => Plan::where('name', Plan::BASIC)->value('id'),
+            'plan_id' => Plan::where('name', Plan::FREE)->value('id'),
             ...$attributes,
         ]);
         $user->roles()->attach(Role::where('name', $role->value)->firstOrFail());
@@ -41,9 +41,32 @@ abstract class TestCase extends BaseTestCase
         return $user;
     }
 
+    /**
+     * Gives the user an active local subscription to the named plan (no Stripe call).
+     */
+    protected function subscribeTo(User $user, string $planName): void
+    {
+        $plan = Plan::where('name', $planName)->firstOrFail();
+        $plan->stripe_price_id ??= 'price_'.str_replace(' ', '_', strtolower($planName));
+        $plan->save();
+
+        $user->subscriptions()->create([
+            'type' => 'default',
+            'plan_id' => $plan->id,
+            'stripe_id' => 'sub_'.$user->id,
+            'stripe_status' => 'active',
+            'stripe_price' => $plan->stripe_price_id,
+            'quantity' => 1,
+        ]);
+    }
+
     protected function actingAsApiUser(User $user): static
     {
         $this->app['auth']->forgetGuards();
+        // The JWT services cache the token they parsed from the previous request; the guard
+        // uses tymon.jwt and the facade tymon.jwt.auth.
+        $this->app['tymon.jwt']->unsetToken();
+        JWTAuth::unsetToken();
 
         return $this->withToken(JWTAuth::fromUser($user));
     }
