@@ -3,18 +3,26 @@
 declare(strict_types=1);
 
 use App\Services\Registries\ClinicalTrialsGovSource;
+use App\Services\Registries\Sources\Anzctr\AnzctrSource;
+use App\Services\Registries\Sources\Cris\CrisSource;
 use App\Services\Registries\Sources\Ctis\CtisSource;
 use App\Services\Registries\Sources\Drks\DrksSource;
 use App\Services\Registries\Sources\EdaEgypt\EdaEgyptSource;
 use App\Services\Registries\Sources\Euctr\EuctrSource;
 use App\Services\Registries\Sources\HealthCanada\HealthCanadaSource;
+use App\Services\Registries\Sources\Hra\HraSource;
 use App\Services\Registries\Sources\Isrctn\IsrctnSource;
+use App\Services\Registries\Sources\Mfds\MfdsSource;
 use App\Services\Registries\Sources\MozUkraine\MozUkraineSource;
+use App\Services\Registries\Sources\NciCts\NciCtsSource;
+use App\Services\Registries\Sources\Orphanet\OrphanetSource;
 use App\Services\Registries\Sources\PpbKenya\PpbKenyaSource;
 use App\Services\Registries\Sources\Rebec\RebecSource;
 use App\Services\Registries\Sources\Reec\ReecSource;
 use App\Services\Registries\Sources\Renis\RenisSource;
+use App\Services\Registries\Sources\Sukl\SuklSource;
 use App\Services\Registries\Sources\Tfda\TfdaSource;
+use App\Services\Registries\Sources\Umin\UminSource;
 
 return [
 
@@ -42,6 +50,16 @@ return [
         PpbKenyaSource::KEY => PpbKenyaSource::class,
         EdaEgyptSource::KEY => EdaEgyptSource::class,
         MozUkraineSource::KEY => MozUkraineSource::class,
+        // Need an operator key.
+        NciCtsSource::KEY => NciCtsSource::class,
+        MfdsSource::KEY => MfdsSource::class,
+        CrisSource::KEY => CrisSource::class,
+        // Need the registry's written permission (see 'permissions' below).
+        AnzctrSource::KEY => AnzctrSource::class,
+        UminSource::KEY => UminSource::class,
+        HraSource::KEY => HraSource::class,
+        SuklSource::KEY => SuklSource::class,
+        OrphanetSource::KEY => OrphanetSource::class,
     ],
 
     /*
@@ -67,6 +85,11 @@ return [
     'options' => [
         'renis' => ['file_url' => env('REGISTRY_RENIS_FILE_URL')],
         'eda_egypt' => ['pdf_url' => env('REGISTRY_EDA_EGYPT_PDF_URL')],
+        'nci_cts' => ['api_key' => env('REGISTRY_NCI_CTS_API_KEY')],
+        'mfds' => ['service_key' => env('REGISTRY_MFDS_SERVICE_KEY', '')],
+        'cris' => ['service_key' => env('REGISTRY_CRIS_SERVICE_KEY', '')],
+        // Delivered under an Orphanet-AISBL contract; no public address.
+        'orphanet' => ['dump_url' => env('REGISTRY_ORPHANET_DUMP_URL', '')],
     ],
 
     /*

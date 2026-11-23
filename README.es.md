@@ -65,6 +65,21 @@ Se pueden importar doce registros más con `php artisan clinicaltrials:fetch --s
 | `eda_egypt` | Egyptian Drug Authority | PDF | No | No confirmado |
 | `moz_ukraine` | Órdenes del Ministerio de Salud de Ucrania | Anexos en PDF | Órdenes más recientes | No confirmado |
 
+Otros ocho importadores están hechos y probados, pero permanecen desactivados hasta que el operador aporte lo que exige el registro:
+
+| Clave | Registro | Lectura | Requiere | Uso comercial |
+|---|---|---|---|---|
+| `nci_cts` | NCI Clinical Trials Search API (EE. UU., cáncer) | API JSON; los estudios enlazan con sus registros de ClinicalTrials.gov | `REGISTRY_NCI_CTS_API_KEY` | Sí, citando al NCI |
+| `mfds` | Planes de ensayo aprobados por el MFDS (Corea del Sur) | API de data.go.kr | `REGISTRY_MFDS_SERVICE_KEY` | Sí |
+| `cris` | CRIS (Corea del Sur) | API de data.go.kr | `REGISTRY_CRIS_SERVICE_KEY` | No (KOGL Tipo 2): se muestra con atribución, nunca en los resúmenes con IA |
+| `anzctr` | ANZCTR (Australia y Nueva Zelanda) | Páginas web | Permiso por escrito, `REGISTRY_PERMISSION_ANZCTR` | No |
+| `umin` | UMIN-CTR (Japón) | Volcado CSV diario | Permiso por escrito, `REGISTRY_PERMISSION_UMIN` | No |
+| `hra` | Resúmenes de investigación de la HRA (Reino Unido) | Páginas web | Permiso por escrito, `REGISTRY_PERMISSION_HRA` | No |
+| `sukl` | SÚKL (Chequia) | API de búsqueda del sitio web | Permiso por escrito, `REGISTRY_PERMISSION_SUKL` | No |
+| `orphanet` | Ensayos clínicos de Orphanet | Volcado XML de Orphadata | Un contrato con Orphanet-AISBL, `REGISTRY_PERMISSION_ORPHANET` y `REGISTRY_ORPHANET_DUMP_URL` | No |
+
+Los mapeos de las API protegidas por clave y de UMIN se hicieron a partir de su documentación con fixtures sintéticas, porque no había ninguna clave ni muestra disponible; revíselos en la primera ejecución real.
+
 - **Cada importador superó una revisión legal**, recogida en su clase de origen y en [docs/registries-evaluation.md](docs/registries-evaluation.md) (sección 7), que también enumera los registros que aún no se pueden importar y lo que necesita cada uno (WHO ICTRP, UMIN-CTR, CRIS, ANZCTR, HRA y otros).
 - **Las entradas de registros cuyas condiciones no confirman el uso comercial se muestran gratis con atribución, pero quedan fuera de los resúmenes con IA**, hasta que el registro confirme la reutilización por escrito.
 - **Acceso respetuoso.** Las solicitudes llevan un user agent con una dirección de contacto (`REGISTRY_CONTACT`, obligatoria para descargas y páginas web), respetan robots.txt y su Crawl-delay en descargas y páginas web, se hacen de una en una por registro con al menos `REGISTRY_MIN_INTERVAL_MS` entre ellas y se reintentan un número limitado de veces. Un inicio de sesión, un captcha o un HTTP 401/403 detiene la ejecución: pida al registro permiso o una exportación. Nunca se elude nada.
@@ -191,6 +206,12 @@ Abra `http://localhost:8000` e inicie sesión con el administrador creado por el
 
 Para compilar la aplicación web en lugar de ejecutar el servidor de desarrollo: `docker-compose run --rm node npm run build`.
 
+### Configuración de otros registros
+
+Defina `REGISTRY_CONTACT` en `.env` con una URL o dirección de correo electrónico con la que los operadores de los registros puedan contactarle; las importaciones por descarga o página web no se ejecutan sin ella. Tras obtener cambios en el `Dockerfile` (instala `poppler-utils` para los registros en PDF), reconstruya la imagen con `docker-compose up -d --build`. Después importe un registro cada vez, por ejemplo `docker-compose exec app php artisan clinicaltrials:fetch --source=isrctn --max-pages=1`.
+
+Los registros que necesitan una clave del operador la leen de `REGISTRY_<KEY>_SERVICE_KEY` o `REGISTRY_<KEY>_API_KEY` (consulte `.env.example`). Los registros que necesitan permiso por escrito permanecen desactivados hasta que se registra con `REGISTRY_PERMISSION_<KEY>=true`; establézcalo solo después de que el registro lo haya concedido por escrito.
+
 ### Configuración de la facturación
 
 La búsqueda y las alertas básicas funcionan sin Stripe. Para vender Pro AI y Team AI:
@@ -241,7 +262,7 @@ Todas las rutas están bajo `/api` y devuelven JSON. Las rutas protegidas requie
 | `POST` | `/auth/email/verification-notification` | token | Vuelve a enviar el enlace de confirmación |
 | `PUT` | `/account/profile`, `/account/password` | token | Cambia el nombre y el correo, o la contraseña |
 | `PUT` | `/account/locale` | token | Cambia el idioma de la cuenta (`locale`: `en`, `pt_BR`, `es`, `zh_CN`, `zh_TW`, `ja`, `ko`) |
-| `GET` | `/trials` | `view_clinical_trials` | Búsqueda, un resultado por estudio; filtros más abajo (incluido `source[]`, la clave de un registro), `sort`, `page`, `per_page` (hasta 100) |
+| `GET` | `/trials` | `view_clinical_trials` | Búsqueda, un resultado por estudio, cada uno con su `registry`, su `registry_url` y la `attribution` que exigen sus condiciones; filtros más abajo (incluido `source[]`, la clave de un registro), `sort`, `page`, `per_page` (hasta 100) |
 | `GET` | `/trials/{nct_id}` | `view_clinical_trials` | Estudio con todas sus listas relacionadas, sus `identifiers` normalizados y sus otros registros (`also_registered_as`, o `duplicate_of` para una entrada mostrada bajo otra) |
 | `GET` `POST` | `/alerts` | `create_alerts`, correo confirmado | Lista o crea búsquedas guardadas; `team_id` para las compartidas de un equipo (el propietario crea, los miembros listan) |
 | `GET` `PATCH` `DELETE` | `/alerts/{id}` | propietario; los miembros del equipo pueden leer las compartidas | Lee, modifica o elimina una búsqueda guardada, incluidos `ai_digest_enabled`, `ai_digest_frequency` (`daily`, `weekly`) y `ai_digest_language` (`en`, `pt_BR`, `es`, `zh_CN`, `zh_TW`, `ja`, `ko`) |

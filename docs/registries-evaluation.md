@@ -254,6 +254,9 @@ whether automated access is allowed, minimum interval, and whether commercial
 use is allowed). `RegistryFetcher` refuses every request of a source whose
 review does not allow automated access, and stops a run on HTTP 401/403 or a
 challenge page; the operator then asks the registry for permission or an export.
+Importers of registries that need written permission are built but refuse every
+request until the operator records the permission (`REGISTRY_PERMISSION_<KEY>`
+in `config/registries.php`).
 
 Commercial use: the product sells automation (AI digests), while registry data
 is shown for free. When a registry's terms do not clearly allow commercial
@@ -276,20 +279,20 @@ in writing.
 | PPB Kenya | Build (scraping) | Server-rendered list and detail pages | Not confirmed (no terms) | PPB confirmation of reuse. No registry identifiers |
 | EDA Egypt | Build (PDF) | Quarterly cumulative PDF | Not confirmed (no terms) | EDA confirmation of reuse. No registry identifiers |
 | MOZ Ukraine orders | Build (PDF annexes) | Orders listing, order pages, annex PDFs | Not confirmed (official documents, probably not copyrighted) | Confirmation; the State Expert Center register is blocked by a firewall |
-| MFDS (Korea) | Build with key | data.go.kr REST API | Yes ("no restriction") | An operator key with production approval |
-| NCI CTS API v2 | Build with key | REST API, `X-API-KEY` | Yes (credit NCI); key terms unread | An operator key and a reading of its terms |
+| MFDS (Korea) | Built, needs a key | data.go.kr REST API | Yes ("no restriction") | An operator key with production approval |
+| NCI CTS API v2 | Built, needs a key | REST API, `X-API-KEY` | Yes (credit NCI); key terms unread | An operator key and a reading of its terms |
 | WHO ICTRP | Blocked | No public API; robots.txt `Disallow: /`; paid institutional files | No (section 4(d)) | WHO institutional access and a written waiver of 4(d) |
-| UMIN-CTR | Blocked | Daily CSV dump | No (FAQ bans commercial web services that display the data) | Written permission from UMIN Center |
-| CRIS (Korea) | Blocked | data.go.kr API with key | No (KOGL Type 2) | Written permission from KDCA |
-| ANZCTR | Blocked | HTML only, no API | Reuse allowed with conditions, but automated collection needs express approval | Written approval, ideally an XML feed |
-| HRA (UK) | Blocked | HTML pages | No (reuse only for research or private study) | Written permission from HRA |
+| UMIN-CTR | Built, off until permission | Daily CSV dump; robots.txt disallows AI agents | No (FAQ bans commercial web services that display the data) | Written permission from UMIN Center |
+| CRIS (Korea) | Built, needs a key; non-commercial | data.go.kr API with key | No (KOGL Type 2): kept out of AI digests | A key; written permission from KDCA to include it in paid features |
+| ANZCTR | Built, off until permission | HTML only, no API | Reuse allowed with conditions, but automated collection needs express approval | Written approval, ideally an XML feed |
+| HRA (UK) | Built, off until permission | HTML pages | No (reuse only for research or private study) | Written permission from HRA |
 | HMA-EMA RWD catalogue | Blocked | Listing and CSV under `/search`, disallowed by robots.txt; HTTP 429 after a few requests | Unclear | Written permission or a data export from EMA |
 | RNEC (Portugal) | Blocked | Stateful JSF form | No ("not for profit") | INFARMED authorisation; its trials are CTIS trials anyway |
-| SÚKL (Czechia) | Blocked | Form search, data up to 2023 | Prior consent required | Not worth asking: duplicates EU CTR and CTIS |
+| SÚKL (Czechia) | Built, off until permission | Website search API, data up to 2023 | Prior consent required | SÚKL consent; low value (duplicates EU CTR and CTIS) |
 | Plataforma Brasil | Blocked | Slow stateful form; no CAAE, phase or status on public pages | Not found; LGPD personal data | An official extract with CAAE from Conep/CNS |
 | CDE/NMPA (China) | Blocked | Every page returns an anti-bot challenge | Unknown | Written permission or a data arrangement with CDE |
 | TİTCK (Turkey) | Blocked | Firewall blocks even robots.txt | Unknown | Permission and an allow-listed route or export |
-| Orphanet | Blocked | Bot challenge; trials only in contracted Orphadata dumps | No (service contract) | An Orphanet-AISBL contract. The CC BY 4.0 ORPHAcode nomenclature can tag rare-disease conditions without it |
+| Orphanet | Built, off until contract | Contracted Orphadata XML dumps | No (service contract) | An Orphanet-AISBL contract. The CC BY 4.0 ORPHAcode nomenclature can tag rare-disease conditions without it |
 | INCa (France) | Unavailable | Site moved to cancer.fr, in maintenance | Unknown | Re-check later; evaluate the API ECLAIRE (FHIR, data.gouv.fr) instead |
 
 Not planned: EMA Clinical Data Publication (login required and non-commercial

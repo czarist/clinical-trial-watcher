@@ -65,6 +65,21 @@ Twelve more registries can be imported with `php artisan clinicaltrials:fetch --
 | `eda_egypt` | Egyptian Drug Authority | PDF | No | Not confirmed |
 | `moz_ukraine` | Ministry of Health of Ukraine orders | PDF annexes | Newest orders | Not confirmed |
 
+Eight more importers are built and tested but stay off until the operator provides what the registry requires:
+
+| Key | Registry | Read by | Needs | Commercial use |
+|---|---|---|---|---|
+| `nci_cts` | NCI Clinical Trials Search API (US, cancer) | JSON API; trials link to their ClinicalTrials.gov records | `REGISTRY_NCI_CTS_API_KEY` | Yes, crediting NCI |
+| `mfds` | MFDS approved trial plans (South Korea) | data.go.kr API | `REGISTRY_MFDS_SERVICE_KEY` | Yes |
+| `cris` | CRIS (South Korea) | data.go.kr API | `REGISTRY_CRIS_SERVICE_KEY` | No (KOGL Type 2): shown with attribution, never in AI digests |
+| `anzctr` | ANZCTR (Australia and New Zealand) | Web pages | Written permission, `REGISTRY_PERMISSION_ANZCTR` | No |
+| `umin` | UMIN-CTR (Japan) | Daily CSV dump | Written permission, `REGISTRY_PERMISSION_UMIN` | No |
+| `hra` | HRA research summaries (UK) | Web pages | Written permission, `REGISTRY_PERMISSION_HRA` | No |
+| `sukl` | SÚKL (Czechia) | Search API of the website | Written permission, `REGISTRY_PERMISSION_SUKL` | No |
+| `orphanet` | Orphanet clinical trials | Orphadata XML dump | An Orphanet-AISBL contract, `REGISTRY_PERMISSION_ORPHANET` and `REGISTRY_ORPHANET_DUMP_URL` | No |
+
+The mappings of the key-protected APIs and of UMIN were built from their documentation with synthetic fixtures, because no key or sample was available; check them on the first live run.
+
 - **Every importer passed a legal review** recorded in its source class and in [docs/registries-evaluation.md](docs/registries-evaluation.md) (section 7), which also lists the registries that cannot be imported yet and what each one needs (WHO ICTRP, UMIN-CTR, CRIS, ANZCTR, HRA and others).
 - **Records of registries whose terms do not confirm commercial use are shown for free with attribution but left out of AI digests**, until the registry confirms reuse in writing.
 - **Polite access.** Requests carry a user agent with a contact address (`REGISTRY_CONTACT`, required for downloads and web pages), follow robots.txt and its Crawl-delay for downloads and web pages, go one at a time per registry at least `REGISTRY_MIN_INTERVAL_MS` apart, and are retried a bounded number of times. A login, captcha or HTTP 401/403 stops the run: ask the registry for permission or an export instead. Nothing is ever worked around.

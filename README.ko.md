@@ -65,6 +65,21 @@
 | `eda_egypt` | Egyptian Drug Authority | PDF | 아니요 | 확인되지 않음 |
 | `moz_ukraine` | 우크라이나 보건부 명령 | PDF 부속서 | 최신 명령 | 확인되지 않음 |
 
+8개의 가져오기 도구가 추가로 구현되고 테스트되었지만, 운영자가 레지스트리가 요구하는 것을 제공할 때까지는 꺼져 있습니다.
+
+| 키 | 레지스트리 | 읽기 방식 | 필요 사항 | 상업적 이용 |
+|---|---|---|---|---|
+| `nci_cts` | NCI Clinical Trials Search API (미국, 암) | JSON API. 시험은 해당 ClinicalTrials.gov 레코드에 연결됨 | `REGISTRY_NCI_CTS_API_KEY` | 가능, NCI 출처 표시 |
+| `mfds` | 식약처(MFDS) 승인 임상시험 계획 (대한민국) | data.go.kr API | `REGISTRY_MFDS_SERVICE_KEY` | 가능 |
+| `cris` | CRIS (대한민국) | data.go.kr API | `REGISTRY_CRIS_SERVICE_KEY` | 불가 (공공누리 제2유형): 출처를 밝혀 표시하며 AI 다이제스트에는 포함하지 않음 |
+| `anzctr` | ANZCTR (호주 및 뉴질랜드) | 웹 페이지 | 서면 허가, `REGISTRY_PERMISSION_ANZCTR` | 불가 |
+| `umin` | UMIN-CTR (일본) | 일일 CSV 덤프 | 서면 허가, `REGISTRY_PERMISSION_UMIN` | 불가 |
+| `hra` | HRA 연구 요약 (영국) | 웹 페이지 | 서면 허가, `REGISTRY_PERMISSION_HRA` | 불가 |
+| `sukl` | SÚKL (체코) | 웹사이트의 검색 API | 서면 허가, `REGISTRY_PERMISSION_SUKL` | 불가 |
+| `orphanet` | Orphanet 임상시험 | Orphadata XML 덤프 | Orphanet-AISBL과의 계약, `REGISTRY_PERMISSION_ORPHANET` 및 `REGISTRY_ORPHANET_DUMP_URL` | 불가 |
+
+키로 보호되는 API와 UMIN의 매핑은 사용할 수 있는 키나 샘플이 없어 문서를 바탕으로 합성 fixture로 만들었습니다. 첫 실제 실행에서 확인하세요.
+
 - **모든 가져오기 도구는 법률 검토를 통과했습니다.** 검토 내용은 각 소스 클래스와 [docs/registries-evaluation.md](docs/registries-evaluation.md)(7절)에 기록되어 있으며, 이 문서에는 아직 가져올 수 없는 레지스트리와 각각에 필요한 사항(WHO ICTRP, UMIN-CTR, CRIS, ANZCTR, HRA 등)도 나와 있습니다.
 - **약관에서 상업적 이용이 확인되지 않는 레지스트리의 레코드는 출처를 밝혀 무료로 표시하지만 AI 다이제스트에서는 제외합니다.** 레지스트리가 재사용을 서면으로 확인할 때까지 이렇게 처리합니다.
 - **예의 바른 접근.** 요청에는 연락처 주소가 포함된 user agent(`REGISTRY_CONTACT`, 다운로드와 웹 페이지에 필수)를 붙이고, 다운로드와 웹 페이지에서는 robots.txt와 그 Crawl-delay를 따르며, 레지스트리별로 한 번에 하나씩 최소 `REGISTRY_MIN_INTERVAL_MS` 간격으로 보내고, 제한된 횟수만큼 재시도합니다. 로그인, 캡차 또는 HTTP 401/403을 만나면 실행을 중단합니다. 이 경우 레지스트리에 허가나 내보내기 파일을 요청하세요. 어떤 제한도 우회하지 않습니다.
@@ -191,6 +206,12 @@ docker-compose exec app php artisan clinicaltrials:fetch --max-pages=1
 
 개발 서버 대신 웹 앱을 빌드하려면 `docker-compose run --rm node npm run build`를 실행하세요.
 
+### 기타 레지스트리 설정
+
+`.env`의 `REGISTRY_CONTACT`에 레지스트리 운영자가 연락할 수 있는 URL 또는 이메일 주소를 설정하세요. 이 값이 없으면 다운로드나 웹 페이지를 통한 가져오기는 실행되지 않습니다. `Dockerfile` 변경 사항을 가져온 뒤에는(PDF 레지스트리용 `poppler-utils`를 설치합니다) `docker-compose up -d --build`로 이미지를 다시 빌드하세요. 그런 다음 레지스트리를 하나씩 가져오세요. 예: `docker-compose exec app php artisan clinicaltrials:fetch --source=isrctn --max-pages=1`.
+
+운영자 키가 필요한 레지스트리는 `REGISTRY_<KEY>_SERVICE_KEY` 또는 `REGISTRY_<KEY>_API_KEY`에서 키를 읽습니다(`.env.example` 참고). 서면 허가가 필요한 레지스트리는 `REGISTRY_PERMISSION_<KEY>=true`로 허가가 기록될 때까지 꺼져 있습니다. 레지스트리가 서면으로 허가한 뒤에만 설정하세요.
+
 ### 결제 설정
 
 검색과 기본 알림은 Stripe 없이도 동작합니다. Pro AI와 Team AI를 판매하려면 다음을 수행하세요.
@@ -241,7 +262,7 @@ AI_MODEL=...                            # a model name the provider accepts
 | `POST` | `/auth/email/verification-notification` | 토큰 | 확인 링크 재발송 |
 | `PUT` | `/account/profile`, `/account/password` | 토큰 | 이름과 이메일 또는 비밀번호 변경 |
 | `PUT` | `/account/locale` | 토큰 | 계정 언어 변경(`locale`: `en`, `pt_BR`, `es`, `zh_CN`, `zh_TW`, `ja`, `ko`) |
-| `GET` | `/trials` | `view_clinical_trials` | 검색(연구당 결과 하나). 아래 필터(레지스트리 키인 `source[]` 포함), `sort`, `page`, `per_page`(최대 100) |
+| `GET` | `/trials` | `view_clinical_trials` | 검색(연구당 결과 하나, 각 결과에 `registry`, `registry_url`, 약관이 요구하는 `attribution` 포함). 아래 필터(레지스트리 키인 `source[]` 포함), `sort`, `page`, `per_page`(최대 100) |
 | `GET` | `/trials/{nct_id}` | `view_clinical_trials` | 모든 관련 목록, 정규화된 `identifiers`, 다른 등록(`also_registered_as`, 또는 다른 레코드 아래에 표시되는 레코드의 경우 `duplicate_of`)을 포함한 연구 |
 | `GET` `POST` | `/alerts` | `create_alerts`, 이메일 확인 완료 | 저장된 검색 목록 조회 또는 생성. 팀 공유 검색은 `team_id` 사용(소유자는 생성, 구성원은 목록 조회) |
 | `GET` `PATCH` `DELETE` | `/alerts/{id}` | 소유자, 팀 구성원은 공유 검색 조회 가능 | 저장된 검색 조회, 변경, 삭제. `ai_digest_enabled`, `ai_digest_frequency`(`daily`, `weekly`), `ai_digest_language`(`en`, `pt_BR`, `es`, `zh_CN`, `zh_TW`, `ja`, `ko`) 포함 |

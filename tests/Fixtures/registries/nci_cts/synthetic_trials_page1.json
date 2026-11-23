@@ -1,0 +1,215 @@
+{
+	"total": 3,
+	"data": [
+		{
+			"nci_id": "NCI-2026-00123",
+			"nct_id": "NCT07012345",
+			"ctep_id": "NRG-XX001",
+			"dcp_id": null,
+			"ccr_id": null,
+			"protocol_id": "SYN-2026-01",
+			"other_ids": null,
+			"acronym": "SYNTH-1",
+			"brief_title": "Synthetic Drug A for the Treatment of Recurrent Synthetic Lymphoma",
+			"official_title": "A Phase 1/2 Synthetic Trial of Drug A in Patients With Recurrent Synthetic Lymphoma",
+			"brief_summary": "This synthetic phase I/II trial is a test record. It does not describe a real study.",
+			"detail_description": "PRIMARY OBJECTIVES:\r\nI. Synthetic objective.",
+			"current_trial_status": "Active",
+			"current_trial_status_date": "2026-02-01",
+			"phase": {
+				"phase": "I_II",
+				"phase_other_text": null,
+				"phase_additional_qualifier_code": "NO"
+			},
+			"study_protocol_type": "Interventional",
+			"primary_purpose": {
+				"primary_purpose_code": "TREATMENT",
+				"primary_purpose_other_text": null,
+				"primary_purpose_additional_qualifier_code": null
+			},
+			"start_date": "2026-01-15",
+			"start_date_type_code": "ACTUAL",
+			"completion_date": "2029-12-31",
+			"completion_date_type_code": "ANTICIPATED",
+			"record_verification_date": "2026-10-30",
+			"amendment_date": "2026-09-01T00:00:00",
+			"minimum_target_accrual_number": 60,
+			"number_of_arms": 2,
+			"lead_org": "Synthetic Cancer Center",
+			"principal_investigator": "Redacted",
+			"collaborators": [{"name": "Synthetic Cooperative Group"}],
+			"keywords": ["synthetic", "lymphoma"],
+			"results_posted": null,
+			"central_contact": {
+				"central_contact_name": "Redacted",
+				"central_contact_type": "GENERAL",
+				"central_contact_email": "Redacted",
+				"central_contact_phone": "Redacted"
+			},
+			"diseases": [
+				{
+					"inclusion_indicator": "TRIAL",
+					"lead_disease_indicator": "YES",
+					"nci_thesaurus_concept_id": "C0000001",
+					"preferred_name": "Recurrent Synthetic Lymphoma",
+					"display_name": "Recurrent Synthetic Lymphoma",
+					"type": ["stage"],
+					"synonyms": [],
+					"parents": ["C0000002"]
+				},
+				{
+					"inclusion_indicator": "TREE",
+					"lead_disease_indicator": "NO",
+					"nci_thesaurus_concept_id": "C0000002",
+					"preferred_name": "Synthetic Lymphoma",
+					"display_name": "Synthetic Lymphoma",
+					"type": ["maintype"],
+					"synonyms": [],
+					"parents": []
+				}
+			],
+			"arms": [
+				{
+					"arm_name": "Arm I (drug A)",
+					"arm_type": "EXPERIMENTAL",
+					"arm_description": "Patients receive synthetic drug A IV on day 1.",
+					"interventions": [
+						{
+							"intervention_code": "C0000010",
+							"intervention_name": "Synthetic Drug A",
+							"intervention_type": "Drug",
+							"intervention_description": "A synthetic agent (NCI Thesaurus).",
+							"inclusion_indicator": "TRIAL",
+							"synonyms": [],
+							"parents": [],
+							"intervention_category": "Agent"
+						},
+						{
+							"intervention_code": "C0000011",
+							"intervention_name": "Quality-of-Life Assessment",
+							"intervention_type": "Other",
+							"intervention_description": "A synthetic assessment.",
+							"inclusion_indicator": "TRIAL",
+							"synonyms": [],
+							"parents": [],
+							"intervention_category": "Other"
+						}
+					]
+				},
+				{
+					"arm_name": "Arm II (radiation therapy)",
+					"arm_type": "ACTIVE_COMPARATOR",
+					"arm_description": "Patients undergo synthetic radiation therapy.",
+					"interventions": [
+						{
+							"intervention_code": "C0000012",
+							"intervention_name": "Radiation Therapy",
+							"intervention_type": "Radiation",
+							"intervention_description": "A synthetic radiation therapy.",
+							"inclusion_indicator": "TRIAL",
+							"synonyms": [],
+							"parents": [],
+							"intervention_category": "Other"
+						},
+						{
+							"intervention_code": "C0000011",
+							"intervention_name": "Quality-of-Life Assessment",
+							"intervention_type": "Other",
+							"intervention_description": "A synthetic assessment.",
+							"inclusion_indicator": "TRIAL",
+							"synonyms": [],
+							"parents": [],
+							"intervention_category": "Other"
+						}
+					]
+				}
+			],
+			"eligibility": {
+				"structured": {
+					"sex": "ALL",
+					"max_age": "999 Years",
+					"min_age": "18 Years",
+					"max_age_unit": "Years",
+					"min_age_unit": "Years",
+					"max_age_number": 999,
+					"min_age_number": 18,
+					"max_age_in_years": 999,
+					"min_age_in_years": 18
+				},
+				"unstructured": [
+					{"description": "No prior synthetic therapy", "display_order": 3, "inclusion_indicator": false},
+					{"description": "Age >= 18 years", "display_order": 1, "inclusion_indicator": true},
+					{"description": "Recurrent synthetic lymphoma", "display_order": 2, "inclusion_indicator": true}
+				]
+			},
+			"outcome_measures": [
+				{"name": "Maximum tolerated dose", "timeframe": "Up to 28 days", "type_code": "PRIMARY", "description": "Synthetic primary outcome."},
+				{"name": "Overall response rate", "timeframe": "Up to 1 year", "type_code": "SECONDARY", "description": null},
+				{"name": "Exploratory biomarker", "timeframe": "Up to 1 year", "type_code": "OTHER_PRE_SPECIFIED", "description": null}
+			],
+			"sites": [
+				{
+					"contact_name": "Redacted",
+					"contact_email": "Redacted",
+					"contact_phone": "Redacted",
+					"recruitment_status": "ACTIVE",
+					"recruitment_status_date": "2026-02-01",
+					"local_site_identifier": "",
+					"org_name": "Synthetic Cancer Center",
+					"org_address_line_1": "1 Synthetic Way",
+					"org_address_line_2": null,
+					"org_city": "Bethesda",
+					"org_state_or_province": "MD",
+					"org_postal_code": "20892",
+					"org_country": "United States",
+					"org_coordinates": {"lat": 38.9847, "lon": -77.0947},
+					"org_email": "Redacted",
+					"org_phone": "Redacted",
+					"org_fax": null,
+					"org_tty": null,
+					"org_family": "Synthetic Family",
+					"org_status": "ACTIVE",
+					"org_status_date": "2020-01-01",
+					"org_to_family_relationship": "ORGANIZATIONAL",
+					"org_va": false
+				},
+				{
+					"contact_name": "Redacted",
+					"contact_email": "Redacted",
+					"contact_phone": "Redacted",
+					"recruitment_status": "CLOSED_TO_ACCRUAL",
+					"recruitment_status_date": "2026-06-01",
+					"local_site_identifier": "",
+					"org_name": "Synthetic University Hospital",
+					"org_address_line_1": null,
+					"org_address_line_2": null,
+					"org_city": "Toronto",
+					"org_state_or_province": "ON",
+					"org_postal_code": null,
+					"org_country": "Canada",
+					"org_coordinates": null,
+					"org_email": null,
+					"org_phone": null,
+					"org_fax": null,
+					"org_tty": null,
+					"org_family": null,
+					"org_status": "ACTIVE",
+					"org_status_date": "2020-01-01",
+					"org_to_family_relationship": null,
+					"org_va": false
+				}
+			]
+		},
+		{
+			"nci_id": "NCI-2025-04567",
+			"brief_title": "Synthetic Observational Study With Few Fields",
+			"current_trial_status": "Closed to Accrual",
+			"study_protocol_type": "Non-Interventional",
+			"phase": {"phase": "NA", "phase_other_text": null, "phase_additional_qualifier_code": null},
+			"diseases": [],
+			"arms": [],
+			"sites": [],
+			"eligibility": {"structured": {"sex": "FEMALE", "min_age_number": 0.5, "min_age_unit": "Years", "max_age_number": 75, "max_age_unit": "Years"}, "unstructured": []}
+		}
+	]
+}

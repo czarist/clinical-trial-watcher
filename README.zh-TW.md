@@ -65,6 +65,21 @@
 | `eda_egypt` | Egyptian Drug Authority | PDF | 否 | 未確認 |
 | `moz_ukraine` | 烏克蘭衛生部命令 | PDF 附件 | 最新命令 | 未確認 |
 
+另有八個匯入器已完成並通過測試，但在營運者提供登錄資料庫所要求的條件之前保持關閉：
+
+| 鍵 | 登錄資料庫 | 讀取方式 | 所需條件 | 商業使用 |
+|---|---|---|---|---|
+| `nci_cts` | NCI Clinical Trials Search API（美國，癌症） | JSON API；試驗連結至其 ClinicalTrials.gov 紀錄 | `REGISTRY_NCI_CTS_API_KEY` | 是，需註明 NCI |
+| `mfds` | MFDS 核准的試驗計畫（南韓） | data.go.kr API | `REGISTRY_MFDS_SERVICE_KEY` | 是 |
+| `cris` | CRIS（南韓） | data.go.kr API | `REGISTRY_CRIS_SERVICE_KEY` | 否（KOGL 第 2 類）：附上出處顯示，絕不納入 AI 摘要 |
+| `anzctr` | ANZCTR（澳洲與紐西蘭） | 網頁 | 書面許可，`REGISTRY_PERMISSION_ANZCTR` | 否 |
+| `umin` | UMIN-CTR（日本） | 每日 CSV 傾印檔 | 書面許可，`REGISTRY_PERMISSION_UMIN` | 否 |
+| `hra` | HRA 研究摘要（英國） | 網頁 | 書面許可，`REGISTRY_PERMISSION_HRA` | 否 |
+| `sukl` | SÚKL（捷克） | 網站的搜尋 API | 書面許可，`REGISTRY_PERMISSION_SUKL` | 否 |
+| `orphanet` | Orphanet 臨床試驗 | Orphadata XML 傾印檔 | 與 Orphanet-AISBL 的合約、`REGISTRY_PERMISSION_ORPHANET` 及 `REGISTRY_ORPHANET_DUMP_URL` | 否 |
+
+由於沒有可用的金鑰或樣本，需要金鑰的 API 與 UMIN 的對應是依據其文件並以合成 fixture 建立的；請在第一次實際執行時加以核對。
+
 - **每個匯入器都通過了法律審查**，審查紀錄在其來源類別及 [docs/registries-evaluation.md](docs/registries-evaluation.md)（第 7 節）中；該文件也列出了目前尚無法匯入的登錄資料庫及各自所需的條件（WHO ICTRP、UMIN-CTR、CRIS、ANZCTR、HRA 等）。
 - **條款未確認允許商業使用的登錄資料庫，其紀錄會附上出處免費顯示，但不會納入 AI 摘要**，直到該登錄資料庫以書面確認允許再利用。
 - **有禮貌的存取。** 請求會帶有包含聯絡地址的 user agent（`REGISTRY_CONTACT`，下載與網頁為必填），下載與網頁會遵守 robots.txt 及其 Crawl-delay，每個登錄資料庫一次只送出一個請求且間隔至少 `REGISTRY_MIN_INTERVAL_MS`，重試次數有上限。遇到登入、驗證碼或 HTTP 401/403 時會停止執行：請向該登錄資料庫申請許可或匯出檔案。絕不繞過任何限制。
@@ -191,6 +206,12 @@ docker-compose exec app php artisan clinicaltrials:fetch --max-pages=1
 
 若要建置網頁應用程式而不執行開發伺服器：`docker-compose run --rm node npm run build`。
 
+### 其他登錄資料庫設定
+
+在 `.env` 中將 `REGISTRY_CONTACT` 設為登錄資料庫營運者可以聯絡到你的 URL 或電子郵件地址；未設定時，透過下載或網頁進行的匯入會拒絕執行。拉取 `Dockerfile` 的變更後（它會為 PDF 登錄資料庫安裝 `poppler-utils`），請以 `docker-compose up -d --build` 重新建置映像檔。接著一次匯入一個登錄資料庫，例如 `docker-compose exec app php artisan clinicaltrials:fetch --source=isrctn --max-pages=1`。
+
+需要營運者金鑰的登錄資料庫會從 `REGISTRY_<KEY>_SERVICE_KEY` 或 `REGISTRY_<KEY>_API_KEY` 讀取金鑰（見 `.env.example`）。需要書面許可的登錄資料庫在以 `REGISTRY_PERMISSION_<KEY>=true` 記錄許可之前保持關閉；請僅在登錄資料庫以書面授予許可後才設定。
+
 ### 計費設定
 
 搜尋及基本提醒不需要 Stripe 即可運作。若要販售 Pro AI 及 Team AI：
@@ -241,7 +262,7 @@ AI_MODEL=...                            # a model name the provider accepts
 | `POST` | `/auth/email/verification-notification` | 權杖 | 重新寄送確認連結 |
 | `PUT` | `/account/profile`, `/account/password` | 權杖 | 變更名稱與電子郵件，或變更密碼 |
 | `PUT` | `/account/locale` | 權杖 | 變更帳戶語言（`locale`：`en`、`pt_BR`、`es`、`zh_CN`、`zh_TW`、`ja`、`ko`） |
-| `GET` | `/trials` | `view_clinical_trials` | 搜尋，每項研究一筆結果；篩選條件見下方（包括 `source[]`，即登錄資料庫的鍵值），另有 `sort`、`page`、`per_page`（最多 100） |
+| `GET` | `/trials` | `view_clinical_trials` | 搜尋，每項研究一筆結果，每筆附有其 `registry`、`registry_url` 及其條款要求的 `attribution`；篩選條件見下方（包括 `source[]`，即登錄資料庫的鍵值），另有 `sort`、`page`、`per_page`（最多 100） |
 | `GET` | `/trials/{nct_id}` | `view_clinical_trials` | 研究及其所有相關清單、正規化後的 `identifiers`，以及其他登錄（`also_registered_as`；若此紀錄顯示在另一筆紀錄之下，則為 `duplicate_of`） |
 | `GET` `POST` | `/alerts` | `create_alerts`，已確認電子郵件 | 列出或建立已儲存搜尋；使用 `team_id` 存取團隊共用的已儲存搜尋（擁有者建立，成員列出） |
 | `GET` `PATCH` `DELETE` | `/alerts/{id}` | 擁有者；團隊成員可讀取共用的項目 | 讀取、變更或刪除已儲存搜尋，包括 `ai_digest_enabled`、`ai_digest_frequency`（`daily`、`weekly`）及 `ai_digest_language`（`en`、`pt_BR`、`es`、`zh_CN`、`zh_TW`、`ja`、`ko`） |

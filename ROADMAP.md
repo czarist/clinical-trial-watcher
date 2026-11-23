@@ -208,27 +208,27 @@ Importers
 - [X] EU Clinical Trials Register / EudraCT: plain-text export, one record per EudraCT number, NCT/ISRCTN/UTN linked; new trials only in incremental runs.
 - [X] DRKS (Germany): JSON dump streamed from the ZIP; only CC BY 4.0 records (registered or updated from 2025). Older records need BfArM permission.
 - [X] REEC (Spain): documented REST API, keyed by EU CT/EudraCT number so it links to CTIS; re-reads the last 90 days of registrations.
-- [ ] CRIS (South Korea): blocked — KOGL Type 2 forbids commercial use and the website disallows all crawlers; needs written permission from KDCA. (API with a service key, no NCT field.)
-- [ ] UMIN-CTR (Japan): blocked — the FAQ forbids commercial web services that display the data; needs written permission from UMIN Center.
+- [ ] CRIS (South Korea): importer built (`cris`) on the official data.go.kr API; KOGL Type 2 forbids commercial use, so its records are shown with attribution and kept out of AI digests. Needs `REGISTRY_CRIS_SERVICE_KEY` and a first live run; ask KDCA if AI digests should include it.
+- [ ] UMIN-CTR (Japan): importer built (`umin`) from the documentation only (its robots.txt disallows AI agents, so no sample was fetched) and off until written permission from UMIN Center (`REGISTRY_PERMISSION_UMIN`); the FAQ forbids commercial web services that display the data.
 - [X] TFDA Drug Clinical Trial Status (Taiwan): monthly ZIP of CSV (export 205), rows grouped per trial; no trial-level status and no registry identifiers.
-- [ ] ANZCTR (Australia and New Zealand): blocked — no API, and automated collection needs ANZCTR's express approval (ideally an XML feed).
+- [ ] ANZCTR (Australia and New Zealand): importer built (`anzctr`) and off until ANZCTR's express approval of automated collection (`REGISTRY_PERMISSION_ANZCTR`); ask for an XML feed, which would replace the page reader.
 - [X] RENIS (Argentina): cumulative XLSX (newest file found on the dataset page, or `REGISTRY_RENIS_FILE_URL`), CC BY 4.0, NCT numbers linked. SISA (reCAPTCHA) is not read.
 - [X] ReBEC (Brazil): HTML list and trial pages (robots.txt disallows the TRDS XML); commercial use not confirmed, so kept out of AI digests. Ask DECIT/Fiocruz to confirm reuse or allow the XML.
 - [ ] WHO ICTRP (international): blocked — robots.txt disallows the whole site, bulk files need paid institutional access, and section 4(d) forbids commercial use. Needs WHO access and a written waiver; until then the registries it aggregates are imported from their own sources.
-- [ ] MFDS approved trial plans (South Korea, data.go.kr `ClncExamPlanDtlService03`): REST API, "no restriction" on use; needs an operator key with production approval and a real response to build the mapper from.
-- [ ] NCI Clinical Trials Search API v2 (US, cancer): needs an operator key and a reading of its terms; enrich existing NCT studies instead of duplicating them.
+- [ ] MFDS approved trial plans (South Korea, data.go.kr `ClncExamPlanDtlService03`): importer built (`mfds`) and tested on synthetic data; needs `REGISTRY_MFDS_SERVICE_KEY` with production approval and a first live run to confirm the field formats.
+- [ ] NCI Clinical Trials Search API v2 (US, cancer): importer built (`nci_cts`) from the schema in NCI's public repositories, linking trials to their ClinicalTrials.gov records; needs `REGISTRY_NCI_CTS_API_KEY`, a reading of the key's terms and a first live run.
 - [X] EDA clinical trials registry (Egypt): cumulative PDF parsed with `pdftotext -layout`; no registry id (study code used, never for linking); commercial use not confirmed.
 - [ ] CDE/NMPA drug trial registration and disclosure platform (China): blocked — every page returns an anti-bot challenge; needs written permission or a data arrangement with CDE.
 - [ ] HMA-EMA catalogue of real-world data studies (EU): blocked — robots.txt disallows `/search` (listing and CSV export); needs permission or an export from EMA.
-- [ ] HRA Research Summaries (UK): blocked — reuse only "for research or private study"; needs written permission from HRA. Records carry IRAS ids (now linkable).
+- [ ] HRA Research Summaries (UK): importer built (`hra`, records keyed and linked by IRAS number) and off until written permission from HRA (`REGISTRY_PERMISSION_HRA`); reuse is otherwise limited to research or private study.
 - [ ] RNEC (Portugal, INFARMED): blocked — reuse only "not for profit"; its trials are CTIS trials (same EU CT numbers), already covered.
 - [ ] INCa cancer trials registry (France): site moved to cancer.fr and was in maintenance on 2026-11-23; re-check, and evaluate the API ECLAIRE (FHIR, data.gouv.fr) instead.
-- [ ] Orphanet research and clinical trials (rare diseases): blocked — trials only in Orphadata dumps under an Orphanet-AISBL contract; the CC BY 4.0 ORPHAcode nomenclature can tag rare-disease conditions without it.
+- [ ] Orphanet research and clinical trials (rare diseases): importer built (`orphanet`, ORPHAcodes as conditions) and off until an Orphanet-AISBL contract (`REGISTRY_PERMISSION_ORPHANET`, `REGISTRY_ORPHANET_DUMP_URL`).
 - [ ] Plataforma Brasil (CEP/Conep): blocked — public pages lack CAAE, phase and status; needs an official extract from Conep/CNS. ReBEC records already cite CAAE numbers (linkable).
 - [ ] TİTCK Clinical Research Portal (Turkey): blocked — a firewall rejects even robots.txt; needs permission and an allow-listed route or export.
 - [X] MOZ orders authorizing trials (Ukraine): orders listing and annex PDFs; amendment annexes skipped; commercial use not confirmed. The State Expert Center register is behind a firewall: ask for access.
 - [X] Pharmacy and Poisons Board trials system (Kenya): approved, stopped and suspended lists and detail pages; no registry identifiers; commercial use not confirmed.
-- [ ] SÚKL clinical trials database (Czechia): blocked — prior consent required; duplicates EU CTR and CTIS, not worth asking.
+- [ ] SÚKL clinical trials database (Czechia): importer built (`sukl`, linked by EudraCT number) and off until SÚKL's prior consent (`REGISTRY_PERMISSION_SUKL`); it mostly duplicates EU CTR and CTIS.
 - Not planned: EMA Clinical Data Publication (terms allow only non-commercial use, login required; link to it only); Australian Clinical Trials and Australian Cancer Trials (copies of ANZCTR); KDCA registration statistics (from CRIS); AACT (a ClinicalTrials.gov mirror); AIFA observational studies (not public yet); Hungary (OGYÉI) and Vietnam (no official public database found).
 
 Verification and documentation

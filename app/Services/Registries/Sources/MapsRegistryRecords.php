@@ -72,7 +72,11 @@ trait MapsRegistryRecords
         }
 
         foreach ($formats as $format) {
-            $date = CarbonImmutable::createFromFormat('!'.$format, $value);
+            try {
+                $date = CarbonImmutable::createFromFormat('!'.$format, $value);
+            } catch (\Throwable) {
+                continue; // not this format, e.g. a partial date
+            }
 
             if ($date !== null && $date->format($format) === $value) {
                 return $date->toDateString();

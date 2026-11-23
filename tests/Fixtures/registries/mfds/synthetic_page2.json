@@ -1,0 +1,31 @@
+{
+  "header": {
+    "resultCode": "00",
+    "resultMsg": "NORMAL SERVICE."
+  },
+  "body": {
+    "pageNo": 2,
+    "totalCount": 3,
+    "numOfRows": 2,
+    "items": {
+      "item": {
+        "CLNC_TEST_SN": "202200789",
+        "CLNC_TEST_TITLE": "제2형 당뇨병 환자에서 DM-3의 유효성을 평가하는 제2/3상 임상시험",
+        "CLNC_TEST_ENG_TITLE": "A Phase 2/3 Study of DM-3 in Patients With Type 2 Diabetes",
+        "STATUS": "진행중",
+        "CLINIC_STEP_NM": "2/3상",
+        "TRGT_DISS_NM": "제2형 당뇨병",
+        "PRDT_NM": "DM-3",
+        "GNRL_CD_NM": "dimetaglip",
+        "COMP_DRUG_NM": "메트포르민",
+        "ORGN_DEV_BSSH_NM": "Example Korea Co., Ltd.",
+        "ADDR": "분당서울대학교병원",
+        "CLST_APRV_DT": "20220810",
+        "HIST_REG_DT": "20230102",
+        "CLST_BGNG_DT": "20221001",
+        "TESTEE_CNT_INFO": "300",
+        "PRIM_EVL_VAR": "24주차 HbA1c 변화량"
+      }
+    }
+  }
+}

@@ -65,6 +65,21 @@
 | `eda_egypt` | Egyptian Drug Authority | PDF | 否 | 未确认 |
 | `moz_ukraine` | 乌克兰卫生部命令 | PDF 附件 | 最新命令 | 未确认 |
 
+另有八个导入器已完成并通过测试，但在运营者提供注册库所要求的条件之前保持关闭：
+
+| 键 | 注册库 | 读取方式 | 所需条件 | 商业使用 |
+|---|---|---|---|---|
+| `nci_cts` | NCI Clinical Trials Search API（美国，癌症） | JSON API；试验链接到其 ClinicalTrials.gov 记录 | `REGISTRY_NCI_CTS_API_KEY` | 是，需注明 NCI |
+| `mfds` | MFDS 批准的试验计划（韩国） | data.go.kr API | `REGISTRY_MFDS_SERVICE_KEY` | 是 |
+| `cris` | CRIS（韩国） | data.go.kr API | `REGISTRY_CRIS_SERVICE_KEY` | 否（KOGL 第 2 类）：附带署名显示，绝不纳入 AI 摘要 |
+| `anzctr` | ANZCTR（澳大利亚和新西兰） | 网页 | 书面许可，`REGISTRY_PERMISSION_ANZCTR` | 否 |
+| `umin` | UMIN-CTR（日本） | 每日 CSV 转储 | 书面许可，`REGISTRY_PERMISSION_UMIN` | 否 |
+| `hra` | HRA 研究摘要（英国） | 网页 | 书面许可，`REGISTRY_PERMISSION_HRA` | 否 |
+| `sukl` | SÚKL（捷克） | 网站的搜索 API | 书面许可，`REGISTRY_PERMISSION_SUKL` | 否 |
+| `orphanet` | Orphanet 临床试验 | Orphadata XML 转储 | 与 Orphanet-AISBL 的合同、`REGISTRY_PERMISSION_ORPHANET` 和 `REGISTRY_ORPHANET_DUMP_URL` | 否 |
+
+由于没有可用的密钥或样本，需要密钥的 API 和 UMIN 的映射是根据其文档并使用合成 fixture 构建的；请在首次实际运行时进行核对。
+
 - **每个导入器都通过了法律审查**，审查记录在其源类和 [docs/registries-evaluation.md](docs/registries-evaluation.md)（第 7 节）中；该文档还列出了暂时无法导入的注册库及各自所需条件（WHO ICTRP、UMIN-CTR、CRIS、ANZCTR、HRA 等）。
 - **条款未确认允许商业使用的注册库，其记录会附带署名免费显示，但不纳入 AI 摘要**，直到该注册库以书面形式确认允许再利用。
 - **礼貌访问。** 请求带有包含联系地址的 user agent（`REGISTRY_CONTACT`，下载和网页必填），下载和网页遵守 robots.txt 及其 Crawl-delay，每个注册库同一时间只发一个请求且间隔至少 `REGISTRY_MIN_INTERVAL_MS`，重试次数有上限。遇到登录、验证码或 HTTP 401/403 时会停止运行：请向该注册库申请许可或导出文件。绝不绕过任何限制。
@@ -191,6 +206,12 @@ docker-compose exec app php artisan clinicaltrials:fetch --max-pages=1
 
 如需构建 Web 应用而不是运行开发服务器：`docker-compose run --rm node npm run build`。
 
+### 其他注册库配置
+
+在 `.env` 中将 `REGISTRY_CONTACT` 设为注册库运营方可以联系到你的 URL 或电子邮件地址；未设置时，通过下载或网页进行的导入会拒绝运行。拉取对 `Dockerfile` 的更改后（它为 PDF 注册库安装 `poppler-utils`），用 `docker-compose up -d --build` 重新构建镜像。然后一次导入一个注册库，例如 `docker-compose exec app php artisan clinicaltrials:fetch --source=isrctn --max-pages=1`。
+
+需要运营方密钥的注册库从 `REGISTRY_<KEY>_SERVICE_KEY` 或 `REGISTRY_<KEY>_API_KEY` 读取密钥（见 `.env.example`）。需要书面许可的注册库在通过 `REGISTRY_PERMISSION_<KEY>=true` 记录许可之前保持关闭；请仅在注册库以书面形式授予许可后再设置。
+
 ### 计费配置
 
 搜索和基础提醒无需 Stripe 即可使用。如需销售 Pro AI 和 Team AI：
@@ -241,7 +262,7 @@ AI_MODEL=...                            # a model name the provider accepts
 | `POST` | `/auth/email/verification-notification` | 令牌 | 重新发送确认链接 |
 | `PUT` | `/account/profile`, `/account/password` | 令牌 | 修改姓名和邮箱，或修改密码 |
 | `PUT` | `/account/locale` | 令牌 | 修改账户语言（`locale`：`en`、`pt_BR`、`es`、`zh_CN`、`zh_TW`、`ja`、`ko`） |
-| `GET` | `/trials` | `view_clinical_trials` | 搜索，每项研究一个结果；筛选条件见下文（包括 `source[]`，即注册库键名），以及 `sort`、`page`、`per_page`（最多 100） |
+| `GET` | `/trials` | `view_clinical_trials` | 搜索，每项研究一个结果，每个结果带有其 `registry`、`registry_url` 以及其条款要求的 `attribution`；筛选条件见下文（包括 `source[]`，即注册库键名），以及 `sort`、`page`、`per_page`（最多 100） |
 | `GET` | `/trials/{nct_id}` | `view_clinical_trials` | 研究及其所有关联列表、规范化后的 `identifiers`，以及它的其他注册（`also_registered_as`；若该记录显示在另一条记录之下，则为 `duplicate_of`） |
 | `GET` `POST` | `/alerts` | `create_alerts`，已确认邮箱 | 列出或创建已保存的搜索；使用 `team_id` 处理团队共享的搜索（所有者创建，成员查看列表） |
 | `GET` `PATCH` `DELETE` | `/alerts/{id}` | 所有者；团队成员可读取共享的搜索 | 读取、修改或删除已保存的搜索，包括 `ai_digest_enabled`、`ai_digest_frequency`（`daily`、`weekly`）和 `ai_digest_language`（`en`、`pt_BR`、`es`、`zh_CN`、`zh_TW`、`ja`、`ko`） |
