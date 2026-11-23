@@ -6,15 +6,22 @@ namespace Tests\Fakes;
 
 use App\Models\Plan;
 use App\Models\User;
+use App\Services\Billing\StripePrice;
 use App\Services\Billing\SubscriptionGateway;
 
 /**
  * Records calls instead of contacting Stripe, and applies them to the local subscription.
+ *
+ * Prices default to a monthly USD price with the amount of the plan that uses them;
+ * set $prices to simulate a misconfigured price.
  */
 final class FakeSubscriptionGateway implements SubscriptionGateway
 {
     /** @var list<array{0: string, 1: int|null, 2: int|null}> */
     public array $calls = [];
+
+    /** @var array<string, StripePrice> */
+    public array $prices = [];
 
     #[\Override]
     public function checkoutUrl(User $user, Plan $plan, int $trialDays, string $successUrl, string $cancelUrl): string
@@ -51,5 +58,17 @@ final class FakeSubscriptionGateway implements SubscriptionGateway
         $this->calls[] = ['portal', null, null];
 
         return 'https://billing.stripe.test/portal';
+    }
+
+    #[\Override]
+    public function price(string $priceId): StripePrice
+    {
+        if (isset($this->prices[$priceId])) {
+            return $this->prices[$priceId];
+        }
+
+        $plan = Plan::query()->where('stripe_price_id', $priceId)->first();
+
+        return new StripePrice($priceId, $plan?->priceInCents(), 'usd', 'month', 1, true);
     }
 }

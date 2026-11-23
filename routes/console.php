@@ -14,3 +14,8 @@ Schedule::job(new ImportClinicalTrialsJob(new ImportOptions(pageSize: (int) conf
 
 Schedule::command('alerts:send-digests daily')->dailyAt('07:00');
 Schedule::command('alerts:send-digests weekly')->weeklyOn(1, '07:00');
+
+// AI digests for the window that just ended, after the morning basic digests. Each edition has
+// a stable identity, so an overlapping or repeated run does not send twice.
+Schedule::command('digests:dispatch daily')->dailyAt('07:30')->withoutOverlapping()->onOneServer();
+Schedule::command('digests:dispatch weekly')->weeklyOn(1, '07:30')->withoutOverlapping()->onOneServer();

@@ -6,6 +6,8 @@ namespace App\Providers;
 
 use App\Models\Subscription;
 use App\Models\User;
+use App\Services\Ai\AiProvider;
+use App\Services\Ai\OpenAiCompatibleProvider;
 use App\Services\Billing\BillingService;
 use App\Services\Billing\CashierSubscriptionGateway;
 use App\Services\Billing\SubscriptionGateway;
@@ -19,6 +21,11 @@ use App\Services\ClinicalTrials\Search\Filters\PhaseFilter;
 use App\Services\ClinicalTrials\Search\Filters\RelatedTextFilter;
 use App\Services\ClinicalTrials\Search\TrialQuery;
 use App\Services\ClinicalTrials\Search\TrialSearchCriteria;
+use App\Services\Digests\ChangeSummarizer;
+use App\Services\Digests\DigestBuilder;
+use App\Services\Digests\FactualChangeWriter;
+use App\Services\Digests\SummaryPrompt;
+use App\Services\Digests\SummaryValidator;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -59,6 +66,33 @@ final class AppServiceProvider extends ServiceProvider
         $this->app->bind(SubscriptionGateway::class, fn (): SubscriptionGateway => new CashierSubscriptionGateway(
             (string) config('billing.subscription_type'),
         ));
+
+        $this->app->bind(AiProvider::class, fn (Application $app): AiProvider => new OpenAiCompatibleProvider(
+            $app->make(HttpFactory::class),
+            (bool) config('ai.enabled'),
+            (string) config('ai.base_url'),
+            config('ai.api_key'),
+            config('ai.model'),
+            (int) config('ai.timeout'),
+        ));
+
+        $this->app->bind(SummaryValidator::class, fn (): SummaryValidator => new SummaryValidator((int) config('ai.max_summary_chars')));
+
+        $this->app->bind(ChangeSummarizer::class, fn (Application $app): ChangeSummarizer => new ChangeSummarizer(
+            $app->make(AiProvider::class),
+            $app->make(FactualChangeWriter::class),
+            $app->make(SummaryPrompt::class),
+            $app->make(SummaryValidator::class),
+            (string) config('ai.prompt_version'),
+            (int) config('ai.max_input_chars'),
+            (int) config('ai.max_output_tokens'),
+            (int) config('ai.retries'),
+            (int) config('ai.retry_sleep_ms'),
+        ));
+
+        $this->app->when(DigestBuilder::class)
+            ->needs('$maxItems')
+            ->give(fn (): int => (int) config('ai.max_items'));
 
         $this->app->when(BillingService::class)
             ->needs('$frontendUrl')

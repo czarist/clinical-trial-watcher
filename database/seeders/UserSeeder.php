@@ -24,7 +24,7 @@ final class UserSeeder extends Seeder
             [
                 'name' => 'Admin',
                 'password' => 'password',
-                'plan_id' => Plan::where('name', 'Enterprise')->value('id'),
+                'plan_id' => Plan::where('name', Plan::FREE)->value('id'),
                 'is_admin' => true,
             ],
         );

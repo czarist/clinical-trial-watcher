@@ -16,6 +16,13 @@ const message = ref<string | null>(null);
 const error = ref<ApiError | null>(null);
 const busy = ref(false);
 
+/** What each current plan adds, in the order shown. */
+const planFeatures: Record<string, string[]> = {
+    Free: ['Search, filters and study details', 'Change history of every study', 'Saved searches with basic email alerts'],
+    'Pro AI': ['Everything in Free', 'AI digests for your saved searches, daily or weekly', 'English or Brazilian Portuguese'],
+    'Team AI': ['Everything in Pro AI', 'One team: shared saved searches and digests', 'A report page for every team digest'],
+};
+
 onMounted(async () => {
     plans.value = (await api.get<{ data: Plan[] }>('/plans')).data;
     if (route.query.checkout === 'success') message.value = 'Payment received. Your plan changes as soon as Stripe confirms it.';
@@ -72,9 +79,13 @@ async function openPortal(): Promise<void> {
             <h2>Plan</h2>
             <template v-if="auth.billing">
                 <p>
-                    Your alerts follow the <strong>{{ auth.billing.effective_plan?.name ?? 'free' }}</strong> plan:
-                    {{ auth.billing.alerts_count }} of {{ auth.billing.alerts_limit }} alerts used.
-                    <template v-if="auth.billing.on_trial">Your free trial ends on {{ formatDate(auth.billing.trial_ends_at) }}.</template>
+                    Your plan: <strong>{{ auth.billing.effective_plan?.name ?? 'Free' }}</strong>.
+                    {{ auth.billing.alerts_count }} of {{ auth.billing.saved_search_limit }} saved searches used.
+                    <template v-if="auth.billing.features.ai_digests">AI digests are included.</template>
+                </p>
+                <p v-if="auth.billing.effective_plan?.is_legacy" class="notice">
+                    You are on the {{ auth.billing.effective_plan.name }} plan, which is no longer offered. It stays as it is until you change it or cancel; it does
+                    not include AI digests. Search and basic alerts are now free on every plan.
                 </p>
                 <p v-if="auth.billing.subscription?.on_grace_period" class="notice warning">
                     Your subscription ends on {{ formatDate(auth.billing.subscription.ends_at) }}.
@@ -88,8 +99,10 @@ async function openPortal(): Promise<void> {
             <ul class="plans">
                 <li v-for="plan in plans" :key="plan.id" class="plan" :class="{ 'is-current': auth.billing?.effective_plan?.id === plan.id }">
                     <h3>{{ plan.name }}</h3>
-                    <p class="plan__price">{{ plan.is_free ? 'Free' : `$${plan.price} / ${plan.billing_cycle === 'yearly' ? 'year' : 'month'}` }}</p>
-                    <p>Up to {{ plan.alerts_limit.toLocaleString() }} alerts<template v-if="plan.trial_days && !plan.is_free">, {{ plan.trial_days }}-day trial for new subscribers</template>.</p>
+                    <p class="plan__price">{{ plan.price_label }} <span v-if="!plan.is_free" class="plan__currency">{{ plan.currency }}</span></p>
+                    <ul class="plan__features">
+                        <li v-for="feature in planFeatures[plan.name] ?? []" :key="feature">{{ feature }}</li>
+                    </ul>
                     <p v-if="auth.billing?.effective_plan?.id === plan.id" class="muted">Your current plan</p>
                     <button
                         v-else-if="plan.is_free || plan.is_purchasable"
@@ -100,9 +113,10 @@ async function openPortal(): Promise<void> {
                     >
                         {{ plan.is_free ? 'Switch to Free' : `Choose ${plan.name}` }}
                     </button>
-                    <p v-else class="muted">Contact us to subscribe.</p>
+                    <p v-else class="muted">Not available for purchase yet.</p>
                 </li>
             </ul>
+            <p class="muted">Prices in US dollars, billed monthly through Stripe. <RouterLink to="/digests/samples">See sample AI digests</RouterLink>.</p>
             <button v-if="auth.billing?.subscription" class="button secondary" type="button" :disabled="busy" @click="openPortal">Manage payment and invoices</button>
         </section>
 
@@ -173,6 +187,17 @@ async function openPortal(): Promise<void> {
     font-size: var(--step-1);
     font-weight: 800;
     font-variant-numeric: tabular-nums;
+}
+
+.plan__currency {
+    font-size: var(--step--1);
+    font-weight: 400;
+    color: var(--muted);
+}
+
+.plan__features {
+    padding-left: var(--space-4);
+    margin: 0 0 var(--space-3);
 }
 
 .forms {

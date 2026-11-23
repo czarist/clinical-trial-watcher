@@ -8,7 +8,7 @@ final class AlertLimitReached extends ApplicationException
 {
     public static function forLimit(int $limit): self
     {
-        return new self("Your plan allows {$limit} alert(s). Upgrade your plan or delete an alert to create a new one.");
+        return new self("You can keep up to {$limit} saved searches. Delete one to create another.");
     }
 
     #[\Override]

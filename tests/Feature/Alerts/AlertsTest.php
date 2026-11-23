@@ -44,7 +44,7 @@ final class AlertsTest extends TestCase
             ->assertJsonPath('data.notify_status_changes', true)
             ->json('data.id');
 
-        $this->getJson('/api/alerts')->assertOk()->assertJsonCount(1, 'data')->assertJsonPath('meta.alerts_limit', 5);
+        $this->getJson('/api/alerts')->assertOk()->assertJsonCount(1, 'data')->assertJsonPath('meta.alerts_limit', 100)->assertJsonPath('meta.ai_digests_available', false);
 
         $this->patchJson("/api/alerts/{$id}", ['frequency' => 'instant', 'is_active' => false])
             ->assertOk()
@@ -71,25 +71,33 @@ final class AlertsTest extends TestCase
         ])->assertUnprocessable()->assertJsonValidationErrors('criteria');
     }
 
-    public function test_the_plan_limits_the_number_of_alerts(): void
+    public function test_every_plan_has_the_same_saved_search_limit_and_keeps_alerts_above_it(): void
     {
-        Alert::factory()->count(5)->for($this->user)->create();
+        config(['billing.saved_search_limit' => 3]);
+        $alerts = Alert::factory()->count(5)->for($this->user)->create();
+        $this->actingAsApiUser($this->user);
 
-        $this->actingAsApiUser($this->user)->postJson('/api/alerts', [
+        $this->postJson('/api/alerts', [
             'name' => 'One too many', 'criteria' => ['condition' => 'asthma'], 'frequency' => 'daily',
-        ])->assertForbidden()->assertJsonPath('message', fn (string $message): bool => str_contains($message, '5 alert'));
+        ])->assertForbidden()->assertJsonPath('message', fn (string $message): bool => str_contains($message, 'up to 3 saved searches'));
+
+        // Saved searches created before the limit keep working and can still be changed.
+        $this->getJson('/api/alerts')->assertOk()->assertJsonCount(5, 'data');
+        $this->patchJson("/api/alerts/{$alerts[0]->id}", ['name' => 'Renamed'])->assertOk();
     }
 
-    public function test_the_signup_trial_uses_the_trial_plan_limit(): void
+    public function test_free_accounts_get_basic_alerts_without_a_paid_plan_or_trial(): void
     {
+        // An account still on the old signup trial gets no paid features from it.
         $user = $this->userWithRole(attributes: ['trial_ends_at' => now()->addDays(3)]);
-        Alert::factory()->count(5)->for($user)->create();
 
         $this->actingAsApiUser($user)->postJson('/api/alerts', [
-            'name' => 'Sixth', 'criteria' => ['condition' => 'asthma'], 'frequency' => 'daily',
-        ])->assertCreated();
+            'name' => 'Asthma', 'criteria' => ['condition' => 'asthma'], 'frequency' => 'daily',
+        ])->assertCreated()->assertJsonPath('data.ai_digest.enabled', false);
 
-        $this->getJson('/api/auth/me')->assertJsonPath('billing.effective_plan.name', 'Pro');
+        $this->getJson('/api/auth/me')
+            ->assertJsonPath('billing.effective_plan.name', 'Free')
+            ->assertJsonPath('billing.features.ai_digests', false);
     }
 
     public function test_users_cannot_access_alerts_of_other_users(): void

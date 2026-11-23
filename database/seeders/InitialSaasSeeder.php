@@ -18,16 +18,29 @@ final class InitialSaasSeeder extends Seeder
 {
     public function run(): void
     {
+        // Current plans, in USD per month. Legacy plans (Basic, Pro, Enterprise) are not
+        // created on new installs; where they exist they stay as they are, marked legacy.
         $plans = [
-            ['name' => 'Basic', 'price' => 0.00, 'billing_cycle' => 'monthly', 'trial_days' => 0, 'features' => ['alerts_limit' => 5]],
-            ['name' => 'Pro', 'price' => 29.99, 'billing_cycle' => 'monthly', 'trial_days' => 14, 'features' => ['alerts_limit' => 50]],
-            ['name' => 'Enterprise', 'price' => 99.99, 'billing_cycle' => 'monthly', 'trial_days' => 14, 'features' => ['alerts_limit' => 9999]],
+            ['name' => Plan::FREE, 'price' => 0.00, 'features' => ['ai_digests' => false, 'team_workspace' => false]],
+            ['name' => Plan::PRO_AI, 'price' => 19.00, 'features' => ['ai_digests' => true, 'team_workspace' => false]],
+            ['name' => Plan::TEAM_AI, 'price' => 99.00, 'features' => ['ai_digests' => true, 'team_workspace' => true]],
         ];
 
-        // stripe_price_id is set by an administrator (PATCH /api/admin/plans/{plan}) and is kept here.
         foreach ($plans as $plan) {
-            Plan::updateOrCreate(['name' => $plan['name']], $plan);
+            $stripePrice = config("billing.plans.{$plan['name']}.stripe_price");
+
+            // stripe_price_id is kept unless the environment configures one.
+            Plan::updateOrCreate(['name' => $plan['name']], [
+                ...$plan,
+                'currency' => 'usd',
+                'billing_cycle' => 'monthly',
+                'trial_days' => 0,
+                'is_legacy' => false,
+                ...(is_string($stripePrice) && $stripePrice !== '' ? ['stripe_price_id' => $stripePrice] : []),
+            ]);
         }
+
+        Plan::query()->whereIn('name', ['Basic', 'Pro', 'Enterprise'])->update(['is_legacy' => true]);
 
         foreach (RoleName::cases() as $role) {
             Role::updateOrCreate(['name' => $role->value], ['description' => $role === RoleName::Admin ? 'Administrator role' : 'Regular user']);

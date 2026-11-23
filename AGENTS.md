@@ -35,7 +35,7 @@ Proceed with ordinary implementation choices supported by the repository. Ask on
 
 ## Project context
 
-Clinical Trial Watcher is a Laravel 13 application (PHP 8.6, MySQL 8.4) that imports clinical studies from the ClinicalTrials.gov API v2, serves them through an API with JWT authentication, and ships a Vue 3 web app in `resources/js/`. It runs with Docker Compose. Keep new code in the layer it belongs to:
+Clinical Trial Watcher is a Laravel 13 application (PHP 8.6, MySQL 8.4, Redis cache through Predis) that imports clinical studies from the ClinicalTrials.gov API v2, serves them through an API with JWT authentication, and ships a Vue 3 web app in `resources/js/`. It runs with Docker Compose. Keep new code in the layer it belongs to:
 
 - `app/Console/Commands/FetchClinicalTrials.php` is the import's CLI entry point; the work is in `app/Services/ClinicalTrials/Import/` (`StudyMapper` maps the API's `protocolSection` and `derivedSection` modules, `ClinicalTrialSynchronizer` persists). Studies are matched by `nct_id`; keep imports idempotent so a run can be repeated safely.
 - `app/Models/ClinicalTrials/` holds `ClinicalTrial` and one model per related list. Every related table has a `clinical_trial_id` foreign key and a `hasMany` relation on `ClinicalTrial`. When you add a field, add it to the migration, the model's `$fillable`, and the import mapping; a field missing from `$fillable` is silently dropped.
@@ -81,8 +81,11 @@ This is a navigation aid, not a second roadmap. Confirm these points in code bef
 | Import | `ClinicalTrialImporter` follows every page, retries with backoff, saves each study in its own transaction and records an `ImportRun`. Incremental runs start from the last `succeeded` run; a run stopped by `--max-pages` or with failed studies is `partial` and does not move that point. |
 | Related lists | `StudyMapper` always returns every list in `ClinicalTrial::SYNCED_RELATIONS`; the synchronizer replaces each one. A new related list must be added to both. |
 | Full-text search | InnoDB full-text indexes do not see uncommitted rows, so a test of `q` must commit its data (see `FullTextSearchTest`) and clean it up. |
-| Billing | Stripe is reached only through `SubscriptionGateway`; tests bind `Tests\Fakes\FakeSubscriptionGateway`. Webhooks are handled by Cashier at `/stripe/webhook`. |
-| Tests | PHPUnit runs on the dedicated MySQL database `clinical_saas_test` (forced in `phpunit.xml`). Running every migration takes minutes on Docker Desktop. |
+| Billing | Plans are Free, Pro AI and Team AI (USD per month); Basic, Pro and Enterprise are legacy (`is_legacy`) and must stay untouched for existing subscribers. Check paid features through `App\Services\Billing\Entitlements`, never by plan name. Core search and basic alerts must never need a paid plan. Stripe is reached only through `SubscriptionGateway`; tests bind `Tests\Fakes\FakeSubscriptionGateway`. Webhooks are handled by Cashier at `/stripe/webhook`. |
+| Teams | A team has one owner (the Team AI subscriber) and members who accepted an invitation. Check membership with `TeamPolicy`/`Team::hasMember()` on every team route, and the workspace with `Entitlements::teamIsActive()`. |
+| Changes | `ClinicalTrialSynchronizer` compares `TrackedFacts` snapshots with `ChangeDetector` and writes `details` and a unique `fingerprint` in the study's transaction. A study without a snapshot gets a baseline, not invented details. Dates keep their original precision in digests. |
+| AI digests | Provider calls happen only in `GenerateDigestJob`, never in a request or the import transaction, and only through `AiProvider`; tests bind `Tests\Fakes\FakeAiProvider`. Send only public registry facts. Keep `SummaryValidator` strict and the factual fallback working with AI disabled. Change `ai.prompt_version` when the prompt changes. |
+| Tests | PHPUnit runs on the dedicated MySQL database `clinical_saas_test` (forced in `phpunit.xml`). Running every migration takes minutes on Docker Desktop. Use `actingAsApiUser()` to switch users within a test: it clears the token cached by tymon/jwt. |
 
 Do not silently fix every item while doing an unrelated task. If a known defect affects the requested result, include the necessary fix and coverage; otherwise mention it only when relevant.
 

@@ -12,6 +12,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * A change to a study detected by an import: creation, update or overall status change.
+ *
+ * details holds the structured before-and-after values (see ChangeDetector); it is null for
+ * a new study and for changes recorded before structured tracking existed. fingerprint is the
+ * change's stable identity (its "version" for shared AI summaries).
  */
 class ClinicalTrialChange extends Model
 {
@@ -23,6 +27,8 @@ class ClinicalTrialChange extends Model
         'type',
         'previous_status',
         'new_status',
+        'details',
+        'fingerprint',
     ];
 
     #[\Override]
@@ -30,6 +36,7 @@ class ClinicalTrialChange extends Model
     {
         return [
             'type' => TrialChangeType::class,
+            'details' => 'array',
         ];
     }
 

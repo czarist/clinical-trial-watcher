@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Enums\PermissionName;
 use App\Http\Controllers\Api\AccountController;
+use App\Http\Controllers\Api\Admin\DigestRunController;
 use App\Http\Controllers\Api\Admin\ImportRunController;
 use App\Http\Controllers\Api\Admin\PlanController as AdminPlanController;
 use App\Http\Controllers\Api\Admin\RoleController;
@@ -12,8 +13,11 @@ use App\Http\Controllers\Api\AlertController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BillingController;
 use App\Http\Controllers\Api\ClinicalTrialController;
+use App\Http\Controllers\Api\DigestController;
 use App\Http\Controllers\Api\EmailVerificationController;
 use App\Http\Controllers\Api\PasswordResetController;
+use App\Http\Controllers\Api\TeamController;
+use App\Http\Controllers\Api\TeamInvitationController;
 use Illuminate\Support\Facades\Route;
 
 $permission = static fn (PermissionName $name): string => 'permission:'.$name->value;
@@ -37,6 +41,7 @@ Route::prefix('auth')->group(function (): void {
 });
 
 Route::get('plans', [BillingController::class, 'plans']);
+Route::get('digests/samples', [DigestController::class, 'samples']);
 
 Route::middleware('auth:api')->group(function () use ($permission): void {
     Route::put('account/profile', [AccountController::class, 'updateProfile']);
@@ -56,6 +61,25 @@ Route::middleware('auth:api')->group(function () use ($permission): void {
         Route::get('alerts/{alert}/matches', [AlertController::class, 'matches'])->can('view', 'alert');
     });
 
+    Route::middleware('verified')->group(function (): void {
+        Route::get('teams', [TeamController::class, 'index']);
+        Route::post('teams', [TeamController::class, 'store']);
+        Route::get('teams/{team}', [TeamController::class, 'show'])->can('view', 'team');
+        Route::patch('teams/{team}', [TeamController::class, 'update']);
+        Route::delete('teams/{team}', [TeamController::class, 'destroy'])->can('manage', 'team');
+        Route::patch('teams/{team}/membership', [TeamController::class, 'updateMembership'])->can('view', 'team');
+        Route::post('teams/{team}/invitations', [TeamController::class, 'invite']);
+        Route::delete('teams/{team}/invitations/{invitation}', [TeamController::class, 'revokeInvitation'])->can('manage', 'team');
+        Route::delete('teams/{team}/members/{member}', [TeamController::class, 'removeMember'])->can('view', 'team');
+
+        Route::get('team-invitations', [TeamInvitationController::class, 'index']);
+        Route::post('team-invitations/{invitation}/accept', [TeamInvitationController::class, 'accept']);
+        Route::post('team-invitations/{invitation}/decline', [TeamInvitationController::class, 'decline']);
+
+        Route::get('digests', [DigestController::class, 'index']);
+        Route::get('digests/{digest}', [DigestController::class, 'show'])->can('view', 'digest');
+    });
+
     Route::middleware('verified')->prefix('billing')->group(function (): void {
         Route::get('/', [BillingController::class, 'show']);
         Route::post('plan', [BillingController::class, 'changePlan']);
@@ -71,6 +95,7 @@ Route::middleware('auth:api')->group(function () use ($permission): void {
         });
 
         Route::middleware($permission(PermissionName::ManagePlans))->group(function (): void {
+            Route::get('plans', [AdminPlanController::class, 'index']);
             Route::post('plans', [AdminPlanController::class, 'store']);
             Route::patch('plans/{plan}', [AdminPlanController::class, 'update']);
             Route::delete('plans/{plan}', [AdminPlanController::class, 'destroy']);
@@ -85,6 +110,7 @@ Route::middleware('auth:api')->group(function () use ($permission): void {
         Route::middleware($permission(PermissionName::ManageImports))->group(function (): void {
             Route::get('imports', [ImportRunController::class, 'index']);
             Route::post('imports', [ImportRunController::class, 'store']);
+            Route::get('digests', [DigestRunController::class, 'index']);
         });
     });
 });

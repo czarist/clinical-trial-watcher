@@ -9,8 +9,9 @@ use App\Models\Plan;
 use App\Models\User;
 
 /**
- * Subscription rules: checkout for a first paid plan, swap for upgrades and downgrades
- * between paid plans, and cancellation to return to the free plan.
+ * Subscription rules: checkout for a first paid plan, swap between paid plans, and
+ * cancellation to return to Free. Legacy plans are never sold, but their subscribers can
+ * still cancel, resume, open the customer portal or move to a current plan.
  */
 final readonly class BillingService
 {
@@ -18,6 +19,8 @@ final readonly class BillingService
         private SubscriptionGateway $gateway,
         private PlanResolver $plans,
         private PlanSynchronizer $synchronizer,
+        private PlanPriceValidator $prices,
+        private Entitlements $entitlements,
         private string $frontendUrl,
     ) {}
 
@@ -40,6 +43,8 @@ final readonly class BillingService
         if (! $plan->isPurchasable()) {
             throw BillingFailed::planNotPurchasable();
         }
+
+        $this->prices->assertValid($plan);
 
         if (! $hasSubscription) {
             return $this->gateway->checkoutUrl(
@@ -89,7 +94,7 @@ final readonly class BillingService
     }
 
     /**
-     * The plan whose limits apply now and the state of the subscription.
+     * The plan that applies now, its paid features and the state of the subscription.
      *
      * @return array<string, mixed>
      */
@@ -97,11 +102,23 @@ final readonly class BillingService
     {
         $plan = $this->plans->effectivePlan($user);
         $subscription = $user->subscription($this->plans->subscriptionType());
+        $limit = $this->plans->savedSearchLimit();
 
         return [
-            'effective_plan' => $plan !== null ? ['id' => $plan->id, 'name' => $plan->name] : null,
-            'alerts_limit' => $plan?->alertsLimit() ?? 0,
-            'alerts_count' => $user->alerts()->count(),
+            'effective_plan' => $plan === null ? null : [
+                'id' => $plan->id,
+                'name' => $plan->name,
+                'price' => $plan->price,
+                'currency' => $plan->currency,
+                'is_legacy' => $plan->is_legacy,
+            ],
+            'features' => [
+                'ai_digests' => $this->entitlements->hasPersonalAiDigests($user),
+                'team_workspace' => $this->entitlements->canOwnTeam($user),
+            ],
+            'saved_search_limit' => $limit,
+            'alerts_limit' => $limit,
+            'alerts_count' => $user->alerts()->whereNull('team_id')->count(),
             'on_trial' => $user->onGenericTrial(),
             'trial_ends_at' => $user->trial_ends_at?->toIso8601String(),
             'subscription' => $subscription === null ? null : [
@@ -114,7 +131,7 @@ final readonly class BillingService
     }
 
     /**
-     * A plan's trial is offered only to accounts that never subscribed and are not on the signup trial.
+     * A plan's trial is offered only to accounts that never subscribed and are not on a signup trial.
      */
     private function checkoutTrialDays(User $user, Plan $plan): int
     {

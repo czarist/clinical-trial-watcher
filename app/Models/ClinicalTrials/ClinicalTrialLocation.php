@@ -20,6 +20,7 @@ class ClinicalTrialLocation extends Model
         'city',
         'state',
         'country',
+        'status',
         'zip',
         'latitude',
         'longitude',

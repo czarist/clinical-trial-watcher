@@ -76,8 +76,9 @@ final class AuthenticationTest extends TestCase
             ->assertJsonPath('data.email', $user->email)
             ->assertJsonPath('data.roles.0.name', RoleName::User->value)
             ->assertJsonPath('data.permissions', ['view_clinical_trials', 'create_alerts'])
-            ->assertJsonPath('billing.effective_plan.name', 'Basic')
-            ->assertJsonPath('billing.alerts_limit', 5)
+            ->assertJsonPath('billing.effective_plan.name', 'Free')
+            ->assertJsonPath('billing.alerts_limit', 100)
+            ->assertJsonPath('billing.features.ai_digests', false)
             ->assertJsonMissingPath('data.password');
     }
 
@@ -105,7 +106,7 @@ final class AuthenticationTest extends TestCase
         $this->assertNotSame($token, $newToken);
     }
 
-    public function test_registration_creates_a_regular_account_with_trial_and_sends_verification(): void
+    public function test_registration_creates_a_free_account_without_trial_and_sends_verification(): void
     {
         Notification::fake();
 
@@ -122,8 +123,8 @@ final class AuthenticationTest extends TestCase
             ->assertJsonPath('user.roles.0.name', RoleName::User->value);
 
         $user = User::where('email', 'new@example.com')->sole();
-        $this->assertSame('Basic', $user->plan->name);
-        $this->assertTrue($user->onGenericTrial());
+        $this->assertSame('Free', $user->plan->name);
+        $this->assertFalse($user->onGenericTrial());
         Notification::assertSentTo($user, VerifyEmail::class);
     }
 

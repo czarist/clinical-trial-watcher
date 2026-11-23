@@ -46,7 +46,7 @@ final class AdministrationTest extends TestCase
     {
         $user = $this->userWithRole(attributes: ['name' => 'Searchable Person']);
         $admin = Role::where('name', RoleName::Admin->value)->firstOrFail();
-        $enterprise = Plan::where('name', 'Enterprise')->firstOrFail();
+        $enterprise = Plan::where('name', Plan::TEAM_AI)->firstOrFail();
         $this->actingAsApiUser($this->admin);
 
         $this->getJson('/api/admin/users?search=searchable')->assertOk()->assertJsonCount(1, 'data')->assertJsonPath('data.0.id', $user->id);
@@ -54,7 +54,7 @@ final class AdministrationTest extends TestCase
         $this->patchJson("/api/admin/users/{$user->id}", ['role_ids' => [$admin->id], 'plan_id' => $enterprise->id])
             ->assertOk()
             ->assertJsonPath('data.roles.0.name', 'Admin')
-            ->assertJsonPath('data.plan.name', 'Enterprise');
+            ->assertJsonPath('data.plan.name', 'Team AI');
 
         $this->assertTrue($user->refresh()->hasPermission('manage_users'));
     }
@@ -64,11 +64,12 @@ final class AdministrationTest extends TestCase
         $this->actingAsApiUser($this->admin);
 
         $id = $this->postJson('/api/admin/plans', [
-            'name' => 'Team', 'price' => 49.5, 'billing_cycle' => 'monthly', 'stripe_price_id' => 'price_team', 'alerts_limit' => 200,
-        ])->assertCreated()->assertJsonPath('data.alerts_limit', 200)->assertJsonPath('data.stripe_price_id', 'price_team')->json('data.id');
+            'name' => 'Team', 'price' => 49.5, 'billing_cycle' => 'monthly', 'stripe_price_id' => 'price_team',
+        ])->assertCreated()->assertJsonPath('data.price', '49.50')->assertJsonPath('data.stripe_price_id', 'price_team')->json('data.id');
 
-        $this->patchJson("/api/admin/plans/{$id}", ['alerts_limit' => 300])->assertOk()->assertJsonPath('data.alerts_limit', 300);
-        $this->postJson('/api/admin/plans', ['name' => 'Team', 'price' => 1, 'billing_cycle' => 'monthly', 'alerts_limit' => 1])
+        $this->getJson('/api/admin/plans')->assertOk()->assertJsonFragment(['name' => 'Team']);
+        $this->patchJson("/api/admin/plans/{$id}", ['price' => 59])->assertOk()->assertJsonPath('data.price', '59.00');
+        $this->postJson('/api/admin/plans', ['name' => 'Team', 'price' => 1, 'billing_cycle' => 'monthly'])
             ->assertUnprocessable()->assertJsonValidationErrors('name');
         $this->deleteJson("/api/admin/plans/{$id}")->assertNoContent();
         $this->assertDatabaseMissing('plans', ['id' => $id]);
@@ -108,6 +109,7 @@ final class AdministrationTest extends TestCase
         $this->assertSame(3, Plan::count());
         $this->assertSame(2, Role::count());
         $this->assertSame(6, Permission::count());
-        $this->assertSame(['alerts_limit' => 5], Plan::where('name', 'Basic')->firstOrFail()->features);
+        $this->assertSame(['ai_digests' => true, 'team_workspace' => false], Plan::where('name', Plan::PRO_AI)->firstOrFail()->features);
+        $this->assertSame(['Free', 'Pro AI', 'Team AI'], Plan::orderBy('price')->pluck('name')->all());
     }
 }

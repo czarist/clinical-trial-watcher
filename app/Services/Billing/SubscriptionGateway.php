@@ -33,4 +33,9 @@ interface SubscriptionGateway
      * URL of the provider's customer portal (payment methods, invoices).
      */
     public function portalUrl(User $user, string $returnUrl): string;
+
+    /**
+     * Reads a price from the provider to check its amount, currency and interval.
+     */
+    public function price(string $priceId): StripePrice;
 }
