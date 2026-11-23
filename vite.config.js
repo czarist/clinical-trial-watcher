@@ -4,10 +4,16 @@ import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
     plugins: [
-        laravel({
-            input: ['resources/css/app.css', 'resources/js/app.ts'],
-            refresh: true,
-        }),
+        // The Laravel plugin is for serving and building assets; Vitest does not need it,
+        // and it refuses to start when the CI environment variable is set.
+        ...(process.env.VITEST
+            ? []
+            : [
+                  laravel({
+                      input: ['resources/css/app.css', 'resources/js/app.ts'],
+                      refresh: true,
+                  }),
+              ]),
         vue({
             template: {
                 transformAssetUrls: { base: null, includeAbsolute: false },

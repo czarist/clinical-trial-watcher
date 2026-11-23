@@ -161,7 +161,7 @@ docker-compose run --rm node npm test
 
 - The PHP tests run on a dedicated MySQL database, `clinical_saas_test`, created by `docker/mysql/init/` when the MySQL volume is first created. For an existing volume, create it once: `docker-compose exec mysql mysql -uroot -proot -e "CREATE DATABASE clinical_saas_test; GRANT ALL ON clinical_saas_test.* TO 'clinical_user'@'%';"`.
 - Import tests use `Http::fake()` with a recorded API response in `tests/Fixtures/`; tests never call ClinicalTrials.gov or Stripe.
-- GitHub Actions (`.github/workflows/ci.yml`) runs Pint, the PHP tests, the type check, the Vue tests and the build on pushes and pull requests.
+- GitHub Actions (`.github/workflows/ci.yml`) runs Pint, the PHP tests, the type check, the Vue tests and the build on pushes and pull requests to `main`, on tags, and by hand from the Actions tab. Branches flow from `dev` to `hom` to `main`.
 
 The schema is defined only by the migrations in `database/migrations/`. Add a new migration for every schema change; do not edit migrations that have already run.
 

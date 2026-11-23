@@ -161,7 +161,7 @@ docker-compose run --rm node npm test
 
 - Os testes PHP rodam em um banco MySQL dedicado, `clinical_saas_test`, criado por `docker/mysql/init/` quando o volume do MySQL é criado pela primeira vez. Para um volume que já existe, crie-o uma vez: `docker-compose exec mysql mysql -uroot -proot -e "CREATE DATABASE clinical_saas_test; GRANT ALL ON clinical_saas_test.* TO 'clinical_user'@'%';"`.
 - Os testes da importação usam `Http::fake()` com uma resposta gravada da API em `tests/Fixtures/`; os testes nunca chamam o ClinicalTrials.gov nem o Stripe.
-- O GitHub Actions (`.github/workflows/ci.yml`) roda o Pint, os testes PHP, a checagem de tipos, os testes do Vue e o build em pushes e pull requests.
+- O GitHub Actions (`.github/workflows/ci.yml`) roda o Pint, os testes PHP, a checagem de tipos, os testes do Vue e o build em pushes e pull requests para a `main`, em tags e manualmente pela aba Actions. As branches seguem de `dev` para `hom` e para `main`.
 
 O esquema do banco é definido apenas pelas migrations em `database/migrations/`. Crie uma migration nova para cada mudança; não edite migrations que já rodaram.
 

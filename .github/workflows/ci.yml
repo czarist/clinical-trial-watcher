@@ -1,9 +1,14 @@
 name: CI
 
+# Branch flow: dev → hom → main. CI runs on changes to main (pushes and pull requests)
+# and on tags; it can also be started by hand from the Actions tab.
 on:
     push:
-        branches: [main, dev]
+        branches: [main]
+        tags: ['*']
     pull_request:
+        branches: [main]
+    workflow_dispatch:
 
 permissions:
     contents: read
