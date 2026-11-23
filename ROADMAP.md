@@ -1,6 +1,6 @@
 # Roadmap
 
-Clinical Trial Watcher imports clinical studies from ClinicalTrials.gov into a MySQL database and serves them through a Laravel API with JWT authentication. The goal is a service where users search studies and get alerts when new or updated trials match what they follow, with plan limits on the number of alerts. The foundations and the first five stages below are built; the next steps at the end are open.
+Clinical Trial Watcher imports clinical studies from ClinicalTrials.gov into a MySQL database, caches with Redis, and serves them through a Laravel API with JWT authentication and a Vue web app. The goal is a free service where users search studies and get alerts when new or updated trials match what they follow, with paid AI digests (Pro AI and Team AI) that explain what changed. The foundations and the stages below are built; the next steps at the end are open.
 
 Last updated: 2026-11-23. This roadmap tracks the `main` branch. Items are checked only when they are implemented and verified.
 
@@ -72,7 +72,7 @@ Objective: catch regressions in the import and the API.
 - [X] Import tests with `Http::fake()` and recorded API responses, covering partial dates, missing modules and re-runs.
 - [X] Run tests on a dedicated database (SQLite in memory or a test MySQL schema).
 - [X] Run Pint in check mode.
-- [X] GitHub Actions running tests and Pint on pushes and pull requests. The workflow is in `.github/workflows/ci.yml`; check it off after its first green run on GitHub.
+- [X] GitHub Actions running Pint, the PHP tests and the web app checks (`.github/workflows/ci.yml`) on pushes and pull requests to `main`, on tags, and by hand.
 
 Acceptance: `php artisan test` passes locally and in CI, with tests for every API route and the import command.
 
@@ -92,7 +92,7 @@ Objective: let users find studies.
 
 Objective: notify users when studies match what they follow.
 
-- [X] Saved searches as alerts, limited by the plan's `alerts_limit`.
+- [X] Saved searches as alerts, limited by the plan's `alerts_limit` (replaced in stage 6 by one limit for every plan).
 - [X] Match new and updated studies after each import.
 - [X] Email notifications and a daily or weekly digest.
 - [X] Track status changes, such as a study starting to recruit.
@@ -102,7 +102,7 @@ Objective: notify users when studies match what they follow.
 Objective: charge for paid plans.
 
 - [X] Integrate a payment provider for subscriptions.
-- [X] Trial period handling with `trial_ends_at`.
+- [X] Trial period handling with `trial_ends_at` (new accounts no longer get a trial since stage 6).
 - [X] Upgrade, downgrade and cancellation.
 - [X] Payment webhooks that update the `subscriptions` table.
 
@@ -121,6 +121,52 @@ Objective: cover studies outside ClinicalTrials.gov.
 - [X] Evaluate other registries such as WHO ICTRP, EU CTR and ReBEC (Brazil).
 - [X] Link publications to PubMed records by PMID.
 
+### Stage 6. Free core and AI digests
+
+Objective: make monitoring free and charge for AI-written digests that explain what changed in the studies a user follows, why each change matched, and where to verify it. Plans: Free ($0), Pro AI ($19 USD/month), Team AI ($99 USD/month per team).
+
+Plans and entitlements
+
+- [X] New plans Free, Pro AI and Team AI with prices stored in USD; Basic, Pro and Enterprise kept as legacy plans (existing subscriptions, customers and Stripe prices untouched, hidden from new checkout).
+- [X] New accounts start on Free without the signup trial.
+- [X] Search, study details, change history and basic alerts need no paid plan; one configurable saved-search limit for every plan, keeping existing alerts above it.
+- [X] Entitlement service: personal AI digests (Pro AI, Team AI) and team workspace access (Team AI), following Cashier's grace period and cancellation dates.
+- [X] Stripe Price IDs for Pro AI and Team AI read from configuration; price, currency and interval validated before checkout and by `php artisan billing:check-prices`.
+
+Teams
+
+- [X] Teams with one billable owner (the Team AI subscriber), invitations of registered users by email, explicit acceptance, member removal and leaving.
+- [X] Shared saved searches and team digest reports, with membership enforced on every team route and isolation between teams.
+
+Study change tracking
+
+- [X] Store site-level recruitment status for locations.
+- [X] Snapshot of tracked facts per study (overall status, sites, key dates with their original precision, results flag), with a baseline for studies imported before the snapshot existed.
+- [X] Structured before-and-after details on change records for overall status, sites added/removed/updated, key dates and results posted; unordered site lists normalized so reordering is not a change.
+- [X] Stable change fingerprints so retries and repeated imports do not duplicate changes or alert matches.
+
+AI digests
+
+- [X] Saved-search settings for AI digests: on/off, daily or weekly, English or Brazilian Portuguese; turning them off keeps basic alerts.
+- [X] Backend ranking of matching changes from the saved-search criteria, with the reasons passed to the model.
+- [X] Provider interface with an OpenAI-compatible client (base URL, key, model, timeout, feature toggle) and a validated JSON response.
+- [X] Shared summary cache per change version, language and prompt version; input, output and item limits; logged status, duration, cache hits and token usage.
+- [X] Deterministic factual digest as the fallback when AI is disabled, fails or returns invalid output, recorded on the digest.
+- [X] Digests with a stable identity (alert and reporting window), queued generation, deduplicated delivery per recipient, and entitlement and membership rechecked before sending.
+- [X] Scheduled daily and weekly digest runs.
+
+Web app
+
+- [X] Plans shown as Free, Pro AI $19/month and Team AI $99/month per team on the account and billing screens.
+- [X] AI digest controls in the saved-search editor, with a preview and upgrade action for free users.
+- [X] Two labeled sample digest editions viewable before subscribing.
+- [X] Digest report pages and a team page for members, invitations and shared searches.
+
+Verification and documentation
+
+- [X] Tests for free access, Pro and Team entitlements, team isolation, legacy billing, change detection, import idempotency, digest scheduling and deduplication, invalid AI output and provider failure.
+- [X] READMEs (plan model, Stripe and AI configuration, local verification) and changelog updated.
+
 ## Next steps
 
 Found while building the stages above.
@@ -129,4 +175,9 @@ Found while building the stages above.
 - [ ] Browser tests for the web app (for example with Playwright). The Vue code is type-checked, unit-tested and built, but no end-to-end browser test exists.
 - [ ] Prepare the schema for more than one registry (`source`, `source_id` and a table of linked identifiers such as EudraCT, EU CT and RBR numbers), as recommended in [docs/registries-evaluation.md](docs/registries-evaluation.md).
 - [ ] Import from CTIS (EU) and then ReBEC, following the evaluation's priority order.
+- [ ] Switch the Redis client from Predis to the phpredis extension once a phpredis release builds on PHP 8.6 (installed with PIE, since PHP 8.6 images no longer include PECL).
+- [ ] Decide whether the queue and sessions should also move to Redis; today only the cache uses it.
+- [ ] Drop `@typescript/typescript6`, `scripts/vue-tsc.cjs` and the `glob`/`minimatch` overrides once `vue-tsc` supports TypeScript 7 and `@vue/test-utils` ships patched dependencies.
+- [ ] Operator actions for stage 6: create the Pro AI ($19) and Team AI ($99) monthly USD prices in Stripe, set `STRIPE_PRICE_PRO_AI` and `STRIPE_PRICE_TEAM_AI`, run `php artisan billing:check-prices`, and set the `AI_*` variables. Then test checkout and digests against Stripe test mode and the chosen AI provider; automated tests use fakes for both.
+- [ ] Browser tests for the team, saved-search and digest screens, together with the end-to-end tests above.
 - [ ] Speed up the test database setup (for example `php artisan schema:dump`); running every migration takes about three minutes on Docker Desktop.

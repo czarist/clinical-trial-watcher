@@ -18,9 +18,12 @@ final class BillingController extends Controller
 {
     public function __construct(private readonly BillingService $billing) {}
 
+    /**
+     * Plans offered today (Free, Pro AI, Team AI). Legacy plans are not listed.
+     */
     public function plans(): AnonymousResourceCollection
     {
-        return PlanResource::collection(Plan::query()->orderBy('price')->get());
+        return PlanResource::collection(Plan::query()->where('is_legacy', false)->orderBy('price')->get());
     }
 
     public function show(Request $request): JsonResponse

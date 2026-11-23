@@ -1,0 +1,38 @@
+name: Packages
+
+# Security audit of the locked dependencies; the README "packages" badge shows this
+# workflow's status on main. Same triggers as CI.
+on:
+    push:
+        branches: [main]
+        tags: ['*']
+    pull_request:
+        branches: [main]
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+jobs:
+    audit:
+        name: Composer and npm audit
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v5
+
+            - uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.6'
+                  coverage: none
+                  tools: composer:v2
+
+            - name: Audit Composer packages
+              run: composer audit --locked --no-interaction
+
+            - uses: actions/setup-node@v5
+              with:
+                  node-version: 26
+
+            - name: Audit npm packages
+              run: npm audit --audit-level=low

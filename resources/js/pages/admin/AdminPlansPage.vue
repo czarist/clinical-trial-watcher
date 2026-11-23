@@ -10,7 +10,6 @@ interface PlanForm {
     billing_cycle: 'monthly' | 'yearly';
     stripe_price_id: string;
     trial_days: number;
-    alerts_limit: number;
 }
 
 const plans = ref<Plan[]>([]);
@@ -18,16 +17,16 @@ const editing = ref<PlanForm | null>(null);
 const error = ref<ApiError | null>(null);
 const message = ref<string | null>(null);
 
-const empty = (): PlanForm => ({ name: '', price: 0, billing_cycle: 'monthly', stripe_price_id: '', trial_days: 0, alerts_limit: 5 });
+const empty = (): PlanForm => ({ name: '', price: 0, billing_cycle: 'monthly', stripe_price_id: '', trial_days: 0 });
 const form = reactive<PlanForm>(empty());
 
 async function load(): Promise<void> {
-    plans.value = (await api.get<{ data: Plan[] }>('/plans')).data;
+    plans.value = (await api.get<{ data: Plan[] }>('/admin/plans')).data;
 }
 
 function edit(plan?: Plan): void {
     Object.assign(form, plan
-        ? { id: plan.id, name: plan.name, price: Number(plan.price), billing_cycle: plan.billing_cycle, stripe_price_id: plan.stripe_price_id ?? '', trial_days: plan.trial_days, alerts_limit: plan.alerts_limit }
+        ? { id: plan.id, name: plan.name, price: Number(plan.price), billing_cycle: plan.billing_cycle, stripe_price_id: plan.stripe_price_id ?? '', trial_days: plan.trial_days }
         : { ...empty(), id: undefined });
     editing.value = form;
     error.value = null;
@@ -63,13 +62,13 @@ onMounted(load);
         <div class="table-scroll">
             <table>
                 <thead>
-                    <tr><th>Plan</th><th>Price</th><th>Alerts</th><th>Trial</th><th>Stripe price</th><th><span class="visually-hidden">Actions</span></th></tr>
+                    <tr><th>Plan</th><th>Price (USD)</th><th>Status</th><th>Trial</th><th>Stripe price</th><th><span class="visually-hidden">Actions</span></th></tr>
                 </thead>
                 <tbody>
                     <tr v-for="plan in plans" :key="plan.id">
                         <td>{{ plan.name }}</td>
                         <td>{{ plan.is_free ? 'Free' : `$${plan.price} / ${plan.billing_cycle}` }}</td>
-                        <td>{{ plan.alerts_limit }}</td>
+                        <td>{{ plan.is_legacy ? 'Legacy, not sold' : 'Offered' }}</td>
                         <td>{{ plan.trial_days }} days</td>
                         <td>{{ plan.stripe_price_id ?? '—' }}</td>
                         <td>
@@ -95,7 +94,6 @@ onMounted(load);
                     <label for="plan-cycle">Billing cycle</label>
                     <select id="plan-cycle" v-model="form.billing_cycle"><option value="monthly">Monthly</option><option value="yearly">Yearly</option></select>
                 </div>
-                <div><label for="plan-alerts">Alerts limit</label><input id="plan-alerts" v-model.number="form.alerts_limit" type="number" min="0" required /></div>
                 <div><label for="plan-trial">Trial days</label><input id="plan-trial" v-model.number="form.trial_days" type="number" min="0" max="365" /></div>
             </div>
             <div>

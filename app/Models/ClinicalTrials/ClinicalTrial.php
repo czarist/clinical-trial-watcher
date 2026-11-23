@@ -65,9 +65,10 @@ class ClinicalTrial extends Model
         'is_fda_regulated_device',
         'has_expanded_access',
         'ipd_sharing',
+        'tracked_facts',
     ];
 
-    protected $hidden = ['raw_json'];
+    protected $hidden = ['raw_json', 'tracked_facts'];
 
     #[\Override]
     protected function casts(): array
@@ -85,6 +86,7 @@ class ClinicalTrial extends Model
             'is_fda_regulated_device' => 'boolean',
             'has_expanded_access' => 'boolean',
             'raw_json' => 'array',
+            'tracked_facts' => 'array',
         ];
     }
 

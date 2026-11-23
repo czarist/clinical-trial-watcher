@@ -66,9 +66,12 @@ final readonly class AlertMatcher
             ->join('clinical_trial_changes as trial_change', 'trial_change.clinical_trial_id', '=', 'clinical_trials.id')
             ->where('trial_change.import_run_id', $run->id)
             ->where('trial_change.created_at', '>=', $alert->created_at)
+            // A retried job must not match (and notify) the same change twice.
+            ->whereNotExists(fn ($matched) => $matched->from('alert_matches')
+                ->whereColumn('alert_matches.clinical_trial_change_id', 'trial_change.id')
+                ->where('alert_matches.alert_id', $alert->id))
             ->select(['clinical_trials.id as trial_id', 'trial_change.id as change_id', 'trial_change.type as change_type'])
-            ->orderBy('trial_change.id')
-            ->chunk(self::INSERT_CHUNK, function (Collection $rows) use ($alert, $now, &$created): void {
+            ->chunkById(self::INSERT_CHUNK, function (Collection $rows) use ($alert, $now, &$created): void {
                 $records = $rows->map(fn (object $row): array => [
                     'alert_id' => $alert->id,
                     'clinical_trial_id' => $row->trial_id,
@@ -80,7 +83,7 @@ final readonly class AlertMatcher
 
                 AlertMatch::query()->insert($records);
                 $created += count($records);
-            });
+            }, 'trial_change.id', 'change_id');
 
         return $created;
     }

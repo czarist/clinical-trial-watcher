@@ -21,6 +21,8 @@ async function logOut(): Promise<void> {
             <ul class="links">
                 <li v-if="auth.can('view_clinical_trials')"><RouterLink to="/search">Search</RouterLink></li>
                 <li v-if="auth.can('create_alerts')"><RouterLink to="/alerts">Alerts</RouterLink></li>
+                <li><RouterLink to="/digests">AI digests</RouterLink></li>
+                <li><RouterLink to="/teams">Teams</RouterLink></li>
                 <li><RouterLink to="/account">Account</RouterLink></li>
                 <li v-if="auth.isAdmin"><RouterLink to="/admin">Admin</RouterLink></li>
             </ul>

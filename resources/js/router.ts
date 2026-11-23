@@ -21,6 +21,11 @@ const routes: RouteRecordRaw[] = [
     { path: '/alerts', component: () => import('@/pages/AlertsPage.vue'), meta: { auth: true, permission: 'create_alerts', title: 'Alerts' } },
     { path: '/alerts/new', component: () => import('@/pages/AlertEditorPage.vue'), meta: { auth: true, permission: 'create_alerts', title: 'New alert' } },
     { path: '/alerts/:id', component: () => import('@/pages/AlertEditorPage.vue'), meta: { auth: true, permission: 'create_alerts', title: 'Alert' }, props: true },
+    { path: '/digests/samples', component: () => import('@/pages/DigestSamplesPage.vue'), meta: { title: 'Sample AI digests' } },
+    { path: '/digests', component: () => import('@/pages/DigestsPage.vue'), meta: { auth: true, title: 'AI digests' } },
+    { path: '/digests/:id', component: () => import('@/pages/DigestPage.vue'), meta: { auth: true, title: 'AI digest' }, props: true },
+    { path: '/teams', component: () => import('@/pages/TeamsPage.vue'), meta: { auth: true, title: 'Teams' } },
+    { path: '/teams/:id', component: () => import('@/pages/TeamPage.vue'), meta: { auth: true, title: 'Team' }, props: true },
     { path: '/account', component: () => import('@/pages/AccountPage.vue'), meta: { auth: true, title: 'Account and plan' } },
     {
         path: '/admin',
