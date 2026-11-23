@@ -167,6 +167,20 @@ Verification and documentation
 - [X] Tests for free access, Pro and Team entitlements, team isolation, legacy billing, change detection, import idempotency, digest scheduling and deduplication, invalid AI output and provider failure.
 - [X] READMEs (plan model, Stripe and AI configuration, local verification) and changelog updated.
 
+### Stage 7. Internationalization
+
+Objective: offer the web app, API messages, emails and digests in English (the default and fallback), Brazilian Portuguese, Spanish, Simplified Chinese, Traditional Chinese, Japanese and Korean.
+
+- [X] Supported locales defined once on each side (a backend enum and a web app list): `en`, `pt-BR`, `es`, `zh-CN`, `zh-TW`, `ja`, `ko`.
+- [X] Account language stored on users (new migration), set at registration from the browser language and editable on the account page and through the API.
+- [X] API messages (validation, authentication, business errors) answered in the request's language (`Accept-Language`), falling back to English.
+- [X] Emails (alert matches, team invitations, email verification, password reset, AI digests) sent in the recipient's language.
+- [X] AI digests in all seven languages: prompt, localized factual fallback, localized dates and advice/efficacy wording checks for each language.
+- [X] Web app text, registry labels (status, phase, study type), dates, numbers and prices localized, with a language switcher; `<html lang>` follows the choice.
+- [X] Tests: every locale has every key (backend and web app), language negotiation, and localized API, email and digest output.
+- [X] READMEs, changelog and agent guide updated.
+- [X] README translated into every offered language (`README.es.md`, `README.zh-CN.md`, `README.zh-TW.md`, `README.ja.md`, `README.ko.md`), with links between all of them.
+
 ## Next steps
 
 Found while building the stages above.

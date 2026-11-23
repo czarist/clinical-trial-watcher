@@ -5,7 +5,7 @@
 <h3 align="center">Importa estudos clínicos do ClinicalTrials.gov, permite pesquisá-los e avisa por e-mail quando estudos que você acompanha abrem, mudam ou começam a recrutar.</h3>
 
 <p align="center">
-  <a href="README.md">English</a> · <a href="README.pt-BR.md">Português (Brasil)</a>
+  <a href="README.md">English</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.es.md">Español</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.zh-TW.md">繁體中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a>
 </p>
 
 <p align="center">
@@ -59,7 +59,7 @@
 
 ### Digests com IA (Pro AI e Team AI)
 
-- Uma busca salva pode ter um digest com IA, diário ou semanal, em inglês ou português do Brasil. Desativá-lo mantém o alerta básico funcionando.
+- Uma busca salva pode ter um digest com IA, diário ou semanal, em qualquer um dos sete idiomas abaixo. Desativá-lo mantém o alerta básico funcionando.
 - O backend escolhe as mudanças que corresponderam à busca no período, conta e ordena por relevância a partir dos critérios da busca (por exemplo, um centro que começou a recrutar num país monitorado fica acima de uma mudança de data). O modelo só redige um resumo factual curto de cada mudança a partir dos fatos registrados.
 - Cada digest mostra a busca salva, o período, o número de atualizações correspondentes, as mudanças mais relevantes com o motivo de corresponderem e, para cada estudo, o número NCT, a data de atualização no registro e o link do ClinicalTrials.gov (montado pelo servidor a partir do número NCT validado). Fatos ausentes aparecem como ausentes, e o digest avisa quando lista só as atualizações mais relevantes.
 - Só fatos públicos do registro vão para o modelo: nenhum dado da conta, e-mail ou anotação do usuário. A resposta precisa ser um JSON ligado às mudanças pedidas; resumos com links, outros números NCT ou frases sobre elegibilidade, tratamento ou eficácia são rejeitados.
@@ -93,6 +93,17 @@
 ### Aplicação web
 
 Uma aplicação Vue 3 de página única servida pelo Laravel: páginas de pesquisa e de estudo, alertas com suas correspondências e configurações de digest com IA, relatórios de digest, digests de exemplo, equipes (membros, convites e buscas compartilhadas), conta e plano, e administração de usuários, planos, papéis e importações.
+
+### Idiomas
+
+A aplicação web, as mensagens da API, os e-mails e os digests com IA estão disponíveis em inglês (o padrão), português do Brasil, espanhol, chinês simplificado, chinês tradicional, japonês e coreano.
+
+- A aplicação web abre no idioma do navegador quando ele é oferecido (senão em inglês) e tem um menu de idioma no cabeçalho, nas páginas de login e na página da conta. Datas, números e preços seguem o idioma escolhido.
+- Cada conta guarda o seu idioma (`locale`): ele é definido no cadastro e alterado pelo menu ou por `PUT /api/account/locale`. Os e-mails (confirmação, redefinição de senha, alertas, convites de equipe) usam o idioma do destinatário; um digest com IA usa o idioma escolhido na sua busca salva.
+- A API responde no idioma do cabeçalho `Accept-Language`, que a aplicação web sempre envia, e usa inglês quando o idioma não é oferecido. A resposta traz `Content-Language`.
+- Os dados do registro (títulos, resumos, condições, centros) continuam no idioma do ClinicalTrials.gov; só a interface em volta deles é traduzida.
+
+As traduções ficam em `lang/<locale>/` e `lang/<locale>.json` no backend e em `resources/js/i18n/locales/` na aplicação web. O inglês é a fonte: os testes falham quando outro idioma não tem uma chave ou um placeholder.
 
 > Os dados dos estudos vêm de um registro público. Não são orientação médica, recomendação de tratamento nem decisão sobre quem pode participar de um estudo.
 
@@ -184,7 +195,7 @@ Todas as rotas ficam em `/api` e respondem em JSON. Rotas protegidas exigem `Aut
 
 | Método | Rota | Acesso | Descrição |
 |---|---|---|---|
-| `POST` | `/auth/register` | público | Cria uma conta; devolve um token (201) |
+| `POST` | `/auth/register` | público | Cria uma conta (`locale` opcional, senão o idioma da requisição); devolve um token (201) |
 | `POST` | `/auth/login` | público, 5 tentativas por minuto | Token, ou HTTP 401 para credenciais inválidas |
 | `POST` | `/auth/refresh` | token | Novo token |
 | `POST` | `/auth/logout` | token | Invalida o token (204) |
@@ -194,10 +205,11 @@ Todas as rotas ficam em `/api` e respondem em JSON. Rotas protegidas exigem `Aut
 | `GET` | `/auth/verify-email/{user}/{hash}` | link assinado | Confirma o e-mail e redireciona para a aplicação web |
 | `POST` | `/auth/email/verification-notification` | token | Reenvia o link de confirmação |
 | `PUT` | `/account/profile`, `/account/password` | token | Altera nome e e-mail, ou a senha |
+| `PUT` | `/account/locale` | token | Altera o idioma da conta (`locale`: `en`, `pt_BR`, `es`, `zh_CN`, `zh_TW`, `ja`, `ko`) |
 | `GET` | `/trials` | `view_clinical_trials` | Pesquisa; filtros abaixo, `sort`, `page`, `per_page` (até 100) |
 | `GET` | `/trials/{nct_id}` | `view_clinical_trials` | Estudo com todas as listas relacionadas |
 | `GET` `POST` | `/alerts` | `create_alerts`, e-mail confirmado | Lista ou cria buscas salvas; `team_id` para as compartilhadas de uma equipe (o dono cria, os membros listam) |
-| `GET` `PATCH` `DELETE` | `/alerts/{id}` | dono; membros da equipe leem as compartilhadas | Lê, altera ou exclui uma busca salva, inclusive `ai_digest_enabled`, `ai_digest_frequency` (`daily`, `weekly`) e `ai_digest_language` (`en`, `pt_BR`) |
+| `GET` `PATCH` `DELETE` | `/alerts/{id}` | dono; membros da equipe leem as compartilhadas | Lê, altera ou exclui uma busca salva, inclusive `ai_digest_enabled`, `ai_digest_frequency` (`daily`, `weekly`) e `ai_digest_language` (`en`, `pt_BR`, `es`, `zh_CN`, `zh_TW`, `ja`, `ko`) |
 | `GET` | `/alerts/{id}/matches` | dono, membros da equipe | Estudos que corresponderam |
 | `GET` | `/plans` | público | Free, Pro AI e Team AI com preços em USD e recursos |
 | `GET` | `/digests/samples` | público | Duas edições de digest de exemplo com dados sintéticos |
@@ -278,10 +290,10 @@ app/
   Models/ClinicalTrials/ ClinicalTrial, suas listas relacionadas e ClinicalTrialChange
   Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
 config/                  clinicaltrials.php, billing.php, ai.php, auth.php, jwt.php
-lang/                    textos dos digests em en/ e pt_BR/
+lang/                    textos da API, dos e-mails e dos digests por idioma (en, pt_BR, es, zh_CN, zh_TW, ja, ko)
 database/                migrations/, factories/, seeders/
 docs/                    logo, avaliação de registros
-resources/js/            aplicação Vue: pages/, components/, stores/, api/
+resources/js/            aplicação Vue: pages/, components/, stores/, api/, i18n/ (catálogos por idioma)
 routes/                  api.php, web.php (aplicação web), console.php (agendamento)
 tests/                   Feature/, Unit/, Fixtures/
 ```

@@ -5,7 +5,7 @@
 <h3 align="center">Import clinical studies from ClinicalTrials.gov, search them, and get an email when studies you follow open, change or start recruiting.</h3>
 
 <p align="center">
-  <a href="README.md">English</a> · <a href="README.pt-BR.md">Português (Brasil)</a>
+  <a href="README.md">English</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.es.md">Español</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.zh-TW.md">繁體中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a>
 </p>
 
 <p align="center">
@@ -59,7 +59,7 @@
 
 ### AI digests (Pro AI and Team AI)
 
-- A saved search can have an AI digest, daily or weekly, in English or Brazilian Portuguese. Turning it off leaves the basic alert running.
+- A saved search can have an AI digest, daily or weekly, in any of the seven languages below. Turning it off leaves the basic alert running.
 - The backend picks the changes that matched the saved search in the reporting window, counts them, and ranks them from the saved-search criteria (for example, a newly recruiting site in a country the search monitors ranks above a date change). The model only words a short factual summary of each change from the recorded facts.
 - Each digest shows the saved search, the period, the number of matching updates, the most relevant changes with why they match, and for every study its NCT number, registry update date and ClinicalTrials.gov link (built by the server from the validated NCT number). Missing facts are stated as missing, and a digest says when it lists only the most relevant updates.
 - Only public registry facts are sent to the model: no account data, email addresses or user notes. Its answer must be JSON tied to the requested changes; summaries with links, other NCT numbers or wording about eligibility, treatment or efficacy are rejected.
@@ -93,6 +93,17 @@
 ### Web app
 
 A Vue 3 single-page app served by Laravel: search and study pages, alerts with their matches and AI digest settings, AI digest reports, sample digests, teams (members, invitations and shared searches), account and plan, and administration of users, plans, roles and imports.
+
+### Languages
+
+The web app, API messages, emails and AI digests are available in English (the default), Brazilian Portuguese, Spanish, Simplified Chinese, Traditional Chinese, Japanese and Korean.
+
+- The web app starts in the browser's language when it is offered (otherwise English) and has a language menu in the header, on the login pages and on the account page. Dates, numbers and prices follow the chosen language.
+- Each account stores its language (`locale`): it is set at registration and changed with the menu or `PUT /api/account/locale`. Emails (confirmation, password reset, alerts, team invitations) use the recipient's language; an AI digest uses the language chosen for its saved search.
+- The API answers in the language of the `Accept-Language` header, which the web app always sends, and falls back to English. The response carries `Content-Language`.
+- Registry data (study titles, summaries, conditions, sites) stays in the language of ClinicalTrials.gov; only the interface around it is translated.
+
+Translations live in `lang/<locale>/` and `lang/<locale>.json` for the backend and in `resources/js/i18n/locales/` for the web app. English is the source: tests fail when another language misses a key or a placeholder.
 
 > Study data comes from a public registry. It is not medical advice, a treatment recommendation or a decision about who can take part in a study.
 
@@ -184,7 +195,7 @@ All routes are under `/api` and return JSON. Protected routes need `Authorizatio
 
 | Method | Route | Access | Description |
 |---|---|---|---|
-| `POST` | `/auth/register` | public | Create an account; returns a token (201) |
+| `POST` | `/auth/register` | public | Create an account (optional `locale`, else the request language); returns a token (201) |
 | `POST` | `/auth/login` | public, 5 attempts per minute | Token, or HTTP 401 for invalid credentials |
 | `POST` | `/auth/refresh` | token | New token |
 | `POST` | `/auth/logout` | token | Invalidate the token (204) |
@@ -194,10 +205,11 @@ All routes are under `/api` and return JSON. Protected routes need `Authorizatio
 | `GET` | `/auth/verify-email/{user}/{hash}` | signed link | Confirm the email and redirect to the web app |
 | `POST` | `/auth/email/verification-notification` | token | Send the confirmation link again |
 | `PUT` | `/account/profile`, `/account/password` | token | Change name and email, or password |
+| `PUT` | `/account/locale` | token | Change the account language (`locale`: `en`, `pt_BR`, `es`, `zh_CN`, `zh_TW`, `ja`, `ko`) |
 | `GET` | `/trials` | `view_clinical_trials` | Search; filters below, `sort`, `page`, `per_page` (up to 100) |
 | `GET` | `/trials/{nct_id}` | `view_clinical_trials` | Study with every related list |
 | `GET` `POST` | `/alerts` | `create_alerts`, confirmed email | List or create saved searches; `team_id` for a team's shared ones (owner creates, members list) |
-| `GET` `PATCH` `DELETE` | `/alerts/{id}` | owner; team members can read shared ones | Read, change or delete a saved search, including `ai_digest_enabled`, `ai_digest_frequency` (`daily`, `weekly`) and `ai_digest_language` (`en`, `pt_BR`) |
+| `GET` `PATCH` `DELETE` | `/alerts/{id}` | owner; team members can read shared ones | Read, change or delete a saved search, including `ai_digest_enabled`, `ai_digest_frequency` (`daily`, `weekly`) and `ai_digest_language` (`en`, `pt_BR`, `es`, `zh_CN`, `zh_TW`, `ja`, `ko`) |
 | `GET` | `/alerts/{id}/matches` | owner, team members | Studies that matched |
 | `GET` | `/plans` | public | Free, Pro AI and Team AI with USD prices and features |
 | `GET` | `/digests/samples` | public | Two sample digest editions with synthetic data |
@@ -278,10 +290,10 @@ app/
   Models/ClinicalTrials/ ClinicalTrial, its related lists and ClinicalTrialChange
   Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
 config/                  clinicaltrials.php, billing.php, ai.php, auth.php, jwt.php
-lang/                    en/ and pt_BR/ digest wording
+lang/                    API, email and digest text per language (en, pt_BR, es, zh_CN, zh_TW, ja, ko)
 database/                migrations/, factories/, seeders/
 docs/                    logo, registries evaluation
-resources/js/            Vue app: pages/, components/, stores/, api/
+resources/js/            Vue app: pages/, components/, stores/, api/, i18n/ (catalogs per language)
 routes/                  api.php, web.php (web app), console.php (schedule)
 tests/                   Feature/, Unit/, Fixtures/
 ```
