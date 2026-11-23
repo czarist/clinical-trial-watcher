@@ -2,9 +2,17 @@
 
 All notable changes to this project are documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Releases will be identified by Git tags in the form `vMAJOR.MINOR.PATCH`; no version has been released yet.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Releases are identified by Git tags in the form `vMAJOR.MINOR.PATCH` and published as GitHub releases. While the version is `0.x`, minor versions may change the API.
 
 ## [Unreleased]
+
+### Added
+
+- Roadmap stage 8 (more registries): a multi-registry schema, a scraping base with a legal check per source, and importers planned for ISRCTN, Health Canada, CTIS, EudraCT, DRKS, REEC, CRIS, MFDS, UMIN-CTR, TFDA, ANZCTR, RENIS, ReBEC, NCI, EDA, CDE/NMPA and others, with WHO ICTRP conditioned on WHO's confirmation of its terms.
+
+## [0.1.0] - 2026-11-23
+
+First release.
 
 ### Added
 
@@ -72,3 +80,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Laravel Sanctum; the API uses JWT only.
 - The framework's example tests and welcome page.
+
+[Unreleased]: https://github.com/czarist/clinical-trial-watcher/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/czarist/clinical-trial-watcher/releases/tag/v0.1.0
