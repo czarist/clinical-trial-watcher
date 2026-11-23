@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Search API: `GET /api/trials` with pagination and filters for text (MySQL full-text), condition, keyword, MeSH term, status, phase, study type, sponsor, country, city, dates, results and distance; `GET /api/trials/{nct_id}` with every related list, PubMed links and recorded status changes.
+- Alerts: saved searches limited by the plan's `alerts_limit`, matched after each import, with instant, daily or weekly emails and optional status-change notices (`alerts:send-digests`).
+- Billing with Stripe through Laravel Cashier: checkout, plan changes with proration, cancellation, resuming, customer portal, a 14-day signup trial, and webhooks that keep the account's plan in sync.
+- Registration, email confirmation, token refresh, password reset, profile and password changes, and a rate limit on login.
+- Permission middleware on every protected route, and administration endpoints for users, plans, roles and imports, with the new `manage_imports` permission.
+- Vue 3 web app (Vue Router, Pinia, TypeScript) served by Laravel: search, study pages, alerts, account and plan, and administration.
+- Import runs (`import_runs`) and study changes (`clinical_trial_changes`), a queued import job scheduled daily, and `queue` and `scheduler` Docker services.
+- `clinicaltrials:fetch` options `--since`, `--full`, `--max-pages` and `--queue`.
+- `primary_completion_date` and `has_results` are stored; search indexes and a full-text index on titles and summary.
+- Model factories for the clinical trial tables, alerts and users; PHPUnit tests for the API, the import (with a recorded API response and `Http::fake()`), alerts, billing and administration; Vitest tests for the web app; a GitHub Actions workflow.
+- Evaluation of other registries (WHO ICTRP, EU CTR/CTIS, ReBEC) in `docs/registries-evaluation.md`, and a project logo.
+
 - English and Brazilian Portuguese READMEs, a roadmap, this changelog, and an `AGENTS.md` guide.
 - `php artisan clinicaltrials:fetch` imports studies from the ClinicalTrials.gov API v2. `--pageSize` sets how many studies are read (default 100). Studies are matched by NCT number, so re-running the import updates existing records, and related lists are replaced with the current version from the API.
 - Partial dates from the API (`YYYY`, `YYYY-MM`) are stored as full dates.
@@ -19,5 +31,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- Upgraded to PHP 8.6, Laravel 13, PHPUnit 13, Guzzle 8, Tinker 3, MySQL 8.4 LTS, Node.js 26 and Vite 8, with every other dependency on its latest release.
+- The import uses the production endpoint `https://clinicaltrials.gov/api/v2/studies`, verifies TLS certificates, follows every page, retries rate limits and server errors with backoff, and by default reads only studies updated since the last successful run. Each study is saved in its own transaction.
+- Related lists are always replaced, so an empty list from the API removes the old rows.
+- The import logic moved from the command into services (`app/Services/ClinicalTrials/Import`); the command keeps its name and `--pageSize`.
+- A failed login returns HTTP 401 instead of HTTP 200 with `status_code` in the body. Logout returns 204.
+- `subscriptions` adapted to Cashier: `payment_provider_id` renamed to `stripe_id`, `status` to `stripe_status`; `plan_id` is now nullable.
+- Long free-text columns (outcome measure and time frame, intervention name, arm label, facility, reference URL) widened to `TEXT`.
+- Composer package and `APP_NAME` renamed from the Laravel skeleton defaults; `.env.example` has the Docker database values, `JWT_SECRET` and the Stripe settings. Host ports are configurable.
+
 - Clinical trial models moved to `App\Models\ClinicalTrials`.
 - Long text fields of `clinical_trials` widened: `official_title` and `brief_summary` to `TEXT`, and `detailed_description`, `eligibility_criteria` and `raw_json` to `LONGTEXT`, so long API values are no longer truncated.
+
+### Fixed
+
+- `ClinicalTrialMeshTerm` had the namespace `App\Models\clinicalTrials`, which broke PSR-4 autoloading.
+- Plan `features` were JSON-encoded twice by the seeder.
+- Expected API errors, such as invalid credentials, are no longer written to the log, and the container keeps `storage/` writable by PHP-FPM.
+
+### Removed
+
+- Laravel Sanctum; the API uses JWT only.
+- The framework's example tests and welcome page.

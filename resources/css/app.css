@@ -1,0 +1,277 @@
+/*
+ * Clinical Trial Watcher — palette taken from the logo: ink navy and mint.
+ * One typeface (Public Sans); NCT numbers use tabular figures.
+ */
+:root {
+    --ink: #0b1427;
+    --ink-soft: #1c2a45;
+    --mint: #63e2c3;
+    --mint-text: #0b7a63;
+    --mint-wash: #e3f8f2;
+    --paper: #f5f7fa;
+    --surface: #ffffff;
+    --line: #d5dde7;
+    --muted: #56677d;
+    --text: #0b1427;
+    --amber: #a86412;
+    --amber-wash: #fbf0e1;
+    --danger: #b42318;
+
+    --radius-control: 6px;
+    --radius-panel: 10px;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-12: 3rem;
+
+    --step--1: 0.833rem;
+    --step-0: 1rem;
+    --step-1: 1.2rem;
+    --step-2: 1.44rem;
+    --step-3: 2.074rem;
+
+    color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --paper: #0b1427;
+        --surface: #121e36;
+        --line: #26365a;
+        --muted: #9aabc4;
+        --text: #eef3fa;
+        --mint-text: #63e2c3;
+        --mint-wash: #123a3a;
+        --amber: #f0b263;
+        --amber-wash: #3a2a14;
+        --danger: #ff8a7a;
+        color-scheme: dark;
+    }
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--text);
+    font-family: 'Public Sans', system-ui, sans-serif;
+    font-size: var(--step-0);
+    line-height: 1.55;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+    margin: 0 0 var(--space-3);
+    letter-spacing: -0.01em;
+}
+
+h1 {
+    font-size: var(--step-3);
+    font-weight: 800;
+}
+
+h2 {
+    font-size: var(--step-2);
+    font-weight: 800;
+}
+
+h3 {
+    font-size: var(--step-1);
+    font-weight: 600;
+}
+
+p {
+    margin: 0 0 var(--space-3);
+    max-width: 72ch;
+}
+
+a {
+    color: var(--mint-text);
+    text-underline-offset: 0.18em;
+}
+
+:focus-visible {
+    outline: 3px solid var(--mint);
+    outline-offset: 2px;
+}
+
+.nct {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: var(--space-8) var(--space-4) var(--space-12);
+}
+
+.narrow {
+    max-width: 440px;
+}
+
+.panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-panel);
+    padding: var(--space-6);
+}
+
+.stack > * + * {
+    margin-top: var(--space-4);
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    font-size: var(--step--1);
+    margin-bottom: var(--space-1);
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    font: inherit;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-control);
+    padding: var(--space-2) var(--space-3);
+}
+
+input[type='checkbox'] {
+    width: auto;
+}
+
+.field-error {
+    color: var(--danger);
+    font-size: var(--step--1);
+    margin-top: var(--space-1);
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font: inherit;
+    font-weight: 600;
+    border-radius: var(--radius-control);
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: #fff;
+    padding: var(--space-2) var(--space-4);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.button:hover {
+    background: var(--ink-soft);
+}
+
+.button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.button.secondary {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--line);
+}
+
+.button.danger {
+    background: transparent;
+    color: var(--danger);
+    border-color: currentColor;
+}
+
+@media (prefers-color-scheme: dark) {
+    .button {
+        background: var(--mint);
+        border-color: var(--mint);
+        color: var(--ink);
+    }
+
+    .button:hover {
+        background: #8beed6;
+    }
+}
+
+.notice {
+    border-left: 4px solid var(--mint);
+    background: var(--mint-wash);
+    padding: var(--space-3) var(--space-4);
+    border-radius: 0 var(--radius-control) var(--radius-control) 0;
+}
+
+.notice.error {
+    border-color: var(--danger);
+    background: transparent;
+    color: var(--danger);
+}
+
+.notice.warning {
+    border-color: var(--amber);
+    background: var(--amber-wash);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--step--1);
+}
+
+th,
+td {
+    text-align: left;
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+}
+
+th {
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}

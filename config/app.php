@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Clinical Trial Watcher'),
 
     /*
     |--------------------------------------------------------------------------
@@ -53,6 +53,11 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+
+    /*
+    | Base URL of the web app, used in emails (alerts, password reset, email verification).
+    */
+    'frontend_url' => env('FRONTEND_URL', env('APP_URL', 'http://localhost')),
 
     /*
     |--------------------------------------------------------------------------

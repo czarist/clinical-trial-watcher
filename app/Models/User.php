@@ -1,18 +1,25 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Models;
 
+use App\Enums\PermissionName;
+use App\Enums\RoleName;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Collection;
+use Laravel\Cashier\Billable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use Billable, HasFactory, Notifiable;
 
     protected $fillable = [
         'name',
@@ -27,22 +34,26 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password',
         'remember_token',
+        'stripe_id',
+        'pm_type',
+        'pm_last_four',
     ];
 
-    protected $casts = [
-        'email_verified_at'    => 'datetime',
-        'trial_ends_at'        => 'datetime',
-        'subscription_ends_at' => 'datetime',
-    ];
+    #[\Override]
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'trial_ends_at' => 'datetime',
+            'subscription_ends_at' => 'datetime',
+            'password' => 'hashed',
+            'is_admin' => 'boolean',
+        ];
+    }
 
     public function plan(): BelongsTo
     {
         return $this->belongsTo(Plan::class);
-    }
-
-    public function subscriptions(): HasMany
-    {
-        return $this->hasMany(Subscription::class);
     }
 
     public function roles(): BelongsToMany
@@ -50,16 +61,46 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(Role::class);
     }
 
-    public function hasRole($roleName): bool
+    public function alerts(): HasMany
     {
-        return $this->roles()->where('name', $roleName)->exists();
+        return $this->hasMany(Alert::class);
     }
 
-    public function getJWTIdentifier(): int | string
+    public function hasRole(RoleName|string $role): bool
+    {
+        $name = $role instanceof RoleName ? $role->value : $role;
+
+        return $this->roles->contains('name', $name);
+    }
+
+    public function hasPermission(PermissionName|string $permission): bool
+    {
+        $name = $permission instanceof PermissionName ? $permission->value : $permission;
+
+        return $this->permissionNames()->contains($name);
+    }
+
+    /**
+     * @return Collection<int, string>
+     */
+    public function permissionNames(): Collection
+    {
+        $this->loadMissing('roles.permissions');
+
+        return $this->roles
+            ->flatMap(fn (Role $role) => $role->permissions->pluck('name'))
+            ->unique()
+            ->values();
+    }
+
+    public function getJWTIdentifier(): int|string
     {
         return $this->getKey();
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getJWTCustomClaims(): array
     {
         return [];

@@ -23,9 +23,18 @@ else
     echo "App key already exists, skipping key generate."
 fi
 
+# Generate the JWT signing secret when it is missing or empty.
+if ! grep -qE "^JWT_SECRET=.+" .env; then
+    echo "Generating JWT secret..."
+    php artisan jwt:secret --force
+fi
+
 # Rodando migrations
 echo "Running migrations..."
 php artisan migrate --force
+
+# Files created by artisan commands run as root must stay writable by PHP-FPM (www-data).
+chown -R www-data:www-data storage bootstrap/cache
 
 # Iniciando PHP-FPM
 echo "Starting PHP-FPM..."

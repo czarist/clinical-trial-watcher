@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1254 1254" role="img" aria-label="Clinical Trial Watcher logo">
+  <rect x="12" y="12" width="1230" height="1230" rx="230" fill="#0b1427"/>
+  <circle cx="580" cy="562" r="292" fill="none" stroke="#ffffff" stroke-width="68"/>
+  <line x1="790" y1="808" x2="942" y2="960" stroke="#ffffff" stroke-width="72" stroke-linecap="round"/>
+  <g stroke="#63e2c3" stroke-width="106" stroke-linecap="round">
+    <line x1="582" y1="456" x2="582" y2="666"/>
+    <line x1="477" y1="561" x2="687" y2="561"/>
+  </g>
+</svg>
