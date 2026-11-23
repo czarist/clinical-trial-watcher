@@ -25,9 +25,10 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip
 
-# Instala Node.js 26 LTS + npm
+# Installs Node.js 26 LTS and npm 12.2.3
 RUN curl -fsSL https://deb.nodesource.com/setup_26.x | bash - \
-    && apt-get install -y nodejs
+    && apt-get install -y nodejs \
+    && npm install -g npm@12.2.3
 
 # Instala Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
