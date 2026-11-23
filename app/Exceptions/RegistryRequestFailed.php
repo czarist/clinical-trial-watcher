@@ -11,7 +11,7 @@ use RuntimeException;
  */
 final class RegistryRequestFailed extends RuntimeException
 {
-    public static function fromStatus(int $status, \Throwable $previous): self
+    public static function fromStatus(int $status, ?\Throwable $previous = null): self
     {
         return new self("The registry responded with HTTP {$status}.", $status, $previous);
     }
@@ -19,6 +19,11 @@ final class RegistryRequestFailed extends RuntimeException
     public static function fromConnection(\Throwable $previous): self
     {
         return new self('Could not connect to the registry: '.$previous->getMessage(), 0, $previous);
+    }
+
+    public static function notCached(string $url): self
+    {
+        return new self("No stored copy of {$url} to read again; run the import without --from-cache.");
     }
 
     public static function invalidPayload(): self

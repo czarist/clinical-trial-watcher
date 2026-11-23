@@ -22,7 +22,8 @@ final class FetchClinicalTrials extends Command
         {--full : Read the whole registry instead of changes since the last successful run}
         {--max-pages= : Stop after this many pages}
         {--queue : Dispatch the import to the queue instead of running it now}
-        {--source=clinicaltrials_gov : Registry to import from (a key of config/registries.php)}';
+        {--source=clinicaltrials_gov : Registry to import from (a key of config/registries.php)}
+        {--from-cache : Parse the stored copies of the pages instead of fetching them (use the same --since or --full as the run being repeated)}';
 
     protected $description = 'Import studies from a registry (ClinicalTrials.gov by default), following every page';
 
@@ -49,6 +50,7 @@ final class FetchClinicalTrials extends Command
             updatedSince: $this->option('since') !== null ? CarbonImmutable::parse($this->option('since')) : null,
             maxPages: $this->option('max-pages') !== null ? (int) $this->option('max-pages') : null,
             source: (string) $this->option('source'),
+            fromCache: (bool) $this->option('from-cache'),
         );
 
         if ($this->option('queue')) {

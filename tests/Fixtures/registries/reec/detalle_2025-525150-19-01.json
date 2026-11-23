@@ -1,0 +1,133 @@
+{
+ "identificador": "2025-525150-19-01",
+ "acronimo": "",
+ "enfermedadRara": "0",
+ "calendario": {
+  "fechaAutorizacionAEMPS": "03-08-2026",
+  "fechaClasificacion": "",
+  "fechaRegistro": "03-06-2026",
+  "fechaInicioPrevista": "",
+  "fechaFinPrevista": "",
+  "fechaInicioReal": "01-09-2026",
+  "fechaFinRealEspana": "",
+  "fechaFinRealGlobal": "",
+  "fechaInterrupcion": "",
+  "fechaReinicio": "",
+  "fechaFinPrematuro": ""
+ },
+ "organismo": {
+  "promotor": "Instituto De Investigacion Marques De Valdecilla",
+  "domicilio": "Avenida Del Cardenal Herrera Oria S/n",
+  "telefono": "Redacted",
+  "fax": "",
+  "mail": "Redacted",
+  "personaContacto": "Redacted",
+  "financiador": ""
+ },
+ "centros": {
+  "centro": [
+   {
+    "tipo": "0",
+    "referencia": "ORG-100041247",
+    "situacion": "0",
+    "nombre": "Hospital Universitario Central De Asturias",
+    "domicilio": "Avenida De Roma S/n",
+    "localidad": "Oviedo",
+    "codPostal": "33011",
+    "provincia": "ASTURIAS",
+    "ccaa": "ASTURIAS, PRINCIPADO DE",
+    "departamento": "Medicina interna-EII",
+    "investigador": "Redacted"
+   },
+   {
+    "tipo": "0",
+    "referencia": "ORG-100030135",
+    "situacion": "0",
+    "nombre": "Hospital Universitario De Leon",
+    "domicilio": "Calle Altos De Nava S/n",
+    "localidad": "Leon",
+    "codPostal": "24071",
+    "provincia": "LEÓN",
+    "ccaa": "CASTILLA Y LEÓN",
+    "departamento": "Medicina interna-EEII",
+    "investigador": "Redacted"
+   }
+  ]
+ },
+ "intervenciones": {
+  "intervencion": [
+   {
+    "nombreComercial": "-",
+    "nombreCientifico": "-",
+    "codigo": "SCP104867981",
+    "sustancias": "",
+    "huerfano": "0",
+    "atcs": "",
+    "viasAdministracion": "ORAL",
+    "formaFarmaceutica": "612"
+   },
+   {
+    "nombreComercial": "Odefsey 200 mg/25 mg/25 mg film-coated tablets",
+    "nombreCientifico": "Odefsey 200 mg/25 mg/25 mg film-coated tablets",
+    "codigo": "PRD4191976",
+    "sustancias": "",
+    "huerfano": "0",
+    "atcs": "",
+    "viasAdministracion": "ORAL",
+    "formaFarmaceutica": "612"
+   },
+   {
+    "nombreComercial": "-",
+    "nombreCientifico": "-",
+    "codigo": "SCP110321403",
+    "sustancias": "",
+    "huerfano": "0",
+    "atcs": "",
+    "viasAdministracion": "ORAL",
+    "formaFarmaceutica": "612"
+   },
+   {
+    "nombreComercial": "Biktarvy 30 mg/120 mg/15 mg film-coated tablets",
+    "nombreCientifico": "Biktarvy 30 mg/120 mg/15 mg film-coated tablets",
+    "codigo": "PRD10144455",
+    "sustancias": "",
+    "huerfano": "0",
+    "atcs": "",
+    "viasAdministracion": "ORAL",
+    "formaFarmaceutica": "612"
+   },
+   {
+    "nombreComercial": "Juluca 50 mg/25 mg film-coated tablets",
+    "nombreCientifico": "Juluca 50 mg/25 mg film-coated tablets",
+    "codigo": "PRD6191432",
+    "sustancias": "",
+    "huerfano": "0",
+    "atcs": "",
+    "viasAdministracion": "ORAL",
+    "formaFarmaceutica": "612"
+   },
+   {
+    "nombreComercial": "Dovato 50 mg/300 mg film-coated tablets",
+    "nombreCientifico": "Dovato 50 mg/300 mg film-coated tablets",
+    "codigo": "PRD10809322",
+    "sustancias": "",
+    "huerfano": "0",
+    "atcs": "",
+    "viasAdministracion": "ORAL",
+    "formaFarmaceutica": "612"
+   },
+   {
+    "nombreComercial": "Triumeq 50 mg/600 mg/300 mg film-coated tablets",
+    "nombreCientifico": "Triumeq 50 mg/600 mg/300 mg film-coated tablets",
+    "codigo": "PRD1663708",
+    "sustancias": "",
+    "huerfano": "0",
+    "atcs": "",
+    "viasAdministracion": "ORAL",
+    "formaFarmaceutica": "612"
+   }
+  ]
+ },
+ "id": 33001,
+ "protocolo": ""
+}

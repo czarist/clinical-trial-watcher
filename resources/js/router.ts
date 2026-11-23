@@ -39,6 +39,7 @@ const routes: RouteRecordRaw[] = [
             { path: 'plans', component: () => import('@/pages/admin/AdminPlansPage.vue'), meta: { permission: 'manage_plans', title: 'titles.adminPlans' } },
             { path: 'roles', component: () => import('@/pages/admin/AdminRolesPage.vue'), meta: { permission: 'manage_roles', title: 'titles.adminRoles' } },
             { path: 'imports', component: () => import('@/pages/admin/AdminImportsPage.vue'), meta: { permission: 'manage_imports', title: 'titles.adminImports' } },
+            { path: 'registries', component: () => import('@/pages/admin/AdminRegistriesPage.vue'), meta: { permission: 'manage_imports', title: 'titles.adminRegistries' } },
         ],
     },
     { path: '/:pathMatch(.*)*', component: () => import('@/pages/NotFoundPage.vue'), meta: { title: 'titles.notFound' } },

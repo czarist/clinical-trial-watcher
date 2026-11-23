@@ -9,19 +9,22 @@
 </p>
 
 <p align="center">
-  <img alt="Status: early development" src="https://img.shields.io/badge/status-early_development-orange?style=flat-square">
+  <img alt="Status: early development" src="https://img.shields.io/badge/status-early_development-orange?style=flat-square&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMi43IDE5bC05LjEtOS4xYy45LTIuMy40LTUtMS41LTYuOS0yLTItNS0yLjQtNy40LTEuM0w5IDYgNiA5IDEuNiA0LjdDLjQgNy4xLjkgMTAuMSAyLjkgMTIuMWMxLjkgMS45IDQuNiAyLjQgNi45IDEuNWw5LjEgOS4xYy40LjQgMSAuNCAxLjQgMGwyLjMtMi4zYy41LS40LjUtMS4xLjEtMS40eiIvPjwvc3ZnPg%3D%3D">
   <a href="https://github.com/czarist/clinical-trial-watcher/actions/workflows/ci.yml"><img alt="Tests" src="https://img.shields.io/github/actions/workflow/status/czarist/clinical-trial-watcher/ci.yml?branch=main&label=tests&logo=githubactions&logoColor=white&style=flat-square"></a>
   <a href="https://github.com/czarist/clinical-trial-watcher/actions/workflows/packages.yml"><img alt="Packages audit" src="https://img.shields.io/github/actions/workflow/status/czarist/clinical-trial-watcher/packages.yml?branch=main&label=packages&logo=dependabot&logoColor=white&style=flat-square"></a>
   <img alt="PHP 8.6" src="https://img.shields.io/badge/PHP-8.6-777BB4?style=flat-square&logo=php&logoColor=white">
   <img alt="Laravel 13" src="https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square&logo=laravel&logoColor=white">
   <img alt="Vue 3" src="https://img.shields.io/badge/Vue-3-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white">
   <img alt="TypeScript 7" src="https://img.shields.io/badge/TypeScript-7-3178C6?style=flat-square&logo=typescript&logoColor=white">
+  <img alt="Node.js 26" src="https://img.shields.io/badge/Node.js-26-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white">
+  <img alt="npm 12.2.3" src="https://img.shields.io/badge/npm-12.2.3-CB3837?style=flat-square&logo=npm&logoColor=white">
   <img alt="MySQL 8.4" src="https://img.shields.io/badge/MySQL-8.4-4479A1?style=flat-square&logo=mysql&logoColor=white">
   <img alt="Redis 8.10" src="https://img.shields.io/badge/Redis-8.10-FF4438?style=flat-square&logo=redis&logoColor=white">
   <img alt="Stripe" src="https://img.shields.io/badge/billing-Stripe-635BFF?style=flat-square&logo=stripe&logoColor=white">
   <img alt="Auth: JWT" src="https://img.shields.io/badge/auth-JWT-000000?style=flat-square&logo=jsonwebtokens&logoColor=white">
-  <img alt="Docker Compose" src="https://img.shields.io/badge/runs%20with-Docker%20Compose-2496ED?style=flat-square&logo=docker&logoColor=white">
-  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square">
+  <img alt="Docker: Nginx + PHP-FPM" src="https://img.shields.io/badge/Docker-Nginx%20%2B%20PHP--FPM-2496ED?style=flat-square&logo=docker&logoColor=white">
+  <img alt="Nginx 1.30" src="https://img.shields.io/badge/Nginx-1.30-009639?style=flat-square&logo=nginx&logoColor=white">
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white">
 </p>
 
 <p align="center">
@@ -46,9 +49,50 @@
 - **变更会连同变更前后的值一起记录。** 新研究被记录为新增，并成为基线。在后续导入中，会比较总体招募状态、研究机构（新增、移除或机构状态变化）、开始和完成日期（保留原始精度：只有月份的日期仍然只到月份）以及已发布的结果，并以结构化详情保存。研究机构列表按机构名称和地点比较，因此注册库中列出顺序的变化不算变更。每项变更都有稳定的指纹，因此重试或重复的导入不会将其记录或通知两次。
 - **不完整的日期会被规范化**（`2024` → `2024-01-01`，`2024-06` → `2024-06-01`），完整的研究数据保存在 `raw_json` 中。
 
+### 其他注册库
+
+另有十二个注册库可通过 `php artisan clinicaltrials:fetch --source=<key>` 导入。只有 ClinicalTrials.gov 按每日计划运行。
+
+| 键 | 注册库 | 读取方式 | 增量 | 商业使用 |
+|---|---|---|---|---|
+| `ctis` | CTIS（欧盟/欧洲经济区） | 门户 JSON API | 是（最后更新） | 是，需注明 EMA |
+| `isrctn` | ISRCTN | XML API | 是（最后编辑） | 是（CC BY / CC0） |
+| `euctr` | EU Clinical Trials Register | 纯文本导出 | 仅新试验 | 是，需注明该注册库 |
+| `drks` | DRKS（德国） | JSON 转储；仅 CC BY 4.0 记录（2025 年起注册或更新） | 是（最后更新） | 是（CC BY 4.0） |
+| `reec` | REEC（西班牙） | REST API | 最近 90 天的注册 | 是，需注明 AEMPS |
+| `rebec` | ReBEC（巴西） | 网页 | 是（最后批准） | 未确认 |
+| `renis` | RENIS（阿根廷） | XLSX 文件 | 否 | 是（CC BY 4.0） |
+| `health_canada` | Health Canada | JSON API | 否 | 是（OGL Canada） |
+| `tfda` | TFDA（台湾） | CSV 的 ZIP 包 | 否 | 是（Open Government Data License） |
+| `ppb_kenya` | Pharmacy and Poisons Board（肯尼亚） | 网页 | 是（批准日期） | 未确认 |
+| `eda_egypt` | Egyptian Drug Authority | PDF | 否 | 未确认 |
+| `moz_ukraine` | 乌克兰卫生部命令 | PDF 附件 | 最新命令 | 未确认 |
+
+另有八个导入器已完成并通过测试，但在运营者提供注册库所要求的条件之前保持关闭：
+
+| 键 | 注册库 | 读取方式 | 所需条件 | 商业使用 |
+|---|---|---|---|---|
+| `nci_cts` | NCI Clinical Trials Search API（美国，癌症） | JSON API；试验链接到其 ClinicalTrials.gov 记录 | `REGISTRY_NCI_CTS_API_KEY` | 是，需注明 NCI |
+| `mfds` | MFDS 批准的试验计划（韩国） | data.go.kr API | `REGISTRY_MFDS_SERVICE_KEY` | 是 |
+| `cris` | CRIS（韩国） | data.go.kr API | `REGISTRY_CRIS_SERVICE_KEY` | 否（KOGL 第 2 类）：附带署名显示，绝不纳入 AI 摘要 |
+| `anzctr` | ANZCTR（澳大利亚和新西兰） | 网页 | 书面许可，`REGISTRY_PERMISSION_ANZCTR` | 否 |
+| `umin` | UMIN-CTR（日本） | 每日 CSV 转储 | 书面许可，`REGISTRY_PERMISSION_UMIN` | 否 |
+| `hra` | HRA 研究摘要（英国） | 网页 | 书面许可，`REGISTRY_PERMISSION_HRA` | 否 |
+| `sukl` | SÚKL（捷克） | 网站的搜索 API | 书面许可，`REGISTRY_PERMISSION_SUKL` | 否 |
+| `orphanet` | Orphanet 临床试验 | Orphadata XML 转储 | 与 Orphanet-AISBL 的合同、`REGISTRY_PERMISSION_ORPHANET` 和 `REGISTRY_ORPHANET_DUMP_URL` | 否 |
+
+由于没有可用的密钥或样本，需要密钥的 API 和 UMIN 的映射是根据其文档并使用合成 fixture 构建的；请在首次实际运行时进行核对。
+
+- **每个导入器都通过了法律审查**，审查记录在其源类和 [docs/registries-evaluation.md](docs/registries-evaluation.md)（第 7 节）中；该文档还列出了暂时无法导入的注册库及各自所需条件（WHO ICTRP、UMIN-CTR、CRIS、ANZCTR、HRA 等）。
+- **条款未确认允许商业使用的注册库，其记录会附带署名免费显示，但不纳入 AI 摘要**，直到该注册库以书面形式确认允许再利用。
+- **礼貌访问。** 请求带有包含联系地址的 user agent（`REGISTRY_CONTACT`，下载和网页必填），下载和网页遵守 robots.txt 及其 Crawl-delay，每个注册库同一时间只发一个请求且间隔至少 `REGISTRY_MIN_INTERVAL_MS`，重试次数有上限。遇到登录、验证码或 HTTP 401/403 时会停止运行：请向该注册库申请许可或导出文件。绝不绕过任何限制。
+- **存储页面。** 每个响应正文都会连同其 `ETag`/`Last-Modified` 一起存储（`storage/app/registry-raw/`），因此未变化的页面不会重复下载；修复解析器后，`clinicaltrials:fetch --source=<key> --from-cache` 会重新解析已存储的页面（传入与被重复的运行相同的 `--since` 或 `--full`）。
+- **按发布原样保存的记录**（XML、CSV 行、网页、PDF 文本）随每项研究保存，规范化内容未变化的研究不会被重写。
+- **版面变化。** 通过下载或网页读取的注册库，若完整运行解析出的记录远少于上次，或任何运行中已填写字段的比例骤降，该运行会被记录为 `partial` 并注明原因。导入绝不会删除研究。
+
 ### 重复注册
 
-导入功能支持多个注册库（`config/registries.php`；目前只导入 ClinicalTrials.gov，其他注册库已列入路线图）。每条记录都保存其所属注册库（`source`）及其在该注册库中的标识符（`source_id`），该标识符在每个注册库内唯一，因此再次导入同一条记录会更新它。
+每条记录都保存其所属注册库（`source`）及其在该注册库中的标识符（`source_id`），该标识符在每个注册库内唯一，因此再次导入同一条记录会更新它。注册库列在 `config/registries.php` 中。
 
 - **多次注册的研究只显示一次。** 每条记录的注册标识符（自身的标识符以及它引用的标识符，例如 ClinicalTrials.gov 次要 ID 中的 ISRCTN 或 EudraCT 编号）会先规范化（`ISRCTN 12345678` 与 `isrctn12345678` 视为相同）再进行比较。共享某个标识符的记录会被关联并归为一组：显示 `config/registries.php` 中排在最前的注册库的记录，其他记录作为它的其他注册保留。申办方方案编号、资助编号和标题绝不会用于合并研究。
 - **存疑的匹配由人工判断。** 同一注册库中共享某个标识符的两条记录，或会包含同一注册库两条记录的分组，不会被合并：它们的关联会被标记为 `conflict`。运维人员可在 `GET /api/admin/trial-links` 列出关联并确认或拒绝；后续导入会保留该决定。共享标识符消失的关联会被删除，分组会重新计算。
@@ -133,7 +177,7 @@ Web 应用、API 消息、电子邮件和 AI 摘要提供以下语言：英语�
 | 前端构建 | Vite 8.3、`laravel-vite-plugin` 3.2、`@vitejs/plugin-vue` 6.0 |
 | PHP 测试与质量 | PHPUnit 13.4、Mockery 1.6、Faker 1.24、Collision 8.9、Laravel Pint 1.32、Ignition 2.13（错误页面） |
 | 前端测试与质量 | Vitest 5.1、Vue Test Utils 2.6、jsdom 31、`vue-tsc` 3.3（基于 `@typescript/typescript6` 6.0） |
-| 工具 | Composer 2.11、Node.js 26、npm、Laravel Tinker 3.2 |
+| 工具 | Composer 2.11、Node.js 26、npm 12.2.3、Laravel Tinker 3.2 |
 | 容器 | Docker Compose：PHP-FPM、队列进程、调度器、MySQL、Redis、nginx 1.30、Node.js（Vite） |
 | CI | GitHub Actions |
 | AI | 任何兼容 OpenAI 的 chat completions API，通过 Laravel HTTP 客户端访问（可选） |
@@ -164,6 +208,12 @@ docker-compose exec app php artisan clinicaltrials:fetch --max-pages=1
 `--max-pages=1` 导入第一页的 100 项研究。如果不加该参数，首次运行会读取整个注册库，耗时数小时。
 
 如需构建 Web 应用而不是运行开发服务器：`docker-compose run --rm node npm run build`。
+
+### 其他注册库配置
+
+在 `.env` 中将 `REGISTRY_CONTACT` 设为注册库运营方可以联系到你的 URL 或电子邮件地址；未设置时，通过下载或网页进行的导入会拒绝运行。拉取对 `Dockerfile` 的更改后（它为 PDF 注册库安装 `poppler-utils`），用 `docker-compose up -d --build` 重新构建镜像。然后一次导入一个注册库，例如 `docker-compose exec app php artisan clinicaltrials:fetch --source=isrctn --max-pages=1`。
+
+管理面板的 **注册库访问** 页面列出每个注册库仍缺少的内容（密钥、书面许可、付费使用确认）、联系对象以及需要遵循的步骤。需要运营方密钥的注册库从 `REGISTRY_<KEY>_SERVICE_KEY` 或 `REGISTRY_<KEY>_API_KEY` 读取密钥（见 `.env.example`）。需要书面许可的注册库在通过 `REGISTRY_PERMISSION_<KEY>=true` 记录许可之前保持关闭；请仅在注册库以书面形式授予许可后再设置。
 
 ### 计费配置
 
@@ -215,7 +265,7 @@ AI_MODEL=...                            # a model name the provider accepts
 | `POST` | `/auth/email/verification-notification` | 令牌 | 重新发送确认链接 |
 | `PUT` | `/account/profile`, `/account/password` | 令牌 | 修改姓名和邮箱，或修改密码 |
 | `PUT` | `/account/locale` | 令牌 | 修改账户语言（`locale`：`en`、`pt_BR`、`es`、`zh_CN`、`zh_TW`、`ja`、`ko`） |
-| `GET` | `/trials` | `view_clinical_trials` | 搜索，每项研究一个结果；筛选条件见下文（包括 `source[]`，即注册库键名），以及 `sort`、`page`、`per_page`（最多 100） |
+| `GET` | `/trials` | `view_clinical_trials` | 搜索，每项研究一个结果，每个结果带有其 `registry`、`registry_url` 以及其条款要求的 `attribution`；筛选条件见下文（包括 `source[]`，即注册库键名），以及 `sort`、`page`、`per_page`（最多 100） |
 | `GET` | `/trials/{nct_id}` | `view_clinical_trials` | 研究及其所有关联列表、规范化后的 `identifiers`，以及它的其他注册（`also_registered_as`；若该记录显示在另一条记录之下，则为 `duplicate_of`） |
 | `GET` `POST` | `/alerts` | `create_alerts`，已确认邮箱 | 列出或创建已保存的搜索；使用 `team_id` 处理团队共享的搜索（所有者创建，成员查看列表） |
 | `GET` `PATCH` `DELETE` | `/alerts/{id}` | 所有者；团队成员可读取共享的搜索 | 读取、修改或删除已保存的搜索，包括 `ai_digest_enabled`、`ai_digest_frequency`（`daily`、`weekly`）和 `ai_digest_language`（`en`、`pt_BR`、`es`、`zh_CN`、`zh_TW`、`ja`、`ko`） |
@@ -238,6 +288,7 @@ AI_MODEL=...                            # a model name the provider accepts
 | `GET` `PUT` | `/admin/roles`, `/admin/permissions`, `/admin/roles/{id}/permissions` | `manage_roles` | 管理角色权限 |
 | `GET` `POST` | `/admin/imports` | `manage_imports` | 导入运行记录；将导入加入队列（202） |
 | `GET` | `/admin/digests` | `manage_imports` | 摘要各期的状态、生成方式、回退原因和指标（不含内容） |
+| `GET` | `/admin/registries` | `manage_imports` | 按注册库列出：使用其数据还缺少什么（`status`：`active`、`confirmation_advised`、`paid_use_unconfirmed`、`needs_key`、`needs_permission`）、联系对象、需要更改哪些设置以及每项是否已设置（绝不显示其值）、其许可证和最近一次导入；另附尚无法导入的注册库。在 Web 应用中位于 管理 > 注册库访问 |
 | `GET` | `/admin/trial-links` | `manage_imports` | 共享某个注册标识符的记录之间的关联；`status` = `conflict`（默认）、`auto`、`confirmed` 或 `rejected` |
 | `PATCH` | `/admin/trial-links/{id}` | `manage_imports` | 确认或拒绝一个关联（`status`：`confirmed` 或 `rejected`）；相关记录会重新分组 |
 
@@ -266,7 +317,7 @@ Web app: Laravel serves resources/views/app.blade.php → Vue 3 + Vue Router + P
 ```
 
 - `app/Services/ClinicalTrials/Import/` 包含导入逻辑。每个注册库都是一个 `RegistrySource`（`app/Services/Registries/`），带有一个 `StudyRegistryClient` 和一个 `StudyPayloadMapper`；`clinicaltrials:fetch --source=<key>` 用于选择注册库（默认 `clinicaltrials_gov`），每个注册库都有各自的增量游标。映射器是只依赖数据内容的纯函数，同步器负责持久化。
-- `app/Services/Registries/` 包含注册库列表（`SourceRegistry`）、标识符规范化（`IdentifierParser`）和去重（`DuplicateLinker`，在每项研究的事务中运行）。
+- `app/Services/Registries/` 包含注册库列表（`SourceRegistry`）、标识符规范化（`IdentifierParser`）和去重（`DuplicateLinker`，在每项研究的事务中运行）。`Fetching/RegistryFetcher` 是导入器访问注册库的唯一途径；`Parsing/` 包含 HTML、CSV、XLSX、PDF 文本和固定宽度表格的读取器；`Sources/<Registry>/` 包含各个导入器（附带法律审查的源类、客户端、映射器）。
 - `app/Services/ClinicalTrials/Search/` 由在 `AppServiceProvider` 中注册的小型 `TrialFilter` 类组合构建搜索。提醒复用相同的条件和筛选器。
 - `app/Services/ClinicalTrials/Changes/` 包含研究的跟踪事实，以及负责比较这些事实的纯函数式 `ChangeDetector`。
 - `app/Services/Alerts/` 负责执行已保存搜索的数量上限、匹配导入结果并发送邮件。`app/Services/Billing/` 包含套餐规则和 `Entitlements`；通过 `SubscriptionGateway` 接口访问 Stripe。`app/Services/Teams/` 管理团队和邀请。
@@ -300,8 +351,9 @@ app/
   Models/                User, Role, Permission, Plan, Subscription, Alert, AlertMatch, ImportRun,
                          Team, TeamMember, TeamInvitation, Digest, DigestItem, DigestDelivery, ChangeSummary
   Models/ClinicalTrials/ ClinicalTrial, its related lists and ClinicalTrialChange
-  Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
-config/                  clinicaltrials.php, billing.php, ai.php, auth.php, jwt.php
+  Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Registries/{Fetching,Parsing,Sources,...},
+                         Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
+config/                  clinicaltrials.php, registries.php, billing.php, ai.php, auth.php, jwt.php
 lang/                    API, email and digest text per language (en, pt_BR, es, zh_CN, zh_TW, ja, ko)
 database/                migrations/, factories/, seeders/
 docs/                    logo, registries evaluation
@@ -312,7 +364,7 @@ tests/                   Feature/, Unit/, Fixtures/
 
 ## 数据来源
 
-研究数据来自 [ClinicalTrials.gov](https://clinicaltrials.gov/)，由美国国家医学图书馆（U.S. National Library of Medicine）运营。这些记录描述的是已注册的研究，不构成医疗建议。在依赖任何研究细节之前，请先核对官方记录。[docs/registries-evaluation.md](docs/registries-evaluation.md) 评估了其他注册库（WHO ICTRP、EU CTR/CTIS 和 ReBEC）。
+研究数据来自 [ClinicalTrials.gov](https://clinicaltrials.gov/)，由美国国家医学图书馆（U.S. National Library of Medicine）运营。这些记录描述的是已注册的研究，不构成医疗建议。在依赖任何研究细节之前，请先核对官方记录。其他注册库列于[其他注册库](#其他注册库)；每个注册库的数据都会附带其署名显示。[docs/registries-evaluation.md](docs/registries-evaluation.md) 记录了所调研的每个注册库的法律审查。
 
 ## 许可证
 

@@ -1,0 +1,733 @@
+                                                        Clinical Trials Registry at EDA
+
+SN     Submission          Study      Sponsor/     Study Title              Study       Sites Activation       Status/Date:      Conditions /       Interventions
+          Date              Code       CRO                                  Phase             Date               - Approved      Therapeutic      Used IMPs & its
+                         (Specified                                         (I, II,      “At which the           - Recruiting       Area          type (Biological,
+                         as per the                                         III, or    clinical trials will    - Recruitment                       Pharmaceutical,
+                         submitted                                           IV)        be conducted in          completion                      Innovative, Herbal,
+                          protocol)                                                          Egypt”             - Completed                      or medical device)
+                                                                                                                - Withdrawn
+                                                                                                                - Suspended
+                                                                                                                - Terminated
+  1.   27/12/2018        M15-991       Sponsor:    A multi-center,            III     1- CRC, Faculty of          Approved       moderately to        (Biological)
+                                        Abbvie     randomized, double-                Medicine,                  26/03/2019         severely
+                                                   blind, placebo-                    Alexandria                                     active
+                                                   controlled induction               University/NA             Completed           Crohn’s           Risankizumab
+                                                   study to assess the                2-Internal Medicine       03/11/2021       disease who
+                                                   efficacy and safety of             Department,                                 failed prior
+                                                   Risankizumab in                    Faculty of                                    biologic
+                                                   subjects with                      Medicine, Cairo                              treatment
+                                                   moderately to                      University/NA
+
+
+                 Green        Biological
+                  Blue   Pharmaceutical
+   Color        Orange   Medical Device
+Indicator         Gray       Innovative
+                   Red           Herbal
+
+            QF:BioInn.231.01          Issue/ Rev No.: 3/0            Issue Date: 15/06/2025               Rev Date: --/--/----         Page 1 of 85
+                                                        Registry updated 07/07/2026
+                                                   severely active                 3- MASRI CRC,
+                                                   Crohn’s disease who             Faculty of Medicine
+                                                   failed prior biologic           Ain Shams
+                                                   treatment                       University/NA
+                                                                                   4- National
+                                                                                   Hepatology and
+                                                                                   Tropical Medicine
+                                                                                   Institute
+                                                                                   (NHTMRI)/NA
+                                                                                   5-Internal Medicine
+                                                                                   Department,
+                                                                                   Faculty of
+                                                                                   Medicine, Zagazig
+                                                                                   University/NA
+  2.   27/12/2018        M16-000       Sponsor:    A Multicenter,          III     1- Two sites at the     Approved        Crohn’s           (Biological)
+                                        Abbvie     Randomized, Double-             Faculty of             26/03/2019       disease
+                                                   Blind, Placebo-                 Medicine, CRC,                                            Risankizumab
+                                                   Controlled 52-Week              Alexandria            Recruitment
+                                                   Maintenance and an              University            completion
+                                                   Open-Label                      (17/11/20219)
+                                                   Extension Study of
+
+                 Green        Biological
+                  Blue   Pharmaceutical
+   Color        Orange   Medical Device
+Indicator         Gray       Innovative
+                   Red           Herbal
+
+            QF:BioInn.231.01          Issue/ Rev No.: 3/0           Issue Date: 15/06/2025          Rev Date: --/--/----      Page 2 of 85
+                                                        Registry updated 07/07/2026
+                                                   the Efficacy and                2-National
+                                                   Safety of                       Hepatology and
+                                                   Risankizumab in                 Tropical medicine
+                                                   Subjects with Crohn's           Research institute
+                                                   Disease who respond              (NHTMRI)/NA
+                                                   to induction treatment          3-Faculty of
+                                                   in M16-006 or M15-              Medicine, Cairo
+                                                   991, or completed               University
+                                                   M15-989                         (22/10/2019)
+                                                                                   4-MASRI CRC,
+                                                                                   Faculty of Medicine
+                                                                                   Ain Shams
+                                                                                   University
+                                                                                   (01/10/2019)
+                                                                                   5- Faculty of
+                                                                                   Medicine, Zagazig
+                                                                                   University /NA
+  3.   28/02/2019        M16-066       Sponsor:    A Multicenter,           III   1- CRC, Faculty of       Approved        Ulcerative         (Biological)
+                                        Abbvie     Randomized, Double-               Medicine,            10/06/2019        Colitis
+                                                   Blind, Placebo-                   Alexandria                                               Risankizumab
+                                                   Controlled 52-Week
+
+                 Green        Biological
+                  Blue   Pharmaceutical
+   Color        Orange   Medical Device
+Indicator         Gray       Innovative
+                   Red           Herbal
+
+            QF:BioInn.231.01          Issue/ Rev No.: 3/0           Issue Date: 15/06/2025          Rev Date: --/--/----       Page 3 of 85
+                                                        Registry updated 07/07/2026
+                                                   Maintenance and an                 University          Recruitment
+                                                   Open-Label                         (10/10/2019)        completion
+                                                   Extension Study of              2- Air Force
+                                                   the Efficacy and                   Specialized
+                                                   Safety of                          Hospital Research
+                                                   Risankizumab in                    (02/10/2019)
+                                                   Subjects with                   3- National Liver
+                                                   Ulcerative Colitis                 Institute,
+                                                                                      Menoufia
+                                                                                      University
+                                                                                      (03/10/2019)
+  4.   28/02/2019        M16-067       Sponsor:    Multicenter              III     1- CRC, faculty of      Approved         Active            (Biological)
+                                        Abbvie     randomized double-               medicine,              10/06/2019       ulcerative
+                                                   blind placebo-                   Alexandria                               colitis.          Risankizumab
+                                                   controlled induction             University
+                                                   study to evaluate the            (02/2022)              Completed:
+                                                   efficacy and safety of           2- National Liver      30/11/2023
+                                                   Risankizumab in                  Institute, Menoufia
+                                                   subjects with                    University
+                                                   moderately to                    (02/2022)
+
+
+
+                 Green        Biological
+                  Blue   Pharmaceutical
+   Color        Orange   Medical Device
+Indicator         Gray       Innovative
+                   Red           Herbal
+
+            QF:BioInn.231.01          Issue/ Rev No.: 3/0            Issue Date: 15/06/2025          Rev Date: --/--/----       Page 4 of 85
+                                                        Registry updated 07/07/2026
+                                                   severely active                      3- Air Force
+                                                   ulcerative colitis.                  Specialized
+                                                                                        Hospital (02/2022)
+  5.   18/09/2019        ARTEMI        Sponsor:    A multicenter,               IV      1- Internal             Approved        Type 2            (Biological)
+                           S-DM        SANOVI      multinational,                       Medicine               09/02/2020       diabetes
+                         “LPS1539                  prospective,                         Department, CRC,                        mellitus      Insulin glargine
+                             6”                    interventional, single-              Faculty of                                               “Toujeo”
+                                                   arm, Phase IV study                  Medicine,              Withdrawn
+                                                   evaluating the                       Alexandria
+                                                    clinical efficacy and               university/NA
+                                                   safety of 26 weeks                   2- Internal
+                                                   of treatment with                    Medicine
+                                                    insulin glargine 300                Department,
+                                                   U/mL (Gla-300) in                    Faculty of
+                                                   patients with Type 2                 Medicine,
+                                                   diabetes mellitus                    Alexandria
+                                                   uncontrolled on                      University/NA
+                                                   basal insulin                        3- GOTHI/NA
+                                                                                        4- Faculty of
+                                                                                        Medicine,
+
+
+
+                 Green        Biological
+                  Blue   Pharmaceutical
+   Color        Orange   Medical Device
+Indicator         Gray       Innovative
+                   Red           Herbal
+
+            QF:BioInn.231.01          Issue/ Rev No.: 3/0                Issue Date: 15/06/2025          Rev Date: --/--/----      Page 5 of 85
+                                                        Registry updated 07/07/2026
+                                                                                     Menoufia
+                                                                                     University/NA
+                                                                                     5- Internal
+                                                                                     Medicine
+                                                                                     Department,
+                                                                                     Faculty of
+                                                                                     Medicine, Ain
+                                                                                     Shams University
+                                                                                     /NA
+  6.   18/11/2019        STAND         Sponsor:    A phase II,               II      1- Abu El Resh            Approved        Sickle cell          (Biological)
+                                       Novartis    multicenter,                          Children             05/05/2020        anemia
+                                                   randomized, open                      Hospital/NA                                               Crizanlizumab
+                                                   label, two arm study
+                                                   comparing the effect                                       Withdrawn
+                                                   of crizanlizumab+                                          03/08/2021
+                                                   SOC alone on renal
+                                                   function in sickle cell
+                                                   disease patients ≥16
+                                                   years with chronic
+                                                   kidney disease due to
+
+
+
+                 Green        Biological
+                  Blue   Pharmaceutical
+   Color        Orange   Medical Device
+Indicator         Gray       Innovative
+                   Red           Herbal
+
+            QF:BioInn.231.01          Issue/ Rev No.: 3/0             Issue Date: 15/06/2025            Rev Date: --/--/----        Page 6 of 85
+                                                        Registry updated 07/07/2026
+                                                   sickle cell
+                                                   nephropathy
+  7.   24/03/2020        STEAD         Sponsor:    A Phase III,             III    1- Faculty of             Approved        Sickle cell          (Biological)
+                          FAST         Novartis    multicenter, double-            Medicine,                05/05/2020        anemia
+                                                   blind study to assess           Alexandria                                                    Crizanlizumab
+                                                   efficacy and safety of          University/NA
+                                                   two doses of                    2- Faculty of            Withdrawn
+                                                   crizanlizumab vs                Medicine, Ain            03/08/2021
+                                                   placebo with or                 Shams University
+                                                   without hydroxyurea             /NA
+                                                   / hydroxycarbamide
+                                                   therapy, in adolescent
+                                                   and adult sickle cell
+                                                   disease patients with
+                                                   vaso-occlusive crisis
+  8.   30/03/2020        WA40404       Sponsor:    A Phase III b            IIIb   1-Sayed Galal             Approved          Primary            (Biological)
+                                        Roche      Multicenter,                    Hospital/NA              23/08/2020       progressive
+                                                   Randomized, double-             2-Faculty of                               multiple           Ocrelizumab
+                                                   blind, Placebo-                 Medicine,                Withdrawn         sclerosis
+                                                   controlled study to             Alexandria               25/08/2021
+                                                   evaluate the efficacy           University/NA
+
+                 Green        Biological
+                  Blue   Pharmaceutical
+   Color        Orange   Medical Device
+Indicator         Gray       Innovative
+                   Red           Herbal
+
+            QF:BioInn.231.01          Issue/ Rev No.: 3/0           Issue Date: 15/06/2025            Rev Date: --/--/----        Page 7 of 85
+                                                        Registry updated 07/07/2026
+                                              and safety of                       3-MASRI CRC,
+                                              Ocrelizumab in                      Faculty of Medicine
+                                              adults with primary                 Ain Shams
+                                              progressive Multiple                University/NA
+                                              Sclerosis
+  9.   14/09/2020        1368-0025 Sponsor: Open label long               IIb     1- Dermatology          Approved        Generalized         (Biological)
+                                   Boehringer term extension                      department, Faculty    18/05/2021        pustular
+                                   Ingelheim study to assess the                  of Medicine,                             psoriasis          Spesolimab
+                                              safety and efficacy                 Alexandria
+                                              of BI655130                         University             Withdrawn
+                                              treatment in patients               Hospital/NA            31/10/2021
+                                              with generalized
+                                              pustular psoriasis
+  10. 22/09/2020         CNBG202 Sponsor: Multicenter,                    III       Activation date:      Approved        COVID-19            (Biological)
+                          0003SQ      China   Randomized, Double                        09/2020          28/03/2022       Prophylaxis
+                                    National blind, parallel                      1- Vacsera Health
+                                     Biotec   placebo controlled,                 Care Facility          Completed                       Inactivated SARS-
+                                      Group   Phase III clinical trial            2- Kameya Medical      31/07/2022                       COV-1 Vaccine
+                                    company to evaluate the                       Center
+                                     limited  protective efficacy,
+                                              safety and
+
+                 Green        Biological
+                  Blue   Pharmaceutical
+   Color        Orange   Medical Device
+Indicator         Gray       Innovative
+                   Red           Herbal
+
+            QF:BioInn.231.01          Issue/ Rev No.: 3/0          Issue Date: 15/06/2025          Rev Date: --/--/----        Page 8 of 85
+                                                        Registry updated 07/07/2026
+                                         Wuhan       immunogenicity of
+                                      institute of   Inactivated SARS-
+                                       biological    COV-2 Vaccines in
+                                        products     healthy population
+                                        Co. Ltd      aged 18 years old and
+                                                     above
+                                         Beijin
+                                      institute of
+                                       biological
+                                        products
+                                         Co.Ltd
+
+  11. 13/04/2021         D910DC0      Sponsor:       A phase 3               III     1- CRC, Faculty of       Approved        Hepatocellul         (Biological)
+                           0001       AstraZene      randomized double               Medicine,               12/12/2021       ar carcinoma
+                         (Emerald-        ca         blind placebo                   Alexandria                                 patients at        Durvalumab\
+                            2)                       controlled                      University                                high risk of        Bevacizumab
+                                            CRO:     multicenter study of            (30/12/2021)           Recruitment         recurrence
+                                           IQVIA     durvalumab                      2- National Liver      completion        after curative
+                                                     monotherapy or in               Institute, Menoufia                          hepatic
+                                                     combination with                University                                resection or
+                                                     bevacizumab as                  (08/11/2021)                                ablation
+
+                 Green        Biological
+                  Blue   Pharmaceutical
+   Color        Orange   Medical Device
+Indicator         Gray       Innovative
+                   Red           Herbal
+
+            QF:BioInn.231.01          Issue/ Rev No.: 3/0             Issue Date: 15/06/2025           Rev Date: --/--/----         Page 9 of 85
+                                                          Registry updated 07/07/2026
+                                                adjuvant therapy in               3- National
+                                                patients with                     Hepatology &
+                                                hepatocellular                    Tropical Medicine
+                                                carcinoma who are at              Research Institute
+                                                high risk of                      (08/11/2021)
+                                                recurrence after                  4- Air Force
+                                                curative hepatic                  Specialized
+                                                resection or ablation             Hospital
+                                                                                  (08/11/2021)
+                                                                                  5- Clinical
+                                                                                  Oncology
+                                                                                  Department,
+                                                                                  Faculty of
+                                                                                  Medicine, Assiut
+                                                                                  University
+                                                                                  (11/11/2021)
+                                                                                  6-Oncology
+                                                                                  Department,
+                                                                                  Faculty of
+                                                                                  Medicine,
+                                                                                  Mansoura
+
+              Green        Biological
+               Blue   Pharmaceutical
+   Color     Orange   Medical Device
+Indicator      Gray       Innovative
+                Red           Herbal
+
+        QF:BioInn.231.01          Issue/ Rev No.: 3/0             Issue Date: 15/06/2025           Rev Date: --/--/----   Page 10 of 85
+                                                        Registry updated 07/07/2026
+                                                                                  University
+                                                                                  (13/12/2021)
+                                                                                  7-MASRI CRC,
+                                                                                  Faculty of
+                                                                                  Medicine, Ain
+                                                                                  Shams University
+                                                                                  (17/11/2021)
+                                                                                  8-National Cancer
+                                                                                  Institute
+                                                                                  (08/11/2021)
+  12. 19/05/2021        01-         Sponsor:    A phase III,              III       Activation date:       Approved       COVID-19             (Biological)
+                      Sputnik-       Human      randomized, double-                     Dec 2022          24/08/2021      Prophylaxis
+                       Light-       vaccine     blind, placebo-                   1- National                                                 Sputnik Light
+                       2021           LLC       controlled                        hepatology and          Completed:                          vector vaccine
+                                   (Global),    international multi-              tropical medicine       31/08/2022
+                                    Russian     site clinical trial in            center
+                                    ministry    parallel assignment to            2- Katameya
+                                       of       evaluate efficacy,                Medical Center
+                                   healthcare   immunogenicity and
+                                       –        safety of the Sputnik
+                                                Light vector vaccine
+
+              Green        Biological
+               Blue   Pharmaceutical
+   Color     Orange   Medical Device
+Indicator      Gray       Innovative
+                Red           Herbal
+
+        QF:BioInn.231.01          Issue/ Rev No.: 3/0             Issue Date: 15/06/2025           Rev Date: --/--/----       Page 11 of 85
+                                                        Registry updated 07/07/2026
+                                    Gamalya     in adults in the
+                                    (Local)     SARS-Cov-2
+                                                infection prophylactic
+                                        CRO:    treatment
+                                        PDC
+
+  13. 25/05/2021      KATE-3        Sponsor:    A randomized, multi-      III     1- NEMROCK,             Approved          HER2-            (Biological)
+                                     Roche      center, double blind,             Faculty of             05/12/2021      positive and
+                                                placebo-controlled                Medicine, Kasr Al-                        PD-L1-           Trastuzumab
+                                                phase III study of the            Ainy Hospital,         Withdrawn         positive           Emtansine/
+                                                efficacy and safety of            Cairo University       19/12/2022         locally          Atezolizumab
+                                                Trastuzumab                       /NA                                    advanced or
+                                                Emtansine in                      2- Shefaa Al-                           metastatic
+                                                combination with                  Orman                                  breast cancer
+                                                Atezolizumab or                   Hospital/NA
+                                                placebo in Pts with               3- Baheya Hospital
+                                                HER2-positive and                 /NA
+                                                PD-L1- positive
+                                                locally advanced or
+                                                metastatic breast
+                                                cancer who have
+
+              Green        Biological
+               Blue   Pharmaceutical
+   Color     Orange   Medical Device
+Indicator      Gray       Innovative
+                Red           Herbal
+
+        QF:BioInn.231.01          Issue/ Rev No.: 3/0             Issue Date: 15/06/2025          Rev Date: --/--/----       Page 12 of 85
+                                                        Registry updated 07/07/2026
+                                                received prior
+                                                Trastuzumab +
+                                                Atezolizumab and
+                                                Taxane- based
+                                                therapy
+  14. 18/08/2021      MO42541       Sponsor:    A phase III, open         III     1- Air Force              Approved       Hepatocellul         (Biological)
+                                     Roche      label, randomized                 Specialized              02/02/2022      ar carcinoma
+                                                study of                          Hospital                                                     Atezolizumab/
+                                     CRO:       Atezolizumab with                 (17/01/2024)             Recruitment                          Lenvatinib/
+                                   IQVIA for    Lenvatinib or                                              completion                            Sorafenib
+                                   Monitoring   Sorafenib versus
+                                                Lenvatinib or
+                                                sorafenib alone in
+                                                hepatocellular
+                                                carcinoma previously
+                                                treated with
+                                                Atezolizumab and
+                                                Bevacizumab
+  15. 02/09/2021      COVID_        Sponsor:    A Phase 1 Clinical         I       1- National              Approved        Covid-19            (Biological)
+                      VACC_1        National    Trial to Evaluate                 Research Center          09/11/2021      Prophylaxis
+                                                the Safety,                       (11/11/2021)
+
+              Green        Biological
+               Blue   Pharmaceutical
+   Color     Orange   Medical Device
+Indicator      Gray       Innovative
+                Red           Herbal
+
+        QF:BioInn.231.01          Issue/ Rev No.: 3/0             Issue Date: 15/06/2025            Rev Date: --/--/----       Page 13 of 85
+                                                        Registry updated 07/07/2026
+                                    research   Tolerability, and                                          Suspended                      Inactivated SARS-
+                                     center    Immunogenicity of                                          09/12/2021                       CoV-2 Vaccine
+                                               Inactivated SARS-
+                                      CRO:     CoV-2 Vaccine
+                                    Clinmax Against COVID-19
+                                               in Healthy Adults
+  16. 17/01/2022      SPHINX-       Sponsor: Safety and                    I      Al-Manial                Approved        Covid-19           (Biological)
+                       EGYPT          - EVA    Immunogenicity                     Specialized             03/02/2022      Prophylaxis
+                      SPHINX2      PHARMA Study of EgyVax                         University Hospital,                                         EgyVax
+                       2122020      - VSVRI Vaccine Candidate                     Cairo University        Completed
+                                   - supreme for Prophylaxis of                   Hospitals               30/04/2023
+                                   council of SARS-CoV-2                          (06/02/2022)
+                                   university Infection (COVID-
+                                    hospitals 19)
+                                   - Ministry
+                                    of higher
+                                   education
+                                        and
+                                    scientific
+                                    research
+
+
+
+              Green        Biological
+               Blue   Pharmaceutical
+   Color     Orange   Medical Device
+Indicator      Gray       Innovative
+                Red           Herbal
+
+        QF:BioInn.231.01          Issue/ Rev No.: 3/0             Issue Date: 15/06/2025           Rev Date: --/--/----       Page 14 of 85
+                                                        Registry updated 07/07/2026
+                                     CRO:
+                                    Dataclin
+  17. 04/11/2021      GBT2104-      Sponsor:    A randomized              III     1-Pediatric              Approved        sickle cell        (Biological)
+                        131          Global     double blinded                    Department,             14/06/2022         disease
+                                     blood      placebo controlled                Faculty of                              patients with       Inclacumab
+                                   therapeuti   multicentre study                 Medicine,               Completed:          Vaso-
+                                    cs Inc. \   to access the safety              Mansoura                30/05/2025       occlusive
+                                     Pfizer     and efficacy of                   University/NA                               crisis
+                                                Inclacumab in                     2-Pediatric
+                                        CRO:    participants with                 Department,
+                                        MCT     sickle cell disease               Faculty of
+                                                experiencing Vaso-                Medicine, Zagazig
+                                                occlusive crisis                  University
+                                                                                  (28/02/2023)
+                                                                                  3- MASRI-CRC,
+                                                                                  Faculty of Medicine,
+                                                                                  Ain Shams
+                                                                                  University
+                                                                                  (04/03/2023)
+                                                                                  4-Pediatric
+                                                                                  Hematology
+
+              Green        Biological
+               Blue   Pharmaceutical
+   Color     Orange   Medical Device
+Indicator      Gray       Innovative
+                Red           Herbal
+
+        QF:BioInn.231.01          Issue/ Rev No.: 3/0             Issue Date: 15/06/2025           Rev Date: --/--/----       Page 15 of 85
+                                                        Registry updated 07/07/2026
+                                                                                  Department& CRC,
+                                                                                  Faculty of
+                                                                                  Medicine,
+                                                                                  Alexandria
+                                                                                  University/NA
+                                                                                  5- Abo El-Resh
+                                                                                  Hospital &CRC,
+                                                                                  Faculty of
+                                                                                  Medicine, Cairo
+                                                                                  University and
+                                                                                  Hematology
+                                                                                  Department,
+                                                                                  (28/02/2023)
+  18. 04/01/2022      GBT2104-      Sponsor:    A Randomized,             III     1-Pediatric            Approved        Sickle cell        (Biological)
+                        132          Global     Double-blind,                     Department, Faculty   14/06/2022         disease
+                                      blood     Placebo-controlled,               of Medicine,                          patients with       Inclacumab
+                                   therapeuti   Multicenter Study                 Mansoura              Withdrawn           Vaso-
+                                     cs Inc.\   of a Single Dose of               University/NA         29/06/2023       occlusive
+                                      Pfizer    Inclacumab to                     2-Pediatric                               crisis
+                                                Reduce Re-                        Department, Faculty
+                                                admission in                      of Medicine,
+
+              Green        Biological
+               Blue   Pharmaceutical
+   Color     Orange   Medical Device
+Indicator      Gray       Innovative
+                Red           Herbal
+
+        QF:BioInn.231.01          Issue/ Rev No.: 3/0             Issue Date: 15/06/2025         Rev Date: --/--/----       Page 16 of 85
+                                                        Registry updated 07/07/2026
+                                        CRO:    Participants with                 Zagazig
+                                        MCT     Sickle Cell Disease               University/NA
+                                                and Recurrent                     3- MASRI, CRC,
+                                                Vaso-occlusive                    Faculty of Medicine
+                                                Crises (GBT-132)                  Ain Shams
+                                                                                  University/NA
+                                                                                  4-Pediatric
+                                                                                  Hematology
+                                                                                  Department, CRC,
+                                                                                  Faculty of Medicine,
+                                                                                  Alexandria
+                                                                                  University/NA
+                                                                                  5- CRC, Faculty of
+                                                                                  Medicine, Cairo
+                                                                                  University and
+                                                                                  Hematology
+                                                                                  Department, Abo El-
+                                                                                  Resh Hospital/NA
+  19. 28/11/2021      GBT2104-      Sponsor:    An Open-label             III     1-Pediatric             Approved       sickle cell
+                        133          Global     Extension Study to                Department, Faculty    14/06/2022        disease          (Biological)
+                                     blood      Evaluate the Long-                of Medicine,
+
+              Green        Biological
+               Blue   Pharmaceutical
+   Color     Orange   Medical Device
+Indicator      Gray       Innovative
+                Red           Herbal
+
+        QF:BioInn.231.01          Issue/ Rev No.: 3/0             Issue Date: 15/06/2025          Rev Date: --/--/----      Page 17 of 85
+                                                        Registry updated 07/07/2026
+                                   therapeuti   term Safety of                    Mansoura               Withdrawn                       Inclacumab/
+                                     cs Inc.\   Inclacumab                        University/NA          17/12/2023                        Placebo
+                                      Pfizer    Administered to                   2- Pediatric
+                                                Participants with                 Department, Faculty
+                                                Sickle Cell Disease               of Medicine,
+                                        CRO:    Who Have                          Zagazig
+                                        MCT     Participated in an                University/NA
+                                                Inclacumab                        3- MASRI, CRC,
+                                                Clinical Trial                    Faculty of Medicine
+                                                                                  Ain Shams
+                                                                                  University/NA
+                                                                                  4-Pediatric
+                                                                                  Hematology
+                                                                                  Department& CRC,
+                                                                                  Faculty of Medicine,
+                                                                                  Alexandria/NA
+                                                                                  University Hospital
+                                                                                  5- Abo El-Resh
+                                                                                  Hospital &CRC,
+                                                                                  Faculty of Medicine,
+                                                                                  Cairo University and
+
+              Green        Biological
+               Blue   Pharmaceutical
+   Color     Orange   Medical Device
+Indicator      Gray       Innovative
+                Red           Herbal
+
+        QF:BioInn.231.01          Issue/ Rev No.: 3/0             Issue Date: 15/06/2025          Rev Date: --/--/----   Page 18 of 85
+                                                        Registry updated 07/07/2026
+                                                                                  Hematology
+                                                                                  Department/NA
+  20. 08\06\2022      Consonan     Sponsor:     An open-label,            III     1- CRC, Faculty of       Approved       Progressive         (Biological)
+                        ce-           F.        single-arm 4-year                 Medicine,               20/09/2022       multiple
+                      MN39159      HOFFMA       study to evaluate                 Alexandria                               sclerosis          Ocrelizumab
+                                    NN-LA       effectiveness and                 University              Recruitment
+                                    ROCHE       safety of                         (05/03/2019)            completion
+                                     LTD        ocrelizumab                       2- MASRI-CRC,
+                                                treatment in                      Faculty of
+                                      CRO:      patients with                     Medicine, Ain
+                                     IQVIA      progressive                       Shams University
+                                       (for     multiple sclerosis                (25/02/2021)
+                                   monitoring
+                                    activities
+                                      only)
+  21. 14/08/2022      CAIN457       Sponsor: A randomized,                III     1- CRC, Faculty of       Approved       Treatments          (Biological)
+                       A2310        Novartis double-blind,                        Medicine,               04/12/2022       of severe
+                                               placebo- and active                Alexandria                                chronic           Secukinumab
+                                      CRO:     controlled                         University Hospital        Early          plaque
+                                      MCT      multicenter trial to               (11/01/2017)           terminated by     psoriasis
+                                               demonstrate                                                the sponsor
+
+              Green        Biological
+               Blue   Pharmaceutical
+   Color     Orange   Medical Device
+Indicator      Gray       Innovative
+                Red           Herbal
+
+        QF:BioInn.231.01          Issue/ Rev No.: 3/0             Issue Date: 15/06/2025           Rev Date: --/--/----       Page 19 of 85
+                                                        Registry updated 07/07/2026
+                                                  efficacy of                       2- Dermatology          31/03/2023
+                                                  subcutaneous                      Department,
+                                                  Secukinumab                       Faculty of
+                                                  compared to                       Medicine, Ain
+                                                  placebo and                       Shams University
+                                                  etanercept (in a                  Hospital
+                                                  single blinded arm)               (22/01/2017)
+                                                  after twelve weeks
+                                                  of treatment, and to
+                                                  assess the safety,
+                                                  tolerability, and
+                                                  long-term efficacy
+                                                  in subjects from 6
+                                                  to less than 18
+                                                  years of age with
+                                                  severe chronic
+                                                  plaque psoriasis
+  22. 19/12/2022       Recbio      Sponsor :      A multi-center           II/III   1.Egyptian CDC           Refusal by     Prophylactic        (Biological)
+                                        Jiangsu   randomized double                 2.Katameya                 EDA:         Vaccine for     Recombinant two
+                                        Recbio    blind placebo-                    Medical Center           20/04/2022      COVID-19      component COVID-
+                                                  controlled phase 2/3                                                                         19 vaccine
+
+
+              Green        Biological
+               Blue   Pharmaceutical
+   Color     Orange   Medical Device
+Indicator      Gray       Innovative
+                Red           Herbal
+
+        QF:BioInn.231.01          Issue/ Rev No.: 3/0               Issue Date: 15/06/2025           Rev Date: --/--/----       Page 20 of 85
+                                                        Registry updated 07/07/2026
+                                   Technolog    trial to evaluate the             3.National
+                                   y Co., Ltd   efficacy, safety and              Hepatology and
+                                                immunogenicity of                 Tropical Medicine
+                                        CRO:    the recombinant two               Research Institute
+                                        PDC     component COVID-
+                                                                                  (NHTMRI)
+                                                19 vaccine (CHO)
+                                                cell in adult aged 18
+                                                years and older
+  23. 06/06/2023      FUZION       Sponsor:     A Phase 3,                III     1- National              Approved       Fistulizing        Guselkumab
+                      CNTO195       Janssen     Randomized,                       Hepatology              13/08/2023       perianal
+                       9CRD        Research     Placebo-controlled,               and Tropical                             Crohn’s           (Biological)
+                                      and       Parallel-group,                   Medicine Research        Recruiting       disease
+                                   Developm     Multicenter Study                 Institute
+                                      ent       to Evaluate the                   (NHTMRI)/
+                                                Efficacy and Safety               (09/12/2024)
+                                        CRO:    of Guselkumab in                  2- CRC, Faculty of
+                                        MCT     Participants with                  Medicine,
+                                                Fistulizing,                       Alexandria
+                                                Perianal Crohn’s                   University
+                                                Disease “FUZION                   (09/12/2024)
+                                                CD”                               3- Department of
+                                                                                   Internal Medicine,
+
+              Green        Biological
+               Blue   Pharmaceutical
+   Color     Orange   Medical Device
+Indicator      Gray       Innovative
+                Red           Herbal
+
+        QF:BioInn.231.01          Issue/ Rev No.: 3/0             Issue Date: 15/06/2025           Rev Date: --/--/----      Page 21 of 85
+                                                        Registry updated 07/07/2026
+                                                                                   Kasr Al Aini
+                                                                                   Hospital, Cairo
+                                                                                   University
+                                                                                   (09/12/2024)
+                                                                                  4- MASRI CRC,
+                                                                                   Faculty of
+                                                                                   Medicine, Ain
+                                                                                   Shams University
+                                                                                   (09/12/2024)
+  24. 14/05/2023        MP-        Sponsor:     A Phase I,                 I      1- CRS clinical          Approved       Inflammatory          Adessia
+                      ADA1-01      Minaphar     randomized,                       research services,      10/08/2023          disease
+                                      m         double-blind, 2-                  Berlin GmbH/NA                           (Biosimilar        (Biological)
+                                                arm, parallel group               2- CRS clinical         Completed:       to Humira)
+                                     CRO:       trial to compare                  research services,      17/11/2023
+                                      CRS       pharmacokinetics                  Mannheim
+                                    Clinical    of Adessia with                   GmbH/NA
+                                    Research    EU-authorized
+                                    Services    Humira in healthy
+                                     Berlin     male and female
+                                     GmbH       participants”
+
+
+
+              Green        Biological
+               Blue   Pharmaceutical
+   Color     Orange   Medical Device
+Indicator      Gray       Innovative
+                Red           Herbal
+
+        QF:BioInn.231.01          Issue/ Rev No.: 3/0             Issue Date: 15/06/2025           Rev Date: --/--/----       Page 22 of 85
+                                                        Registry updated 07/07/2026
+  88. 25/08/2024       NW-          Sponsor:    Efficacy and safety       III    1- Cardiology           Refused        Hypertension       (Herbal)
+                      Roselle-       Natural    of Roselle in phase                 Department,         15/01/2025                         Hibiscus
+                      572023        wellness    III, randomized,                    Faculty of                                          sabdariffa, Olea
+                                                double -blind,                      Medicine,                                             europaea L
+                                     CRO:
+                                                double dummy,                       Alexandria
+                                    Clinmax
+                                                active controlled                   University
+                                                clinical trial                      Hospitals/NA
+                                                                                 2- Cardiology
+                                                                                    Department
+                                                                                    Faculty of
+                                                                                    Medicine,
+                                                                                    Mansoura
+                                                                                    University
+                                                                                    Hospitals/NA
+                                                                                 3- Fayoum General
+                                                                                    Hospital/NA
+
+
+
+
+              Green        Biological
+               Blue   Pharmaceutical
+   Color     Orange   Medical Device
+Indicator      Gray       Innovative
+                Red           Herbal
+
+        QF:BioInn.231.01          Issue/ Rev No.: 3/0             Issue Date: 15/06/2025         Rev Date: --/--/----       Page 84 of 85
+                                                        Registry updated 07/07/2026
+  89. 02/09/2024      NW_LowG       Sponsor:    A Phase III,              III     1- Internal            Refused        Type II           (Herbal)
+                      lu_180520      Natural    Randomized, Double-                  Medicine           22/05/2025      Diabetes        Mas Cotek
+                          23        wellness    Blind, Double-                       Department,                        Mellitus     powdered Extract
+                                                Dummy, Active-                       Faculty of                                            300 mg
+                                     CRO:       Controlled Clinical
+                                                                                     Medicine,                                         Cinnamomum
+                                    Dataclin    Trial to Investigate
+                                                the Efficacy and
+                                                                                     Alexandria                                      cassia, Black seed
+                                                Safety of NW Low-                    University/NA                                   powdered extract
+                                                Glu® in Patients with             2- Internal                                             250 mg)
+                                                Type II Diabetes                     Medicine
+                                                Mellitus                             Department,
+                                                                                     Faculty of
+                                                                                     Medicine,
+                                                                                     Alazahar
+                                                                                     University/NA
+                                                                                  3- Internal
+                                                                                     Medicine
+                                                                                     Department,
+                                                                                     Imbaba General
+                                                                                     Hospital/NA
+
+
+
+
+              Green        Biological
+               Blue   Pharmaceutical
+   Color     Orange   Medical Device
+Indicator      Gray       Innovative
+                Red           Herbal
+
+        QF:BioInn.231.01          Issue/ Rev No.: 3/0             Issue Date: 15/06/2025         Rev Date: --/--/----     Page 85 of 85
+                                                        Registry updated 07/07/2026
+

@@ -9,19 +9,22 @@
 </p>
 
 <p align="center">
-  <img alt="Status: desenvolvimento inicial" src="https://img.shields.io/badge/status-desenvolvimento_inicial-orange?style=flat-square">
+  <img alt="Status: desenvolvimento inicial" src="https://img.shields.io/badge/status-desenvolvimento_inicial-orange?style=flat-square&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMi43IDE5bC05LjEtOS4xYy45LTIuMy40LTUtMS41LTYuOS0yLTItNS0yLjQtNy40LTEuM0w5IDYgNiA5IDEuNiA0LjdDLjQgNy4xLjkgMTAuMSAyLjkgMTIuMWMxLjkgMS45IDQuNiAyLjQgNi45IDEuNWw5LjEgOS4xYy40LjQgMSAuNCAxLjQgMGwyLjMtMi4zYy41LS40LjUtMS4xLjEtMS40eiIvPjwvc3ZnPg%3D%3D">
   <a href="https://github.com/czarist/clinical-trial-watcher/actions/workflows/ci.yml"><img alt="Testes" src="https://img.shields.io/github/actions/workflow/status/czarist/clinical-trial-watcher/ci.yml?branch=main&label=tests&logo=githubactions&logoColor=white&style=flat-square"></a>
   <a href="https://github.com/czarist/clinical-trial-watcher/actions/workflows/packages.yml"><img alt="Auditoria dos pacotes" src="https://img.shields.io/github/actions/workflow/status/czarist/clinical-trial-watcher/packages.yml?branch=main&label=packages&logo=dependabot&logoColor=white&style=flat-square"></a>
   <img alt="PHP 8.6" src="https://img.shields.io/badge/PHP-8.6-777BB4?style=flat-square&logo=php&logoColor=white">
   <img alt="Laravel 13" src="https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square&logo=laravel&logoColor=white">
   <img alt="Vue 3" src="https://img.shields.io/badge/Vue-3-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white">
   <img alt="TypeScript 7" src="https://img.shields.io/badge/TypeScript-7-3178C6?style=flat-square&logo=typescript&logoColor=white">
+  <img alt="Node.js 26" src="https://img.shields.io/badge/Node.js-26-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white">
+  <img alt="npm 12.2.3" src="https://img.shields.io/badge/npm-12.2.3-CB3837?style=flat-square&logo=npm&logoColor=white">
   <img alt="MySQL 8.4" src="https://img.shields.io/badge/MySQL-8.4-4479A1?style=flat-square&logo=mysql&logoColor=white">
   <img alt="Redis 8.10" src="https://img.shields.io/badge/Redis-8.10-FF4438?style=flat-square&logo=redis&logoColor=white">
   <img alt="Stripe" src="https://img.shields.io/badge/cobran%C3%A7a-Stripe-635BFF?style=flat-square&logo=stripe&logoColor=white">
   <img alt="Auth: JWT" src="https://img.shields.io/badge/auth-JWT-000000?style=flat-square&logo=jsonwebtokens&logoColor=white">
-  <img alt="Docker Compose" src="https://img.shields.io/badge/roda%20com-Docker%20Compose-2496ED?style=flat-square&logo=docker&logoColor=white">
-  <img alt="Licença: MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-blue?style=flat-square">
+  <img alt="Docker: Nginx + PHP-FPM" src="https://img.shields.io/badge/Docker-Nginx%20%2B%20PHP--FPM-2496ED?style=flat-square&logo=docker&logoColor=white">
+  <img alt="Nginx 1.30" src="https://img.shields.io/badge/Nginx-1.30-009639?style=flat-square&logo=nginx&logoColor=white">
+  <img alt="Licença: MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white">
 </p>
 
 <p align="center">
@@ -46,9 +49,50 @@
 - **Mudanças são registradas com o valor anterior e o novo.** Um estudo novo é registrado como novo e vira a base de comparação. Nas importações seguintes são comparados o status geral de recrutamento, os centros (adicionados, removidos ou com status do centro alterado), as datas de início e de conclusão (com a precisão original: uma data só com mês continua sendo um mês) e a publicação de resultados, e as diferenças ficam gravadas de forma estruturada. As listas de centros são comparadas por instituição e local, então uma mudança na ordem em que o registro os lista não é uma mudança. Cada mudança tem uma impressão digital estável, então uma importação repetida não consegue registrá-la nem notificá-la duas vezes.
 - **Datas parciais são normalizadas** (`2024` → `2024-01-01`, `2024-06` → `2024-06-01`), e o payload completo do estudo fica em `raw_json`.
 
+### Outros registros
+
+Outros doze registros podem ser importados com `php artisan clinicaltrials:fetch --source=<chave>`. Só o ClinicalTrials.gov roda no agendamento diário.
+
+| Chave | Registro | Lido por | Incremental | Uso comercial |
+|---|---|---|---|---|
+| `ctis` | CTIS (UE/EEE) | API JSON do portal | Sim (última atualização) | Sim, com crédito à EMA |
+| `isrctn` | ISRCTN | API XML | Sim (última edição) | Sim (CC BY / CC0) |
+| `euctr` | EU Clinical Trials Register | Exportação em texto simples | Só estudos novos | Sim, com crédito ao registro |
+| `drks` | DRKS (Alemanha) | Dump JSON; só registros CC BY 4.0 (registrados ou atualizados a partir de 2025) | Sim (última atualização) | Sim (CC BY 4.0) |
+| `reec` | REEC (Espanha) | API REST | Inscrições dos últimos 90 dias | Sim, citando a AEMPS |
+| `rebec` | ReBEC (Brasil) | Páginas web | Sim (última aprovação) | Não confirmado |
+| `renis` | RENIS (Argentina) | Arquivo XLSX | Não | Sim (CC BY 4.0) |
+| `health_canada` | Health Canada | API JSON | Não | Sim (OGL Canada) |
+| `tfda` | TFDA (Taiwan) | ZIP de CSV | Não | Sim (Open Government Data License) |
+| `ppb_kenya` | Pharmacy and Poisons Board (Quênia) | Páginas web | Sim (data de aprovação) | Não confirmado |
+| `eda_egypt` | Egyptian Drug Authority | PDF | Não | Não confirmado |
+| `moz_ukraine` | Portarias do Ministério da Saúde da Ucrânia | Anexos em PDF | Portarias mais recentes | Não confirmado |
+
+Outros oito importadores estão prontos e testados, mas ficam desligados até que o operador forneça o que o registro exige:
+
+| Chave | Registro | Lido por | Requer | Uso comercial |
+|---|---|---|---|---|
+| `nci_cts` | NCI Clinical Trials Search API (EUA, câncer) | API JSON; os estudos apontam para os seus registros no ClinicalTrials.gov | `REGISTRY_NCI_CTS_API_KEY` | Sim, com crédito ao NCI |
+| `mfds` | Planos de estudo aprovados pelo MFDS (Coreia do Sul) | API do data.go.kr | `REGISTRY_MFDS_SERVICE_KEY` | Sim |
+| `cris` | CRIS (Coreia do Sul) | API do data.go.kr | `REGISTRY_CRIS_SERVICE_KEY` | Não (KOGL Tipo 2): aparece com atribuição, nunca nos digests com IA |
+| `anzctr` | ANZCTR (Austrália e Nova Zelândia) | Páginas web | Permissão por escrito, `REGISTRY_PERMISSION_ANZCTR` | Não |
+| `umin` | UMIN-CTR (Japão) | Dump CSV diário | Permissão por escrito, `REGISTRY_PERMISSION_UMIN` | Não |
+| `hra` | Resumos de pesquisa da HRA (Reino Unido) | Páginas web | Permissão por escrito, `REGISTRY_PERMISSION_HRA` | Não |
+| `sukl` | SÚKL (Tchéquia) | API de busca do site | Permissão por escrito, `REGISTRY_PERMISSION_SUKL` | Não |
+| `orphanet` | Estudos clínicos da Orphanet | Dump XML do Orphadata | Um contrato com a Orphanet-AISBL, `REGISTRY_PERMISSION_ORPHANET` e `REGISTRY_ORPHANET_DUMP_URL` | Não |
+
+Os mapeamentos das APIs protegidas por chave e do UMIN foram feitos a partir da documentação, com fixtures sintéticas, porque não havia chave nem amostra disponível; confira-os na primeira execução real.
+
+- **Cada importador passou por uma revisão jurídica**, registrada na sua classe de origem e em [docs/registries-evaluation.md](docs/registries-evaluation.md) (seção 7), que também lista os registros que ainda não podem ser importados e o que cada um exige (WHO ICTRP, UMIN-CTR, CRIS, ANZCTR, HRA e outros).
+- **Registros de origens cujos termos não confirmam o uso comercial aparecem de graça com atribuição, mas ficam fora dos digests com IA**, até que o registro confirme a reutilização por escrito.
+- **Acesso educado.** As requisições levam um user agent com endereço de contato (`REGISTRY_CONTACT`, obrigatório para downloads e páginas web), seguem o robots.txt e o seu Crawl-delay em downloads e páginas web, vão uma por vez por registro com pelo menos `REGISTRY_MIN_INTERVAL_MS` de intervalo e são repetidas um número limitado de vezes. Um login, captcha ou HTTP 401/403 interrompe a execução: peça permissão ou uma exportação ao registro. Nada é contornado.
+- **Páginas guardadas.** Todo corpo de resposta é guardado (`storage/app/registry-raw/`) com o seu `ETag`/`Last-Modified`, então páginas sem mudança não são baixadas de novo, e `clinicaltrials:fetch --source=<chave> --from-cache` lê de novo as páginas guardadas depois de uma correção no parser (passe o mesmo `--since` ou `--full` da execução repetida).
+- **O registro como publicado** (XML, linha de CSV, página web, texto do PDF) fica guardado com cada estudo, e um estudo cujo conteúdo normalizado não mudou não é regravado.
+- **Mudanças de layout.** Uma execução completa de um registro lido por download ou página web que extrai muito menos registros que a anterior, ou qualquer execução cuja parcela de campos preenchidos cai bruscamente, fica marcada como `partial` com o motivo. As importações nunca apagam estudos.
+
 ### Registros duplicados
 
-A importação foi preparada para mais de um registro (`config/registries.php`; hoje só o ClinicalTrials.gov é importado, os outros estão planejados no roadmap). Cada registro guarda a sua origem (`source`) e o seu identificador nela (`source_id`), único por origem, então importar o mesmo registro de novo o atualiza.
+Cada registro guarda a sua origem (`source`) e o seu identificador nela (`source_id`), único por origem, então importar o mesmo registro de novo o atualiza. Os registros estão listados em `config/registries.php`.
 
 - **Estudos registrados mais de uma vez aparecem uma vez só.** Os identificadores de registro de cada estudo (o próprio e os que ele cita, como um número ISRCTN ou EudraCT entre os IDs secundários do ClinicalTrials.gov) são normalizados (`ISRCTN 12345678` e `isrctn12345678` são o mesmo) e comparados. Registros que compartilham um deles são ligados e agrupados: aparece o registro da origem listada primeiro em `config/registries.php`, e os outros ficam como inscrições adicionais do estudo. Números de protocolo do patrocinador, números de financiamento e títulos nunca são usados para juntar estudos.
 - **Correspondências duvidosas esperam uma pessoa.** Dois registros da mesma origem que compartilham um identificador, ou um grupo que ficaria com dois registros da mesma origem, não são juntados: os vínculos ficam como `conflict`. Os operadores listam os vínculos em `GET /api/admin/trial-links` e os confirmam ou rejeitam; a decisão é mantida pelas importações seguintes. Um vínculo cujo identificador compartilhado desaparece é removido e o grupo é recalculado.
@@ -133,7 +177,7 @@ Versões instaladas em 23/11/2026. As restrições de versão estão em `compose
 | Build do front-end | Vite 8.3, `laravel-vite-plugin` 3.2, `@vitejs/plugin-vue` 6.0 |
 | Testes e qualidade do PHP | PHPUnit 13.4, Mockery 1.6, Faker 1.24, Collision 8.9, Laravel Pint 1.32, Ignition 2.13 (páginas de erro) |
 | Testes e qualidade do front-end | Vitest 5.1, Vue Test Utils 2.6, jsdom 31, `vue-tsc` 3.3 (com `@typescript/typescript6` 6.0) |
-| Ferramentas | Composer 2.11, Node.js 26, npm, Laravel Tinker 3.2 |
+| Ferramentas | Composer 2.11, Node.js 26, npm 12.2.3, Laravel Tinker 3.2 |
 | Contêineres | Docker Compose: PHP-FPM, worker da fila, agendador, MySQL, Redis, nginx 1.30, Node.js (Vite) |
 | CI | GitHub Actions |
 | IA | Qualquer API de chat completions compatível com a OpenAI, pelo cliente HTTP do Laravel (opcional) |
@@ -164,6 +208,12 @@ Abra `http://localhost:8000` e entre com o administrador criado pelo seeder, `ad
 `--max-pages=1` importa uma primeira página de 100 estudos. Sem essa opção, a primeira execução lê o registro inteiro, o que leva horas.
 
 Para gerar o build da aplicação web em vez de usar o servidor de desenvolvimento: `docker-compose run --rm node npm run build`.
+
+### Configurar outros registros
+
+Defina `REGISTRY_CONTACT` no `.env` com uma URL ou endereço de e-mail pelo qual os operadores dos registros possam falar com você; importações por download ou página web não rodam sem ele. Depois de puxar mudanças no `Dockerfile` (ele instala o `poppler-utils` para os registros em PDF), reconstrua a imagem com `docker-compose up -d --build`. Em seguida, importe um registro de cada vez, por exemplo `docker-compose exec app php artisan clinicaltrials:fetch --source=isrctn --max-pages=1`.
+
+A página **Acesso aos registros** do painel de administração mostra, para cada registro, o que ainda falta (uma chave, uma permissão por escrito, uma confirmação de uso pago), quem contatar e os passos a seguir. Registros que exigem uma chave do operador a leem de `REGISTRY_<KEY>_SERVICE_KEY` ou `REGISTRY_<KEY>_API_KEY` (veja o `.env.example`). Registros que exigem permissão por escrito ficam desligados até que ela seja registrada com `REGISTRY_PERMISSION_<KEY>=true`; defina isso só depois que o registro a concedeu por escrito.
 
 ### Configurar a cobrança
 
@@ -215,7 +265,7 @@ Todas as rotas ficam em `/api` e respondem em JSON. Rotas protegidas exigem `Aut
 | `POST` | `/auth/email/verification-notification` | token | Reenvia o link de confirmação |
 | `PUT` | `/account/profile`, `/account/password` | token | Altera nome e e-mail, ou a senha |
 | `PUT` | `/account/locale` | token | Altera o idioma da conta (`locale`: `en`, `pt_BR`, `es`, `zh_CN`, `zh_TW`, `ja`, `ko`) |
-| `GET` | `/trials` | `view_clinical_trials` | Pesquisa, um resultado por estudo; filtros abaixo (inclusive `source[]`, a chave de um registro), `sort`, `page`, `per_page` (até 100) |
+| `GET` | `/trials` | `view_clinical_trials` | Pesquisa, um resultado por estudo, cada um com o seu `registry`, `registry_url` e a `attribution` que os termos exigem; filtros abaixo (inclusive `source[]`, a chave de um registro), `sort`, `page`, `per_page` (até 100) |
 | `GET` | `/trials/{nct_id}` | `view_clinical_trials` | Estudo com todas as listas relacionadas, seus `identifiers` normalizados e suas outras inscrições (`also_registered_as`, ou `duplicate_of` para um registro mostrado sob outro) |
 | `GET` `POST` | `/alerts` | `create_alerts`, e-mail confirmado | Lista ou cria buscas salvas; `team_id` para as compartilhadas de uma equipe (o dono cria, os membros listam) |
 | `GET` `PATCH` `DELETE` | `/alerts/{id}` | dono; membros da equipe leem as compartilhadas | Lê, altera ou exclui uma busca salva, inclusive `ai_digest_enabled`, `ai_digest_frequency` (`daily`, `weekly`) e `ai_digest_language` (`en`, `pt_BR`, `es`, `zh_CN`, `zh_TW`, `ja`, `ko`) |
@@ -238,6 +288,7 @@ Todas as rotas ficam em `/api` e respondem em JSON. Rotas protegidas exigem `Aut
 | `GET` `PUT` | `/admin/roles`, `/admin/permissions`, `/admin/roles/{id}/permissions` | `manage_roles` | Gerencia as permissões dos papéis |
 | `GET` `POST` | `/admin/imports` | `manage_imports` | Execuções da importação; coloca uma importação na fila (202) |
 | `GET` | `/admin/digests` | `manage_imports` | Edições de digest com status, forma de geração, motivo da alternativa e métricas (sem conteúdo) |
+| `GET` | `/admin/registries` | `manage_imports` | Por registro: o que falta para usar seus dados (`status`: `active`, `confirmation_advised`, `paid_use_unconfirmed`, `needs_key`, `needs_permission`), quem contatar, quais configurações alterar e se cada uma está definida (nunca o seu valor), sua licença e a última importação; além dos registros que ainda não podem ser importados. Exibido no app web em Administração > Acesso aos registros |
 | `GET` | `/admin/trial-links` | `manage_imports` | Vínculos entre registros que compartilham um identificador; `status` = `conflict` (padrão), `auto`, `confirmed` ou `rejected` |
 | `PATCH` | `/admin/trial-links/{id}` | `manage_imports` | Confirma ou rejeita um vínculo (`status`: `confirmed` ou `rejected`); os registros são reagrupados |
 
@@ -266,7 +317,7 @@ Web:        o Laravel serve resources/views/app.blade.php → Vue 3 + Vue Router
 ```
 
 - `app/Services/ClinicalTrials/Import/` contém a importação. Cada registro é uma `RegistrySource` (`app/Services/Registries/`) com um `StudyRegistryClient` e um `StudyPayloadMapper`; `clinicaltrials:fetch --source=<chave>` escolhe um (padrão `clinicaltrials_gov`), e cada registro tem o seu próprio ponto de importação incremental. O mapeador é uma função pura do payload e o sincronizador cuida da gravação.
-- `app/Services/Registries/` contém a lista de registros (`SourceRegistry`), a normalização de identificadores (`IdentifierParser`) e a deduplicação (`DuplicateLinker`, executada na transação de cada estudo).
+- `app/Services/Registries/` contém a lista de registros (`SourceRegistry`), a normalização de identificadores (`IdentifierParser`) e a deduplicação (`DuplicateLinker`, executada na transação de cada estudo). `Fetching/RegistryFetcher` é o único caminho dos importadores até um registro; `Parsing/` contém os leitores de HTML, CSV, XLSX, texto de PDF e tabelas de largura fixa; `Sources/<Registro>/` contém cada importador (origem com a sua revisão jurídica, cliente, mapeador).
 - `app/Services/ClinicalTrials/Search/` monta a pesquisa com pequenas classes `TrialFilter` registradas no `AppServiceProvider`. Os alertas reaproveitam os mesmos critérios e filtros.
 - `app/Services/ClinicalTrials/Changes/` contém os fatos acompanhados de um estudo e o `ChangeDetector`, uma função pura que os compara.
 - `app/Services/Alerts/` aplica o limite de buscas salvas, cruza as importações e envia os e-mails. `app/Services/Billing/` contém as regras dos planos e o `Entitlements`; o Stripe é acessado pela interface `SubscriptionGateway`. `app/Services/Teams/` gerencia equipes e convites.
@@ -300,8 +351,9 @@ app/
   Models/                User, Role, Permission, Plan, Subscription, Alert, AlertMatch, ImportRun,
                          Team, TeamMember, TeamInvitation, Digest, DigestItem, DigestDelivery, ChangeSummary
   Models/ClinicalTrials/ ClinicalTrial, suas listas relacionadas e ClinicalTrialChange
-  Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
-config/                  clinicaltrials.php, billing.php, ai.php, auth.php, jwt.php
+  Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Registries/{Fetching,Parsing,Sources,...},
+                         Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
+config/                  clinicaltrials.php, registries.php, billing.php, ai.php, auth.php, jwt.php
 lang/                    textos da API, dos e-mails e dos digests por idioma (en, pt_BR, es, zh_CN, zh_TW, ja, ko)
 database/                migrations/, factories/, seeders/
 docs/                    logo, avaliação de registros
@@ -312,7 +364,7 @@ tests/                   Feature/, Unit/, Fixtures/
 
 ## Fonte dos dados
 
-Os dados dos estudos vêm do [ClinicalTrials.gov](https://clinicaltrials.gov/), mantido pela National Library of Medicine dos EUA. Os registros descrevem estudos cadastrados e não são orientação médica. Confira o registro oficial antes de confiar em qualquer detalhe de um estudo. [docs/registries-evaluation.md](docs/registries-evaluation.md) avalia outros registros (WHO ICTRP, EU CTR/CTIS e ReBEC).
+Os dados dos estudos vêm do [ClinicalTrials.gov](https://clinicaltrials.gov/), mantido pela National Library of Medicine dos EUA. Os registros descrevem estudos cadastrados e não são orientação médica. Confira o registro oficial antes de confiar em qualquer detalhe de um estudo. Os outros registros estão listados em [Outros registros](#outros-registros); os dados de cada um aparecem com a sua atribuição. [docs/registries-evaluation.md](docs/registries-evaluation.md) registra a revisão jurídica de cada registro analisado.
 
 ## Licença
 

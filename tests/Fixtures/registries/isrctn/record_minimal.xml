@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Synthetic record with every optional field empty or absent. -->
+<fullTrial xmlns="http://www.67bricks.com/isrctn">
+  <trial lastUpdated="2026-11-01T00:00:00.000Z" version="1" isPublished="true" publicIdentifierType="isrctn" publicIdentifierCanonical="ISRCTN00000002">
+    <isrctn>00000002</isrctn>
+    <trialDescription>
+      <title>Minimal record</title>
+      <scientificTitle/>
+      <acronym/>
+      <studyHypothesis/>
+      <plainEnglishSummary>Not provided at time of registration</plainEnglishSummary>
+      <primaryOutcome/>
+      <secondaryOutcome/>
+    </trialDescription>
+    <externalRefs>
+      <eudraCTNumber>Nil known</eudraCTNumber>
+      <irasNumber/>
+      <clinicalTrialsGovNumber>N/A</clinicalTrialsGovNumber>
+      <protocolSerialNumber/>
+    </externalRefs>
+    <trialDesign/>
+    <participants>
+      <recruitmentCountries/>
+      <trialCentres/>
+      <gender>Not Specified</gender>
+      <targetEnrolment/>
+      <totalFinalEnrolment/>
+      <recruitmentStatusOverride/>
+    </participants>
+    <conditions/>
+    <interventions>
+      <intervention>
+        <description/>
+        <interventionType/>
+        <phase>Not Specified</phase>
+        <drugNames/>
+      </intervention>
+    </interventions>
+  </trial>
+</fullTrial>

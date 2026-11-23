@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Registries;
 
+use App\Models\ClinicalTrials\ClinicalTrial;
 use Illuminate\Contracts\Container\Container;
 use InvalidArgumentException;
 
@@ -33,6 +34,16 @@ final class SourceRegistry
         return array_keys($this->sources);
     }
 
+    /**
+     * Registries whose terms do not allow their data in paid features.
+     *
+     * @return list<string>
+     */
+    public function withoutCommercialUse(): array
+    {
+        return array_values(array_filter($this->keys(), fn (string $key): bool => ! $this->get($key)->access()->commercialUse));
+    }
+
     public function has(string $key): bool
     {
         return isset($this->sources[$key]);
@@ -60,6 +71,27 @@ final class SourceRegistry
     public function name(string $key): string
     {
         return $this->has($key) ? $this->get($key)->name() : $key;
+    }
+
+    /**
+     * Public page of a stored record: the registry's own record URL, or else the HTTPS address
+     * the importer read the record from (registries without a page per identifier).
+     */
+    public function urlFor(ClinicalTrial $trial): ?string
+    {
+        $url = $this->recordUrl((string) $trial->source, $trial->source_id);
+
+        if ($url === null && is_string($trial->raw_url) && str_starts_with($trial->raw_url, 'https://')) {
+            return $trial->raw_url;
+        }
+
+        return $url;
+    }
+
+    /** Text to show where a registry's data appears, as its terms require. */
+    public function attribution(string $key): ?string
+    {
+        return $this->has($key) ? $this->get($key)->access()->attribution : null;
     }
 
     public function recordUrl(string $key, ?string $sourceId): ?string

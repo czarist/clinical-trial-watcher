@@ -1,0 +1,524 @@
+{
+ "ctNumber": "2025-520887-17-00",
+ "ctStatus": "Authorised",
+ "decisionDate": "2026-03-26T15:06:00.45",
+ "publishDate": "2026-03-27T02:34:30.220863729",
+ "ctPublicStatusCode": 2,
+ "authorizedApplication": {
+  "authorizedPartI": {
+   "id": 71975,
+   "rowSubjectCount": 0,
+   "products": [
+    {
+     "id": 294186,
+     "part1MpRoleTypeCode": "1",
+     "productDictionaryInfo": {
+      "productPharmForm": "N/A",
+      "euMpNumber": "N/A",
+      "marketingAuthNumber": "N/A",
+      "prodName": "10 g Celulosa microcristalina 250 g Acofarma \nCL 0,1 g Riboflavina (vit. B2) (vit. B2) 250 g Acofarma \n200 cáps Cápsulas Nº4 blancas-verdes 1000 Ud Acofarma",
+      "pharmForm": "N/A",
+      "activeSubstanceName": "N/A",
+      "euSubstNumber": "N/A",
+      "productOtherName": "N/A",
+      "authorisationCountryCode": "IS",
+      "nameOrg": "N/A",
+      "sponsorSubstanceCode": "N/A",
+      "atcCode": "N/A",
+      "atcName": "N/A",
+      "atcTermLevel": "N/A",
+      "activeSubstanceOtherDescriptiveName": "N/A"
+     },
+     "isPaediatricFormulation": false,
+     "mpRoleInTrial": "3",
+     "timeUnitCode": "2",
+     "evCode": "N/A",
+     "devices": [],
+     "characteristics": [],
+     "routes": [],
+     "allSubstancesChemicals": false,
+     "productName": "10 g Celulosa microcristalina 250 g Acofarma \nCL 0,1 g Riboflavina (vit. B2) (vit. B2) 250 g Acofarma \n200 cáps Cápsulas Nº4 blancas-verdes 1000 Ud Acofarma",
+     "jsonActiveSubstanceNames": "n/a",
+     "pharmaceuticalFormDisplay": "N/A"
+    },
+    {
+     "id": 294242,
+     "part1MpRoleTypeCode": "1",
+     "productDictionaryInfo": {
+      "productPk": "11616102",
+      "productPharmForm": "TABLETY",
+      "euMpNumber": "PRD10167219",
+      "marketingAuthNumber": "56/1139/93-C",
+      "prodAuthStatus": 2,
+      "prodName": "Fortecortin 4 mg tablety",
+      "pharmForm": "TABLET",
+      "activeSubstanceName": "DEXAMETHASONE",
+      "euSubstNumber": "SUB07017MIG",
+      "authorisationCountryCode": "CZ",
+      "nameOrg": "MERCK SPOL.S.R.O.",
+      "productSubstances": [
+       {
+        "productPk": "11616102",
+        "substancePk": "386042",
+        "nameOrg": "MERCK SPOL.S.R.O.",
+        "substanceOrigin": "Chemical",
+        "actSubstOrigin": "Chemical",
+        "actSubstName": "DEXAMETHASONE",
+        "substanceEvCode": "SUB07017MIG"
+       }
+      ],
+      "atcCode": "H02AB02",
+      "atcName": "DEXAMETHASONE",
+      "atcTermLevel": "5",
+      "activeSubstanceOtherDescriptiveName": ""
+     },
+     "isPaediatricFormulation": false,
+     "mpRoleInTrial": "1",
+     "orphanDrugEdit": false,
+     "doseUom": "mg milligram(s)",
+     "maxDailyDoseAmount": "16",
+     "doseUomTotal": "mg milligram(s)",
+     "maxTotalDoseAmount": "94",
+     "productChangedRelationMA": false,
+     "maxTreatmentPeriod": 12,
+     "timeUnitCode": "1",
+     "evCode": "PRD10167219",
+     "devices": [],
+     "characteristics": [],
+     "routes": [
+      "ORAL USE"
+     ],
+     "allSubstancesChemicals": true,
+     "productName": "Fortecortin 4 mg tablety",
+     "jsonActiveSubstanceNames": "dexamethasone",
+     "pharmaceuticalFormDisplay": "TABLET"
+    }
+   ],
+   "trialDetails": {
+    "clinicalTrialIdentifiers": {
+     "fullTitle": "Dexamethasone for the treatment of traumatic brain injured patients with brain contusions and pericontusional edema: Study protocol for a prospective, randomized and double blind trial",
+     "publicTitle": "Dexamethasone for the treatment of traumatic brain injured patients with brain contusions and pericontusional edema: Study protocol for a prospective, randomized and double blind trial",
+     "secondaryIdentifyingNumbers": {
+      "additionalRegistries": []
+     }
+    },
+    "trialInformation": {
+     "trialCategory": {
+      "isLowIntervention": false,
+      "trialPhase": "6",
+      "trialCategory": "3",
+      "justificationForTrialCategory": "Low interventional clinical trial",
+      "trialCategoryId": 63547
+     },
+     "medicalCondition": {
+      "partIMedicalConditions": [
+       {
+        "id": 72856,
+        "medicalCondition": "Post-traumatic brain contusion with edema",
+        "isConditionRareDisease": false
+       }
+      ]
+     },
+     "trialObjective": {
+      "trialScopes": [
+       {
+        "code": "3",
+        "trialScopeId": 209702
+       },
+       {
+        "code": "5",
+        "trialScopeId": 209703
+       }
+      ],
+      "mainObjective": "Efficacy of dexamethasone in improving the prognosis of patients with TBI, brain contusions and pericontusional edema.",
+      "secondaryObjectives": []
+     },
+     "eligibilityCriteria": {
+      "principalInclusionCriteria": [
+       {
+        "id": 460267,
+        "number": 1,
+        "principalInclusionCriteria": "- Patients who have suffered a head injury and who present  on computed tomography (CT) one or more bruises brain with pericontusion edema. Those patients will be included  with bruises in which it was initially chosen  medical, non-surgical treatment."
+       },
+       {
+        "id": 460268,
+        "number": 2,
+        "principalInclusionCriteria": "- Age equal to or greater than 18 years and less than 85 years"
+       },
+       {
+        "id": 460269,
+        "number": 3,
+        "principalInclusionCriteria": "-Signature of the informed consent by the patient or his legal representative in case the patient cannot do so."
+       }
+      ],
+      "principalExclusionCriteria": [
+       {
+        "id": 792268,
+        "number": 1,
+        "principalExclusionCriteria": "- Patients with TBI and contusions who have required surgery  Evacuation of brain contusion before randomization."
+       },
+       {
+        "id": 792277,
+        "number": 10,
+        "principalExclusionCriteria": "- Patients with allergy or intolerance to the following excipients contents in dexamethasone/placebo capsules: lactose, starch  corn or microcrystalline cellulose."
+       },
+       {
+        "id": 792278,
+        "number": 11,
+        "principalExclusionCriteria": "- Patients with a history of psychotic disorders."
+       },
+       {
+        "id": 792279,
+        "number": 12,
+        "principalExclusionCriteria": "- Patients unable to take oral medication due to  swallowing problems and in which placing a  nasogastric tube."
+       },
+       {
+        "id": 792280,
+        "number": 13,
+        "principalExclusionCriteria": "- Patient with any systemic condition that, at the discretion of the  investigator contraindicates the patient's inclusion in the study."
+       },
+       {
+        "id": 792281,
+        "number": 14,
+        "principalExclusionCriteria": "Pregnant or breastfeeding patients."
+       },
+       {
+        "id": 792269,
+        "number": 2,
+        "principalExclusionCriteria": "- Patients with TBI who have required a craniotomy before  randomization for any other reason: hematoma evacuation  subdural, epidural or sinking fracture."
+       },
+       {
+        "id": 792270,
+        "number": 3,
+        "principalExclusionCriteria": "- Patients in a 3-point GCS situation with bilateral mydriasis"
+       },
+       {
+        "id": 792271,
+        "number": 4,
+        "principalExclusionCriteria": "- Patients with an extracranial Injury Severity Score greater than 18  points."
+       },
+       {
+        "id": 792272,
+        "number": 5,
+        "principalExclusionCriteria": "- Patients with associated spinal cord injuries."
+       },
+       {
+        "id": 792273,
+        "number": 6,
+        "principalExclusionCriteria": "- Patients in whom the use of corticosteroids is contraindicated."
+       },
+       {
+        "id": 792274,
+        "number": 7,
+        "principalExclusionCriteria": "- Patients who chronically take oral corticosteroids."
+       },
+       {
+        "id": 792275,
+        "number": 8,
+        "principalExclusionCriteria": "- Patients included in another clinical trial."
+       },
+       {
+        "id": 792276,
+        "number": 9,
+        "principalExclusionCriteria": "- Known intolerance or hypersensitivity to dexamethasone."
+       }
+      ]
+     },
+     "endPoint": {
+      "primaryEndPoints": [
+       {
+        "id": 534855,
+        "number": 1,
+        "endPoint": "To evaluate the efficacy of treatment with dexamethasone compared to placebo,  measured by the proportion of patients who, one month after the trauma, present  good evolution according to the “Extended Glasgow Outcome Scale (GOSE)”.",
+        "isPrimary": true
+       }
+      ],
+      "secondaryEndPoints": []
+     },
+     "trialDuration": {
+      "estimatedGlobalEndDate": "2025-02-01",
+      "estimatedEndDate": "2025-01-31",
+      "estimatedRecruitmentStartDate": "2019-01-15"
+     },
+     "sourceOfMonetarySupport": [],
+     "populationOfTrialSubjects": {
+      "ageRanges": [
+       {
+        "id": 194706,
+        "ageRangeCategoryCode": "3",
+        "ageRangeCategory": "3"
+       },
+       {
+        "id": 194707,
+        "ageRangeCategoryCode": "4",
+        "ageRangeCategory": "4"
+       }
+      ],
+      "ageRangeSecondaryIds": [],
+      "clinicalTrialGroups": [
+       {
+        "code": "2",
+        "name": "Patients"
+       }
+      ],
+      "isFemaleSubjects": true,
+      "isMaleSubjects": true,
+      "isVulnerablePopulationSelected": false
+     },
+     "individualParticipantData": {
+      "planToShareIPD": "3"
+     }
+    },
+    "protocolInformation": {
+     "studyDesign": {
+      "periodDetails": []
+     }
+    },
+    "scientificAdviceAndPip": {
+     "scientificAdvices": [],
+     "paediatricInvestigationPlan": []
+    },
+    "associatedClinicalTrials": [],
+    "references": [],
+    "pubmedCode": [],
+    "pubmedUrl": []
+   },
+   "assessmentOutcome": "acceptable_conditions",
+   "assessmentOutcomeDate": "2025-01-30",
+   "conclusionDate": "2025-01-30",
+   "therapeuticAreas": [
+    {
+     "code": "10",
+     "name": "Diseases [C] - Nervous System Diseases [C10]"
+    }
+   ],
+   "medicalConditions": [
+    {
+     "id": 72856,
+     "medicalCondition": "Post-traumatic brain contusion with edema",
+     "isConditionRareDisease": false
+    }
+   ],
+   "sponsors": [
+    {
+     "id": 77601,
+     "primary": true,
+     "publicContacts": [
+      {
+       "id": 231741,
+       "type": "Public",
+       "functionalName": "Redacted",
+       "functionalEmailAddress": "Redacted",
+       "telephone": "Redacted",
+       "organisation": {
+        "id": 731129,
+        "type": "Hospital/Clinic/Other health care facility",
+        "typeCode": "8",
+        "name": "University Hospital Son Espases",
+        "commercial": false,
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100023103",
+        "organisationLocationStatus": "Active"
+       }
+      }
+     ],
+     "scientificContacts": [
+      {
+       "id": 231742,
+       "type": "Scientific",
+       "functionalName": "Redacted",
+       "functionalEmailAddress": "Redacted",
+       "telephone": "Redacted",
+       "organisation": {
+        "id": 731129,
+        "type": "Hospital/Clinic/Other health care facility",
+        "typeCode": "8",
+        "name": "University Hospital Son Espases",
+        "commercial": false,
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100023103",
+        "organisationLocationStatus": "Active"
+       }
+      }
+     ],
+     "thirdParties": [],
+     "organisation": {
+      "id": 731129,
+      "type": "Hospital/Clinic/Other health care facility",
+      "typeCode": "8",
+      "name": "University Hospital Son Espases",
+      "commercial": false,
+      "isBusinessKeyValidated": true,
+      "businessKey": "ORG-100023103",
+      "organisationLocationStatus": "Active"
+     },
+     "addresses": [
+      {
+       "id": 692967,
+       "organisation": {
+        "id": 731129,
+        "type": "Hospital/Clinic/Other health care facility",
+        "typeCode": "8",
+        "name": "University Hospital Son Espases",
+        "commercial": false,
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100023103",
+        "organisationLocationStatus": "Active"
+       },
+       "address": {
+        "addressId": 756952,
+        "oneLine": "Carretera Valldemossa 79",
+        "addressLine1": "Carretera Valldemossa 79",
+        "addressLine2": "",
+        "addressLine3": "",
+        "addressLine4": "",
+        "city": "Palma",
+        "postcode": "07120",
+        "country": 2027,
+        "countryName": "Spain"
+       },
+       "isBusinessKeyValidated": true,
+       "businessKey": "ORG-100023103"
+      }
+     ],
+     "isCommercial": false,
+     "commercial": "Non-Commercial"
+    }
+   ],
+   "trialCategoryCode": "3",
+   "trialCategoryJustificationComment": "Low interventional clinical trial",
+   "partOneTherapeuticAreas": [
+    {
+     "id": 762381,
+     "therapeuticArea": {
+      "code": "10",
+      "name": "Diseases [C] - Nervous System Diseases [C10]"
+     }
+    }
+   ],
+   "isLowIntervention": false
+  },
+  "authorizedPartsII": [
+   {
+    "id": 176252,
+    "mscId": 44897,
+    "mscInfo": {
+     "id": 44897,
+     "clinicalTrialId": 22365,
+     "countryOrganisationId": 2027,
+     "reportingStatusCode": "Authorised",
+     "fromDate": "2026-03-25",
+     "toDate": "2026-03-25",
+     "isProposedRms": true,
+     "countryName": "Spain",
+     "organisationInfo": {},
+     "firstDecisionDate": "2026-03-26",
+     "trialStatus": "Authorised",
+     "trialPeriod": [],
+     "trialRecruitmentPeriod": [],
+     "hasRecruitmentStarted": false,
+     "activeTrialPeriod": {},
+     "activeTrialRecruitmentPeriod": {},
+     "isWillingAtDayThreeView": false,
+     "clinicalTrialStatusHistory": [
+      {
+       "id": 338945,
+       "mscId": 44897,
+       "trialStatus": "Under evaluation",
+       "trialStatusDate": "2026-03-20T15:23:59.014"
+      },
+      {
+       "id": 339500,
+       "mscId": 44897,
+       "trialStatus": "Authorised",
+       "trialStatusDate": "2026-03-26T15:06:00.183"
+      }
+     ],
+     "applicationTypeMsc": "1",
+     "mscName": "Spain",
+     "assessmentOutcome": "acceptable",
+     "assessmentOutcomeDate": "2026-03-26",
+     "decision": "authorized_conditions",
+     "decisionDate": "2026-03-26"
+    },
+    "decisionDate": "2026-03-26",
+    "recruitmentSubjectCount": 1,
+    "trialSites": [
+     {
+      "id": 1135697,
+      "organisationAddressInfo": {
+       "id": 693231,
+       "organisation": {
+        "id": 731395,
+        "type": "Hospital/Clinic/Other health care facility",
+        "typeCode": "8",
+        "name": "University Hospital Son Espases",
+        "commercial": false,
+        "isBusinessKeyValidated": true,
+        "businessKey": "ORG-100023103",
+        "organisationLocationStatus": "Active"
+       },
+       "address": {
+        "addressId": 757280,
+        "oneLine": "Carretera Valldemossa 79",
+        "addressLine1": "Carretera Valldemossa 79",
+        "addressLine2": "",
+        "addressLine3": "",
+        "addressLine4": "",
+        "city": "Palma",
+        "postcode": "07120",
+        "country": 2027,
+        "countryName": "Spain"
+       },
+       "phone": "Redacted",
+       "email": "Redacted",
+       "isBusinessKeyValidated": true,
+       "businessKey": "ORG-100023103"
+      },
+      "personInfo": {
+       "id": 1269517,
+       "firstName": "Redacted",
+       "lastName": "Redacted",
+       "telephone": "Redacted",
+       "email": "Redacted",
+       "title": "1"
+      },
+      "departmentName": "Critical care unit"
+     }
+    ],
+    "applicationStatusCode": "Authorised"
+   }
+  ],
+  "trialGlobalEnd": [],
+  "memberStatesConcerned": [
+   {
+    "mscName": "Spain",
+    "mscId": 44897,
+    "firstDecisionDate": "2026-03-26T15:06:00.45",
+    "lastDecisionDate": "2026-03-26T15:06:00.45",
+    "mscPublicStatusCode": 2
+   }
+  ],
+  "eudraCt": {
+   "isTransitioned": true,
+   "eudraCtCode": "2019-004038-41"
+  }
+ },
+ "events": {
+  "temporaryHaltList": [],
+  "trialEvents": [
+   {
+    "mscId": 44897,
+    "mscName": "Spain",
+    "events": []
+   }
+  ],
+  "unexpectedEvents": [],
+  "seriousBreaches": [],
+  "urgentSafetyMeasures": []
+ },
+ "results": {},
+ "trialRegion": "EEA",
+ "trialRegionCode": 1,
+ "correctiveMeasures": []
+}

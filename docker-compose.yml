@@ -66,7 +66,7 @@ services:
         working_dir: /var/www/html
         volumes:
             - .:/var/www/html
-        command: sh -c "npm install && npm run dev"
+        command: sh -c "npm install -g npm@12.2.3 && npm install && npm run dev"
         ports:
             - "${VITE_PORT:-5173}:5173"
         depends_on:

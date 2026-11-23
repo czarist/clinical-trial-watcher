@@ -9,19 +9,22 @@
 </p>
 
 <p align="center">
-  <img alt="Status: early development" src="https://img.shields.io/badge/status-early_development-orange?style=flat-square">
+  <img alt="Status: early development" src="https://img.shields.io/badge/status-early_development-orange?style=flat-square&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMi43IDE5bC05LjEtOS4xYy45LTIuMy40LTUtMS41LTYuOS0yLTItNS0yLjQtNy40LTEuM0w5IDYgNiA5IDEuNiA0LjdDLjQgNy4xLjkgMTAuMSAyLjkgMTIuMWMxLjkgMS45IDQuNiAyLjQgNi45IDEuNWw5LjEgOS4xYy40LjQgMSAuNCAxLjQgMGwyLjMtMi4zYy41LS40LjUtMS4xLjEtMS40eiIvPjwvc3ZnPg%3D%3D">
   <a href="https://github.com/czarist/clinical-trial-watcher/actions/workflows/ci.yml"><img alt="Tests" src="https://img.shields.io/github/actions/workflow/status/czarist/clinical-trial-watcher/ci.yml?branch=main&label=tests&logo=githubactions&logoColor=white&style=flat-square"></a>
   <a href="https://github.com/czarist/clinical-trial-watcher/actions/workflows/packages.yml"><img alt="Packages audit" src="https://img.shields.io/github/actions/workflow/status/czarist/clinical-trial-watcher/packages.yml?branch=main&label=packages&logo=dependabot&logoColor=white&style=flat-square"></a>
   <img alt="PHP 8.6" src="https://img.shields.io/badge/PHP-8.6-777BB4?style=flat-square&logo=php&logoColor=white">
   <img alt="Laravel 13" src="https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square&logo=laravel&logoColor=white">
   <img alt="Vue 3" src="https://img.shields.io/badge/Vue-3-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white">
   <img alt="TypeScript 7" src="https://img.shields.io/badge/TypeScript-7-3178C6?style=flat-square&logo=typescript&logoColor=white">
+  <img alt="Node.js 26" src="https://img.shields.io/badge/Node.js-26-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white">
+  <img alt="npm 12.2.3" src="https://img.shields.io/badge/npm-12.2.3-CB3837?style=flat-square&logo=npm&logoColor=white">
   <img alt="MySQL 8.4" src="https://img.shields.io/badge/MySQL-8.4-4479A1?style=flat-square&logo=mysql&logoColor=white">
   <img alt="Redis 8.10" src="https://img.shields.io/badge/Redis-8.10-FF4438?style=flat-square&logo=redis&logoColor=white">
   <img alt="Stripe" src="https://img.shields.io/badge/billing-Stripe-635BFF?style=flat-square&logo=stripe&logoColor=white">
   <img alt="Auth: JWT" src="https://img.shields.io/badge/auth-JWT-000000?style=flat-square&logo=jsonwebtokens&logoColor=white">
-  <img alt="Docker Compose" src="https://img.shields.io/badge/runs%20with-Docker%20Compose-2496ED?style=flat-square&logo=docker&logoColor=white">
-  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square">
+  <img alt="Docker: Nginx + PHP-FPM" src="https://img.shields.io/badge/Docker-Nginx%20%2B%20PHP--FPM-2496ED?style=flat-square&logo=docker&logoColor=white">
+  <img alt="Nginx 1.30" src="https://img.shields.io/badge/Nginx-1.30-009639?style=flat-square&logo=nginx&logoColor=white">
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white">
 </p>
 
 <p align="center">
@@ -46,9 +49,50 @@
 - **變更會連同變更前後的值一併追蹤。** 新研究會記錄為新研究，並成為比較基準。之後的匯入會比較整體招募狀態、試驗地點（新增、移除或試驗地點狀態變更）、開始與完成日期（保留原始精確度：只有年月的日期仍維持年月）以及已發布的結果，並以結構化的詳細資料儲存。試驗地點清單依機構與地點比對，因此登錄資料庫列出的順序改變並不算變更。每項變更都有穩定的指紋，因此重試或重複的匯入不會將同一項變更記錄或通知兩次。
 - **不完整的日期會經過正規化**（`2024` → `2024-01-01`、`2024-06` → `2024-06-01`），完整的研究資料則保存在 `raw_json` 中。
 
+### 其他登錄資料庫
+
+另有十二個登錄資料庫可透過 `php artisan clinicaltrials:fetch --source=<key>` 匯入。只有 ClinicalTrials.gov 會依每日排程執行。
+
+| 鍵 | 登錄資料庫 | 讀取方式 | 增量 | 商業使用 |
+|---|---|---|---|---|
+| `ctis` | CTIS（歐盟/歐洲經濟區） | 入口網站 JSON API | 是（最後更新） | 是，須註明 EMA |
+| `isrctn` | ISRCTN | XML API | 是（最後編輯） | 是（CC BY / CC0） |
+| `euctr` | EU Clinical Trials Register | 純文字匯出 | 僅新試驗 | 是，須註明該登錄資料庫 |
+| `drks` | DRKS（德國） | JSON 傾印；僅 CC BY 4.0 紀錄（2025 年起登錄或更新） | 是（最後更新） | 是（CC BY 4.0） |
+| `reec` | REEC（西班牙） | REST API | 最近 90 天的登錄 | 是，須註明 AEMPS |
+| `rebec` | ReBEC（巴西） | 網頁 | 是（最後核准） | 未確認 |
+| `renis` | RENIS（阿根廷） | XLSX 檔案 | 否 | 是（CC BY 4.0） |
+| `health_canada` | Health Canada | JSON API | 否 | 是（OGL Canada） |
+| `tfda` | TFDA（台灣） | CSV 的 ZIP 壓縮檔 | 否 | 是（Open Government Data License） |
+| `ppb_kenya` | Pharmacy and Poisons Board（肯亞） | 網頁 | 是（核准日期） | 未確認 |
+| `eda_egypt` | Egyptian Drug Authority | PDF | 否 | 未確認 |
+| `moz_ukraine` | 烏克蘭衛生部命令 | PDF 附件 | 最新命令 | 未確認 |
+
+另有八個匯入器已完成並通過測試，但在營運者提供登錄資料庫所要求的條件之前保持關閉：
+
+| 鍵 | 登錄資料庫 | 讀取方式 | 所需條件 | 商業使用 |
+|---|---|---|---|---|
+| `nci_cts` | NCI Clinical Trials Search API（美國，癌症） | JSON API；試驗連結至其 ClinicalTrials.gov 紀錄 | `REGISTRY_NCI_CTS_API_KEY` | 是，需註明 NCI |
+| `mfds` | MFDS 核准的試驗計畫（南韓） | data.go.kr API | `REGISTRY_MFDS_SERVICE_KEY` | 是 |
+| `cris` | CRIS（南韓） | data.go.kr API | `REGISTRY_CRIS_SERVICE_KEY` | 否（KOGL 第 2 類）：附上出處顯示，絕不納入 AI 摘要 |
+| `anzctr` | ANZCTR（澳洲與紐西蘭） | 網頁 | 書面許可，`REGISTRY_PERMISSION_ANZCTR` | 否 |
+| `umin` | UMIN-CTR（日本） | 每日 CSV 傾印檔 | 書面許可，`REGISTRY_PERMISSION_UMIN` | 否 |
+| `hra` | HRA 研究摘要（英國） | 網頁 | 書面許可，`REGISTRY_PERMISSION_HRA` | 否 |
+| `sukl` | SÚKL（捷克） | 網站的搜尋 API | 書面許可，`REGISTRY_PERMISSION_SUKL` | 否 |
+| `orphanet` | Orphanet 臨床試驗 | Orphadata XML 傾印檔 | 與 Orphanet-AISBL 的合約、`REGISTRY_PERMISSION_ORPHANET` 及 `REGISTRY_ORPHANET_DUMP_URL` | 否 |
+
+由於沒有可用的金鑰或樣本，需要金鑰的 API 與 UMIN 的對應是依據其文件並以合成 fixture 建立的；請在第一次實際執行時加以核對。
+
+- **每個匯入器都通過了法律審查**，審查紀錄在其來源類別及 [docs/registries-evaluation.md](docs/registries-evaluation.md)（第 7 節）中；該文件也列出了目前尚無法匯入的登錄資料庫及各自所需的條件（WHO ICTRP、UMIN-CTR、CRIS、ANZCTR、HRA 等）。
+- **條款未確認允許商業使用的登錄資料庫，其紀錄會附上出處免費顯示，但不會納入 AI 摘要**，直到該登錄資料庫以書面確認允許再利用。
+- **有禮貌的存取。** 請求會帶有包含聯絡地址的 user agent（`REGISTRY_CONTACT`，下載與網頁為必填），下載與網頁會遵守 robots.txt 及其 Crawl-delay，每個登錄資料庫一次只送出一個請求且間隔至少 `REGISTRY_MIN_INTERVAL_MS`，重試次數有上限。遇到登入、驗證碼或 HTTP 401/403 時會停止執行：請向該登錄資料庫申請許可或匯出檔案。絕不繞過任何限制。
+- **儲存的頁面。** 每個回應本文都會連同其 `ETag`/`Last-Modified` 一併儲存（`storage/app/registry-raw/`），因此未變更的頁面不會重新下載；修正剖析器後，`clinicaltrials:fetch --source=<key> --from-cache` 會重新剖析已儲存的頁面（請傳入與要重複的執行相同的 `--since` 或 `--full`）。
+- **依發布原樣保存的紀錄**（XML、CSV 列、網頁、PDF 文字）會隨每項研究保存，正規化內容未變更的研究不會重新寫入。
+- **版面變更。** 透過下載或網頁讀取的登錄資料庫，若完整執行剖析出的紀錄遠少於上次，或任何執行中已填欄位的比例驟降，該次執行會記錄為 `partial` 並註明原因。匯入絕不會刪除研究。
+
 ### 重複登錄
 
-匯入功能可支援多個登錄資料庫（`config/registries.php`；目前只匯入 ClinicalTrials.gov，其他登錄資料庫已列入藍圖）。每筆紀錄都會保存所屬的登錄資料庫（`source`）及其在該資料庫中的識別碼（`source_id`），識別碼在每個登錄資料庫內不會重複，因此再次匯入同一筆紀錄時會更新該紀錄。
+每筆紀錄都會保存所屬的登錄資料庫（`source`）及其在該資料庫中的識別碼（`source_id`），識別碼在每個登錄資料庫內不會重複，因此再次匯入同一筆紀錄時會更新該紀錄。登錄資料庫列於 `config/registries.php`。
 
 - **登錄多次的研究只顯示一次。** 每筆紀錄的登錄識別碼（本身的識別碼及其引用的識別碼，例如 ClinicalTrials.gov 次要 ID 中的 ISRCTN 或 EudraCT 編號）會先經過正規化（`ISRCTN 12345678` 與 `isrctn12345678` 視為相同）再進行比對。共用某個識別碼的紀錄會建立連結並歸為一組：顯示在 `config/registries.php` 中排在最前面的登錄資料庫的紀錄，其餘紀錄則保留為它的其他登錄。贊助者的計畫書編號、補助編號及標題絕不會用來合併研究。
 - **有疑慮的比對交由人工判斷。** 同一個登錄資料庫中共用某個識別碼的兩筆紀錄，或會包含同一登錄資料庫兩筆紀錄的群組，都不會合併：它們的連結會標記為 `conflict`。營運人員可在 `GET /api/admin/trial-links` 列出連結並確認或拒絕；之後的匯入會保留此決定。共用識別碼消失的連結會被移除，並重新計算群組。
@@ -133,7 +177,7 @@
 | 前端建置 | Vite 8.3、`laravel-vite-plugin` 3.2、`@vitejs/plugin-vue` 6.0 |
 | PHP 測試與品質 | PHPUnit 13.4、Mockery 1.6、Faker 1.24、Collision 8.9、Laravel Pint 1.32、Ignition 2.13（錯誤頁面） |
 | 前端測試與品質 | Vitest 5.1、Vue Test Utils 2.6、jsdom 31、`vue-tsc` 3.3（執行於 `@typescript/typescript6` 6.0） |
-| 工具 | Composer 2.11、Node.js 26、npm、Laravel Tinker 3.2 |
+| 工具 | Composer 2.11、Node.js 26、npm 12.2.3、Laravel Tinker 3.2 |
 | 容器 | Docker Compose：PHP-FPM、佇列工作程序、排程器、MySQL、Redis、nginx 1.30、Node.js（Vite） |
 | CI | GitHub Actions |
 | AI | 任何相容於 OpenAI 的 chat completions API，透過 Laravel HTTP 用戶端呼叫（選用） |
@@ -164,6 +208,12 @@ docker-compose exec app php artisan clinicaltrials:fetch --max-pages=1
 `--max-pages=1` 會匯入第一頁共 100 項研究。若不加此選項，第一次執行會讀取整個登錄資料庫，需要數小時。
 
 若要建置網頁應用程式而不執行開發伺服器：`docker-compose run --rm node npm run build`。
+
+### 其他登錄資料庫設定
+
+在 `.env` 中將 `REGISTRY_CONTACT` 設為登錄資料庫營運者可以聯絡到你的 URL 或電子郵件地址；未設定時，透過下載或網頁進行的匯入會拒絕執行。拉取 `Dockerfile` 的變更後（它會為 PDF 登錄資料庫安裝 `poppler-utils`），請以 `docker-compose up -d --build` 重新建置映像檔。接著一次匯入一個登錄資料庫，例如 `docker-compose exec app php artisan clinicaltrials:fetch --source=isrctn --max-pages=1`。
+
+管理面板的 **登錄資料庫存取** 頁面會列出每個登錄資料庫仍缺少的項目（金鑰、書面許可、付費使用確認）、聯絡對象以及應遵循的步驟。需要營運者金鑰的登錄資料庫會從 `REGISTRY_<KEY>_SERVICE_KEY` 或 `REGISTRY_<KEY>_API_KEY` 讀取金鑰（見 `.env.example`）。需要書面許可的登錄資料庫在以 `REGISTRY_PERMISSION_<KEY>=true` 記錄許可之前保持關閉；請僅在登錄資料庫以書面授予許可後才設定。
 
 ### 計費設定
 
@@ -215,7 +265,7 @@ AI_MODEL=...                            # a model name the provider accepts
 | `POST` | `/auth/email/verification-notification` | 權杖 | 重新寄送確認連結 |
 | `PUT` | `/account/profile`, `/account/password` | 權杖 | 變更名稱與電子郵件，或變更密碼 |
 | `PUT` | `/account/locale` | 權杖 | 變更帳戶語言（`locale`：`en`、`pt_BR`、`es`、`zh_CN`、`zh_TW`、`ja`、`ko`） |
-| `GET` | `/trials` | `view_clinical_trials` | 搜尋，每項研究一筆結果；篩選條件見下方（包括 `source[]`，即登錄資料庫的鍵值），另有 `sort`、`page`、`per_page`（最多 100） |
+| `GET` | `/trials` | `view_clinical_trials` | 搜尋，每項研究一筆結果，每筆附有其 `registry`、`registry_url` 及其條款要求的 `attribution`；篩選條件見下方（包括 `source[]`，即登錄資料庫的鍵值），另有 `sort`、`page`、`per_page`（最多 100） |
 | `GET` | `/trials/{nct_id}` | `view_clinical_trials` | 研究及其所有相關清單、正規化後的 `identifiers`，以及其他登錄（`also_registered_as`；若此紀錄顯示在另一筆紀錄之下，則為 `duplicate_of`） |
 | `GET` `POST` | `/alerts` | `create_alerts`，已確認電子郵件 | 列出或建立已儲存搜尋；使用 `team_id` 存取團隊共用的已儲存搜尋（擁有者建立，成員列出） |
 | `GET` `PATCH` `DELETE` | `/alerts/{id}` | 擁有者；團隊成員可讀取共用的項目 | 讀取、變更或刪除已儲存搜尋，包括 `ai_digest_enabled`、`ai_digest_frequency`（`daily`、`weekly`）及 `ai_digest_language`（`en`、`pt_BR`、`es`、`zh_CN`、`zh_TW`、`ja`、`ko`） |
@@ -238,6 +288,7 @@ AI_MODEL=...                            # a model name the provider accepts
 | `GET` `PUT` | `/admin/roles`, `/admin/permissions`, `/admin/roles/{id}/permissions` | `manage_roles` | 管理角色權限 |
 | `GET` `POST` | `/admin/imports` | `manage_imports` | 匯入執行紀錄；將匯入排入佇列（202） |
 | `GET` | `/admin/digests` | `manage_imports` | 摘要各期的狀態、產生方式、改用事實摘要的原因及指標（不含內容） |
+| `GET` | `/admin/registries` | `manage_imports` | 依登錄資料庫列出：使用其資料還缺少什麼（`status`：`active`、`confirmation_advised`、`paid_use_unconfirmed`、`needs_key`、`needs_permission`）、聯絡對象、需要變更哪些設定以及每項是否已設定（絕不顯示其值）、其授權條款與最近一次匯入；另附尚無法匯入的登錄資料庫。在 Web 應用程式中位於 管理 > 登錄資料庫存取 |
 | `GET` | `/admin/trial-links` | `manage_imports` | 共用某個登錄識別碼的紀錄之間的連結；`status` = `conflict`（預設）、`auto`、`confirmed` 或 `rejected` |
 | `PATCH` | `/admin/trial-links/{id}` | `manage_imports` | 確認或拒絕連結（`status`：`confirmed` 或 `rejected`）；相關紀錄會重新分組 |
 
@@ -266,7 +317,7 @@ Web app: Laravel serves resources/views/app.blade.php → Vue 3 + Vue Router + P
 ```
 
 - `app/Services/ClinicalTrials/Import/` 包含匯入功能。每個登錄資料庫都是一個 `RegistrySource`（`app/Services/Registries/`），具備一個 `StudyRegistryClient` 及一個 `StudyPayloadMapper`；`clinicaltrials:fetch --source=<key>` 用來選擇登錄資料庫（預設為 `clinicaltrials_gov`），且每個登錄資料庫都有各自的增量游標（cursor）。對應器（mapper）是只依賴資料內容的純函式，同步器（synchronizer）則負責資料持久化。
-- `app/Services/Registries/` 包含登錄資料庫清單（`SourceRegistry`）、識別碼正規化（`IdentifierParser`）及去除重複（`DuplicateLinker`，在每項研究的交易中執行）。
+- `app/Services/Registries/` 包含登錄資料庫清單（`SourceRegistry`）、識別碼正規化（`IdentifierParser`）及去除重複（`DuplicateLinker`，在每項研究的交易中執行）。`Fetching/RegistryFetcher` 是匯入器存取登錄資料庫的唯一途徑；`Parsing/` 包含 HTML、CSV、XLSX、PDF 文字及固定寬度表格的讀取器；`Sources/<Registry>/` 包含各個匯入器（附法律審查的來源類別、用戶端、對應器）。
 - `app/Services/ClinicalTrials/Search/` 以在 `AppServiceProvider` 中註冊的小型 `TrialFilter` 類別組成搜尋。提醒會重複使用相同的條件與篩選器。
 - `app/Services/ClinicalTrials/Changes/` 包含研究的追蹤事實，以及負責比較這些事實的純函式 `ChangeDetector`。
 - `app/Services/Alerts/` 負責強制執行已儲存搜尋上限、比對匯入結果及寄送電子郵件。`app/Services/Billing/` 包含方案規則及 `Entitlements`；Stripe 透過 `SubscriptionGateway` 介面存取。`app/Services/Teams/` 管理團隊及邀請。
@@ -300,8 +351,9 @@ app/
   Models/                User, Role, Permission, Plan, Subscription, Alert, AlertMatch, ImportRun,
                          Team, TeamMember, TeamInvitation, Digest, DigestItem, DigestDelivery, ChangeSummary
   Models/ClinicalTrials/ ClinicalTrial, its related lists and ClinicalTrialChange
-  Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
-config/                  clinicaltrials.php, billing.php, ai.php, auth.php, jwt.php
+  Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Registries/{Fetching,Parsing,Sources,...},
+                         Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
+config/                  clinicaltrials.php, registries.php, billing.php, ai.php, auth.php, jwt.php
 lang/                    API, email and digest text per language (en, pt_BR, es, zh_CN, zh_TW, ja, ko)
 database/                migrations/, factories/, seeders/
 docs/                    logo, registries evaluation
@@ -312,7 +364,7 @@ tests/                   Feature/, Unit/, Fixtures/
 
 ## 資料來源
 
-研究資料來自由美國國家醫學圖書館（U.S. National Library of Medicine）營運的 [ClinicalTrials.gov](https://clinicaltrials.gov/)。這些紀錄描述的是已登錄的研究，並非醫療建議。在依據任何研究細節做決定之前，請先查閱官方紀錄。[docs/registries-evaluation.md](docs/registries-evaluation.md) 評估了其他登錄資料庫（WHO ICTRP、EU CTR/CTIS 及 ReBEC）。
+研究資料來自由美國國家醫學圖書館（U.S. National Library of Medicine）營運的 [ClinicalTrials.gov](https://clinicaltrials.gov/)。這些紀錄描述的是已登錄的研究，並非醫療建議。在依據任何研究細節做決定之前，請先查閱官方紀錄。其他登錄資料庫列於[其他登錄資料庫](#其他登錄資料庫)；每個登錄資料庫的資料都會附上其出處顯示。[docs/registries-evaluation.md](docs/registries-evaluation.md) 記錄了所調查的每個登錄資料庫的法律審查。
 
 ## 授權
 

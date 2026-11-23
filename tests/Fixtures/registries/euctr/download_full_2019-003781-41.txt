@@ -1,0 +1,236 @@
+This file contains full details on each clinical trial selected for download. Where multi-state trials have been downloaded full information for each of the member states/countries involved in the trial are included separately.
+
+Summary
+EudraCT Number: 2019-003781-41
+Sponsor's Protocol Code Number: CLTW888A11301
+Clinical Trial Type: Outside EU/EEA
+Date on which this record was first entered in the EudraCT database: 2026-11-02
+Link: https://www.clinicaltrialsregister.eu/ctr-search/trial/2019-003781-41/3rd/
+
+A. Protocol Information
+A.2 EudraCT number: 2019-003781-41
+A.3 Full title of the trial: An open-label, single-arm study to provide efficacy and safety data of voretigene neparvovec administered assubretinal injection in Japanese patients with biallelic RPE65 mutation-associated retinal dystrophy
+A.3.1 Title of the trial for lay people, in easily understood, i.e. non-technical, language: Study of efficacy and safety of voretigene neparvovec in Japanese patients with biallelic RPE65 mutation-associated retinal dystrophy
+A.4.1 Sponsor's protocol code number: CLTW888A11301
+A.7 Trial is part of a Paediatric Investigation Plan: No
+A.8 EMA Decision number of Paediatric Investigation Plan: 
+
+B. Sponsor Information
+Sponsor 1
+B.1.1 Name of Sponsor: Novartis Pharma K.K
+B.1.3.4	Country: Japan
+B.3.1 and B.3.2	Status of the sponsor: Commercial
+B.4 Source(s) of Monetary or Material Support for the clinical trial:
+B.4.1 Name of organisation providing support: Novartis Pharma AG
+B.4.2 Country: Switzerland
+B.5 Contact point designated by the sponsor for further information on the trial
+B.5.1 Name of organisation: Novartis Pharma AG
+B.5.2 Functional name of contact point: Redacted
+B.5.3 Address
+B.5.3.1 Street Address: Forum 1, Novartis Campus
+B.5.3.2 Town/ city: Basel
+B.5.3.3 Post code: 4056
+B.5.3.4 Country: Switzerland
+B.5.6 E-mail: Redacted
+
+D. IMP Identification
+D.IMP: 1
+D.1.2 and D.1.3 IMP Role: Test
+D.2 Status of the IMP to be used in the clinical trial
+D.2.1 IMP to be used in the trial has a marketing authorisation: Yes
+D.2.1.1.1 Trade name: Luxturna
+D.2.1.1.2 Name of the Marketing Authorisation holder: Novartis Pharma K.K.
+D.2.1.2 Country which granted the Marketing Authorisation: Japan
+D.2.5 The IMP has been designated in this indication as an orphan drug in the Community: Yes
+D.2.5.1 Orphan drug designation number: EMA/OD/040/15
+D.3 Description of the IMP
+D.3.1 Product name: Voretigene neparvovec
+D.3.2 Product code: LTW888
+D.3.4 Pharmaceutical form: Solution for injection in vial
+D.3.4.1 Specific paediatric formulation: No
+D.3.7 Routes of administration for this IMP:
+Subretinal use
+D.3.8 to D.3.10 IMP Identification Details (Active Substances)
+D.3.8 INN - Proposed INN: Voretigene neparvovec
+D.3.9.1 CAS number: 1646819-03-5
+D.3.9.2 Current sponsor code: LTW888
+D.3.9.4 EV Substance Code: SUB182301
+D.3.10 Strength
+D.3.10.1 Concentration unit: Vector genome
+D.3.10.2 Concentration type: equal
+D.3.10.3 Concentration number: 150000000000 
+D.3.11 The IMP contains an
+D.3.11.1 Active substance of chemical origin: No
+D.3.11.2 Active substance of biological/ biotechnological origin (other than Advanced Therapy IMP (ATIMP): No
+D.3.11.3 Advanced Therapy IMP (ATIMP): Yes
+D.3.11.3.1 Somatic cell therapy medicinal product: No
+D.3.11.3.2 Gene therapy medical product: Yes
+D.3.11.3.3 Tissue Engineered Product: No
+D.3.11.3.4 Combination ATIMP (i.e. one involving a medical device): No
+D.3.11.3.5 Committee on Advanced therapies (CAT) has issued a classification for this product: No
+D.3.11.4 Combination product that includes a device, but does not involve an Advanced Therapy: No
+D.3.11.5 Radiopharmaceutical medicinal product: No
+D.3.11.6 Immunological medicinal product (such as vaccine, allergen, immune serum): No
+D.3.11.7 Plasma derived medicinal product: No
+D.3.11.8 Extractive medicinal product: No
+D.3.11.9 Recombinant medicinal product: No
+D.3.11.10 Medicinal product containing genetically modified organisms: No
+D.3.11.11 Herbal medicinal product: No
+D.3.11.12 Homeopathic medicinal product: No
+D.3.11.13 Another type of medicinal product: No
+
+D.8 Information on Placebo
+
+E. General Information on the Trial
+E.1 Medical condition or disease under investigation
+E.1.1 Medical condition(s) being investigated: Biallelic RPE65 mutation-associated retinal dystrophy
+E.1.1.1 Medical condition in easily understood language: retinal dystrophy
+E.1.1.2 Therapeutic area: Diseases [C] - Eye Diseases [C11]
+MedDRA Classification
+E.1.2 Medical condition or disease under investigation:
+E.1.2 Version: 20.0
+E.1.2 Level: PT
+E.1.2 Classification code: 10038857
+E.1.2 Term: Retinal dystrophy
+E.1.2 System Organ Class: 10015919 - Eye disorders
+E.1.3 Condition being studied is a rare disease: Yes
+E.2 Objective of the trial
+E.2.1 Main objective of the trial: The primary objective of this study is to evaluate the efficacy of voretigene neparvovec in Japanese participants.
+E.2.2 Secondary objectives of the trial: To evaluate the efficacy of voretigene neparvovec in Japanese participants in terms of visual fields (VF) and visual acuity (VA) during the study period 
+To evaluate the long term efficacy of voretigene neparvovec in Japanese participants
+To evaluate the safety of voretigene neparvovec during the study period
+To evaluate the vector shedding of voretigene neparvovec during the study period
+To evaluate the immunogenicity of voretigene neparvovec during the study period
+E.2.3 Trial contains a sub-study: No
+E.3 Principal inclusion criteria: Japanese participants with biallelic RPE65 mutation-associated retinal dystrophy; molecular diagnosis of RPE65 mutation must be confirmed by a Novartis-designated laboratory in Japan.
+
+Age four years or older.
+
+Visual acuity worse than 20/60 (both eyes) and/or visual field less than 20 degrees in any meridian as measured by a III4e isopter or equivalent (both eyes).
+
+Sufficient viable retinal cells as determined by non-invasive means, such as optical coherence tomography (OCT) and/ or ophthalmoscopy. 
+
+Must have either:
+An area of retina within the posterior pole of > 100 μm thickness shown on OCT, or ≥ 3 disc areas of retina without atrophy or pigmentary degeneration within the posterior pole, or remaining visual field within 30 degrees of fixation as measured by a III4e isopter or equivalent
+E.4 Principal exclusion criteria: Any prior participation in a study in which a gene therapy vector was administered.
+
+Participation in a clinical study with an investigational drug in the past 6 months from screening visit.
+
+Known hypersensitivity to any of the study treatments including excipients or to medications planned for use in the peri-operative period.
+
+Unable to reliably perform the FST assessment.
+
+Use of retinoid compounds or precursors that could potentially interact with the biochemical activity of the RPE65 enzyme in the past 6 months from screening visit.
+
+Prior intraocular surgery within 6 months from screening visit.
+
+Prior use of any medicines that, in the opinion of the investigator, may have caused retinal damage (e.g., sildenafil or related compounds, hydroxychloroquine, chloroquine, thioridazine, any other retino-toxic compounds).
+
+Pre-existing eye conditions or complicating systemic diseases that would preclude the planned surgery or interfere with the interpretation of study.
+
+Complicating systemic diseases would include those in which the disease itself, or the treatment for the disease, can alter ocular function.
+E.5 End points
+E.5.1 Primary end point(s): Change from Baseline in full-field light sensitivity threshold (FST; white light, averaged over both eyes) at Day 30B, 90B, 180B, 270B and Year 1B.
+*"B" refers to the time points after the second eye injection. e.g. Year 1B means one year after second-eye injection.
+E.5.1.1 Timepoint(s) of evaluation of this end point: Day 30B, 90B, 180B, 270B and Year 1B.
+*"B" refers to the time points after the second eye injection. e.g. Year 1B means one year after second-eye injection.
+E.5.2 Secondary end point(s): Change from Baseline in the sum total degrees for VF, averaged over both eyes, as measured using Goldmann kinetic perimetry testing with a III4e target over time up to Year 5B.
+Change from Baseline in macular threshold, averaged over both eyes, as measured using Humphrey static VF testing over time up to Year 5B.
+Change from Baseline in VA (averaged over both eyes) over time up to Year 5B.
+Change from Baseline in FST (white light, averaged over both eyes) at Year 2B, 3B, 4B and 5B.
+Frequency of treatment-emergent adverse events and treatment-emergent serious adverse events over time up to Year 5B.
+Presence of vector in peripheral blood or collected tear over time up to Year 1B.
+Presence of systemic cell-mediated or humoral responses to capsid or transgene product over time up to Year 1B.
+E.5.2.1 Timepoint(s) of evaluation of this end point: Over time up to Year 5B.
+Over time up to Year 1B.
+*"B" refers to the time points after the second eye injection. e.g. Year 1B means one year after second-eye injection.
+E.6 and E.7 Scope of the trial
+E.6 Scope of the Trial
+E.6.1 Diagnosis: Yes
+E.6.2 Prophylaxis: No
+E.6.3 Therapy: No
+E.6.4 Safety: Yes
+E.6.5 Efficacy: Yes
+E.6.6 Pharmacokinetic: No
+E.6.7 Pharmacodynamic: No
+E.6.8 Bioequivalence: No
+E.6.9 Dose response: No
+E.6.10 Pharmacogenetic: No
+E.6.11 Pharmacogenomic: No
+E.6.12 Pharmacoeconomic: No
+E.6.13 Others: No
+E.7 Trial type and phase 
+E.7.1 Human pharmacology (Phase I): No
+E.7.1.1 First administration to humans: No
+E.7.1.2 Bioequivalence study: No
+E.7.1.3 Other: No
+E.7.1.3.1 Other trial type description: 
+E.7.2 Therapeutic exploratory (Phase II): No
+E.7.3 Therapeutic confirmatory (Phase III): Yes
+E.7.4 Therapeutic use (Phase IV): No
+E.8 Design of the trial
+E.8.1 Controlled: No
+E.8.1.1 Randomised: No
+E.8.1.2 Open: Yes
+E.8.1.3 Single blind: No
+E.8.1.4 Double blind: No
+E.8.1.5 Parallel group: No
+E.8.1.6 Cross over: No
+E.8.1.7 Other: No
+E.8.2 Comparator of controlled trial
+E.8.2.1 Other medicinal product(s): No
+E.8.2.2 Placebo: No
+E.8.2.3 Other: No
+E.8.2.4 Number of treatment arms in the trial: 1
+E.8.3 Will this trial be conducted at a single site globally?: Yes
+E.8.4 Will this trial be conducted at multiple sites globally?: No
+E.8.6 Trial involving sites outside the EEA
+E.8.6.2 Trial being conducted completely outside of the EEA: Yes
+E.8.6.3 Specify the countries outside of the EEA in which trial sites are planned:
+Japan
+E.8.7 Trial has a data monitoring committee: No
+E.8.8 Definition of the end of the trial and justification where it is not the last visit of the last subject undergoing the trial: Study completion is defined as when the last participant finishes their EOS visit and any repeat assessments associated with this visit have been documented and followed up appropriately by the Investigator or, in the event of an early study termination decision, the date of that decision.
+All patients should have a safety follow-up call conducted 30 days after the end of study visit.
+E.8.9 Initial estimate of the duration of the trial
+E.8.9.2 In all countries concerned by the trial years: 7
+
+F. Population of Trial Subjects
+F.1 Age Range
+F.1.1 Trial has subjects under 18: Yes
+F.1.1 Number of subjects for this age range: 2
+F.1.1.1 In Utero: No
+F.1.1.2 Preterm newborn infants (up to gestational age < 37 weeks): No
+F.1.1.3 Newborns (0-27 days): No
+F.1.1.4 Infants and toddlers (28 days-23 months): No
+F.1.1.5 Children (2-11years): Yes
+F.1.1.5.1 Number of subjects for this age range: 1
+F.1.1.6 Adolescents (12-17 years): Yes
+F.1.1.6.1 Number of subjects for this age range: 1
+F.1.2 Adults (18-64 years): Yes
+F.1.2.1 Number of subjects for this age range: 2
+F.1.3 Elderly (>=65 years): No
+F.2 Gender
+F.2.1 Female: Yes
+F.2.2 Male: Yes
+F.3 Group of trial subjects
+F.3.1 Healthy volunteers: No
+F.3.2 Patients: Yes
+F.3.3 Specific vulnerable populations: No
+F.3.3.1 Women of childbearing potential not using contraception : No
+F.3.3.2 Women of child-bearing potential using contraception: No
+F.3.3.3 Pregnant women: No
+F.3.3.4 Nursing women: No
+F.3.3.5 Emergency situation: No
+F.3.3.6 Subjects incapable of giving consent personally: No
+F.3.3.7 Others: No
+F.4 Planned number of subjects to be included
+F.4.2 For a multinational trial
+F.4.2.2 In the whole clinical trial: 4
+F.5 Plans for treatment or care after the subject has ended the participation in the trial (if it is different from the expected normal treatment of that condition): All patients should have a safety follow-up call conducted 30 days after the end of study visit.
+ 
+
+G. Investigator Networks to be involved in the Trial
+
+H.4 Third Country in which the Trial was first authorised
+H.4.1 Third Country in which the trial was first authorised: Japan
+

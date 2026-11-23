@@ -1,0 +1,75 @@
+{
+ "showWarning": false,
+ "pagination": {
+  "totalRecords": 3,
+  "currentPage": 1,
+  "totalPages": 2,
+  "nextPage": true,
+  "prevPage": false
+ },
+ "data": [
+  {
+   "ctNumber": "2026-527959-25-00",
+   "ctStatus": 2,
+   "ctTitle": "Comparative Pharmacokinetics and Bioequivalence of Semaglutide 0.5 mg Solution for Injection in Pre-filled Pen in Healthy Participants.",
+   "shortTitle": "PHD1001",
+   "conditions": "No medical condition.",
+   "trialCountries": [
+    "Portugal:2"
+   ],
+   "decisionDateOverall": "21/11/2026",
+   "decisionDate": "PT: 21/11/2026",
+   "therapeuticAreas": [
+    "Not possible to specify"
+   ],
+   "sponsor": "PHARMIDEA SIA",
+   "sponsorType": "Pharmaceutical company",
+   "trialPhase": "Human Pharmacology (Phase I)- Bioequivalence Study",
+   "endPoint": "",
+   "product": "",
+   "ageRangeSecondary": [
+    ""
+   ],
+   "ageGroup": "18-64 years",
+   "gender": "Female, Male",
+   "trialRegion": 1,
+   "totalNumberEnrolled": "26",
+   "primaryEndPoint": "",
+   "resultsFirstReceived": "No",
+   "lastUpdated": "21/11/2026",
+   "lastPublicationUpdate": "22/11/2026"
+  },
+  {
+   "ctNumber": "2023-505807-21-00",
+   "ctStatus": 5,
+   "ctTitle": "A Study to Evaluate Efficacy and Safety of Mosunetuzumab in Combination with Lenalidomide in Comparison to Rituximab in Combination with Lenalidomide in Patients with Follicular Lymphoma",
+   "shortTitle": "GO42909",
+   "conditions": "Relapsed/refractory follicular lymphoma",
+   "trialCountries": [
+    "Spain:5",
+    "France:5"
+   ],
+   "decisionDateOverall": "07/11/2024",
+   "decisionDate": "ES: 07/11/2024",
+   "therapeuticAreas": [
+    "Diseases [C] - Neoplasms [C04]"
+   ],
+   "sponsor": "F. Hoffmann-La Roche AG",
+   "sponsorType": "Pharmaceutical company",
+   "trialPhase": "Therapeutic confirmatory  (Phase III)",
+   "endPoint": "",
+   "product": "",
+   "ageRangeSecondary": [
+    ""
+   ],
+   "ageGroup": "18-64 years",
+   "gender": "Female, Male",
+   "trialRegion": 3,
+   "totalNumberEnrolled": "324",
+   "primaryEndPoint": "",
+   "resultsFirstReceived": "No",
+   "lastUpdated": "01/09/2026",
+   "lastPublicationUpdate": "02/09/2026"
+  }
+ ]
+}

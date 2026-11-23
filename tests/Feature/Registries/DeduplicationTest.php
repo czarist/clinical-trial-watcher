@@ -43,7 +43,7 @@ final class DeduplicationTest extends TestCase
             FakeRegistrySource::KEY => FakeRegistrySource::class,
         ]]);
         $this->app->forgetInstance(SourceRegistry::class);
-        FakeRegistrySource::$payloads = [];
+        FakeRegistrySource::reset();
         Http::preventStrayRequests();
         Http::fake([self::ENDPOINT => fn () => Http::response($this->page($this->ctgov))]);
         $this->seedAccessControl();

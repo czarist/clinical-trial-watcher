@@ -40,7 +40,8 @@ class ClinicalTrialSummaryResource extends JsonResource
             'has_results' => $this->has_results,
             'conditions' => $this->whenLoaded('conditions', fn () => $this->conditions->pluck('condition')),
             'locations_count' => $this->whenCounted('locations'),
-            'registry_url' => $sources->recordUrl((string) $this->source, $this->source_id),
+            'registry_url' => $sources->urlFor($this->resource),
+            'attribution' => $sources->attribution((string) $this->source),
         ];
     }
 }

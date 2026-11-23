@@ -9,19 +9,22 @@
 </p>
 
 <p align="center">
-  <img alt="Status: early development" src="https://img.shields.io/badge/status-early_development-orange?style=flat-square">
+  <img alt="Status: early development" src="https://img.shields.io/badge/status-early_development-orange?style=flat-square&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMi43IDE5bC05LjEtOS4xYy45LTIuMy40LTUtMS41LTYuOS0yLTItNS0yLjQtNy40LTEuM0w5IDYgNiA5IDEuNiA0LjdDLjQgNy4xLjkgMTAuMSAyLjkgMTIuMWMxLjkgMS45IDQuNiAyLjQgNi45IDEuNWw5LjEgOS4xYy40LjQgMSAuNCAxLjQgMGwyLjMtMi4zYy41LS40LjUtMS4xLjEtMS40eiIvPjwvc3ZnPg%3D%3D">
   <a href="https://github.com/czarist/clinical-trial-watcher/actions/workflows/ci.yml"><img alt="Tests" src="https://img.shields.io/github/actions/workflow/status/czarist/clinical-trial-watcher/ci.yml?branch=main&label=tests&logo=githubactions&logoColor=white&style=flat-square"></a>
   <a href="https://github.com/czarist/clinical-trial-watcher/actions/workflows/packages.yml"><img alt="Packages audit" src="https://img.shields.io/github/actions/workflow/status/czarist/clinical-trial-watcher/packages.yml?branch=main&label=packages&logo=dependabot&logoColor=white&style=flat-square"></a>
   <img alt="PHP 8.6" src="https://img.shields.io/badge/PHP-8.6-777BB4?style=flat-square&logo=php&logoColor=white">
   <img alt="Laravel 13" src="https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square&logo=laravel&logoColor=white">
   <img alt="Vue 3" src="https://img.shields.io/badge/Vue-3-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white">
   <img alt="TypeScript 7" src="https://img.shields.io/badge/TypeScript-7-3178C6?style=flat-square&logo=typescript&logoColor=white">
+  <img alt="Node.js 26" src="https://img.shields.io/badge/Node.js-26-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white">
+  <img alt="npm 12.2.3" src="https://img.shields.io/badge/npm-12.2.3-CB3837?style=flat-square&logo=npm&logoColor=white">
   <img alt="MySQL 8.4" src="https://img.shields.io/badge/MySQL-8.4-4479A1?style=flat-square&logo=mysql&logoColor=white">
   <img alt="Redis 8.10" src="https://img.shields.io/badge/Redis-8.10-FF4438?style=flat-square&logo=redis&logoColor=white">
   <img alt="Stripe" src="https://img.shields.io/badge/billing-Stripe-635BFF?style=flat-square&logo=stripe&logoColor=white">
   <img alt="Auth: JWT" src="https://img.shields.io/badge/auth-JWT-000000?style=flat-square&logo=jsonwebtokens&logoColor=white">
-  <img alt="Docker Compose" src="https://img.shields.io/badge/runs%20with-Docker%20Compose-2496ED?style=flat-square&logo=docker&logoColor=white">
-  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square">
+  <img alt="Docker: Nginx + PHP-FPM" src="https://img.shields.io/badge/Docker-Nginx%20%2B%20PHP--FPM-2496ED?style=flat-square&logo=docker&logoColor=white">
+  <img alt="Nginx 1.30" src="https://img.shields.io/badge/Nginx-1.30-009639?style=flat-square&logo=nginx&logoColor=white">
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white">
 </p>
 
 <p align="center">
@@ -46,9 +49,50 @@
 - **Changes are tracked with before-and-after values.** A new study is recorded as new and becomes the baseline. On later imports the overall recruitment status, the sites (added, removed, or with a changed site status), the start and completion dates (with their original precision: a month-only date stays a month) and posted results are compared and stored as structured details. Site lists are compared by facility and place, so a change in the order the registry lists them is not a change. Each change has a stable fingerprint, so a retried or repeated import cannot record it, or notify it, twice.
 - **Partial dates are normalized** (`2024` → `2024-01-01`, `2024-06` → `2024-06-01`), and the full study payload is kept in `raw_json`.
 
+### Other registries
+
+Twelve more registries can be imported with `php artisan clinicaltrials:fetch --source=<key>`. Only ClinicalTrials.gov runs on the daily schedule.
+
+| Key | Registry | Read by | Incremental | Commercial use |
+|---|---|---|---|---|
+| `ctis` | CTIS (EU/EEA) | Portal JSON API | Yes (last update) | Yes, crediting EMA |
+| `isrctn` | ISRCTN | XML API | Yes (last edit) | Yes (CC BY / CC0) |
+| `euctr` | EU Clinical Trials Register | Plain-text export | New trials only | Yes, crediting the register |
+| `drks` | DRKS (Germany) | JSON dump; only CC BY 4.0 records (registered or updated from 2025) | Yes (last update) | Yes (CC BY 4.0) |
+| `reec` | REEC (Spain) | REST API | Last 90 days of registrations | Yes, citing AEMPS |
+| `rebec` | ReBEC (Brazil) | Web pages | Yes (last approval) | Not confirmed |
+| `renis` | RENIS (Argentina) | XLSX file | No | Yes (CC BY 4.0) |
+| `health_canada` | Health Canada | JSON API | No | Yes (OGL Canada) |
+| `tfda` | TFDA (Taiwan) | ZIP of CSV | No | Yes (Open Government Data License) |
+| `ppb_kenya` | Pharmacy and Poisons Board (Kenya) | Web pages | Yes (approval date) | Not confirmed |
+| `eda_egypt` | Egyptian Drug Authority | PDF | No | Not confirmed |
+| `moz_ukraine` | Ministry of Health of Ukraine orders | PDF annexes | Newest orders | Not confirmed |
+
+Eight more importers are built and tested but stay off until the operator provides what the registry requires:
+
+| Key | Registry | Read by | Needs | Commercial use |
+|---|---|---|---|---|
+| `nci_cts` | NCI Clinical Trials Search API (US, cancer) | JSON API; trials link to their ClinicalTrials.gov records | `REGISTRY_NCI_CTS_API_KEY` | Yes, crediting NCI |
+| `mfds` | MFDS approved trial plans (South Korea) | data.go.kr API | `REGISTRY_MFDS_SERVICE_KEY` | Yes |
+| `cris` | CRIS (South Korea) | data.go.kr API | `REGISTRY_CRIS_SERVICE_KEY` | No (KOGL Type 2): shown with attribution, never in AI digests |
+| `anzctr` | ANZCTR (Australia and New Zealand) | Web pages | Written permission, `REGISTRY_PERMISSION_ANZCTR` | No |
+| `umin` | UMIN-CTR (Japan) | Daily CSV dump | Written permission, `REGISTRY_PERMISSION_UMIN` | No |
+| `hra` | HRA research summaries (UK) | Web pages | Written permission, `REGISTRY_PERMISSION_HRA` | No |
+| `sukl` | SÚKL (Czechia) | Search API of the website | Written permission, `REGISTRY_PERMISSION_SUKL` | No |
+| `orphanet` | Orphanet clinical trials | Orphadata XML dump | An Orphanet-AISBL contract, `REGISTRY_PERMISSION_ORPHANET` and `REGISTRY_ORPHANET_DUMP_URL` | No |
+
+The mappings of the key-protected APIs and of UMIN were built from their documentation with synthetic fixtures, because no key or sample was available; check them on the first live run.
+
+- **Every importer passed a legal review** recorded in its source class and in [docs/registries-evaluation.md](docs/registries-evaluation.md) (section 7), which also lists the registries that cannot be imported yet and what each one needs (WHO ICTRP, UMIN-CTR, CRIS, ANZCTR, HRA and others).
+- **Records of registries whose terms do not confirm commercial use are shown for free with attribution but left out of AI digests**, until the registry confirms reuse in writing.
+- **Polite access.** Requests carry a user agent with a contact address (`REGISTRY_CONTACT`, required for downloads and web pages), follow robots.txt and its Crawl-delay for downloads and web pages, go one at a time per registry at least `REGISTRY_MIN_INTERVAL_MS` apart, and are retried a bounded number of times. A login, captcha or HTTP 401/403 stops the run: ask the registry for permission or an export instead. Nothing is ever worked around.
+- **Stored pages.** Every response body is stored (`storage/app/registry-raw/`) with its `ETag`/`Last-Modified`, so unchanged pages are not downloaded again, and `clinicaltrials:fetch --source=<key> --from-cache` parses the stored pages again after a parser fix (pass the same `--since` or `--full` as the run being repeated).
+- **The record as published** (XML, CSV row, web page, PDF text) is kept with each study, and a study whose normalized content did not change is not rewritten.
+- **Layout changes.** A full run of a registry read by download or web page that parses far fewer records than the last one, or any run whose share of filled fields drops sharply, is recorded as `partial` with the reason. Imports never delete studies.
+
 ### Duplicate registrations
 
-The import is built for more than one registry (`config/registries.php`; ClinicalTrials.gov is the only one imported today, the others are planned in the roadmap). Each record keeps its registry (`source`) and its identifier there (`source_id`), unique per registry, so importing a record again updates it.
+Each record keeps its registry (`source`) and its identifier there (`source_id`), unique per registry, so importing a record again updates it. The registries are listed in `config/registries.php`.
 
 - **Studies registered more than once are shown once.** Each record's registry identifiers (its own and the ones it cites, such as an ISRCTN or EudraCT number among ClinicalTrials.gov secondary IDs) are normalized (`ISRCTN 12345678` and `isrctn12345678` are the same) and compared. Records that share one are linked and grouped: the record of the registry listed first in `config/registries.php` is shown, the others are kept as its other registrations. Sponsor protocol numbers, grant numbers and titles are never used to merge studies.
 - **Doubtful matches wait for a person.** Two records of the same registry that share an identifier, or a group that would hold two records of one registry, are not merged: their links are marked `conflict`. Operators list links at `GET /api/admin/trial-links` and confirm or reject them; the decision is kept by later imports. A link whose shared identifier disappears is removed and the group is recomputed.
@@ -133,7 +177,7 @@ Versions installed on 2026-11-23. Constraints are in `composer.json` and `packag
 | Front-end build | Vite 8.3, `laravel-vite-plugin` 3.2, `@vitejs/plugin-vue` 6.0 |
 | PHP tests and quality | PHPUnit 13.4, Mockery 1.6, Faker 1.24, Collision 8.9, Laravel Pint 1.32, Ignition 2.13 (error pages) |
 | Front-end tests and quality | Vitest 5.1, Vue Test Utils 2.6, jsdom 31, `vue-tsc` 3.3 (on `@typescript/typescript6` 6.0) |
-| Tooling | Composer 2.11, Node.js 26, npm, Laravel Tinker 3.2 |
+| Tooling | Composer 2.11, Node.js 26, npm 12.2.3, Laravel Tinker 3.2 |
 | Containers | Docker Compose: PHP-FPM, queue worker, scheduler, MySQL, Redis, nginx 1.30, Node.js (Vite) |
 | CI | GitHub Actions |
 | AI | Any OpenAI-compatible chat completions API, through the Laravel HTTP client (optional) |
@@ -164,6 +208,12 @@ Open `http://localhost:8000` and log in with the seeded administrator, `admin@ad
 `--max-pages=1` imports a first page of 100 studies. Without it, the first run reads the whole registry, which takes hours.
 
 To build the web app instead of running the dev server: `docker-compose run --rm node npm run build`.
+
+### Other registries setup
+
+Set `REGISTRY_CONTACT` in `.env` to a URL or email address registry operators can use to reach you; imports by download or web page refuse to run without it. After pulling changes to the `Dockerfile` (it installs `poppler-utils` for PDF registries), rebuild the image with `docker-compose up -d --build`. Then import one registry at a time, for example `docker-compose exec app php artisan clinicaltrials:fetch --source=isrctn --max-pages=1`.
+
+The admin panel's **Registry access** page lists, for every registry, what is still missing (a key, a written permission, a confirmation of paid use), whom to contact and the steps to follow. Registries that need an operator key read it from `REGISTRY_<KEY>_SERVICE_KEY` or `REGISTRY_<KEY>_API_KEY` (see `.env.example`). Registries that need written permission stay off until it is recorded with `REGISTRY_PERMISSION_<KEY>=true`; set it only after the registry granted it in writing.
 
 ### Billing setup
 
@@ -215,7 +265,7 @@ All routes are under `/api` and return JSON. Protected routes need `Authorizatio
 | `POST` | `/auth/email/verification-notification` | token | Send the confirmation link again |
 | `PUT` | `/account/profile`, `/account/password` | token | Change name and email, or password |
 | `PUT` | `/account/locale` | token | Change the account language (`locale`: `en`, `pt_BR`, `es`, `zh_CN`, `zh_TW`, `ja`, `ko`) |
-| `GET` | `/trials` | `view_clinical_trials` | Search, one result per study; filters below (including `source[]`, a registry key), `sort`, `page`, `per_page` (up to 100) |
+| `GET` | `/trials` | `view_clinical_trials` | Search, one result per study, each with its `registry`, `registry_url` and the `attribution` its terms require; filters below (including `source[]`, a registry key), `sort`, `page`, `per_page` (up to 100) |
 | `GET` | `/trials/{nct_id}` | `view_clinical_trials` | Study with every related list, its normalized `identifiers`, and its other registrations (`also_registered_as`, or `duplicate_of` for a record shown under another one) |
 | `GET` `POST` | `/alerts` | `create_alerts`, confirmed email | List or create saved searches; `team_id` for a team's shared ones (owner creates, members list) |
 | `GET` `PATCH` `DELETE` | `/alerts/{id}` | owner; team members can read shared ones | Read, change or delete a saved search, including `ai_digest_enabled`, `ai_digest_frequency` (`daily`, `weekly`) and `ai_digest_language` (`en`, `pt_BR`, `es`, `zh_CN`, `zh_TW`, `ja`, `ko`) |
@@ -238,6 +288,7 @@ All routes are under `/api` and return JSON. Protected routes need `Authorizatio
 | `GET` `PUT` | `/admin/roles`, `/admin/permissions`, `/admin/roles/{id}/permissions` | `manage_roles` | Manage role permissions |
 | `GET` `POST` | `/admin/imports` | `manage_imports` | Import runs; queue an import (202) |
 | `GET` | `/admin/digests` | `manage_imports` | Digest editions with status, generation, fallback reason and metrics (no content) |
+| `GET` | `/admin/registries` | `manage_imports` | Per registry: what is missing to use its data (`status`: `active`, `confirmation_advised`, `paid_use_unconfirmed`, `needs_key`, `needs_permission`), whom to contact, which settings to change and whether each is set (never its value), its licence and last import; plus the registries that cannot be imported yet. Shown in the web app under Admin > Registry access |
 | `GET` | `/admin/trial-links` | `manage_imports` | Links between records that share a registry identifier; `status` = `conflict` (default), `auto`, `confirmed` or `rejected` |
 | `PATCH` | `/admin/trial-links/{id}` | `manage_imports` | Confirm or reject a link (`status`: `confirmed` or `rejected`); the records are regrouped |
 
@@ -266,7 +317,7 @@ Web app: Laravel serves resources/views/app.blade.php → Vue 3 + Vue Router + P
 ```
 
 - `app/Services/ClinicalTrials/Import/` holds the import. Each registry is a `RegistrySource` (`app/Services/Registries/`) with a `StudyRegistryClient` and a `StudyPayloadMapper`; `clinicaltrials:fetch --source=<key>` picks one (default `clinicaltrials_gov`), and each registry keeps its own incremental cursor. The mapper is a pure function of the payload, and the synchronizer owns persistence.
-- `app/Services/Registries/` holds the registry list (`SourceRegistry`), identifier normalization (`IdentifierParser`) and deduplication (`DuplicateLinker`, run in each study's transaction).
+- `app/Services/Registries/` holds the registry list (`SourceRegistry`), identifier normalization (`IdentifierParser`) and deduplication (`DuplicateLinker`, run in each study's transaction). `Fetching/RegistryFetcher` is the only way importers reach a registry; `Parsing/` holds the HTML, CSV, XLSX, PDF-text and fixed-width table readers; `Sources/<Registry>/` holds each importer (source with its legal review, client, mapper).
 - `app/Services/ClinicalTrials/Search/` builds the search from small `TrialFilter` classes registered in `AppServiceProvider`. Alerts reuse the same criteria and filters.
 - `app/Services/ClinicalTrials/Changes/` holds the tracked facts of a study and the pure `ChangeDetector` that compares them.
 - `app/Services/Alerts/` enforces the saved-search limit, matches imports and sends emails. `app/Services/Billing/` holds the plan rules and `Entitlements`; Stripe is reached through the `SubscriptionGateway` interface. `app/Services/Teams/` manages teams and invitations.
@@ -300,8 +351,9 @@ app/
   Models/                User, Role, Permission, Plan, Subscription, Alert, AlertMatch, ImportRun,
                          Team, TeamMember, TeamInvitation, Digest, DigestItem, DigestDelivery, ChangeSummary
   Models/ClinicalTrials/ ClinicalTrial, its related lists and ClinicalTrialChange
-  Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
-config/                  clinicaltrials.php, billing.php, ai.php, auth.php, jwt.php
+  Services/              Auth/, ClinicalTrials/{Import,Search,Changes}, Registries/{Fetching,Parsing,Sources,...},
+                         Alerts/, Billing/, Teams/, Digests/, Ai/, Admin/
+config/                  clinicaltrials.php, registries.php, billing.php, ai.php, auth.php, jwt.php
 lang/                    API, email and digest text per language (en, pt_BR, es, zh_CN, zh_TW, ja, ko)
 database/                migrations/, factories/, seeders/
 docs/                    logo, registries evaluation
@@ -312,7 +364,7 @@ tests/                   Feature/, Unit/, Fixtures/
 
 ## Data source
 
-Study data comes from [ClinicalTrials.gov](https://clinicaltrials.gov/), operated by the U.S. National Library of Medicine. Records describe registered studies and are not medical advice. Check the official record before relying on any study detail. [docs/registries-evaluation.md](docs/registries-evaluation.md) evaluates other registries (WHO ICTRP, EU CTR/CTIS and ReBEC).
+Study data comes from [ClinicalTrials.gov](https://clinicaltrials.gov/), operated by the U.S. National Library of Medicine. Records describe registered studies and are not medical advice. Check the official record before relying on any study detail. The other registries are listed under [Other registries](#other-registries); each one's data is shown with its attribution. [docs/registries-evaluation.md](docs/registries-evaluation.md) records the legal review of every registry surveyed.
 
 ## License
 

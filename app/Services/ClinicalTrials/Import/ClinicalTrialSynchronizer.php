@@ -23,6 +23,9 @@ use Illuminate\Database\ConnectionInterface;
  * identifiers are indexed and, in the same transaction, the record is linked to other
  * registrations of the same study (see DuplicateLinker).
  *
+ * A record whose normalized content (MappedStudy::contentHash) equals the stored hash is
+ * unchanged: only its raw payload is refreshed, without rewriting relations or identifiers.
+ *
  * Changes: a new study is recorded as created and its tracked facts become the baseline.
  * A study imported before facts were tracked gets its baseline on this import, without
  * structured details except a status change, which the previous column shows. Otherwise the
@@ -32,7 +35,7 @@ use Illuminate\Database\ConnectionInterface;
 final readonly class ClinicalTrialSynchronizer
 {
     /** Attributes ignored when deciding whether a study changed. */
-    private const array VOLATILE_ATTRIBUTES = ['raw_json', 'tracked_facts', 'updated_at'];
+    private const array VOLATILE_ATTRIBUTES = ['raw_json', 'raw_format', 'raw_document', 'raw_url', 'tracked_facts', 'content_hash', 'updated_at'];
 
     /** Retries of a study's transaction after a deadlock with a concurrent import. */
     private const int TRANSACTION_ATTEMPTS = 3;
@@ -55,10 +58,18 @@ final readonly class ClinicalTrialSynchronizer
                 ?? new ClinicalTrial(['source' => $study->source, 'source_id' => $study->sourceId]);
 
             $isNew = ! $trial->exists;
+            $contentHash = $study->contentHash();
+
+            if (! $isNew && $trial->content_hash === $contentHash) {
+                $this->refreshRaw($trial, $study);
+
+                return SyncOutcome::Unchanged;
+            }
+
             $previousStatus = $trial->overall_status;
             $previousFacts = is_array($trial->tracked_facts) ? TrackedFacts::fromArray($trial->tracked_facts) : null;
 
-            $trial->fill([...$study->attributes, 'nct_id' => $study->nctId]);
+            $trial->fill([...$study->attributes, 'nct_id' => $study->nctId, 'content_hash' => $contentHash, ...$this->rawAttributes($study)]);
 
             if ($study->facts !== null) {
                 $trial->tracked_facts = $study->facts->toArray();
@@ -88,6 +99,31 @@ final readonly class ClinicalTrialSynchronizer
 
             return $outcome;
         }, self::TRANSACTION_ATTEMPTS);
+    }
+
+    /**
+     * @return array<string, string|null>
+     */
+    private function rawAttributes(MappedStudy $study): array
+    {
+        return $study->raw === null ? [] : [
+            'raw_format' => $study->raw->format,
+            'raw_document' => $study->raw->content,
+            'raw_url' => $study->raw->url,
+        ];
+    }
+
+    private function refreshRaw(ClinicalTrial $trial, MappedStudy $study): void
+    {
+        $trial->fill($this->rawAttributes($study));
+
+        if (array_key_exists('raw_json', $study->attributes)) {
+            $trial->raw_json = $study->attributes['raw_json'];
+        }
+
+        if ($trial->isDirty()) {
+            $trial->saveQuietly();
+        }
     }
 
     /**

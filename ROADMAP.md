@@ -194,47 +194,91 @@ Foundations (needed before any second source)
 
 Scraping (for sources without an API or export)
 
-- [ ] Scraping importer base: an identified user agent with a contact address, `robots.txt` honoured, per-source rate limit and concurrency of one, bounded retries with backoff, conditional requests (`ETag`/`Last-Modified`) and a raw-page cache so a parser fix does not refetch.
-- [ ] Legal gate per source before any scraper ships: terms of use and `robots.txt` checked and recorded in the evaluation document; never bypass blocks, logins, captchas or rate limits; when automated access is refused or blocked, ask the operator for permission or an export instead.
-- [ ] Parsers kept separate from fetching: HTML listings and detail pages (selectors per source, with recorded fixtures), and PDF tables (text extraction, then table parsing) for registries that publish only PDFs.
-- [ ] Change detection for scraped records (content hash of the normalized record), and layout-drift alerts: a run that parses far fewer records or fields than the last one is marked `partial` and logged instead of deleting data.
-- [ ] Keep the raw page or file of each scraped record (like `raw_json`) so fields can be remapped without fetching again.
+- [X] Scraping importer base: an identified user agent with a contact address, `robots.txt` honoured, per-source rate limit and concurrency of one, bounded retries with backoff, conditional requests (`ETag`/`Last-Modified`) and a raw-page cache so a parser fix does not refetch.
+- [X] Legal gate per source before any scraper ships: terms of use and `robots.txt` checked and recorded in the evaluation document; never bypass blocks, logins, captchas or rate limits; when automated access is refused or blocked, ask the operator for permission or an export instead.
+- [X] Parsers kept separate from fetching: HTML listings and detail pages (selectors per source, with recorded fixtures), and PDF tables (text extraction, then table parsing) for registries that publish only PDFs.
+- [X] Change detection for scraped records (content hash of the normalized record), and layout-drift alerts: a run that parses far fewer records or fields than the last one is marked `partial` and logged instead of deleting data.
+- [X] Keep the raw page or file of each scraped record (like `raw_json`) so fields can be remapped without fetching again.
 
 Importers
 
-- [ ] ISRCTN (international): XML API and CSV; contribution licence allows commercial use.
-- [ ] Health Canada Clinical Trials Database: JSON/XML API, open licence with attribution; phase I–III drug and biologic trials.
-- [ ] CTIS (EU/EEA): search CSV and per-trial ZIP with XML/PDF; confirm with EMA whether the portal endpoints may be used programmatically.
-- [ ] EU Clinical Trials Register / EudraCT: portal download of the historical archive, which still receives results for EudraCT trials; at least link records through EudraCT numbers.
-- [ ] DRKS (Germany): JSON, CSV and RIS per study and ZIP exports of several records.
-- [ ] REEC (Spain): REST extraction service documented by AEMPS.
-- [ ] CRIS (South Korea): official open API on data.go.kr for listing, details and statistics (needs a service key).
-- [ ] UMIN-CTR (Japan): compressed CSV updated daily; the Japanese version is complete, the English one a subset.
-- [ ] TFDA Drug Clinical Trial Status (Taiwan): CSV on the open data portal with protocol, phase, criteria and trial status.
-- [ ] ANZCTR (Australia and New Zealand): ZIP/XML of full records from search; confirm the conditions of the SOAP service.
-- [ ] RENIS (Argentina): historical CSV on the open data portal; the current registry is queried in SISA.
-- [ ] ReBEC (Brazil): per-trial WHO TRDS XML; ask Fiocruz about bulk access or permitted crawling.
-- [ ] WHO ICTRP (international): CSV/XML and institutional access to new and updated records. Its terms (section 4(d)) forbid using extracted data "for marketing, promotional or commercial purposes", without defining them. Before importing, ask WHO for written confirmation through its permissions form that free display with attribution alongside paid AI digests is allowed. Until then, ICTRP-only records stay out of paid features (AI digests), carry the "WHO ICTRP" attribution, and the registries ICTRP aggregates are imported from their own sources where their licences allow it.
-- [ ] MFDS approved trial plans (South Korea, data.go.kr `ClncExamPlanDtlService03`): REST API (JSON/XML) with a free key; drug trials authorized by MFDS with their approval number; the portal states no usage restriction. MFDS also has a COVID-19 trials API.
-- [ ] NCI Clinical Trials Search API v2 (US, cancer): REST API with a free key; ClinicalTrials.gov and CTRP records with biomarkers and structured eligibility, so enrich existing NCT studies instead of duplicating them; confirm the terms.
-- [ ] EDA clinical trials registry (Egypt): periodic PDF (latest 07/2026) with phase, sites, status and sponsor; needs the PDF table parser. Data no other mapped registry seems to cover.
-- [ ] CDE/NMPA drug trial registration and disclosure platform (China, chinadrugtrials.org.cn): every drug trial approved in China, separate from ChiCTR. Web search only and the site blocked automated access, so scrape only after the terms are confirmed and access is allowed; otherwise request an export.
-- [ ] HMA-EMA catalogue of real-world data studies (EU, replaces the EU PAS Register): observational and post-authorisation studies; web search, API and terms to verify.
-- [ ] HRA Research Summaries (UK): every study reviewed by a UK ethics committee (~69,000), with results summaries; paged web pages, no download or API, © HRA, so scrape only with permission.
-- [ ] RNEC (Portugal, INFARMED): trials authorized in Portugal (transitioned to CTIS and Directive trials until 01/2025); web search without export; link to CTIS records where they overlap.
-- [ ] INCa cancer trials registry (France): oncology trials in France; web search; terms to verify.
-- [ ] Orphanet research and clinical trials (rare diseases): trials with ORPHA codes, partly from WHO ICTRP; web search, and Orphadata does not confirm trials are included; use ORPHA codes to enrich conditions.
-- [ ] Plataforma Brasil (CEP/Conep): every human-research project reviewed by an ethics committee; public search of approved projects, no API; scrape only after the terms are confirmed.
-- [ ] TİTCK Clinical Research Portal (Turkey, kap.titck.gov.tr): trials authorized by TİTCK; web search, API to verify.
-- [ ] MOZ orders authorizing trials and amendments (Ukraine): lists in PDF annexes per order; PDF parser. Replace with the State Register run by the State Expert Center once its public address is found.
-- [ ] Pharmacy and Poisons Board trials system (Kenya): approved trials with investigators, status, sites and objectives; web search; confirm the subsystem address and terms.
-- [ ] SÚKL clinical trials database (Czechia): trials authorized since 2007, excluding bioequivalence and first-in-human; new trials are in CTIS; web search.
+- [X] ISRCTN (international): XML API, incremental by last-edit windows; CC BY / CC0, commercial use allowed. IRAS numbers are linked too.
+- [X] Health Canada Clinical Trials Database: JSON API, full list compared by content hash; Open Government Licence. No registry identifiers, so no linking.
+- [X] CTIS (EU/EEA): portal JSON API (search and retrieve), incremental by last update; EMA legal notice, credit EMA. Written confirmation from EMA about automated calls is still advisable.
+- [X] EU Clinical Trials Register / EudraCT: plain-text export, one record per EudraCT number, NCT/ISRCTN/UTN linked; new trials only in incremental runs.
+- [X] DRKS (Germany): JSON dump streamed from the ZIP; only CC BY 4.0 records (registered or updated from 2025). Older records need BfArM permission.
+- [X] REEC (Spain): documented REST API, keyed by EU CT/EudraCT number so it links to CTIS; re-reads the last 90 days of registrations.
+- [ ] CRIS (South Korea): importer built (`cris`) on the official data.go.kr API; KOGL Type 2 forbids commercial use, so its records are shown with attribution and kept out of AI digests. Needs `REGISTRY_CRIS_SERVICE_KEY` and a first live run; ask KDCA if AI digests should include it.
+- [ ] UMIN-CTR (Japan): importer built (`umin`) from the documentation only (its robots.txt disallows AI agents, so no sample was fetched) and off until written permission from UMIN Center (`REGISTRY_PERMISSION_UMIN`); the FAQ forbids commercial web services that display the data.
+- [X] TFDA Drug Clinical Trial Status (Taiwan): monthly ZIP of CSV (export 205), rows grouped per trial; no trial-level status and no registry identifiers.
+- [ ] ANZCTR (Australia and New Zealand): importer built (`anzctr`) and off until ANZCTR's express approval of automated collection (`REGISTRY_PERMISSION_ANZCTR`); ask for an XML feed, which would replace the page reader.
+- [X] RENIS (Argentina): cumulative XLSX (newest file found on the dataset page, or `REGISTRY_RENIS_FILE_URL`), CC BY 4.0, NCT numbers linked. SISA (reCAPTCHA) is not read.
+- [X] ReBEC (Brazil): HTML list and trial pages (robots.txt disallows the TRDS XML); commercial use not confirmed, so kept out of AI digests. Ask DECIT/Fiocruz to confirm reuse or allow the XML.
+- [ ] WHO ICTRP (international): blocked — robots.txt disallows the whole site, bulk files need paid institutional access, and section 4(d) forbids commercial use. Needs WHO access and a written waiver; until then the registries it aggregates are imported from their own sources.
+- [ ] MFDS approved trial plans (South Korea, data.go.kr `ClncExamPlanDtlService03`): importer built (`mfds`) and tested on synthetic data; needs `REGISTRY_MFDS_SERVICE_KEY` with production approval and a first live run to confirm the field formats.
+- [ ] NCI Clinical Trials Search API v2 (US, cancer): importer built (`nci_cts`) from the schema in NCI's public repositories, linking trials to their ClinicalTrials.gov records; needs `REGISTRY_NCI_CTS_API_KEY`, a reading of the key's terms and a first live run.
+- [X] EDA clinical trials registry (Egypt): cumulative PDF parsed with `pdftotext -layout`; no registry id (study code used, never for linking); commercial use not confirmed.
+- [ ] CDE/NMPA drug trial registration and disclosure platform (China): blocked — every page returns an anti-bot challenge; needs written permission or a data arrangement with CDE.
+- [ ] HMA-EMA catalogue of real-world data studies (EU): blocked — robots.txt disallows `/search` (listing and CSV export); needs permission or an export from EMA.
+- [ ] HRA Research Summaries (UK): importer built (`hra`, records keyed and linked by IRAS number) and off until written permission from HRA (`REGISTRY_PERMISSION_HRA`); reuse is otherwise limited to research or private study.
+- [ ] RNEC (Portugal, INFARMED): blocked — reuse only "not for profit"; its trials are CTIS trials (same EU CT numbers), already covered.
+- [ ] INCa cancer trials registry (France): site moved to cancer.fr and was in maintenance on 2026-11-23; re-check, and evaluate the API ECLAIRE (FHIR, data.gouv.fr) instead.
+- [ ] Orphanet research and clinical trials (rare diseases): importer built (`orphanet`, ORPHAcodes as conditions) and off until an Orphanet-AISBL contract (`REGISTRY_PERMISSION_ORPHANET`, `REGISTRY_ORPHANET_DUMP_URL`).
+- [ ] Plataforma Brasil (CEP/Conep): blocked — public pages lack CAAE, phase and status; needs an official extract from Conep/CNS. ReBEC records already cite CAAE numbers (linkable).
+- [ ] TİTCK Clinical Research Portal (Turkey): blocked — a firewall rejects even robots.txt; needs permission and an allow-listed route or export.
+- [X] MOZ orders authorizing trials (Ukraine): orders listing and annex PDFs; amendment annexes skipped; commercial use not confirmed. The State Expert Center register is behind a firewall: ask for access.
+- [X] Pharmacy and Poisons Board trials system (Kenya): approved, stopped and suspended lists and detail pages; no registry identifiers; commercial use not confirmed.
+- [ ] SÚKL clinical trials database (Czechia): importer built (`sukl`, linked by EudraCT number) and off until SÚKL's prior consent (`REGISTRY_PERMISSION_SUKL`); it mostly duplicates EU CTR and CTIS.
 - Not planned: EMA Clinical Data Publication (terms allow only non-commercial use, login required; link to it only); Australian Clinical Trials and Australian Cancer Trials (copies of ANZCTR); KDCA registration statistics (from CRIS); AACT (a ClinicalTrials.gov mirror); AIFA observational studies (not public yet); Hungary (OGYÉI) and Vietnam (no official public database found).
 
 Verification and documentation
 
-- [ ] Tests per importer with recorded fixtures and `Http::fake()` (first import, repeated import, changes, missing fields, failures); no test calls a live registry.
-- [ ] Attribution and licence of each source shown where its data appears, and READMEs (all languages), changelog and evaluation document updated.
+- [X] Tests per importer with recorded fixtures and `Http::fake()` (first import, repeated import, changes, missing fields, failures); no test calls a live registry.
+- [X] Attribution and licence of each source shown where its data appears, and READMEs (all languages), changelog and evaluation document updated.
+
+### Stage 9. Automated testing, quality gates and source health checks
+
+Objective: a complete, repeatable test routine enforced by CI (the existing GitHub Actions workflows, PHPUnit and Vitest), plus a separate scheduled check that verifies every live data source every 12 hours. Pull-request checks never depend on a live source; they use recorded fixtures and fakes.
+
+Inventory
+
+- [ ] Review the architecture, existing tests, CI workflows, importer and scraper adapters and `config/registries.php`; list every enabled source with its normal request and expected response.
+
+Test suite
+
+- [ ] Unit tests: business rules, validation, parsing, normalization, deduplication and error handling.
+- [ ] Integration and API tests: entry points, persistence, queues and source adapters, covering success, invalid input, upstream failures, retries and idempotency.
+- [ ] Contract tests: the API shapes the web app consumes, and each source's assumptions against representative recorded fixtures, including empty results, missing fields and changed response formats.
+- [ ] End-to-end tests with Playwright (no browser test framework exists yet) for the critical journeys (sign-up and login, search, study page, alerts, billing screens with the fake gateway, team and digest screens) on deterministic seeded data. This replaces the browser-test items under Next steps.
+- [ ] Smoke tests in CI: the application starts and the essential routes and services (database, Redis, queue) respond; lightweight post-deployment checks if a deployment workflow is added.
+- [ ] Regression and acceptance tests: confirmed bugs and documented business rules (free core, entitlements, deduplication, digest rules) as repeatable scenarios.
+- [ ] Performance baseline for critical endpoints (search, study page) and ingestion with representative fixtures on project-controlled infrastructure: workload, latency, throughput and error rate recorded; longer runs kept out of pull-request checks.
+
+Defensive security checks
+
+- [ ] Authentication: JWT issue, refresh, expiry and revocation (logout and blacklist), and CSRF protection on any cookie-authenticated route.
+- [ ] Authorization for every sensitive operation: authorized user, unauthenticated user, insufficient permission and a user from another team, asserting that rejected writes leave state unchanged.
+- [ ] Input validation, protection of server-managed fields (mass assignment), rate limiting, and no credentials, tokens or other teams' data in responses or logs.
+- [ ] CI: static security analysis, dependency vulnerability scanning (Composer and npm) and secret scanning; configuration and response-header checks against a project-owned test environment.
+
+Coverage gate
+
+- [ ] CI fails when line, class or method coverage of first-party production code falls below 80% (three independent thresholds). The denominator includes code no test loads (for example source adapters); generated and vendored code is excluded, and every exclusion is documented.
+- [ ] Machine-readable coverage report (Clover/Cobertura) as a CI artifact plus a readable job summary; web app function coverage reported separately; exact results and remaining gaps recorded.
+
+Source health check every 12 hours
+
+- [ ] Separate scheduled workflow at 00:00 and 12:00 UTC with a manual trigger running the same command, no overlapping runs (concurrency group), and existing alerting used if configured.
+- [ ] For every enabled source, one minimal read-only request through the production adapter or its shared request code, with bounded timeouts and retries within the provider's documented limits.
+- [ ] Each check proves the response reached the expected service, has the expected content type or structure and is parsed by the adapter (an HTTP 200 alone is not enough), and tells a valid empty result from an error page or a changed format.
+- [ ] Report per source: name, outcome, status code, latency and failure reason, classified as connectivity, authentication, throttling or parsing/schema change. All sources are checked after a failure; the job fails if any required source is unhealthy and reports all results together.
+- [ ] No production writes, and no credentials or sensitive response content in logs.
+- [ ] Tests of the health-check runner with fixtures for healthy responses, valid empty results, upstream failures, throttling and malformed responses.
+
+Verification and documentation
+
+- [ ] Run every suite and the coverage gates, validate the scheduled workflow configuration, and run the live check once if outbound access and credentials are available; record which sources were verified and which checks were blocked, and why. Report the schedule as configured until GitHub Actions has run it.
+- [ ] Document local test commands, coverage report location, scheduled times, the manual trigger and how to add a new source to the health check, in every README, the agent guide and the changelog.
 
 ## Next steps
 
@@ -245,6 +289,9 @@ Found while building the stages above.
 - [ ] Switch the Redis client from Predis to the phpredis extension once a phpredis release builds on PHP 8.6 (installed with PIE, since PHP 8.6 images no longer include PECL).
 - [ ] Decide whether the queue and sessions should also move to Redis; today only the cache uses it.
 - [ ] Drop `@typescript/typescript6`, `scripts/vue-tsc.cjs` and the `glob`/`minimatch` overrides once `vue-tsc` supports TypeScript 7 and `@vue/test-utils` ships patched dependencies.
+- [X] Registry access guide in the admin panel: what each registry needs (key, written permission, confirmation of paid use), whom to contact, settings and steps, and the registries that cannot be imported yet.
+- [ ] Operator actions for stage 8: set `REGISTRY_CONTACT`, rebuild the app image (`poppler-utils`), run each new importer once against the live registry with `--max-pages=1` and check the stored records, then decide which registries to schedule. Ask for written confirmations: EMA (automated calls to the CTIS portal API and the EU CTR export), DECIT/Fiocruz (ReBEC reuse or the TRDS XML), PPB Kenya, EDA Egypt and the Ukrainian Ministry of Health (commercial reuse), BfArM (DRKS records before 2025). Register keys for MFDS, CRIS and the NCI API.
+- [ ] Stage 8 follow-ups found while building the importers: `TextTable` collapses two columns with the same label (the EDA PDF repeats "Study"); about 10 of 89 rows of the EDA July 2026 PDF parse badly because its columns are misaligned; ISRCTN publishes no status, so it is derived from the recruitment and end dates; TFDA has several rows per trial and its sites and drugs files cannot be linked to trials; Health Canada, TFDA, PPB, EDA and MOZ publish no other registry's identifiers, so their trials can appear next to the same study from ClinicalTrials.gov.
 - [ ] Operator actions for stage 6: create the Pro AI ($19) and Team AI ($99) monthly USD prices in Stripe, set `STRIPE_PRICE_PRO_AI` and `STRIPE_PRICE_TEAM_AI`, run `php artisan billing:check-prices`, and set the `AI_*` variables. Then test checkout and digests against Stripe test mode and the chosen AI provider; automated tests use fakes for both.
 - [ ] Browser tests for the team, saved-search and digest screens, together with the end-to-end tests above.
 - [ ] Speed up the test database setup (for example `php artisan schema:dump`); running every migration takes about three minutes on Docker Desktop.

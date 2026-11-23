@@ -1,0 +1,427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  <title>
+    Pharmacy and Poisons Board:
+    Applications  </title>
+  <link href="/favicon.ico" type="image/x-icon" rel="icon" /><link href="/favicon.ico" type="image/x-icon" rel="shortcut icon" />  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+        <![endif]-->
+</head>
+<body>
+  <header>
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <!-- logo -->
+          <span><img style="float:left; width: 80px;" alt="Pharmacy and Poisons Board" src="/img/logo1.png" border="0"></span>
+          <span><a class="brand logo" style="color: #638624; " href="/">Pharmacy and Poisons Board </a></span>
+          <!-- end logo -->
+          <!-- top menu -->
+          <div class="navigation">
+            <nav>
+              <ul class="nav topnav">
+                <li class="dropdown ">
+                  <a href="/pages/home"><i class="icon-home"></i> Home</a>                </li>
+                <li class="dropdown active">
+                  <!-- <a href="/applications"><i class="icon-thumbs-up"></i> Approved Clinical Trials</a> -->
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-thumbs-up"></i> Clinical Trials <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="/applications/index/status:approved"><i class="icon-thumbs-up"></i> Approved</a>                    </li>
+                    <li>
+                      <a href="/applications/index/status:rejected"><i class="icon-remove"></i> Rejected</a>                    </li>
+                    <li>
+                      <a href="/applications/index/status:stopped"><i class="icon-stop"></i> Stopped</a>                    </li>
+                    <li>
+                      <a href="/applications/index/status:suspended"><i class="icon-pause"></i> Suspended</a>                    </li>
+                  </ul>
+                </li>
+                <li class="dropdown ">
+                  <a href="/pages/news"><i class="icon-bullhorn"></i> News</a>                </li>
+                <li class="dropdown ">
+                  <a href="/pages/faqs"><i class="icon-question-sign"></i> FAQs</a>                </li>
+                <li class="dropdown ">
+                  <a href="/feedbacks/add"><i class="icon-envelope"></i> Contact us</a>                </li>
+                <li class="dropdown ">
+                  <a href="/users/login"><i class="icon-signin"></i> Login</a>                </li>
+                                  <li class="dropdown ">
+                    <a href="/users/register"><i class="icon-edit"></i> Register</a>                  </li>
+                              </ul>
+            </nav>
+          </div>
+          <!-- end menu -->
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Subhead
+================================================== -->
+  <section id="maincontent">
+    <div class="container">
+      <div class="alert alert-error alertbrowser" style="display: none;">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>NOTE TO APPLICANT!</strong> Please use the latest versions of Firefox or Google Chrome for the best experience on this site.
+      </div>
+      <div class="row-fluid">
+  <div class="span12">
+            <div class="marketing">
+      <div class="row-fluid">
+            <div class="span12">
+              <h4>Clinical Trial Applications - Approved:<small> <i class="icon-glass"></i> Filter, <i class="icon-search"></i> Search, and <i class="icon-eye-open"></i> view applications</small> <span class="pull-right">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <!-- Place this tag where you want the +1 button to render. -->
+    <div class="g-plusone" data-size="small" data-href="http://www.ctr.pharmacyboardkenya.org"></div>
+</span>
+</h4>
+              <!-- <hr style="margin: 10px 0px"> -->
+              <hr class="soften" style="margin: 10px 0px;">
+            </div>
+        </div>
+    </div>
+        <div class="row-fluid">
+        <div class="span2">
+          <div class="well" style="width:165px; padding:8px;">
+            <ul class="nav nav-list">
+              <li class="nav-header"> Filter Results By </li>
+              <li class="divider"></li>
+                            <li class="nav-header"><small><i class="icon-glass"></i> Trial Phase</small></li>
+              <li class="">
+                <a href="/applications/index/trial_human_pharmacology:1/status:approved"><i class="icon-hand-right"></i>Phase I -  <br> <small class="muted">Human pharmacology</small></a>              </li>
+              <li class="">
+                <a href="/applications/index/trial_therapeutic_exploratory:1/status:approved"><i class="icon-hand-right"></i>Phase II -  <small class="muted">Therapeutic exploratory</small></a>              </li>
+              <li class="">
+                <a href="/applications/index/trial_therapeutic_confirmatory:1/status:approved"><i class="icon-hand-right"></i>Phase III - <small class="muted">Therapeutic confirmatory</small> </a>              </li>
+              <li class="">
+                <a href="/applications/index/trial_therapeutic_use:1/status:approved"><i class="icon-hand-right"></i>Phase IV - <small class="muted">Therapeutic use</small></a>              </li>
+                            <li class="divider"></li>
+            </ul>
+          </div>
+        </div>
+        <div class="span10">
+      <form action="/applications/index/status:approved" class="ctr-groups" style="padding:9px; background-color: #F5F5F5" id="ApplicationIndexForm" method="post" accept-charset="utf-8"><div style="display:none;"><input type="hidden" name="_method" value="POST"/></div>      <div class="row-fluid">
+        <div class="span12">
+          <table class="table table-condensed table-bordered" style="margin-bottom: 2px;">
+            <thead>
+            <tr>
+              <th style="width: 15%;">
+              <label for="ApplicationProtocolNo" class="required">Protocol No.</label><input name="data[Application][protocol_no]" class="span12 unauthorized_index" maxlength="55" type="text" id="ApplicationProtocolNo"/>              </th>
+              <th>
+              <label for="ApplicationFilter" class="required">Study Title</label><input name="data[Application][filter]" class="span12 unauthorized_index" type="text" id="ApplicationFilter"/>              </th>
+              <th>
+              <label for="ApplicationInvestigator" class="required">Principal Investigator(s)</label><input name="data[Application][investigator]" class="span12 unauthorized_index" type="text" id="ApplicationInvestigator"/>              </th>
+              <th>
+              <label for="ApplicationSites" class="required">Name of Site / County</label><input name="data[Application][sites]" class="span12 unauthorized_index" type="text" id="ApplicationSites"/>              </th>
+              <th>
+                <label for="ApplicationPages" class="required">Pages</label><select name="data[Application][pages]" class="span12" id="ApplicationPages">
+<option value=""></option>
+<option value="10" selected="selected">10</option>
+<option value="50">50</option>
+<option value="100">100</option>
+</select>              </th>
+              <th rowspan="2" style="width: 14%;">
+                <button class="btn btn-inverse" style="margin-bottom: 5px" type="submit"><i class="icon-search icon-white"></i> Search</button><a href="/applications/index/status:approved" class="btn" style="margin-bottom: 5px"><i class="icon-remove"></i> Clear</a><br>              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="searchmore" style="display: none;">
+              <td colspan="2">
+              <label for="ApplicationStartDate" class="required">Application Submission Dates</label><input name="data[Application][start_date]" class="input-small unauthorized_index" placeHolder="Start Date" type="text" id="ApplicationStartDate"/>-to-<input name="data[Application][end_date]" class="input-small unauthorized_index" placeHolder="End Date" type="text" id="ApplicationEndDate"/><a style="font-weight:normal" onclick="$('.unauthorized_index').val('');" >
+                            <em class="accordion-toggle">clear!</em></a>              </td>
+              <td>
+                              </td>
+              <td colspan="3">
+                <label for="ApplicationEstimatedDuration" class="required">Estimated Duration (Months)</label><input name="data[Application][estimated_duration]" min="0" step="1" class="span6 unauthorized_index" type="number" id="ApplicationEstimatedDuration"/>              </td>
+            </tr>
+          </tbody>
+         </table>
+         <a href="#"  id='moresearch' class="muted"><small><i class="icon-caret-right"></i> Extended search...</small></a>
+      </div>
+      </div>
+        <p>
+          Page <span class="badge">1</span> of <span class="badge">59</span>,
+                    showing <span class="badge">10</span> Applications out of
+                    <span class="badge badge-inverse">584</span> total, starting on record <span class="badge">1</span>,
+                    ending on <span class="badge">10</span>          </p>
+    </form>          <div class="pagination">
+            <ul>
+            <li class="disabled"><a href="#">&laquo;</a></li><li class="active"><a href="#">1</a></li><li><a href="/applications/index/sort:approval_date/direction:desc/status:approved/page:2">2</a></li><li><a href="/applications/index/sort:approval_date/direction:desc/status:approved/page:3">3</a></li><li><a href="/applications/index/sort:approval_date/direction:desc/status:approved/page:4">4</a></li><li><a href="/applications/index/sort:approval_date/direction:desc/status:approved/page:5">5</a></li><li><a href="/applications/index/sort:approval_date/direction:desc/status:approved/page:6">6</a></li><li><a href="/applications/index/sort:approval_date/direction:desc/status:approved/page:7">7</a></li><li><a href="/applications/index/sort:approval_date/direction:desc/status:approved/page:8">8</a></li><li><a href="/applications/index/sort:approval_date/direction:desc/status:approved/page:9">9</a></li><li class="next"><a href="/applications/index/sort:approval_date/direction:desc/status:approved/page:2" rel="next">&raquo;</a></li>            </ul>
+          </div>
+      <div class="row-fluid">
+                    <table  class="table  table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:3%">#</th>
+                <th style="width: 13%"><a href="/applications/index/sort:protocol_no/direction:asc/status:approved">Protocol No</a></th>
+                <th style="width: 26%;"><a href="/applications/index/sort:study_title/direction:asc/status:approved">Study Title</a></th>
+                <th style="width: 26%;">Investigator(s) &amp; Site(s)</th>
+                                <th style="width: 12%;"><a href="/applications/index/sort:approval_date/direction:asc/status:approved" class="desc">Date Approved</a></th>
+                                <!-- <th style="width: 27%">Application Status </th> -->
+                <th style="width: 5%;"><i class="icon-link"></i></th>
+              </tr>
+            </thead>
+            <tbody>
+                          <tr class="">
+                <td><p class="tablenums">1.</p></td>
+                <td>
+                  <a href="/applications/view/1647">ECCT/26/05/01</a>                  &nbsp;</td>
+                <td class="morecontent"> 
+                  <b>C1091009 Study site 1193 </b> </br>&nbsp; 
+                  &nbsp;	Phase 3, Randomized, Placebo-Controlled, Double-Blinded Trial to Evaluate the Safety, Tolerability, and Immunogenicity of a Multivalent Group B Streptococcus Vaccine in Healthy Pregnant Women and Their Infants&nbsp; &nbsp; 
+                </td>
+                <td class="morecontent">
+                  <small><strong style="text-decoration:underline;">Principal Investigator(s)</strong></small><br>
+                  1. Redacted<br>                  <small><strong style="text-decoration:underline;">Site(s) in Kenya</strong></small><br>
+                 1. KEMRI Butere Clinical Research Centre  <small class="muted">(Kakamega county)</small><br>2. Kenya Medical Research Institute Walter Reed Project  <small class="muted">(Kericho county)</small><br>3. Kenya Medical Research Institute (KEMRI) - Centre for Global Health Research  <small class="muted">(Kisumu county)</small><br>4. Victoria Biomedical Research Institute Kisumu County Referral Hospital <small class="muted">(Kisumu county)</small><br> &nbsp; </td>
+                                <td>
+                  08-11-2026                </td>
+                                <!-- <td> 
+                                   </td> -->
+                <td>
+                  <a href="/applications/view/1647"><span class="label label-info"> View </span></a><br><br>                </td>
+              </tr>
+                          <tr class="">
+                <td><p class="tablenums">2.</p></td>
+                <td>
+                  <a href="/applications/view/1655">ECCT/26/06/03</a>                  &nbsp;</td>
+                <td class="morecontent"> 
+                  <b>C1091009 - Study Site 1254 </b> </br>&nbsp; 
+                  &nbsp;	Phase 3, Randomized, Placebo-Controlled, Double-Blinded Trial to Evaluate the Safety, Tolerability, and Immunogenicity of a Multivalent Group B Streptococcus Vaccine in Healthy Pregnant Women and Their Infants&nbsp; &nbsp; 
+                </td>
+                <td class="morecontent">
+                  <small><strong style="text-decoration:underline;">Principal Investigator(s)</strong></small><br>
+                  1. Redacted<br>                  <small><strong style="text-decoration:underline;">Site(s) in Kenya</strong></small><br>
+                 1. Kenya Medical Research Institute Walter Reed Project <small class="muted">(Kericho county)</small><br>2. KEMRI Butere Clinical Research Centre <small class="muted">(Kakamega county)</small><br>3. Kenya Medical Research Institute (KEMRI) - Centre for Global Health Research <small class="muted">(Kisumu county)</small><br>4. Victoria Biomedical Research Institute Kisumu County Referral Hospital <small class="muted">(Kisumu county)</small><br> &nbsp; </td>
+                                <td>
+                  08-11-2026                </td>
+                                <!-- <td> 
+                                   </td> -->
+                <td>
+                  <a href="/applications/view/1655"><span class="label label-info"> View </span></a><br><br>                </td>
+              </tr>
+                          <tr class="">
+                <td><p class="tablenums">3.</p></td>
+                <td>
+                  <a href="/applications/view/1660">ECCT/26/06/01</a>                  &nbsp;</td>
+                <td class="morecontent"> 
+                  <b>SANDLY </b> </br>&nbsp; 
+                  &nbsp;	A Phase 1, Multi-Site, Double-Blinded, Placebo-Controlled Dose-Escalation Study to Evaluate the Safety and Immunogenicity of Leishmania major LmCen -/- vaccine in healthy Kenyan and Brazilian Adults (SANDFLY)&nbsp; &nbsp; 
+                </td>
+                <td class="morecontent">
+                  <small><strong style="text-decoration:underline;">Principal Investigator(s)</strong></small><br>
+                  1. Redacted<br>                  <small><strong style="text-decoration:underline;">Site(s) in Kenya</strong></small><br>
+                 KEMRI WRP CRC KERICHO<br> &nbsp; </td>
+                                <td>
+                  08-11-2026                </td>
+                                <!-- <td> 
+                                   </td> -->
+                <td>
+                  <a href="/applications/view/1660"><span class="label label-info"> View </span></a><br><br>                </td>
+              </tr>
+                          <tr class="">
+                <td><p class="tablenums">4.</p></td>
+                <td>
+                  <a href="/applications/view/1613">ECCT/25/12/03</a>                  &nbsp;</td>
+                <td class="morecontent"> 
+                  <b>ITU512 Study - Site 6002 </b> </br>&nbsp; 
+                  &nbsp;	A Phase I/II clinical study to investigate the safety, tolerability, pharmacokinetics, pharmacodynamics, and efficacy of ITU512 in healthy participants and patients with sickle cell disease&nbsp; &nbsp; 
+                </td>
+                <td class="morecontent">
+                  <small><strong style="text-decoration:underline;">Principal Investigator(s)</strong></small><br>
+                  1. Redacted<br>                  <small><strong style="text-decoration:underline;">Site(s) in Kenya</strong></small><br>
+                 1. Site 6001: International Cancer Institute <small class="muted">(Uasin Gishu county)</small><br>2. Site 6002: Gertrude’s Children’s Hospital <small class="muted">(Nairobi City county)</small><br>3. Site 6003: KEMRI Kondele Children’s Hospital <small class="muted">(Kisumu county)</small><br> &nbsp; </td>
+                                <td>
+                  23-10-2026                </td>
+                                <!-- <td> 
+                                   </td> -->
+                <td>
+                  <a href="/applications/view/1613"><span class="label label-info"> View </span></a><br><br>                </td>
+              </tr>
+                          <tr class="">
+                <td><p class="tablenums">5.</p></td>
+                <td>
+                  <a href="/applications/view/1614">ECCT/25/12/02</a>                  &nbsp;</td>
+                <td class="morecontent"> 
+                  <b>ITU512 Study - Site 6003 </b> </br>&nbsp; 
+                  &nbsp;	A Phase I/II clinical study to investigate the safety, tolerability, pharmacokinetics, pharmacodynamics, and efficacy of ITU512 in healthy participants and patients with sickle cell disease&nbsp; &nbsp; 
+                </td>
+                <td class="morecontent">
+                  <small><strong style="text-decoration:underline;">Principal Investigator(s)</strong></small><br>
+                  1. Redacted<br>                  <small><strong style="text-decoration:underline;">Site(s) in Kenya</strong></small><br>
+                 1. Site 6001: International Cancer Institute <small class="muted">(Uasin Gishu county)</small><br>2. Site 6002: Gertrude’s Children’s Hospital <small class="muted">(Nairobi City county)</small><br>3.  Site 6003: KEMRI Kondele Children’s Hospital <small class="muted">(Kisumu county)</small><br> &nbsp; </td>
+                                <td>
+                  23-10-2026                </td>
+                                <!-- <td> 
+                                   </td> -->
+                <td>
+                  <a href="/applications/view/1614"><span class="label label-info"> View </span></a><br><br>                </td>
+              </tr>
+                          <tr class="">
+                <td><p class="tablenums">6.</p></td>
+                <td>
+                  <a href="/applications/view/1640">ECCT/26/03/03</a>                  &nbsp;</td>
+                <td class="morecontent"> 
+                  <b>LIBRA </b> </br>&nbsp; 
+                  &nbsp;	A 52-week, multicenter, randomized, double-blind, placebo-controlled, parallel-group, group sequential, Phase 3 study to evaluate the efficacy and safety of rilzabrutinib in patients aged 10 to 65 years with sickle-cell disease (LIBRA)&nbsp; &nbsp; 
+                </td>
+                <td class="morecontent">
+                  <small><strong style="text-decoration:underline;">Principal Investigator(s)</strong></small><br>
+                  1. Redacted<br>                  <small><strong style="text-decoration:underline;">Site(s) in Kenya</strong></small><br>
+                 Getrudes’s Children\'s Hospital<br> &nbsp; </td>
+                                <td>
+                  23-10-2026                </td>
+                                <!-- <td> 
+                                   </td> -->
+                <td>
+                  <a href="/applications/view/1640"><span class="label label-info"> View </span></a><br><br>                </td>
+              </tr>
+                          <tr class="">
+                <td><p class="tablenums">7.</p></td>
+                <td>
+                  <a href="/applications/view/1650">ECCT/26/06/02</a>                  &nbsp;</td>
+                <td class="morecontent"> 
+                  <b> HibiscusJr </b> </br>&nbsp; 
+                  &nbsp;	A global phase 3 Randomised, Double-blind and Placebo-controlled Study Evaluating the Efficacy and Safety of etavopivat in children with Sickle Cell Disease.&nbsp; &nbsp; 
+                </td>
+                <td class="morecontent">
+                  <small><strong style="text-decoration:underline;">Principal Investigator(s)</strong></small><br>
+                  1. Redacted<br>                  <small><strong style="text-decoration:underline;">Site(s) in Kenya</strong></small><br>
+                 1. Victoria Biomedical Research Institute <small class="muted">(Kisumu county)</small><br> &nbsp; </td>
+                                <td>
+                  23-10-2026                </td>
+                                <!-- <td> 
+                                   </td> -->
+                <td>
+                  <a href="/applications/view/1650"><span class="label label-info"> View </span></a><br><br>                </td>
+              </tr>
+                          <tr class="">
+                <td><p class="tablenums">8.</p></td>
+                <td>
+                  <a href="/applications/view/1631">ECCT/26/04/01</a>                  &nbsp;</td>
+                <td class="morecontent"> 
+                  <b>ACRN-MNK02-301 </b> </br>&nbsp; 
+                  &nbsp;	A Phase 3, randomized, double-blind, placebo-controlled trial to evaluate the effect of Bifidobacterium longum subsp. infantis DSM33361(Bifin02) administered together with Lacticaseibacillus rhamnosus GG DSM33156 (LGG &reg;) versus placebo on weight gain in underweight infants.&nbsp;&nbsp;	&nbsp;&nbsp; &nbsp; 
+                </td>
+                <td class="morecontent">
+                  <small><strong style="text-decoration:underline;">Principal Investigator(s)</strong></small><br>
+                  1. Redacted<br>                  <small><strong style="text-decoration:underline;">Site(s) in Kenya</strong></small><br>
+                 1. KEMRI-CRDR <small class="muted">(Nairobi City county)</small><br>2. KEMRI-MTWAPA <small class="muted">(Kilifi county)</small><br>3. Moi University Clinical Research Centre <small class="muted">(Uasin Gishu county)</small><br> &nbsp; </td>
+                                <td>
+                  21-10-2026                </td>
+                                <!-- <td> 
+                                   </td> -->
+                <td>
+                  <a href="/applications/view/1631"><span class="label label-info"> View </span></a><br><br>                </td>
+              </tr>
+                          <tr class="">
+                <td><p class="tablenums">9.</p></td>
+                <td>
+                  <a href="/applications/view/1621">ECCT/26/02/03</a>                  &nbsp;</td>
+                <td class="morecontent"> 
+                  <b>REVIVE Study - KNH </b> </br>&nbsp; 
+                  &nbsp;	A randomised, double blinded, placebo-controlled, multicentre trial of azithromycin prophylaxis for advanced HIV disease&nbsp; &nbsp; 
+                </td>
+                <td class="morecontent">
+                  <small><strong style="text-decoration:underline;">Principal Investigator(s)</strong></small><br>
+                  1. Redacted<br>                  <small><strong style="text-decoration:underline;">Site(s) in Kenya</strong></small><br>
+                 1. Kenyatta National Hospital (KNH) <small class="muted">(Nairobi City county)</small><br> &nbsp; </td>
+                                <td>
+                  28-09-2026                </td>
+                                <!-- <td> 
+                                   </td> -->
+                <td>
+                  <a href="/applications/view/1621"><span class="label label-info"> View </span></a><br><br>                </td>
+              </tr>
+                          <tr class="">
+                <td><p class="tablenums">10.</p></td>
+                <td>
+                  <a href="/applications/view/1559">ECCT/25/08/09</a>                  &nbsp;</td>
+                <td class="morecontent"> 
+                  <b>First-in-human (FIH) study </b> </br>&nbsp; 
+                  &nbsp;	A Phase 1, Randomized, Placebo-Controlled, Double Blind, Single and Multiple Ascending Dose Study to Assess the Safety, Tolerability, Pharmacokinetics, and Pharmacodynamics of CLY-124 in Healthy Volunteers and Participants with Sickle Cell Disease&nbsp; &nbsp; 
+                </td>
+                <td class="morecontent">
+                  <small><strong style="text-decoration:underline;">Principal Investigator(s)</strong></small><br>
+                  1. Redacted<br>                  <small><strong style="text-decoration:underline;">Site(s) in Kenya</strong></small><br>
+                 1. Victoria Biomedical Research Institute [VIBRI] <small class="muted">(Kisumu county)</small><br>2. Strathmore University Medical Center [SUMC], Creates for Research in Therapeutic Sciences <small class="muted">(Nairobi City county)</small><br> &nbsp; </td>
+                                <td>
+                  17-09-2026                </td>
+                                <!-- <td> 
+                                   </td> -->
+                <td>
+                  <a href="/applications/view/1559"><span class="label label-info"> View </span></a><br><br>                </td>
+              </tr>
+                        </tbody>
+            </table>
+              </div> <!-- /row-fluid -->
+        </div>
+      </div>
+  </div>
+</div>
+    </div>
+  </section>
+  <!-- Footer
+ ================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="span5">
+          <div class="widget">
+            <!-- logo -->
+            <!-- <h5>Browse pages</h5>
+            <address>
+                            <strong>Registered Companyname, Inc.</strong><br>
+                             8895 Somename Ave, Suite 600<br>
+                             San Francisco, CA 94107<br>
+                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                        </address> -->
+            <a href="/pages/home" target="_blank"><img src="/img/cake.power.png" alt="Pharmacy and Poisons Board" border="0" /></a>            <address>
+              <a href="http://www.pharmacyboardkenya.org" target="_blank">Pharmacy and Poisons Board Kenya</a>.
+              Kenya's Drug Regulatory Authority
+              <ul class="footer-links">
+                <li><a href="/">Ministry of Health</a></li>
+                <li><a href="/">Contact Us</a></li>
+                <li><a href="http://clinicaltrials.org">Clinical Trials</a></li>
+              </ul>
+            </address>
+          </div>
+        </div>
+        <div class="span7">
+          <p class="pull-right"><a href="#">Back to top</a></p>
+          <img src="/img/edctp.png" alt="EDCTP" width="12%">
+          <img src="/img/eu.png" alt="EU" style="padding-left: 30%;" width="17%">
+          <p>
+            Clinical Trial Registry Information system upgrade project (HATUA) with the support from EDCTP and EU partners
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="verybottom">
+      <div class="container">
+        <div class="row">
+          <div class="span6">
+            <p>
+              Copyright &copy; 2026. All Rights Reserved.
+            </p>
+          </div>
+          <div class="span6">
+            <div class="credits">
+              <!--
+                All the links in the footer should remain intact.
+                You can delete the links only if you purchased the pro version.
+                Licensing information: https://bootstrapmade.com/license/
+                Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Serenity
+              -->
+              <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
