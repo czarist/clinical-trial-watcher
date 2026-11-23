@@ -2,7 +2,9 @@
 import { computed, onMounted, ref } from 'vue';
 import DigestReport from '@/components/DigestReport.vue';
 import { api, ApiError } from '@/api/client';
+import LanguageSelect from '@/components/LanguageSelect.vue';
 import type { DigestSample } from '@/api/types';
+import { LOCALES, t } from '@/i18n';
 import { useAuthStore } from '@/stores/auth';
 
 const auth = useAuthStore();
@@ -16,29 +18,29 @@ onMounted(async () => {
     try {
         samples.value = (await api.get<{ data: DigestSample[] }>('/digests/samples')).data;
     } catch (exception) {
-        error.value = exception instanceof ApiError ? exception.message : 'Could not load the samples. Check your connection.';
+        error.value = exception instanceof ApiError ? exception.message : t('digests.samples.loadFailed');
     } finally {
         loading.value = false;
     }
 });
+
+const languageName = (code: string): string => LOCALES.find((item) => item.code === code)?.name ?? code;
 </script>
 
 <template>
     <div class="page">
-        <h1>Sample AI digests</h1>
-        <p class="lede">
-            Pro AI and Team AI send a daily or weekly digest for a saved search: what changed in the matching studies, why each change matches, and where to check it on
-            ClinicalTrials.gov. These two editions use invented studies.
-        </p>
+        <LanguageSelect v-if="!auth.isLoggedIn" class="language" />
+        <h1>{{ t('digests.samples.title') }}</h1>
+        <p class="lede">{{ t('digests.samples.lede') }} {{ t('digests.samples.languageNote') }}</p>
         <p>
-            <RouterLink v-if="auth.isLoggedIn" class="button" to="/account">See plans</RouterLink>
-            <RouterLink v-else class="button" to="/register">Create a free account</RouterLink>
+            <RouterLink v-if="auth.isLoggedIn" class="button" to="/account">{{ t('common.seePlans') }}</RouterLink>
+            <RouterLink v-else class="button" to="/register">{{ t('digests.samples.createAccount') }}</RouterLink>
         </p>
 
-        <p v-if="loading" class="muted">Loading samples…</p>
+        <p v-if="loading" class="muted">{{ t('digests.samples.loading') }}</p>
         <p v-else-if="error" class="notice error" role="alert">{{ error }}</p>
         <template v-else>
-            <div class="tabs" role="tablist" aria-label="Sample editions">
+            <div class="tabs" role="tablist" :aria-label="t('digests.samples.tabs')">
                 <button
                     v-for="(sample, index) in samples"
                     :key="sample.id"
@@ -48,7 +50,7 @@ onMounted(async () => {
                     :aria-selected="selected === index"
                     @click="selected = index"
                 >
-                    {{ sample.plan }} · {{ sample.language === 'pt_BR' ? 'Português' : 'English' }}
+                    {{ sample.plan }} · {{ languageName(sample.language) }}
                 </button>
             </div>
             <DigestReport v-if="current" :content="current" :sample-label="current.sample_label" />

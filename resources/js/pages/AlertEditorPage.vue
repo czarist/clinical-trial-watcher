@@ -6,7 +6,8 @@ import TrialFilters from '@/components/TrialFilters.vue';
 import { api, ApiError } from '@/api/client';
 import type { Alert, AlertFrequency, AlertMatch, DigestFrequency, DigestLanguage, Paginated, SearchCriteria } from '@/api/types';
 import { criteriaFromQuery } from '@/criteria';
-import { formatDate, statusLabel } from '@/registry';
+import { formatDate, formatPrice, LOCALES, t } from '@/i18n';
+import { statusLabel } from '@/registry';
 import { useAuthStore } from '@/stores/auth';
 
 const props = defineProps<{ id?: string }>();
@@ -33,7 +34,6 @@ const error = ref<ApiError | null>(null);
 const saved = ref<string | null>(null);
 const busy = ref(false);
 
-const reasonLabel = { new_study: 'New study', updated_study: 'Updated', status_change: 'Status changed' } as const;
 
 watch(
     () => props.id,
@@ -54,7 +54,7 @@ watch(
             criteria.value = alert.criteria;
             matches.value = await api.get<Paginated<AlertMatch>>(`/alerts/${id}/matches`);
         } catch (exception) {
-            error.value = exception instanceof ApiError ? exception : new ApiError(0, 'Could not load this alert.');
+            error.value = exception instanceof ApiError ? exception : new ApiError(0, t('alertEditor.loadFailed'));
         }
     },
     { immediate: true },
@@ -72,9 +72,9 @@ async function save(): Promise<void> {
         } else {
             await api.patch(`/alerts/${props.id}`, body);
         }
-        saved.value = 'Alert saved.';
+        saved.value = t('alertEditor.saved');
     } catch (exception) {
-        error.value = exception instanceof ApiError ? exception : new ApiError(0, 'Could not reach the server. Check your connection.');
+        error.value = exception instanceof ApiError ? exception : new ApiError(0, t('errors.network'));
     } finally {
         busy.value = false;
     }
@@ -90,67 +90,65 @@ async function remove(): Promise<void> {
 <template>
     <div class="page editor">
         <p>
-            <RouterLink v-if="teamId !== null" :to="`/teams/${teamId}`">Back to the team</RouterLink>
-            <RouterLink v-else to="/alerts">Back to alerts</RouterLink>
+            <RouterLink v-if="teamId !== null" :to="`/teams/${teamId}`">{{ t('alertEditor.backToTeam') }}</RouterLink>
+            <RouterLink v-else to="/alerts">{{ t('alertEditor.backToAlerts') }}</RouterLink>
         </p>
-        <h1>{{ isNew ? (teamId !== null ? 'New shared saved search' : 'New alert') : form.name || 'Alert' }}</h1>
-        <p v-if="teamId !== null" class="muted">Shared with every member of the team.</p>
+        <h1>{{ isNew ? (teamId !== null ? t('alertEditor.newShared') : t('alertEditor.new')) : form.name || t('alertEditor.fallbackTitle') }}</h1>
+        <p v-if="teamId !== null" class="muted">{{ t('alertEditor.sharedNote') }}</p>
 
         <div class="editor__grid">
             <form class="panel stack" @submit.prevent="save">
                 <div>
-                    <label for="name">Name</label>
-                    <input id="name" v-model.trim="form.name" maxlength="120" placeholder="e.g. Asthma studies in São Paulo" required />
+                    <label for="name">{{ t('alertEditor.name') }}</label>
+                    <input id="name" v-model.trim="form.name" maxlength="120" :placeholder="t('alertEditor.namePlaceholder')" required />
                     <p v-if="error?.field('name')" class="field-error">{{ error.field('name') }}</p>
                 </div>
                 <div>
-                    <label for="frequency">Email me</label>
+                    <label for="frequency">{{ t('alertEditor.emailMe') }}</label>
                     <select id="frequency" v-model="form.frequency">
-                        <option value="instant">As soon as a study matches</option>
-                        <option value="daily">Once a day, in a summary</option>
-                        <option value="weekly">Once a week, in a summary</option>
+                        <option value="instant">{{ t('alertEditor.frequency.instant') }}</option>
+                        <option value="daily">{{ t('alertEditor.frequency.daily') }}</option>
+                        <option value="weekly">{{ t('alertEditor.frequency.weekly') }}</option>
                     </select>
                 </div>
-                <label class="check"><input v-model="form.notify_status_changes" type="checkbox" /> Tell me when a study changes recruitment status</label>
-                <label v-if="!isNew" class="check"><input v-model="form.is_active" type="checkbox" /> Alert is on</label>
+                <label class="check"><input v-model="form.notify_status_changes" type="checkbox" /> {{ t('alertEditor.statusChanges') }}</label>
+                <label v-if="!isNew" class="check"><input v-model="form.is_active" type="checkbox" /> {{ t('alertEditor.active') }}</label>
 
                 <fieldset class="ai">
-                    <legend>AI digest</legend>
+                    <legend>{{ t('alertEditor.aiDigest') }}</legend>
                     <template v-if="aiAvailable">
                         <label class="check">
                             <input v-model="form.ai_digest_enabled" type="checkbox" />
-                            Send an AI digest that explains what changed and why it matches
+                            {{ t('alertEditor.aiEnable') }}
                         </label>
                         <template v-if="form.ai_digest_enabled">
                             <div>
-                                <label for="ai-frequency">How often</label>
+                                <label for="ai-frequency">{{ t('alertEditor.howOften') }}</label>
                                 <select id="ai-frequency" v-model="form.ai_digest_frequency">
-                                    <option value="daily">Daily</option>
-                                    <option value="weekly">Weekly</option>
+                                    <option value="daily">{{ t('alertEditor.daily') }}</option>
+                                    <option value="weekly">{{ t('alertEditor.weekly') }}</option>
                                 </select>
                             </div>
                             <div>
-                                <label for="ai-language">Language</label>
+                                <label for="ai-language">{{ t('alertEditor.language') }}</label>
                                 <select id="ai-language" v-model="form.ai_digest_language">
-                                    <option value="en">English</option>
-                                    <option value="pt_BR">Português (Brasil)</option>
+                                    <option v-for="item in LOCALES" :key="item.code" :value="item.code" :lang="item.tag">{{ item.name }}</option>
                                 </select>
                             </div>
                         </template>
-                        <p class="muted">Turning the digest off keeps the basic email alert above.</p>
+                        <p class="muted">{{ t('alertEditor.aiOffKeepsAlert') }}</p>
                     </template>
                     <template v-else>
                         <p v-if="form.ai_digest_enabled" class="notice warning">
-                            Your plan no longer includes AI digests, so none are sent for this search.
-                            <button class="button secondary" type="button" @click="form.ai_digest_enabled = false">Turn the AI digest off</button>
+                            {{ t('alertEditor.aiNoLongerIncluded') }}
+                            <button class="button secondary" type="button" @click="form.ai_digest_enabled = false">{{ t('alertEditor.aiTurnOff') }}</button>
                         </p>
                         <p>
-                            A daily or weekly digest written from the registry changes, ranked by what this search follows, with a ClinicalTrials.gov link for every
-                            study. Part of Pro AI ($19/month).
+                            {{ t('alertEditor.aiPitch', { price: formatPrice(19, 'usd') }) }}
                         </p>
                         <p class="ai__links">
-                            <RouterLink to="/digests/samples">See sample digests</RouterLink>
-                            <RouterLink class="button secondary" to="/account">Upgrade to Pro AI</RouterLink>
+                            <RouterLink to="/digests/samples">{{ t('common.seeSamples') }}</RouterLink>
+                            <RouterLink class="button secondary" to="/account">{{ t('alertEditor.upgrade') }}</RouterLink>
                         </p>
                     </template>
                 </fieldset>
@@ -158,27 +156,27 @@ async function remove(): Promise<void> {
                 <p v-if="error?.field('criteria')" class="notice error">{{ error.field('criteria') }}</p>
                 <p v-else-if="error && Object.keys(error.errors).length === 0" class="notice error" role="alert">
                     {{ error.message }}
-                    <RouterLink v-if="error.status === 402" to="/account">See plans</RouterLink>
+                    <RouterLink v-if="error.status === 402" to="/account">{{ t('common.seePlans') }}</RouterLink>
                 </p>
                 <p v-if="saved" class="notice" role="status">{{ saved }}</p>
                 <div class="actions">
-                    <button class="button" type="submit" :disabled="busy">{{ isNew ? 'Create alert' : 'Save alert' }}</button>
-                    <button v-if="!isNew" class="button danger" type="button" @click="remove">Delete alert</button>
+                    <button class="button" type="submit" :disabled="busy">{{ isNew ? t('alertEditor.create') : t('alertEditor.save') }}</button>
+                    <button v-if="!isNew" class="button danger" type="button" @click="remove">{{ t('alertEditor.delete') }}</button>
                 </div>
             </form>
 
             <section class="panel">
-                <h2>Which studies</h2>
-                <TrialFilters v-model="criteria" submit-label="Use these filters" />
+                <h2>{{ t('alertEditor.whichStudies') }}</h2>
+                <TrialFilters v-model="criteria" :submit-label="t('alertEditor.useFilters')" />
             </section>
         </div>
 
         <section v-if="matches" class="matches">
-            <h2>Matches</h2>
-            <p v-if="matches.data.length === 0" class="muted">No study has matched yet. Matches appear after the next import.</p>
+            <h2>{{ t('alertEditor.matches') }}</h2>
+            <p v-if="matches.data.length === 0" class="muted">{{ t('alertEditor.noMatches') }}</p>
             <ul v-else class="matches__list">
                 <li v-for="match in matches.data" :key="match.id">
-                    <p class="muted">{{ reasonLabel[match.reason] }} on {{ formatDate(match.matched_at) }}<template v-if="match.reason === 'status_change'">: {{ statusLabel(match.previous_status) }} to {{ statusLabel(match.new_status) }}</template></p>
+                    <p class="muted">{{ t('alertEditor.matchedOn', { reason: t(`alertEditor.reason.${match.reason}`), date: formatDate(match.matched_at) }) }}<template v-if="match.reason === 'status_change'">: {{ t('alertEditor.statusChange', { before: statusLabel(match.previous_status), after: statusLabel(match.new_status) }) }}</template></p>
                     <RouterLink v-if="match.trial" :to="`/studies/${match.trial.nct_id}`">{{ match.trial.nct_id }}: {{ match.trial.brief_title }}</RouterLink>
                     <StatusTrack v-if="match.trial" compact :status="match.trial.overall_status" />
                 </li>

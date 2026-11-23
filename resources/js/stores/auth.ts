@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { api, hasToken, setToken } from '@/api/client';
 import type { BillingSummary, User } from '@/api/types';
+import { locale, matchLocale, setLocale, type LocaleCode } from '@/i18n';
 
 interface TokenResponse {
     access_token: string;
@@ -26,6 +27,9 @@ export const useAuthStore = defineStore('auth', () => {
             const response = await api.get<{ data: User; billing: BillingSummary }>('/auth/me');
             user.value = response.data;
             billing.value = response.billing;
+            // The account's language follows the user from device to device.
+            const saved = matchLocale(response.data.locale);
+            if (saved && saved !== locale.value) await setLocale(saved);
         } catch {
             clear();
         } finally {
@@ -45,9 +49,18 @@ export const useAuthStore = defineStore('auth', () => {
             email,
             password,
             password_confirmation: passwordConfirmation,
+            locale: locale.value,
         });
         setToken(response.access_token);
         await load();
+    }
+
+    /** Changes the language now and, when logged in, for the account and its emails. */
+    async function changeLocale(code: LocaleCode): Promise<void> {
+        await setLocale(code);
+        if (user.value !== null) {
+            user.value = (await api.put<{ data: User }>('/account/locale', { locale: code })).data;
+        }
     }
 
     async function logout(): Promise<void> {
@@ -64,5 +77,5 @@ export const useAuthStore = defineStore('auth', () => {
         billing.value = null;
     }
 
-    return { user, billing, loaded, isLoggedIn, isAdmin, can, load, login, register, logout, clear };
+    return { user, billing, loaded, isLoggedIn, isAdmin, can, load, login, register, changeLocale, logout, clear };
 });

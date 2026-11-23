@@ -6,7 +6,7 @@ namespace App\Http\Requests;
 
 use App\Enums\AlertFrequency;
 use App\Enums\DigestFrequency;
-use App\Enums\DigestLanguage;
+use App\Enums\Locale;
 use App\Models\Alert;
 use App\Models\Team;
 use App\Services\ClinicalTrials\Search\TrialSearchCriteria;
@@ -51,7 +51,7 @@ final class SaveAlertRequest extends FormRequest
             'is_active' => ['sometimes', 'boolean'],
             'ai_digest_enabled' => ['sometimes', 'boolean'],
             'ai_digest_frequency' => ['sometimes', Rule::enum(DigestFrequency::class)],
-            'ai_digest_language' => ['sometimes', Rule::enum(DigestLanguage::class)],
+            'ai_digest_language' => ['sometimes', Rule::enum(Locale::class)],
         ];
     }
 
@@ -100,7 +100,7 @@ final class SaveAlertRequest extends FormRequest
         }
 
         if (isset($validated['ai_digest_language'])) {
-            $changes['ai_digest_language'] = DigestLanguage::from($validated['ai_digest_language']);
+            $changes['ai_digest_language'] = Locale::from($validated['ai_digest_language']);
         }
 
         if (isset($validated['criteria'])) {

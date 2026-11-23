@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue';
 import PaginationNav from '@/components/PaginationNav.vue';
 import { api, ApiError } from '@/api/client';
 import type { Paginated, Plan, Role, User } from '@/api/types';
+import { t } from '@/i18n';
 
 const users = ref<Paginated<User> | null>(null);
 const roles = ref<Role[]>([]);
@@ -20,9 +21,9 @@ async function update(user: User, changes: { plan_id?: number | null; role_ids?:
     try {
         const updated = (await api.patch<{ data: User }>(`/admin/users/${user.id}`, changes)).data;
         Object.assign(user, updated);
-        message.value = `${updated.name} updated.`;
+        message.value = t('admin.updated', { name: updated.name });
     } catch (exception) {
-        error.value = exception instanceof ApiError ? exception.message : 'Could not save the change.';
+        error.value = exception instanceof ApiError ? exception.message : t('admin.saveFailed');
     }
 }
 
@@ -47,25 +48,25 @@ onMounted(async () => {
 <template>
     <section>
         <form class="search" role="search" @submit.prevent="load(1)">
-            <label for="user-search" class="visually-hidden">Find users by name or email</label>
-            <input id="user-search" v-model.trim="search" type="search" placeholder="Name or email" />
-            <button class="button" type="submit">Find users</button>
+            <label for="user-search" class="visually-hidden">{{ t('admin.findLabel') }}</label>
+            <input id="user-search" v-model.trim="search" type="search" :placeholder="t('admin.findPlaceholder')" />
+            <button class="button" type="submit">{{ t('admin.find') }}</button>
         </form>
         <p v-if="message" class="notice" role="status">{{ message }}</p>
         <p v-if="error" class="notice error" role="alert">{{ error }}</p>
         <div v-if="users" class="table-scroll">
             <table>
                 <thead>
-                    <tr><th>Name</th><th>Email</th><th>Plan</th><th>Roles</th></tr>
+                    <tr><th>{{ t('admin.colName') }}</th><th>{{ t('admin.colEmail') }}</th><th>{{ t('admin.colPlan') }}</th><th>{{ t('admin.colRoles') }}</th></tr>
                 </thead>
                 <tbody>
                     <tr v-for="user in users.data" :key="user.id">
                         <td>{{ user.name }}</td>
-                        <td>{{ user.email }}<span v-if="!user.email_verified" class="muted"> (not confirmed)</span></td>
+                        <td>{{ user.email }}<span v-if="!user.email_verified" class="muted"> {{ t('admin.notConfirmed') }}</span></td>
                         <td>
-                            <label :for="`plan-${user.id}`" class="visually-hidden">Plan of {{ user.name }}</label>
+                            <label :for="`plan-${user.id}`" class="visually-hidden">{{ t('admin.planOf', { name: user.name }) }}</label>
                             <select :id="`plan-${user.id}`" :value="user.plan?.id ?? ''" @change="update(user, { plan_id: Number(($event.target as HTMLSelectElement).value) || null })">
-                                <option value="">No plan</option>
+                                <option value="">{{ t('admin.noPlan') }}</option>
                                 <option v-for="plan in plans" :key="plan.id" :value="plan.id">{{ plan.name }}</option>
                             </select>
                         </td>

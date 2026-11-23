@@ -45,6 +45,7 @@ Route::get('digests/samples', [DigestController::class, 'samples']);
 
 Route::middleware('auth:api')->group(function () use ($permission): void {
     Route::put('account/profile', [AccountController::class, 'updateProfile']);
+    Route::put('account/locale', [AccountController::class, 'updateLocale']);
     Route::put('account/password', [AccountController::class, 'updatePassword']);
 
     Route::middleware($permission(PermissionName::ViewClinicalTrials))->group(function (): void {

@@ -85,6 +85,7 @@ This is a navigation aid, not a second roadmap. Confirm these points in code bef
 | Teams | A team has one owner (the Team AI subscriber) and members who accepted an invitation. Check membership with `TeamPolicy`/`Team::hasMember()` on every team route, and the workspace with `Entitlements::teamIsActive()`. |
 | Changes | `ClinicalTrialSynchronizer` compares `TrackedFacts` snapshots with `ChangeDetector` and writes `details` and a unique `fingerprint` in the study's transaction. A study without a snapshot gets a baseline, not invented details. Dates keep their original precision in digests. |
 | AI digests | Provider calls happen only in `GenerateDigestJob`, never in a request or the import transaction, and only through `AiProvider`; tests bind `Tests\Fakes\FakeAiProvider`. Send only public registry facts. Keep `SummaryValidator` strict and the factual fallback working with AI disabled. Change `ai.prompt_version` when the prompt changes. |
+| Languages | Offered languages are `App\Enums\Locale` on the backend and `LOCALES` in `resources/js/i18n/index.ts`; keep both lists equal. Never hard-code user-facing text: add the English message to `lang/en/*.php` (API, email and digest text) or `resources/js/i18n/locales/en.ts` (web app) and the same key, with the same placeholders, to every other language — `TranslationCatalogTest`, `i18n.spec.ts` and the type checker fail otherwise. Framework mail strings live in `lang/<locale>.json`. Advice and efficacy wording must be added to `SummaryValidator` for every language. Registry data itself is not translated. |
 | Tests | PHPUnit runs on the dedicated MySQL database `clinical_saas_test` (forced in `phpunit.xml`). Running every migration takes minutes on Docker Desktop. Use `actingAsApiUser()` to switch users within a test: it clears the token cached by tymon/jwt. |
 
 Do not silently fix every item while doing an unrelated task. If a known defect affects the requested result, include the necessary fix and coverage; otherwise mention it only when relevant.
@@ -102,7 +103,7 @@ Complete the entire path from source data to persisted value:
 7. If the field is exposed by an endpoint, update its response/resource and validation/filtering only as required by the task.
 8. Add a test that imports a fixture and reads the value back from the database. An assertion on a temporary PHP array does not prove persistence.
 9. Cover an absent/null source field and an update to an existing study where relevant.
-10. Update the roadmap/changelog and both READMEs if user-facing behavior changes.
+10. Update the roadmap/changelog and all READMEs if user-facing behavior changes.
 
 For a new related list, also add its table, child model, `clinical_trial_id` foreign key and `hasMany` relation on `ClinicalTrial`. Follow existing naming and foreign-key conventions. Ensure child attributes are fillable and test that rows belong to the correct study.
 
@@ -132,7 +133,7 @@ For import changes, choose applicable regression cases: first import, identical 
 7. Return the correct HTTP status, not only a `status_code` field in the body. Preserve existing response contracts unless the task requires changing them.
 8. For list endpoints, paginate results and bound client-controlled limits. Allowlist sortable/filterable fields; never interpolate arbitrary input into SQL. Eager-load relations that will be serialized to avoid one query per result.
 9. Test the successful response and applicable invalid-input, unauthenticated, forbidden and missing-resource cases. Assert HTTP status and meaningful response fields.
-10. Document changed public routes and behavior in both `README.md` and `README.pt-BR.md`.
+10. Document changed public routes and behavior in `README.md` and in every translated README (`README.pt-BR.md`, `README.es.md`, `README.zh-CN.md`, `README.zh-TW.md`, `README.ja.md`, `README.ko.md`).
 
 Never expose password hashes, tokens or internal exception details in responses. The seeded administrator credentials are for local development only.
 
@@ -224,7 +225,7 @@ Update only the documents affected by the task:
 
 | Change | Documentation to review/update |
 |---|---|
-| Public behavior, routes, configuration or setup | Both `README.md` and `README.pt-BR.md`, with equivalent information |
+| Public behavior, routes, configuration or setup | `README.md` and every translated README (`README.<locale>.md`), with equivalent information; English is the source |
 | Material behavior change or delivery milestone | `CHANGELOG.md`, following its existing structure |
 | Implemented planned work or newly discovered project gap | Relevant item in `ROADMAP.md` |
 | Shared contributor/agent rule or a fixed trap listed here | `AGENTS.md` |
@@ -237,7 +238,7 @@ Before saying the task is complete:
 - [ ] Relevant regression cases were checked; import tests use fake HTTP only.
 - [ ] Applicable tests and formatting checks passed, or the exact limitations are stated.
 - [ ] No secrets, generated dependencies or unrelated formatting entered the changes.
-- [ ] Affected documentation is accurate; both READMEs agree when changed.
+- [ ] Affected documentation is accurate; all READMEs agree when changed.
 - [ ] The final diff and newly created files were reviewed. `git diff` does not show the contents of untracked files; inspect those separately.
 
 Final response: state the concrete result, summarize verification, and disclose any remaining blocker. Distinguish tests that passed, failed and could not run. Do not mark roadmap work complete just because files were written.

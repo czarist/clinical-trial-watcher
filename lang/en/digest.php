@@ -77,6 +77,7 @@ return [
     ],
 
     'subject' => 'AI digest: :name (:period)',
+    'subject_fallback' => 'AI digest',
     'title' => 'AI digest for ":name"',
     'period' => ':start to :end',
     'intro' => ':count matching study update(s) between :start and :end.',
@@ -86,6 +87,7 @@ return [
     'updated_on' => 'Registry update posted :date',
     'view_registry' => 'View on ClinicalTrials.gov',
     'view_report' => 'Open the report',
+    'why_matches' => 'Why it matches',
     'notice' => 'This digest describes public registry entries from ClinicalTrials.gov. It is not medical advice, does not assess eligibility for any study and does not interpret results. Verify every fact on the linked registry page.',
     'missing_fact' => 'The registry did not provide this information.',
     'manage' => 'You receive this because AI digests are on for this saved search. You can turn them off in the saved search settings; basic alerts keep working.',

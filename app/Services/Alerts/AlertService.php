@@ -6,7 +6,7 @@ namespace App\Services\Alerts;
 
 use App\Enums\AlertFrequency;
 use App\Enums\DigestFrequency;
-use App\Enums\DigestLanguage;
+use App\Enums\Locale;
 use App\Exceptions\AlertLimitReached;
 use App\Exceptions\PaidFeatureRequired;
 use App\Models\Alert;
@@ -36,7 +36,7 @@ final readonly class AlertService
     }
 
     /**
-     * @param  array{name: string, criteria: TrialSearchCriteria, frequency: AlertFrequency, notify_status_changes?: bool, ai_digest_enabled?: bool, ai_digest_frequency?: DigestFrequency, ai_digest_language?: DigestLanguage}  $attributes
+     * @param  array{name: string, criteria: TrialSearchCriteria, frequency: AlertFrequency, notify_status_changes?: bool, ai_digest_enabled?: bool, ai_digest_frequency?: DigestFrequency, ai_digest_language?: Locale}  $attributes
      */
     public function create(User $user, ?Team $team, array $attributes): Alert
     {

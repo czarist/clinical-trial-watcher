@@ -4,7 +4,7 @@ import { useRoute, useRouter } from 'vue-router';
 import PaginationNav from '@/components/PaginationNav.vue';
 import { api, ApiError } from '@/api/client';
 import type { Digest, Paginated, Team } from '@/api/types';
-import { formatDate } from '@/registry';
+import { formatDate, t } from '@/i18n';
 import { useAuthStore } from '@/stores/auth';
 
 const auth = useAuthStore();
@@ -16,7 +16,6 @@ const digests = ref<Paginated<Digest> | null>(null);
 const loading = ref(false);
 const error = ref<ApiError | null>(null);
 
-const generationLabel = { ai: 'AI summaries', partial: 'Some factual summaries', fallback: 'Factual summaries' } as const;
 
 async function load(): Promise<void> {
     loading.value = true;
@@ -25,7 +24,7 @@ async function load(): Promise<void> {
         digests.value = await api.get<Paginated<Digest>>('/digests', { team_id: route.query.team as string | undefined, page: route.query.page as string | undefined });
     } catch (exception) {
         digests.value = null;
-        error.value = exception instanceof ApiError ? exception : new ApiError(0, 'Could not load the digests. Check your connection.');
+        error.value = exception instanceof ApiError ? exception : new ApiError(0, t('digests.loadFailed'));
     } finally {
         loading.value = false;
     }
@@ -43,34 +42,34 @@ function showScope(value: string): void {
 
 <template>
     <div class="page">
-        <h1>AI digests</h1>
-        <p class="muted">Each edition explains the changes in the studies a saved search follows. Turn digests on in a saved search's settings.</p>
+        <h1>{{ t('digests.title') }}</h1>
+        <p class="muted">{{ t('digests.intro') }}</p>
 
         <div v-if="teams.length" class="scope">
-            <label for="scope">Show</label>
+            <label for="scope">{{ t('digests.show') }}</label>
             <select id="scope" :value="(route.query.team as string) ?? ''" @change="showScope(($event.target as HTMLSelectElement).value)">
-                <option value="">My digests</option>
-                <option v-for="team in teams" :key="team.id" :value="String(team.id)">Team: {{ team.name }}</option>
+                <option value="">{{ t('digests.mine') }}</option>
+                <option v-for="team in teams" :key="team.id" :value="String(team.id)">{{ t('digests.teamOption', { team: team.name }) }}</option>
             </select>
         </div>
 
-        <p v-if="loading" class="muted">Loading digests…</p>
+        <p v-if="loading" class="muted">{{ t('digests.loading') }}</p>
         <p v-else-if="error" class="notice error" role="alert">
             {{ error.message }}
-            <RouterLink v-if="error.status === 402" to="/account">See plans</RouterLink>
+            <RouterLink v-if="error.status === 402" to="/account">{{ t('common.seePlans') }}</RouterLink>
         </p>
         <template v-else-if="digests">
             <div v-if="digests.data.length === 0" class="notice">
                 <template v-if="!route.query.team && !auth.billing?.features.ai_digests">
-                    AI digests are part of Pro AI and Team AI. <RouterLink to="/digests/samples">See two sample editions</RouterLink> or <RouterLink to="/account">compare plans</RouterLink>.
+                    {{ t('digests.upsell') }} <RouterLink to="/digests/samples">{{ t('digests.seeTwo') }}</RouterLink> {{ t('digests.or') }} <RouterLink to="/account">{{ t('digests.compare') }}</RouterLink>.
                 </template>
-                <template v-else>No digest yet. Editions appear after the first daily or weekly window with matching updates.</template>
+                <template v-else>{{ t('digests.empty') }}</template>
             </div>
             <ul v-else class="digests">
                 <li v-for="digest in digests.data" :key="digest.id">
-                    <RouterLink :to="`/digests/${digest.id}`">{{ digest.name ?? 'Digest' }}</RouterLink>
-                    <span class="muted">{{ formatDate(digest.period_start) }} to {{ formatDate(digest.period_end) }} · {{ digest.total_updates }} update(s)</span>
-                    <span v-if="digest.generation" class="muted">{{ generationLabel[digest.generation] }}</span>
+                    <RouterLink :to="`/digests/${digest.id}`">{{ digest.name ?? t('digests.fallbackName') }}</RouterLink>
+                    <span class="muted">{{ t('digests.period', { start: formatDate(digest.period_start), end: formatDate(digest.period_end) }) }} · {{ t('digests.updates', { count: digest.total_updates }) }}</span>
+                    <span v-if="digest.generation" class="muted">{{ t(`digests.generation.${digest.generation}`) }}</span>
                 </li>
             </ul>
             <PaginationNav

@@ -10,22 +10,22 @@ final class TeamActionFailed extends ApplicationException
 
     public static function alreadyOwnsTeam(): self
     {
-        return new self('You already own a team. A Team AI subscription covers one team.');
+        return new self(__('errors.team.already_owns_team'));
     }
 
     public static function alreadyMember(): self
     {
-        return new self('This person is already a member of the team.');
+        return new self(__('errors.team.already_member'));
     }
 
     public static function ownerCannotLeave(): self
     {
-        return new self('The team owner cannot leave the team. Delete the team instead.');
+        return new self(__('errors.team.owner_cannot_leave'));
     }
 
     public static function invitationNotFound(): self
     {
-        $exception = new self('Invitation not found.');
+        $exception = new self(__('errors.team.invitation_not_found'));
         $exception->httpStatus = 404;
 
         return $exception;

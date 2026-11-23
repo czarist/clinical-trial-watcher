@@ -8,7 +8,7 @@ final class InvalidCredentials extends ApplicationException
 {
     public function __construct()
     {
-        parent::__construct('Invalid email or password.');
+        parent::__construct(__('auth.failed'));
     }
 
     #[\Override]

@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import AuthLayout from '@/components/AuthLayout.vue';
 import { ApiError } from '@/api/client';
+import { t } from '@/i18n';
 import { useAuthStore } from '@/stores/auth';
 
 const auth = useAuthStore();
@@ -23,8 +24,8 @@ async function submit(): Promise<void> {
         await router.push(redirect);
     } catch (exception) {
         error.value = exception instanceof ApiError && exception.status === 429
-            ? 'Too many attempts. Wait a minute and try again.'
-            : exception instanceof ApiError ? exception.message : 'Could not reach the server. Check your connection.';
+            ? t('errors.tooManyAttempts')
+            : exception instanceof ApiError ? exception.message : t('errors.network');
     } finally {
         busy.value = false;
     }
@@ -32,25 +33,25 @@ async function submit(): Promise<void> {
 </script>
 
 <template>
-    <AuthLayout title="Log in">
-        <p v-if="route.query.verified === '1'" class="notice">Your email address is confirmed. Log in to continue.</p>
-        <p v-else-if="route.query.verified === '0'" class="notice error">This confirmation link is not valid. Log in and send a new one from your account.</p>
-        <p v-if="route.query.reset === '1'" class="notice">Your password was changed. Log in with the new one.</p>
+    <AuthLayout :title="t('auth.login')">
+        <p v-if="route.query.verified === '1'" class="notice">{{ t('auth.verified') }}</p>
+        <p v-else-if="route.query.verified === '0'" class="notice error">{{ t('auth.verifyFailed') }}</p>
+        <p v-if="route.query.reset === '1'" class="notice">{{ t('auth.passwordChanged') }}</p>
         <form class="stack" @submit.prevent="submit">
             <div>
-                <label for="email">Email</label>
+                <label for="email">{{ t('common.email') }}</label>
                 <input id="email" v-model="email" type="email" autocomplete="email" required />
             </div>
             <div>
-                <label for="password">Password</label>
+                <label for="password">{{ t('common.password') }}</label>
                 <input id="password" v-model="password" type="password" autocomplete="current-password" required />
             </div>
             <p v-if="error" class="notice error" role="alert">{{ error }}</p>
-            <button class="button" type="submit" :disabled="busy">Log in</button>
+            <button class="button" type="submit" :disabled="busy">{{ t('auth.login') }}</button>
         </form>
         <p class="links">
-            <RouterLink to="/forgot-password">Forgot your password?</RouterLink><br />
-            New here? <RouterLink to="/register">Create an account</RouterLink>
+            <RouterLink to="/forgot-password">{{ t('auth.forgot') }}</RouterLink><br />
+            {{ t('auth.newHere') }} <RouterLink to="/register">{{ t('auth.createAccountLink') }}</RouterLink>
         </p>
     </AuthLayout>
 </template>

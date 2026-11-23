@@ -11,12 +11,12 @@ final class PaidFeatureRequired extends ApplicationException
 {
     public static function aiDigests(): self
     {
-        return new self('AI digests are part of the Pro AI and Team AI plans. Basic alerts stay free.');
+        return new self(__('errors.paid.ai_digests'));
     }
 
     public static function teamWorkspace(): self
     {
-        return new self("This team's workspace needs an active Team AI subscription held by the team owner.");
+        return new self(__('errors.paid.team_workspace'));
     }
 
     #[\Override]

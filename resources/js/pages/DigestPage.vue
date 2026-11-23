@@ -3,6 +3,7 @@ import { ref, watch } from 'vue';
 import DigestReport from '@/components/DigestReport.vue';
 import { api, ApiError } from '@/api/client';
 import type { Digest } from '@/api/types';
+import { t } from '@/i18n';
 
 const props = defineProps<{ id: string }>();
 const digest = ref<Digest | null>(null);
@@ -16,7 +17,7 @@ watch(
         try {
             digest.value = (await api.get<{ data: Digest }>(`/digests/${id}`)).data;
         } catch (exception) {
-            error.value = exception instanceof ApiError ? exception : new ApiError(0, 'Could not load this digest. Check your connection.');
+            error.value = exception instanceof ApiError ? exception : new ApiError(0, t('digests.loadOneFailed'));
         }
     },
     { immediate: true },
@@ -25,12 +26,12 @@ watch(
 
 <template>
     <div class="page">
-        <p><RouterLink :to="digest?.team_id ? `/digests?team=${digest.team_id}` : '/digests'">Back to digests</RouterLink></p>
+        <p><RouterLink :to="digest?.team_id ? `/digests?team=${digest.team_id}` : '/digests'">{{ t('digests.back') }}</RouterLink></p>
         <p v-if="error" class="notice error" role="alert">
-            {{ error.status === 403 || error.status === 404 ? 'This digest is not available to you.' : error.message }}
+            {{ error.status === 403 || error.status === 404 ? t('digests.unavailable') : error.message }}
         </p>
-        <p v-else-if="!digest" class="muted">Loading the digest…</p>
+        <p v-else-if="!digest" class="muted">{{ t('digests.loadingOne') }}</p>
         <DigestReport v-else-if="digest.content" :content="digest.content" />
-        <p v-else class="notice">This edition has no content.</p>
+        <p v-else class="notice">{{ t('digests.noContent') }}</p>
     </div>
 </template>

@@ -1,40 +1,31 @@
+import { t, tx } from '@/i18n';
+
 /**
- * Readable names for ClinicalTrials.gov vocabulary, and the position of each recruitment
- * status on the study lifecycle shown by StatusTrack.
+ * Readable names for ClinicalTrials.gov vocabulary, in the reader's language, and the position
+ * of each recruitment status on the study lifecycle shown by StatusTrack.
  */
-export const STATUS_LABELS: Record<string, string> = {
-    NOT_YET_RECRUITING: 'Not yet recruiting',
-    RECRUITING: 'Recruiting',
-    ENROLLING_BY_INVITATION: 'Enrolling by invitation',
-    ACTIVE_NOT_RECRUITING: 'Active, not recruiting',
-    COMPLETED: 'Completed',
-    SUSPENDED: 'Suspended',
-    TERMINATED: 'Terminated',
-    WITHDRAWN: 'Withdrawn',
-    AVAILABLE: 'Available',
-    NO_LONGER_AVAILABLE: 'No longer available',
-    TEMPORARILY_NOT_AVAILABLE: 'Temporarily not available',
-    APPROVED_FOR_MARKETING: 'Approved for marketing',
-    WITHHELD: 'Withheld',
-    UNKNOWN: 'Unknown status',
-};
+export const MAIN_STATUSES = [
+    'NOT_YET_RECRUITING',
+    'RECRUITING',
+    'ENROLLING_BY_INVITATION',
+    'ACTIVE_NOT_RECRUITING',
+    'COMPLETED',
+    'SUSPENDED',
+    'TERMINATED',
+    'WITHDRAWN',
+] as const;
 
-export const PHASE_LABELS: Record<string, string> = {
-    EARLY_PHASE1: 'Early phase 1',
-    PHASE1: 'Phase 1',
-    PHASE2: 'Phase 2',
-    PHASE3: 'Phase 3',
-    PHASE4: 'Phase 4',
-    NA: 'Not applicable',
-};
+export const PHASES = ['EARLY_PHASE1', 'PHASE1', 'PHASE2', 'PHASE3', 'PHASE4', 'NA'] as const;
 
-export const STUDY_TYPE_LABELS: Record<string, string> = {
-    INTERVENTIONAL: 'Interventional',
-    OBSERVATIONAL: 'Observational',
-    EXPANDED_ACCESS: 'Expanded access',
-};
+export const STUDY_TYPES = ['INTERVENTIONAL', 'OBSERVATIONAL', 'EXPANDED_ACCESS'] as const;
 
-export const LIFECYCLE = ['Not yet recruiting', 'Recruiting', 'Active', 'Completed'] as const;
+/** Lifecycle stages, as message keys. */
+export const LIFECYCLE = [
+    'registry.lifecycle.notYetRecruiting',
+    'registry.lifecycle.recruiting',
+    'registry.lifecycle.active',
+    'registry.lifecycle.completed',
+] as const;
 
 export type StageTone = 'progress' | 'stopped' | 'unknown';
 
@@ -63,15 +54,8 @@ export function lifecycleStage(status: string | null): { index: number; tone: St
     }
 }
 
-export const statusLabel = (status: string | null): string => (status ? (STATUS_LABELS[status] ?? status) : 'Status not reported');
+export const statusLabel = (status: string | null): string => (status ? tx(`registry.status.${status}`, status) : t('registry.statusNotReported'));
 
-export const phaseLabel = (phases: string[]): string => phases.map((phase) => PHASE_LABELS[phase] ?? phase).join(' / ');
+export const phaseLabel = (phases: string[]): string => phases.map((phase) => tx(`registry.phase.${phase}`, phase)).join(' / ');
 
-export function formatDate(value: string | null | undefined): string {
-    if (!value) return '—';
-    const date = new Date(value.length === 10 ? `${value}T00:00:00` : value);
-    return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
-}
-
-export const DISCLAIMER =
-    'Registry data from ClinicalTrials.gov. It is not medical advice or a decision about eligibility — talk to a health professional and the study team.';
+export const studyTypeLabel = (type: string): string => tx(`registry.studyType.${type}`, type);

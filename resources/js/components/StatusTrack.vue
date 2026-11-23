@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { t } from '@/i18n';
 import { LIFECYCLE, lifecycleStage, statusLabel } from '@/registry';
 
 const props = defineProps<{ status: string | null; compact?: boolean }>();
@@ -18,11 +19,11 @@ function stepState(index: number): 'done' | 'current' | 'ahead' {
         <ol class="track__steps" aria-hidden="true">
             <li v-for="(step, index) in LIFECYCLE" :key="step" class="track__step" :class="`is-${stepState(index)}`">
                 <span class="track__dot" />
-                <span v-if="!compact" class="track__name">{{ step }}</span>
+                <span v-if="!compact" class="track__name">{{ t(step) }}</span>
             </li>
         </ol>
         <p class="track__label">
-            <span class="visually-hidden">Recruitment status: </span>{{ label }}
+            <span class="visually-hidden">{{ t('registry.recruitmentStatus') }} </span>{{ label }}
         </p>
     </div>
 </template>

@@ -26,6 +26,6 @@ final class ImportRunController extends Controller
     {
         ImportClinicalTrialsJob::dispatch($request->options());
 
-        return response()->json(['message' => 'Import queued.'], 202);
+        return response()->json(['message' => __('messages.import_queued')], 202);
     }
 }

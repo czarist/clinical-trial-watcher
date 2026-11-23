@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import LanguageSelect from '@/components/LanguageSelect.vue';
+import { t } from '@/i18n';
+
 defineProps<{ title: string }>();
 </script>
 
@@ -6,8 +9,9 @@ defineProps<{ title: string }>();
     <div class="auth">
         <section class="auth__intro">
             <img src="/logo.svg" alt="" width="56" height="56" />
-            <p class="auth__name">Clinical Trial Watcher</p>
-            <p class="auth__pitch">Search ClinicalTrials.gov and get an email when studies you follow open, change or start recruiting.</p>
+            <p class="auth__name">{{ t('app.name') }}</p>
+            <p class="auth__pitch">{{ t('app.pitch') }}</p>
+            <LanguageSelect class="auth__language" />
         </section>
         <section class="auth__form panel">
             <h1>{{ title }}</h1>
@@ -36,6 +40,10 @@ defineProps<{ title: string }>();
     font-weight: 800;
     font-size: var(--step-2);
     margin: var(--space-4) 0 var(--space-2);
+}
+
+.auth__language {
+    margin-top: var(--space-4);
 }
 
 .auth__pitch {
