@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\Locale;
 use App\Enums\PermissionName;
 use App\Enums\RoleName;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -18,18 +20,23 @@ use Illuminate\Support\Collection;
 use Laravel\Cashier\Billable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject, MustVerifyEmail
+class User extends Authenticatable implements HasLocalePreference, JWTSubject, MustVerifyEmail
 {
     use Billable, HasFactory, Notifiable;
 
     protected $fillable = [
         'name',
         'email',
+        'locale',
         'password',
         'plan_id',
         'is_admin',
         'trial_ends_at',
         'subscription_ends_at',
+    ];
+
+    protected $attributes = [
+        'locale' => 'en',
     ];
 
     protected $hidden = [
@@ -45,6 +52,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return [
             'email_verified_at' => 'datetime',
+            'locale' => Locale::class,
             'trial_ends_at' => 'datetime',
             'subscription_ends_at' => 'datetime',
             'password' => 'hashed',
@@ -105,6 +113,15 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
             ->flatMap(fn (Role $role) => $role->permissions->pluck('name'))
             ->unique()
             ->values();
+    }
+
+    /**
+     * Emails to this account (verification, password reset, alerts, invitations) use its language.
+     */
+    #[\Override]
+    public function preferredLocale(): string
+    {
+        return ($this->locale ?? Locale::default())->value;
     }
 
     public function getJWTIdentifier(): int|string

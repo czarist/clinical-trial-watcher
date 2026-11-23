@@ -6,8 +6,8 @@ namespace App\Models;
 
 use App\Enums\DigestFrequency;
 use App\Enums\DigestGeneration;
-use App\Enums\DigestLanguage;
 use App\Enums\DigestStatus;
+use App\Enums\Locale;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -44,7 +44,7 @@ class Digest extends Model
     {
         return [
             'frequency' => DigestFrequency::class,
-            'language' => DigestLanguage::class,
+            'language' => Locale::class,
             'status' => DigestStatus::class,
             'generation' => DigestGeneration::class,
             'period_start' => 'immutable_datetime',

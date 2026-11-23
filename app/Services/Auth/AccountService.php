@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Auth;
 
+use App\Enums\Locale;
 use App\Models\User;
 use Illuminate\Auth\Events\Verified;
 
@@ -25,6 +26,13 @@ final class AccountService
         if ($emailChanged) {
             $user->sendEmailVerificationNotification();
         }
+
+        return $user;
+    }
+
+    public function updateLocale(User $user, Locale $locale): User
+    {
+        $user->forceFill(['locale' => $locale])->save();
 
         return $user;
     }

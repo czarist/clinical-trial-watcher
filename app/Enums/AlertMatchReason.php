@@ -12,10 +12,6 @@ enum AlertMatchReason: string
 
     public function label(): string
     {
-        return match ($this) {
-            self::NewStudy => 'New study',
-            self::UpdatedStudy => 'Updated study',
-            self::StatusChange => 'Status changed',
-        };
+        return __('mail.alert_matches.reason.'.$this->value);
     }
 }

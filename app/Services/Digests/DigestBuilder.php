@@ -119,6 +119,7 @@ final readonly class DigestBuilder
                 'view_registry' => trans('digest.view_registry', [], $locale),
                 'updated_on' => trans('digest.updated_on', ['date' => ':date'], $locale),
                 'missing_fact' => trans('digest.missing_fact', [], $locale),
+                'why_matches' => trans('digest.why_matches', [], $locale),
             ],
             'notice' => trans('digest.notice', [], $locale),
             'manage' => trans('digest.manage', [], $locale),

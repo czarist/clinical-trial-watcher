@@ -32,11 +32,11 @@ final class EmailVerificationController extends Controller
         $user = $request->user();
 
         if ($user->hasVerifiedEmail()) {
-            return response()->json(['message' => 'Your email address is already verified.']);
+            return response()->json(['message' => __('messages.email_already_verified')]);
         }
 
         $user->sendEmailVerificationNotification();
 
-        return response()->json(['message' => 'A new verification link has been sent.'], 202);
+        return response()->json(['message' => __('messages.verification_sent')], 202);
     }
 }

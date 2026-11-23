@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Digests;
 
-use App\Enums\DigestLanguage;
+use App\Enums\Locale;
 use App\Models\ChangeSummary;
 use App\Models\ClinicalTrials\ClinicalTrialChange;
 use App\Services\Ai\AiProvider;
@@ -39,7 +39,7 @@ final readonly class ChangeSummarizer
         private int $retrySleepMs,
     ) {}
 
-    public function cacheKey(ClinicalTrialChange $change, DigestLanguage $language): string
+    public function cacheKey(ClinicalTrialChange $change, Locale $language): string
     {
         return hash('sha256', implode('|', [$change->fingerprint ?? 'change:'.$change->id, $language->value, $this->promptVersion]));
     }
@@ -47,7 +47,7 @@ final readonly class ChangeSummarizer
     /**
      * @param  list<ClinicalTrialChange>  $changes  with their trial loaded
      */
-    public function summarize(array $changes, DigestLanguage $language): SummaryBatch
+    public function summarize(array $changes, Locale $language): SummaryBatch
     {
         $keys = [];
 
@@ -133,7 +133,7 @@ final readonly class ChangeSummarizer
      * @param  list<ClinicalTrialChange>  $changes
      * @return list<array{changes: list<ClinicalTrialChange>, items: list<array<string, mixed>>, nct_ids: array<int, string>}>
      */
-    private function batches(array $changes, DigestLanguage $language): array
+    private function batches(array $changes, Locale $language): array
     {
         $batches = [];
         $current = ['changes' => [], 'items' => [], 'nct_ids' => []];
@@ -181,7 +181,7 @@ final readonly class ChangeSummarizer
     /**
      * @param  list<array<string, mixed>>  $items
      */
-    private function complete(array $items, DigestLanguage $language): AiResponse
+    private function complete(array $items, Locale $language): AiResponse
     {
         $attempt = 0;
 

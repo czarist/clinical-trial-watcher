@@ -38,35 +38,35 @@ final class AlertMatchesNotification extends Notification
     {
         $frontend = rtrim((string) config('app.frontend_url'), '/');
         $message = (new MailMessage)
-            ->subject("{$this->total} study update(s) for your alert \"{$this->alert->name}\"")
-            ->greeting("Alert: {$this->alert->name}")
-            ->line("{$this->total} study update(s) match this alert.");
+            ->subject(trans_choice('mail.alert_matches.subject', $this->total, ['count' => $this->total, 'name' => $this->alert->name]))
+            ->greeting(__('mail.alert_matches.greeting', ['name' => $this->alert->name]))
+            ->line(trans_choice('mail.alert_matches.intro', $this->total, ['count' => $this->total]));
 
         foreach ($this->matches as $match) {
             $message->line($this->describe($match));
         }
 
         if ($this->total > $this->matches->count()) {
-            $message->line(sprintf('And %d more.', $this->total - $this->matches->count()));
+            $message->line(__('mail.alert_matches.more', ['count' => $this->total - $this->matches->count()]));
         }
 
         return $message
-            ->action('Open your alerts', "{$frontend}/alerts/{$this->alert->id}")
-            ->line('This information comes from the public ClinicalTrials.gov registry. It is not medical advice or a decision about eligibility; talk to a health professional and the study team.');
+            ->action(__('mail.alert_matches.action'), "{$frontend}/alerts/{$this->alert->id}")
+            ->line(__('mail.notice'));
     }
 
     private function describe(AlertMatch $match): string
     {
         $trial = $match->trial;
-        $title = $trial !== null ? "{$trial->nct_id}: {$trial->brief_title}" : 'Study removed';
+        $title = $trial !== null ? "{$trial->nct_id}: {$trial->brief_title}" : __('mail.alert_matches.study_removed');
 
         return match ($match->reason) {
             AlertMatchReason::StatusChange => sprintf(
                 '[%s] %s (%s → %s)',
                 $match->reason->label(),
                 $title,
-                $match->change?->previous_status ?? 'unknown',
-                $match->change?->new_status ?? 'unknown',
+                $match->change?->previous_status ?? __('mail.alert_matches.unknown'),
+                $match->change?->new_status ?? __('mail.alert_matches.unknown'),
             ),
             default => "[{$match->reason->label()}] {$title}",
         };
