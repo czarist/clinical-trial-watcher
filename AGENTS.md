@@ -176,7 +176,18 @@ Skills are specialized references, not always-on instructions. Load a skill only
 | `devops-engineer` | Dockerfile, Docker Compose, CI pipelines such as GitHub Actions, and deployment. |
 | `monitoring-expert` | Logging, metrics and alerts for the scheduled import and the API. |
 | `code-documenter` | PHPDoc, OpenAPI documentation and contributor guides. |
-| `frontend-design` | A distinct visual direction for the planned web interface. Only needed for front-end work. |
+| `frontend-design` | A distinct visual direction for the web app. Only needed for front-end work. |
+| `tailwindcss-development` | Tailwind CSS 4 utilities in the Vue components: layouts, responsive and mobile variants, forms, tables and dark mode. |
+| `ui-ux-pro-max` | UI/UX review and decisions: accessibility, touch targets, responsive layout, typography, color and interaction states. |
+| `ui-styling` | Accessible component patterns and Tailwind styling when building new UI pieces. |
+| `design-system` | Design tokens (the palette and spacing in `resources/css/app.css`) and component specifications. |
+| `design` | Broader design work: brand identity, logos, icons and visual assets. |
+| `brand` | Brand voice, visual identity and messaging for user-facing copy and assets. |
+| `banner-design` | Banners and hero images for the site, social media or announcements. |
+| `laravel-best-practices` | Laravel code review and refactoring: Eloquent queries, N+1, validation, authorization, queues and caching. |
+| `testing-best-practices` | Laravel test design and review: coverage choices, assertions, test data and isolating dependencies. |
+| `infer-conventions` | Recording how this codebase is actually written as shared conventions. |
+| `deploying-to-cloud` | Deploying to Laravel Cloud with the `cloud` CLI. Only when a deployment is explicitly requested. |
 
 Some skills overlap. Use `laravel-specialist` for framework code and `php-pro` only for language-level questions outside Laravel; use `api-designer` for the shape of the API and `laravel-specialist` to implement it. Combine skills only when the task has separate needs they each address.
 

@@ -23,7 +23,8 @@ const loading = ref(false);
 const filtersOpen = ref(false);
 
 const page = computed(() => Number(route.query.page ?? 1));
-const hasFilters = computed(() => Object.keys(criteria.value).length > 0);
+const activeFilters = computed(() => Object.keys(criteria.value).length);
+const hasFilters = computed(() => activeFilters.value > 0);
 
 async function load(): Promise<void> {
     loading.value = true;
@@ -50,28 +51,58 @@ watch(
     { immediate: true },
 );
 
+function applyFilters(): void {
+    filtersOpen.value = false;
+    search(1);
+}
+
 function followThisSearch(): void {
     void router.push({ path: '/alerts/new', query: criteriaToQuery(criteria.value) });
 }
 </script>
 
 <template>
-    <div class="page search">
-        <aside class="search__filters" :class="{ 'is-open': filtersOpen }">
-            <button class="button secondary search__toggle" type="button" :aria-expanded="filtersOpen" @click="filtersOpen = !filtersOpen">
-                {{ filtersOpen ? t('search.hideFilters') : t('search.showFilters') }}
-            </button>
-            <div class="search__filters-body">
-                <TrialFilters v-model="criteria" @submit="search(1)" />
+    <div class="mx-auto grid max-w-[1180px] items-start gap-8 px-4 pt-6 pb-12 lg:grid-cols-[300px_minmax(0,1fr)] lg:pt-8">
+        <!-- Filters: a sticky sidebar on wide screens, a drawer on small ones. -->
+        <div v-if="filtersOpen" class="fixed inset-0 z-40 bg-ink/60 lg:hidden" aria-hidden="true" @click="filtersOpen = false" />
+        <aside
+            id="search-filters"
+            class="fixed inset-y-0 left-0 z-50 w-[min(22rem,90vw)] overflow-y-auto border-r border-line bg-surface px-4 shadow-2xl transition-transform duration-200 lg:sticky lg:top-24 lg:z-auto lg:max-h-[calc(100vh-7rem)] lg:w-auto lg:translate-x-0 lg:rounded-panel lg:border lg:shadow-none"
+            :class="filtersOpen ? 'translate-x-0' : 'max-lg:invisible -translate-x-full'"
+            :aria-label="t('filters.title')"
+            @keydown.esc="filtersOpen = false"
+        >
+            <div class="sticky top-0 z-10 -mx-4 mb-2 flex items-center justify-between border-b border-line bg-surface px-4 py-3">
+                <h2 class="m-0 flex items-center gap-2 text-base font-extrabold"><i class="fas fa-filter text-mint-text" aria-hidden="true" />{{ t('filters.title') }}</h2>
+                <button
+                    type="button"
+                    class="inline-flex size-10 items-center justify-center rounded-control text-muted hover:bg-surface-raised hover:text-text lg:hidden"
+                    @click="filtersOpen = false"
+                >
+                    <span class="visually-hidden">{{ t('search.hideFilters') }}</span>
+                    <i class="fas fa-xmark text-lg" aria-hidden="true" />
+                </button>
             </div>
+            <TrialFilters v-model="criteria" @submit="applyFilters" />
         </aside>
 
-        <section class="search__results" aria-live="polite">
-            <div class="search__head">
-                <h1>{{ t('search.title') }}</h1>
-                <div class="search__tools">
+        <section class="min-w-0" aria-live="polite">
+            <div class="flex flex-wrap items-end justify-between gap-4">
+                <div>
+                    <h1 class="mb-1">{{ t('search.title') }}</h1>
+                    <p v-if="results" class="m-0 flex items-center gap-2 text-sm text-muted">
+                        {{ t('search.count', { count: results.meta.total }) }}
+                        <i v-if="loading" class="fas fa-circle-notch fa-spin text-mint-text" aria-hidden="true" />
+                    </p>
+                </div>
+                <div class="flex w-full flex-wrap items-center gap-2 sm:w-auto">
+                    <button class="button secondary lg:hidden" type="button" :aria-expanded="filtersOpen" aria-controls="search-filters" @click="filtersOpen = true">
+                        <i class="fas fa-sliders" aria-hidden="true" />
+                        {{ t('search.showFilters') }}
+                        <span v-if="activeFilters" class="rounded-full bg-mint-wash px-2 text-xs font-bold text-mint-text">{{ activeFilters }}</span>
+                    </button>
                     <label for="sort" class="visually-hidden">{{ t('search.sortBy') }}</label>
-                    <select id="sort" v-model="sort" @change="search(1)">
+                    <select id="sort" v-model="sort" class="min-h-10 flex-1 sm:w-auto sm:flex-none" @change="search(1)">
                         <option value="-last_update_post_date">{{ t('search.sort.updated') }}</option>
                         <option value="-study_first_post_date">{{ t('search.sort.posted') }}</option>
                         <option value="-start_date">{{ t('search.sort.startNewest') }}</option>
@@ -79,30 +110,60 @@ function followThisSearch(): void {
                         <option value="brief_title">{{ t('search.sort.title') }}</option>
                         <option value="relevance" :disabled="!criteria.q">{{ t('search.sort.relevance') }}</option>
                     </select>
-                    <button v-if="hasFilters && auth.can('create_alerts')" class="button" type="button" @click="followThisSearch">{{ t('search.follow') }}</button>
+                    <button v-if="hasFilters && auth.can('create_alerts')" class="button w-full sm:w-auto" type="button" @click="followThisSearch"><i class="fas fa-bell" aria-hidden="true" />{{ t('search.follow') }}</button>
                 </div>
             </div>
-            <p class="muted disclaimer">{{ t('app.disclaimer') }}</p>
+            <p class="mt-4 mb-6 flex max-w-none gap-3 rounded-control border border-line bg-surface-raised/60 px-4 py-3 text-sm text-muted"><i class="fas fa-circle-info mt-0.5" aria-hidden="true" /><span>{{ t('app.disclaimer') }}</span></p>
 
             <p v-if="error" class="notice error" role="alert">{{ error }}</p>
-            <p v-else-if="loading && !results" class="muted">{{ t('search.loading') }}</p>
+            <div v-else-if="loading && !results" role="status">
+                <span class="visually-hidden">{{ t('search.loading') }}</span>
+                <!-- Placeholder cards in the shape of the results, so the first load does not look empty. -->
+                <ol class="m-0 grid list-none gap-3 p-0" aria-hidden="true">
+                    <li v-for="n in 4" :key="n" class="grid animate-pulse gap-4 rounded-panel border border-line bg-surface p-4 sm:grid-cols-[minmax(0,1fr)_14rem] sm:gap-6 sm:p-5">
+                        <div class="grid gap-3">
+                            <div class="h-3.5 w-40 rounded bg-surface-raised" />
+                            <div class="h-5 w-11/12 rounded bg-surface-raised" />
+                            <div class="h-5 w-2/3 rounded bg-surface-raised" />
+                            <div class="h-3.5 w-1/2 rounded bg-surface-raised" />
+                        </div>
+                        <div class="grid content-start gap-2">
+                            <div class="h-1.5 w-full max-w-56 rounded-full bg-surface-raised" />
+                            <div class="h-5 w-24 rounded-full bg-surface-raised" />
+                        </div>
+                    </li>
+                </ol>
+            </div>
             <template v-else-if="results">
-                <p class="muted count">{{ t('search.count', { count: results.meta.total }) }}</p>
                 <p v-if="results.data.length === 0" class="notice">{{ t('search.empty') }}</p>
-                <ol class="results" :class="{ 'is-loading': loading }">
-                    <li v-for="trial in results.data" :key="`${trial.source}:${trial.source_id}`" class="result">
-                        <div class="result__main">
-                            <p class="result__id nct">{{ trial.nct_id ?? trial.source_id }}<span v-if="trial.acronym" class="muted"> ({{ trial.acronym }})</span><span class="muted"> · {{ trial.registry }}</span></p>
-                            <h2 class="result__title"><RouterLink :to="`/studies/${trial.nct_id}`">{{ trial.brief_title }}</RouterLink></h2>
-                            <p v-if="trial.conditions?.length" class="result__conditions">{{ trial.conditions.slice(0, 4).join(', ') }}<template v-if="trial.conditions.length > 4"> {{ t('search.moreConditions', { count: trial.conditions.length - 4 }) }}</template></p>
-                            <dl class="result__facts">
-                                <div v-if="trial.phases.length"><dt>{{ t('search.phase') }}</dt><dd>{{ phaseLabel(trial.phases) }}</dd></div>
-                                <div v-if="trial.sponsor_name"><dt>{{ t('search.sponsor') }}</dt><dd>{{ trial.sponsor_name }}</dd></div>
-                                <div><dt>{{ t('search.sites') }}</dt><dd>{{ trial.locations_count ?? 0 }}</dd></div>
-                                <div><dt>{{ t('search.updated') }}</dt><dd>{{ formatDate(trial.last_update_post_date) }}</dd></div>
+                <ol class="m-0 grid list-none gap-3 p-0 transition-opacity" :class="{ 'pointer-events-none opacity-55': loading }" :aria-busy="loading">
+                    <li
+                        v-for="trial in results.data"
+                        :key="`${trial.source}:${trial.source_id}`"
+                        class="group relative grid gap-4 rounded-panel border border-line bg-surface p-4 transition-colors hover:border-mint-text/60 sm:grid-cols-[minmax(0,1fr)_14rem] sm:gap-6 sm:p-5"
+                    >
+                        <div class="min-w-0">
+                            <p class="m-0 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+                                <i class="fas fa-flask-vial text-xs text-mint-text" aria-hidden="true" />
+                                <span class="nct text-text">{{ trial.nct_id ?? trial.source_id }}</span>
+                                <span v-if="trial.acronym" class="text-muted">{{ trial.acronym }}</span>
+                                <span class="rounded-full border border-line px-2 text-xs text-muted">{{ trial.registry }}</span>
+                            </p>
+                            <h2 class="mt-2 mb-2 text-lg leading-snug font-semibold text-pretty">
+                                <!-- The link covers the whole card. -->
+                                <RouterLink :to="`/studies/${trial.nct_id}`" class="text-text no-underline after:absolute after:inset-0 after:rounded-panel group-hover:underline">{{ trial.brief_title }}</RouterLink>
+                            </h2>
+                            <p v-if="trial.conditions?.length" class="mb-3 text-[0.95rem] text-muted">
+                                {{ trial.conditions.slice(0, 4).join(', ') }}<template v-if="trial.conditions.length > 4"> {{ t('search.moreConditions', { count: trial.conditions.length - 4 }) }}</template>
+                            </p>
+                            <dl class="m-0 flex flex-wrap gap-x-6 gap-y-1 text-sm">
+                                <div v-if="trial.phases.length" class="flex gap-1"><dt class="text-muted"><i class="fas fa-layer-group mr-1" aria-hidden="true" />{{ t('search.phase') }}</dt><dd class="m-0 font-medium">{{ phaseLabel(trial.phases) }}</dd></div>
+                                <div v-if="trial.sponsor_name" class="flex min-w-0 gap-1"><dt class="text-muted"><i class="fas fa-building mr-1" aria-hidden="true" />{{ t('search.sponsor') }}</dt><dd class="m-0 truncate font-medium">{{ trial.sponsor_name }}</dd></div>
+                                <div class="flex gap-1"><dt class="text-muted"><i class="fas fa-location-dot mr-1" aria-hidden="true" />{{ t('search.sites') }}</dt><dd class="m-0 font-medium tabular-nums">{{ trial.locations_count ?? 0 }}</dd></div>
+                                <div class="flex gap-1"><dt class="text-muted"><i class="fas fa-clock-rotate-left mr-1" aria-hidden="true" />{{ t('search.updated') }}</dt><dd class="m-0 font-medium">{{ formatDate(trial.last_update_post_date) }}</dd></div>
                             </dl>
                         </div>
-                        <StatusTrack class="result__track" :status="trial.overall_status" />
+                        <StatusTrack class="border-t border-line pt-3 sm:border-0 sm:pt-1" :status="trial.overall_status" />
                     </li>
                 </ol>
                 <PaginationNav :page="results.meta.current_page" :last-page="results.meta.last_page" @go="search" />
@@ -110,126 +171,3 @@ function followThisSearch(): void {
         </section>
     </div>
 </template>
-
-<style scoped>
-.search {
-    display: grid;
-    grid-template-columns: 280px minmax(0, 1fr);
-    gap: var(--space-8);
-    align-items: start;
-}
-
-.search__toggle {
-    display: none;
-}
-
-.search__head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: var(--space-4);
-    flex-wrap: wrap;
-}
-
-.search__tools {
-    display: flex;
-    gap: var(--space-2);
-}
-
-.search__tools select {
-    width: auto;
-}
-
-.disclaimer,
-.count {
-    font-size: var(--step--1);
-}
-
-.results {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border-top: 2px solid var(--ink);
-}
-
-.results.is-loading {
-    opacity: 0.55;
-}
-
-.result {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 240px;
-    gap: var(--space-6);
-    padding: var(--space-4) 0;
-    border-bottom: 1px solid var(--line);
-}
-
-.result__id {
-    margin: 0;
-    font-size: var(--step--1);
-}
-
-.result__title {
-    font-size: var(--step-1);
-    font-weight: 600;
-    margin: var(--space-1) 0 var(--space-2);
-}
-
-.result__title a {
-    color: var(--text);
-    text-decoration: none;
-}
-
-.result__title a:hover {
-    text-decoration: underline;
-}
-
-.result__conditions {
-    margin-bottom: var(--space-2);
-}
-
-.result__facts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-1) var(--space-6);
-    margin: 0;
-    font-size: var(--step--1);
-}
-
-.result__facts div {
-    display: flex;
-    gap: var(--space-1);
-}
-
-.result__facts dt {
-    color: var(--muted);
-}
-
-.result__facts dd {
-    margin: 0;
-}
-
-@media (max-width: 900px) {
-    .search {
-        grid-template-columns: 1fr;
-    }
-
-    .search__toggle {
-        display: inline-flex;
-    }
-
-    .search__filters-body {
-        display: none;
-        margin-top: var(--space-4);
-    }
-
-    .search__filters.is-open .search__filters-body {
-        display: block;
-    }
-
-    .result {
-        grid-template-columns: 1fr;
-        gap: var(--space-3);
-    }
-}
-</style>

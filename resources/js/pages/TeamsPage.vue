@@ -64,7 +64,7 @@ async function create(): Promise<void> {
             {{ error.message }}
             <RouterLink v-if="error.status === 402" to="/account">{{ t('common.seePlans') }}</RouterLink>
         </p>
-        <p v-if="loading" class="muted">{{ t('teams.loading') }}</p>
+        <p v-if="loading" class="muted" role="status"><i class="fas fa-circle-notch fa-spin mr-2 text-mint-text" aria-hidden="true" />{{ t('teams.loading') }}</p>
 
         <template v-else>
             <section v-if="invitations.length" class="block">

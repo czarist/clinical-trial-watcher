@@ -12,110 +12,33 @@ function stepState(index: number): 'done' | 'current' | 'ahead' {
     if (index < stage.value.index) return 'done';
     return index === stage.value.index ? 'current' : 'ahead';
 }
+
+const segment = computed(() => (state: 'done' | 'current' | 'ahead'): string => {
+    const stopped = stage.value.tone === 'stopped';
+    if (state === 'ahead' || stage.value.tone === 'unknown') return 'bg-line';
+    if (state === 'current') return stopped ? 'bg-amber' : 'bg-mint';
+    return stopped ? 'bg-amber/60' : 'bg-mint-text';
+});
+
+const pill = computed(() => {
+    if (stage.value.tone === 'stopped') return 'bg-amber-wash text-amber';
+    if (stage.value.tone === 'unknown') return 'bg-surface-raised text-muted';
+    return 'bg-mint-wash text-mint-text';
+});
 </script>
 
 <template>
-    <div class="track" :class="[`track--${stage.tone}`, { 'track--compact': compact }]">
-        <ol class="track__steps" aria-hidden="true">
-            <li v-for="(step, index) in LIFECYCLE" :key="step" class="track__step" :class="`is-${stepState(index)}`">
-                <span class="track__dot" />
-                <span v-if="!compact" class="track__name">{{ t(step) }}</span>
+    <div class="track min-w-0" :class="[`track--${stage.tone}`, { 'track--compact': compact }]">
+        <!-- The stage names are in the label below; the rail is a picture of the same fact. -->
+        <ol class="track__steps m-0 grid list-none grid-cols-4 gap-1 p-0" :class="compact ? 'max-w-28' : 'max-w-56'" aria-hidden="true">
+            <li v-for="(step, index) in LIFECYCLE" :key="step" class="track__step" :class="`is-${stepState(index)}`" :title="t(step)">
+                <span class="block h-1.5 rounded-full" :class="segment(stepState(index))" />
+                <span v-if="!compact" class="track__name visually-hidden">{{ t(step) }}</span>
             </li>
         </ol>
-        <p class="track__label">
+        <p class="track__label m-0 mt-2 inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[0.8rem] font-semibold" :class="pill">
+            <span class="size-1.5 rounded-full bg-current" aria-hidden="true" />
             <span class="visually-hidden">{{ t('registry.recruitmentStatus') }} </span>{{ label }}
         </p>
     </div>
 </template>
-
-<style scoped>
-.track {
-    --done: var(--mint-text);
-    --current: var(--mint);
-    min-width: 0;
-}
-
-.track--stopped {
-    --done: var(--amber);
-    --current: var(--amber);
-}
-
-.track__steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.track__step {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-    font-size: 0.72rem;
-    color: var(--muted);
-}
-
-/* The rail between dots. */
-.track__step + .track__step::before {
-    content: '';
-    position: absolute;
-    top: 5px;
-    right: calc(100% - 6px);
-    width: calc(100% - 12px);
-    height: 2px;
-    background: var(--line);
-}
-
-.track__step.is-done + .track__step::before,
-.track__step.is-done + .track__step.is-current::before {
-    background: var(--done);
-}
-
-.track__dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2px solid var(--line);
-    background: var(--surface);
-}
-
-.is-done .track__dot {
-    background: var(--done);
-    border-color: var(--done);
-}
-
-.is-current .track__dot {
-    background: var(--current);
-    border-color: var(--current);
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--current) 25%, transparent);
-}
-
-.is-current .track__name {
-    color: var(--text);
-    font-weight: 600;
-}
-
-.track__label {
-    margin: var(--space-2) 0 0;
-    font-weight: 600;
-    font-size: var(--step--1);
-}
-
-.track--stopped .track__label {
-    color: var(--amber);
-}
-
-.track--unknown .track__label {
-    color: var(--muted);
-}
-
-.track--compact .track__steps {
-    max-width: 120px;
-}
-
-.track--compact .track__label {
-    margin-top: var(--space-1);
-}
-</style>

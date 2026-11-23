@@ -53,6 +53,7 @@ const messages: Messages = {
         tooManyAttempts: '嘗試次數過多，請等候一分鐘後再試。',
     },
     nav: {
+        menu: '選單',
         main: '主選單',
         search: '搜尋',
         alerts: '提醒',
@@ -138,6 +139,7 @@ const messages: Messages = {
         recruitmentStatus: '招募狀態：',
     },
     filters: {
+        title: '篩選',
         text: '標題或摘要中的字詞',
         textPlaceholder: '例如：吸入性皮質類固醇',
         condition: '疾病或狀況',

@@ -37,7 +37,7 @@ const languageName = (code: string): string => LOCALES.find((item) => item.code 
             <RouterLink v-else class="button" to="/register">{{ t('digests.samples.createAccount') }}</RouterLink>
         </p>
 
-        <p v-if="loading" class="muted">{{ t('digests.samples.loading') }}</p>
+        <p v-if="loading" class="muted" role="status"><i class="fas fa-circle-notch fa-spin mr-2 text-mint-text" aria-hidden="true" />{{ t('digests.samples.loading') }}</p>
         <p v-else-if="error" class="notice error" role="alert">{{ error }}</p>
         <template v-else>
             <div class="tabs" role="tablist" :aria-label="t('digests.samples.tabs')">

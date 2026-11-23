@@ -1,7 +1,14 @@
 /*
  * Clinical Trial Watcher — palette taken from the logo: ink navy and mint.
  * One typeface (Public Sans); NCT numbers use tabular figures.
+ *
+ * Tailwind CSS 4 reads the palette below as theme tokens (bg-surface, text-muted,
+ * border-line…), so utilities follow the light and dark schemes automatically.
+ * The base and component rules sit in layers, so a utility always wins over them;
+ * pages not moved to utilities yet keep their scoped styles.
  */
+@import 'tailwindcss';
+
 :root {
     --ink: #0b1427;
     --ink-soft: #1c2a45;
@@ -10,12 +17,17 @@
     --mint-wash: #e3f8f2;
     --paper: #f5f7fa;
     --surface: #ffffff;
+    --surface-raised: #eef2f7;
     --line: #d5dde7;
     --muted: #56677d;
     --text: #0b1427;
     --amber: #a86412;
     --amber-wash: #fbf0e1;
     --danger: #b42318;
+    --danger-wash: #fdecea;
+    --on-accent: #ffffff;
+    --accent: var(--ink);
+    --accent-hover: var(--ink-soft);
 
     --radius-control: 6px;
     --radius-panel: 10px;
@@ -40,6 +52,7 @@
     :root {
         --paper: #0b1427;
         --surface: #121e36;
+        --surface-raised: #182641;
         --line: #26365a;
         --muted: #9aabc4;
         --text: #eef3fa;
@@ -48,223 +61,258 @@
         --amber: #f0b263;
         --amber-wash: #3a2a14;
         --danger: #ff8a7a;
+        --danger-wash: #3a1a1a;
+        --on-accent: #0b1427;
+        --accent: var(--mint);
+        --accent-hover: #8beed6;
         color-scheme: dark;
     }
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
+@theme inline {
+    --font-sans: 'Public Sans', system-ui, sans-serif;
+
+    --color-ink: var(--ink);
+    --color-ink-soft: var(--ink-soft);
+    --color-mint: var(--mint);
+    --color-mint-text: var(--mint-text);
+    --color-mint-wash: var(--mint-wash);
+    --color-paper: var(--paper);
+    --color-surface: var(--surface);
+    --color-surface-raised: var(--surface-raised);
+    --color-line: var(--line);
+    --color-muted: var(--muted);
+    --color-text: var(--text);
+    --color-amber: var(--amber);
+    --color-amber-wash: var(--amber-wash);
+    --color-danger: var(--danger);
+    --color-danger-wash: var(--danger-wash);
+    --color-accent: var(--accent);
+    --color-accent-hover: var(--accent-hover);
+    --color-on-accent: var(--on-accent);
+
+    --radius-control: var(--radius-control);
+    --radius-panel: var(--radius-panel);
 }
 
-html {
-    -webkit-text-size-adjust: 100%;
+@layer base {
+    html {
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--text);
+        font-family: 'Public Sans', system-ui, sans-serif;
+        font-size: var(--step-0);
+        line-height: 1.55;
+    }
+
+    h1,
+    h2,
+    h3 {
+        line-height: 1.2;
+        margin: 0 0 var(--space-3);
+        letter-spacing: -0.01em;
+    }
+
+    h1 {
+        font-size: var(--step-3);
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: var(--step-2);
+        font-weight: 800;
+    }
+
+    h3 {
+        font-size: var(--step-1);
+        font-weight: 600;
+    }
+
+    p {
+        margin: 0 0 var(--space-3);
+        max-width: 72ch;
+    }
+
+    /* Tailwind's reset removes list markers; pages written before it rely on them. */
+    ol {
+        list-style: decimal;
+        padding-inline-start: 1.5rem;
+    }
+
+    ul {
+        list-style: disc;
+        padding-inline-start: 1.5rem;
+    }
+
+    a {
+        color: var(--mint-text);
+        text-underline-offset: 0.18em;
+    }
+
+    :focus-visible {
+        outline: 3px solid var(--mint);
+        outline-offset: 2px;
+    }
+
+    label {
+        display: block;
+        font-weight: 600;
+        font-size: var(--step--1);
+        margin-bottom: var(--space-1);
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        font: inherit;
+        color: var(--text);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-control);
+        padding: var(--space-2) var(--space-3);
+    }
+
+    input[type='checkbox'],
+    input[type='radio'] {
+        width: auto;
+        accent-color: var(--mint-text);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: var(--step--1);
+    }
+
+    th,
+    td {
+        text-align: left;
+        padding: var(--space-2) var(--space-3);
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+    }
+
+    th {
+        font-weight: 600;
+        color: var(--muted);
+    }
 }
 
-body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--text);
-    font-family: 'Public Sans', system-ui, sans-serif;
-    font-size: var(--step-0);
-    line-height: 1.55;
-}
+@layer components {
+    .nct {
+        font-variant-numeric: tabular-nums;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+    }
 
-h1,
-h2,
-h3 {
-    line-height: 1.2;
-    margin: 0 0 var(--space-3);
-    letter-spacing: -0.01em;
-}
+    .muted {
+        color: var(--muted);
+    }
 
-h1 {
-    font-size: var(--step-3);
-    font-weight: 800;
-}
+    .page {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: var(--space-8) var(--space-4) var(--space-12);
+    }
 
-h2 {
-    font-size: var(--step-2);
-    font-weight: 800;
-}
+    .narrow {
+        max-width: 440px;
+    }
 
-h3 {
-    font-size: var(--step-1);
-    font-weight: 600;
-}
+    .panel {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-panel);
+        padding: var(--space-6);
+    }
 
-p {
-    margin: 0 0 var(--space-3);
-    max-width: 72ch;
-}
+    .stack > * + * {
+        margin-top: var(--space-4);
+    }
 
-a {
-    color: var(--mint-text);
-    text-underline-offset: 0.18em;
-}
+    .field-error {
+        color: var(--danger);
+        font-size: var(--step--1);
+        margin-top: var(--space-1);
+    }
 
-:focus-visible {
-    outline: 3px solid var(--mint);
-    outline-offset: 2px;
-}
-
-.nct {
-    font-variant-numeric: tabular-nums;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-}
-
-.muted {
-    color: var(--muted);
-}
-
-.page {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: var(--space-8) var(--space-4) var(--space-12);
-}
-
-.narrow {
-    max-width: 440px;
-}
-
-.panel {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-panel);
-    padding: var(--space-6);
-}
-
-.stack > * + * {
-    margin-top: var(--space-4);
-}
-
-label {
-    display: block;
-    font-weight: 600;
-    font-size: var(--step--1);
-    margin-bottom: var(--space-1);
-}
-
-input,
-select,
-textarea {
-    width: 100%;
-    font: inherit;
-    color: var(--text);
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-control);
-    padding: var(--space-2) var(--space-3);
-}
-
-input[type='checkbox'] {
-    width: auto;
-}
-
-.field-error {
-    color: var(--danger);
-    font-size: var(--step--1);
-    margin-top: var(--space-1);
-}
-
-.button {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    font: inherit;
-    font-weight: 600;
-    border-radius: var(--radius-control);
-    border: 1px solid var(--ink);
-    background: var(--ink);
-    color: #fff;
-    padding: var(--space-2) var(--space-4);
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.button:hover {
-    background: var(--ink-soft);
-}
-
-.button[disabled] {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.button.secondary {
-    background: transparent;
-    color: var(--text);
-    border-color: var(--line);
-}
-
-.button.danger {
-    background: transparent;
-    color: var(--danger);
-    border-color: currentColor;
-}
-
-@media (prefers-color-scheme: dark) {
     .button {
-        background: var(--mint);
-        border-color: var(--mint);
-        color: var(--ink);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-2);
+        font: inherit;
+        font-weight: 600;
+        border-radius: var(--radius-control);
+        border: 1px solid var(--accent);
+        background: var(--accent);
+        color: var(--on-accent);
+        padding: var(--space-2) var(--space-4);
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 150ms ease;
     }
 
     .button:hover {
-        background: #8beed6;
+        background: var(--accent-hover);
     }
-}
 
-.notice {
-    border-left: 4px solid var(--mint);
-    background: var(--mint-wash);
-    padding: var(--space-3) var(--space-4);
-    border-radius: 0 var(--radius-control) var(--radius-control) 0;
-}
+    .button[disabled] {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
 
-.notice.error {
-    border-color: var(--danger);
-    background: transparent;
-    color: var(--danger);
-}
+    .button.secondary {
+        background: transparent;
+        color: var(--text);
+        border-color: var(--line);
+    }
 
-.notice.warning {
-    border-color: var(--amber);
-    background: var(--amber-wash);
-}
+    .button.secondary:hover {
+        background: var(--surface-raised);
+    }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: var(--step--1);
-}
+    .button.danger {
+        background: transparent;
+        color: var(--danger);
+        border-color: currentColor;
+    }
 
-th,
-td {
-    text-align: left;
-    padding: var(--space-2) var(--space-3);
-    border-bottom: 1px solid var(--line);
-    vertical-align: top;
-}
+    .notice {
+        border-left: 4px solid var(--mint);
+        background: var(--mint-wash);
+        padding: var(--space-3) var(--space-4);
+        border-radius: 0 var(--radius-control) var(--radius-control) 0;
+    }
 
-th {
-    font-weight: 600;
-    color: var(--muted);
-}
+    .notice.error {
+        border-color: var(--danger);
+        background: transparent;
+        color: var(--danger);
+    }
 
-.table-scroll {
-    overflow-x: auto;
-}
+    .notice.warning {
+        border-color: var(--amber);
+        background: var(--amber-wash);
+    }
 
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
+    .table-scroll {
+        overflow-x: auto;
+    }
+
+    .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {

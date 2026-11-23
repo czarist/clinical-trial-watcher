@@ -113,6 +113,9 @@ Objective: give users a front end for search and alerts.
 - [X] Search page and study page.
 - [X] Account, alerts and plan management.
 - [X] Administration of users, plans, roles and imports.
+- [X] Tailwind CSS 4 with the existing palette as theme tokens; the header and the search page (filters, results, status track) redesigned with Tailwind utilities, with a mobile menu and a filters drawer on small screens.
+- [X] Font Awesome icons and loading feedback: a start screen, a progress bar for requests and page changes, and placeholder results.
+- [ ] Move the remaining pages from scoped CSS to Tailwind utilities.
 
 ### Stage 5. More sources
 

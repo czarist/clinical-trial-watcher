@@ -53,6 +53,7 @@ const messages: Messages = {
         tooManyAttempts: '시도 횟수가 너무 많습니다. 1분 후 다시 시도하세요.',
     },
     nav: {
+        menu: '메뉴',
         main: '메인',
         search: '검색',
         alerts: '알림',
@@ -138,6 +139,7 @@ const messages: Messages = {
         recruitmentStatus: '모집 상태:',
     },
     filters: {
+        title: '필터',
         text: '제목 또는 요약의 단어',
         textPlaceholder: '예: 흡입 코르티코스테로이드',
         condition: '질환',

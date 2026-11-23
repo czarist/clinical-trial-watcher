@@ -9,9 +9,6 @@
 </p>
 
 <p align="center">
-  <img alt="Status: early development" src="https://img.shields.io/badge/status-early_development-orange?style=flat-square&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMi43IDE5bC05LjEtOS4xYy45LTIuMy40LTUtMS41LTYuOS0yLTItNS0yLjQtNy40LTEuM0w5IDYgNiA5IDEuNiA0LjdDLjQgNy4xLjkgMTAuMSAyLjkgMTIuMWMxLjkgMS45IDQuNiAyLjQgNi45IDEuNWw5LjEgOS4xYy40LjQgMSAuNCAxLjQgMGwyLjMtMi4zYy41LS40LjUtMS4xLjEtMS40eiIvPjwvc3ZnPg%3D%3D">
-  <a href="https://github.com/czarist/clinical-trial-watcher/actions/workflows/ci.yml"><img alt="Tests" src="https://img.shields.io/github/actions/workflow/status/czarist/clinical-trial-watcher/ci.yml?branch=main&label=tests&logo=githubactions&logoColor=white&style=flat-square"></a>
-  <a href="https://github.com/czarist/clinical-trial-watcher/actions/workflows/packages.yml"><img alt="Packages audit" src="https://img.shields.io/github/actions/workflow/status/czarist/clinical-trial-watcher/packages.yml?branch=main&label=packages&logo=dependabot&logoColor=white&style=flat-square"></a>
   <img alt="PHP 8.6" src="https://img.shields.io/badge/PHP-8.6-777BB4?style=flat-square&logo=php&logoColor=white">
   <img alt="Laravel 13" src="https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square&logo=laravel&logoColor=white">
   <img alt="Vue 3" src="https://img.shields.io/badge/Vue-3-4FC08D?style=flat-square&logo=vuedotjs&logoColor=white">
@@ -20,9 +17,15 @@
   <img alt="npm 12.2.3" src="https://img.shields.io/badge/npm-12.2.3-CB3837?style=flat-square&logo=npm&logoColor=white">
   <img alt="MySQL 8.4" src="https://img.shields.io/badge/MySQL-8.4-4479A1?style=flat-square&logo=mysql&logoColor=white">
   <img alt="Redis 8.10" src="https://img.shields.io/badge/Redis-8.10-FF4438?style=flat-square&logo=redis&logoColor=white">
+  <img alt="Status: early development" src="https://img.shields.io/badge/status-early_development-orange?style=flat-square&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMi43IDE5bC05LjEtOS4xYy45LTIuMy40LTUtMS41LTYuOS0yLTItNS0yLjQtNy40LTEuM0w5IDYgNiA5IDEuNiA0LjdDLjQgNy4xLjkgMTAuMSAyLjkgMTIuMWMxLjkgMS45IDQuNiAyLjQgNi45IDEuNWw5LjEgOS4xYy40LjQgMSAuNCAxLjQgMGwyLjMtMi4zYy41LS40LjUtMS4xLjEtMS40eiIvPjwvc3ZnPg%3D%3D">
+  <a href="https://github.com/czarist/clinical-trial-watcher/actions/workflows/ci.yml"><img alt="Tests" src="https://img.shields.io/github/actions/workflow/status/czarist/clinical-trial-watcher/ci.yml?branch=main&label=tests&logo=githubactions&logoColor=white&style=flat-square"></a>
+  <a href="https://github.com/czarist/clinical-trial-watcher/actions/workflows/packages.yml"><img alt="Packages audit" src="https://img.shields.io/github/actions/workflow/status/czarist/clinical-trial-watcher/packages.yml?branch=main&label=packages&logo=dependabot&logoColor=white&style=flat-square"></a>
+  <img alt="Tailwind CSS 4" src="https://img.shields.io/badge/Tailwind%20CSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white">
+  <img alt="Font Awesome 7" src="https://img.shields.io/badge/Font%20Awesome-7-538DD7?style=flat-square&logo=fontawesome&logoColor=white">
+  <img alt="Vite 8.3.8" src="https://img.shields.io/badge/Vite-8.3.8-646CFF?style=flat-square&logo=vite&logoColor=white">
   <img alt="Stripe" src="https://img.shields.io/badge/billing-Stripe-635BFF?style=flat-square&logo=stripe&logoColor=white">
   <img alt="Auth: JWT" src="https://img.shields.io/badge/auth-JWT-000000?style=flat-square&logo=jsonwebtokens&logoColor=white">
-  <img alt="Docker: Nginx + PHP-FPM" src="https://img.shields.io/badge/Docker-Nginx%20%2B%20PHP--FPM-2496ED?style=flat-square&logo=docker&logoColor=white">
+  <img alt="Docker 29.9.3" src="https://img.shields.io/badge/Docker-29.9.3-2496ED?style=flat-square&logo=docker&logoColor=white">
   <img alt="Nginx 1.30" src="https://img.shields.io/badge/Nginx-1.30-009639?style=flat-square&logo=nginx&logoColor=white">
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white">
 </p>
@@ -145,7 +148,7 @@ Cada entrada guarda su registro (`source`) y su identificador en él (`source_id
 
 ### Aplicación web
 
-Una aplicación de una sola página en Vue 3 servida por Laravel: páginas de búsqueda y de estudio, alertas con sus coincidencias y la configuración del resumen con IA, informes de resúmenes con IA, resúmenes de ejemplo, equipos (miembros, invitaciones y búsquedas compartidas), cuenta y plan, y administración de usuarios, planes, roles e importaciones.
+Una aplicación de una sola página en Vue 3 servida por Laravel: páginas de búsqueda y de estudio, alertas con sus coincidencias y la configuración del resumen con IA, informes de resúmenes con IA, resúmenes de ejemplo, equipos (miembros, invitaciones y búsquedas compartidas), cuenta y plan, y administración de usuarios, planes, roles e importaciones. Usa Tailwind CSS 4 y funciona en el móvil: en pantallas pequeñas, el menú y los filtros de búsqueda se abren como paneles.
 
 ### Idiomas
 
@@ -173,7 +176,7 @@ Versiones instaladas el 2026-11-23. Las restricciones están en `composer.json` 
 | Facturación | Stripe mediante Laravel Cashier 16.11 |
 | Cliente HTTP | Guzzle 8.6 (cliente HTTP de Laravel) para la API de ClinicalTrials.gov |
 | Correo | Laravel Mail y notificaciones (`MAIL_MAILER`; `log` en desarrollo local) |
-| Aplicación web | Vue 3.5, Vue Router 5.5, Pinia 4.1, TypeScript 7.0, Public Sans (Google Fonts) |
+| Aplicación web | Vue 3.5, Vue Router 5.5, Pinia 4.1, TypeScript 7.0, Tailwind CSS 4.3, Font Awesome 7.3 Free, Public Sans (Google Fonts) |
 | Build del front-end | Vite 8.3, `laravel-vite-plugin` 3.2, `@vitejs/plugin-vue` 6.0 |
 | Pruebas y calidad de PHP | PHPUnit 13.4, Mockery 1.6, Faker 1.24, Collision 8.9, Laravel Pint 1.32, Ignition 2.13 (páginas de error) |
 | Pruebas y calidad del front-end | Vitest 5.1, Vue Test Utils 2.6, jsdom 31, `vue-tsc` 3.3 (sobre `@typescript/typescript6` 6.0) |

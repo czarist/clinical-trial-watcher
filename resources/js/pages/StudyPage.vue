@@ -45,7 +45,7 @@ watch(locale, setTitle);
     <div class="page">
         <p><RouterLink to="/search">{{ t('study.back') }}</RouterLink></p>
         <p v-if="error" class="notice error" role="alert">{{ error }}</p>
-        <p v-else-if="!trial" class="muted">{{ t('study.loading') }}</p>
+        <p v-else-if="!trial" class="muted" role="status"><i class="fas fa-circle-notch fa-spin mr-2 text-mint-text" aria-hidden="true" />{{ t('study.loading') }}</p>
         <article v-else class="study">
             <header class="study__head">
                 <p class="nct">{{ trial.nct_id }}<span v-if="trial.acronym" class="muted"> ({{ trial.acronym }})</span></p>

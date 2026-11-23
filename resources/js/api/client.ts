@@ -1,3 +1,4 @@
+import { trackRequest } from '@/activity';
 import { localeTag, t } from '@/i18n';
 
 /**
@@ -64,7 +65,11 @@ export function toQueryString(query: Query): string {
     return text === '' ? '' : `?${text}`;
 }
 
-export async function request<T>(method: string, path: string, body?: unknown, query: Query = {}): Promise<T> {
+export function request<T>(method: string, path: string, body?: unknown, query: Query = {}): Promise<T> {
+    return trackRequest(send<T>(method, path, body, query));
+}
+
+async function send<T>(method: string, path: string, body: unknown, query: Query): Promise<T> {
     const headers: Record<string, string> = { Accept: 'application/json', 'Accept-Language': localeTag.value };
     if (body !== undefined) headers['Content-Type'] = 'application/json';
     if (token !== null) headers.Authorization = `Bearer ${token}`;

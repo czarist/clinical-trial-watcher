@@ -77,7 +77,7 @@ async function deleteTeam(): Promise<void> {
             <RouterLink v-if="error.status === 402" to="/account">{{ t('common.seePlans') }}</RouterLink>
         </p>
         <p v-if="message" class="notice" role="status">{{ message }}</p>
-        <p v-if="!team && !error" class="muted">{{ t('team.loading') }}</p>
+        <p v-if="!team && !error" class="muted" role="status"><i class="fas fa-circle-notch fa-spin mr-2 text-mint-text" aria-hidden="true" />{{ t('team.loading') }}</p>
 
         <template v-if="team">
             <h1>{{ team.name }}</h1>

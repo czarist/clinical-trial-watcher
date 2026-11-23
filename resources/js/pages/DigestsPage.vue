@@ -53,7 +53,7 @@ function showScope(value: string): void {
             </select>
         </div>
 
-        <p v-if="loading" class="muted">{{ t('digests.loading') }}</p>
+        <p v-if="loading" class="muted" role="status"><i class="fas fa-circle-notch fa-spin mr-2 text-mint-text" aria-hidden="true" />{{ t('digests.loading') }}</p>
         <p v-else-if="error" class="notice error" role="alert">
             {{ error.message }}
             <RouterLink v-if="error.status === 402" to="/account">{{ t('common.seePlans') }}</RouterLink>

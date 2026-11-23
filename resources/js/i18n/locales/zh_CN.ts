@@ -53,6 +53,7 @@ const messages: Messages = {
         tooManyAttempts: '尝试次数过多。请等待一分钟后重试。',
     },
     nav: {
+        menu: '菜单',
         main: '主导航',
         search: '搜索',
         alerts: '提醒',
@@ -138,6 +139,7 @@ const messages: Messages = {
         recruitmentStatus: '招募状态：',
     },
     filters: {
+        title: '筛选',
         text: '标题或摘要中的词语',
         textPlaceholder: '例如：吸入性糖皮质激素',
         condition: '疾病/状况',

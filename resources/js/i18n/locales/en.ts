@@ -55,6 +55,7 @@ const en = {
         tooManyAttempts: 'Too many attempts. Wait a minute and try again.',
     },
     nav: {
+        menu: 'Menu',
         main: 'Main',
         search: 'Search',
         alerts: 'Alerts',
@@ -140,6 +141,7 @@ const en = {
         recruitmentStatus: 'Recruitment status:',
     },
     filters: {
+        title: 'Filters',
         text: 'Words in the title or summary',
         textPlaceholder: 'e.g. inhaled corticosteroids',
         condition: 'Condition',

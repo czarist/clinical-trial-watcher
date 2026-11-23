@@ -17,6 +17,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `docs/registries-evaluation.md` records the legal review of 27 registries, including those blocked and what each needs (WHO ICTRP, UMIN-CTR, CRIS, ANZCTR, HRA, the HMA-EMA catalogue, RNEC, SÚKL, Plataforma Brasil, CDE/NMPA, TİTCK, Orphanet; INCa was unavailable; MFDS and NCI need an operator key).
 - Roadmap stage 8 (more registries): a multi-registry schema, a scraping base with a legal check per source, and importers planned for ISRCTN, Health Canada, CTIS, EudraCT, DRKS, REEC, CRIS, MFDS, UMIN-CTR, TFDA, ANZCTR, RENIS, ReBEC, NCI, EDA, CDE/NMPA and others, with WHO ICTRP conditioned on WHO's confirmation of its terms.
 
+### Changed
+
+- The web app uses Tailwind CSS 4 (`@tailwindcss/vite`), with the existing palette as theme tokens that follow the light and dark schemes. The header and the search page were redesigned: results are cards, the status track is a progress rail with a status label, filter choices are chips, and on small screens the menu and the filters open as panels. Other pages keep their scoped styles for now.
+- npm 12.2.3 is pinned in the Docker image, the `node` service and CI.
+- Font Awesome 7 Free icons in the header, the admin tabs, the search page, the filters and the pagination.
+- Loading feedback: a start screen until the first page is ready, a progress bar at the top while any request or page change is running, placeholder cards on the first search, and spinners on the pages that load data.
+
 ## [0.1.0] - 2026-11-23
 
 First release.

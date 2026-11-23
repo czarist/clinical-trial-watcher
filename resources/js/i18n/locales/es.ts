@@ -53,6 +53,7 @@ const messages: Messages = {
         tooManyAttempts: 'Demasiados intentos. Espere un minuto e inténtelo de nuevo.',
     },
     nav: {
+        menu: 'Menú',
         main: 'Principal',
         search: 'Buscar',
         alerts: 'Alertas',
@@ -138,6 +139,7 @@ const messages: Messages = {
         recruitmentStatus: 'Estado de reclutamiento:',
     },
     filters: {
+        title: 'Filtros',
         text: 'Palabras en el título o el resumen',
         textPlaceholder: 'p. ej. corticoides inhalados',
         condition: 'Afección',

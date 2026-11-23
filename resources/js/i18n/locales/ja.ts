@@ -53,6 +53,7 @@ const messages: Messages = {
         tooManyAttempts: '試行回数が多すぎます。1分ほど待ってからもう一度お試しください。',
     },
     nav: {
+        menu: 'メニュー',
         main: 'メイン',
         search: '検索',
         alerts: 'アラート',
@@ -138,6 +139,7 @@ const messages: Messages = {
         recruitmentStatus: '募集状況：',
     },
     filters: {
+        title: '絞り込み',
         text: 'タイトルまたは概要の語句',
         textPlaceholder: '例：吸入ステロイド',
         condition: '疾患・状態',

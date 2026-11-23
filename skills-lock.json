@@ -7,6 +7,18 @@
       "skillPath": "skills/api-designer/SKILL.md",
       "computedHash": "b9d0ef61ede97ff8b78bed7c97c98fd4461c39cfa80d544813e6790c18db1fc3"
     },
+    "banner-design": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/banner-design/SKILL.md",
+      "computedHash": "4b22f6f48afc6fcd72e6f3ae106a4dca11b33b88221efded1f5c62d8f9afb50d"
+    },
+    "brand": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/brand/SKILL.md",
+      "computedHash": "d5619310b76bd204efd2f8b3832f72b5a2899712be0ab94d1b4b671271419c54"
+    },
     "code-documenter": {
       "source": "Jeffallan/claude-skills",
       "sourceType": "github",
@@ -19,6 +31,24 @@
       "skillPath": "skills/database-optimizer/SKILL.md",
       "computedHash": "6b4bf917227430bf404d93679de4616013b613036a899b5a62ad5802a8441d2f"
     },
+    "deploying-to-cloud": {
+      "source": "laravel/boost",
+      "sourceType": "github",
+      "skillPath": ".ai/deployments/skill/deploying-to-cloud/SKILL.md",
+      "computedHash": "bf7dbaf04ec2bb4ce7509a00855dc4c35c393173f56f731113811c0a04cc4c5e"
+    },
+    "design": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/design/SKILL.md",
+      "computedHash": "029cd8e3c45bab68f017e8aeaa18edd8c980e63445ce3915d64e7b5f5bb11be6"
+    },
+    "design-system": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/design-system/SKILL.md",
+      "computedHash": "f711176c54dedef1dd16865a54882cb635b7b9f6b03c7aa15440d7096bc0ac4e"
+    },
     "devops-engineer": {
       "source": "Jeffallan/claude-skills",
       "sourceType": "github",
@@ -30,6 +60,18 @@
       "sourceType": "github",
       "skillPath": "skills/frontend-design/SKILL.md",
       "computedHash": "106acf230014cbb43ca34e6410371321b56ca742f9ee0442e8ec05bf02eb0384"
+    },
+    "infer-conventions": {
+      "source": "laravel/boost",
+      "sourceType": "github",
+      "skillPath": ".ai/boost/skill/infer-conventions/SKILL.blade.php",
+      "computedHash": "4e6fc4c4cf57a9b04a78787e5bca5683e25157411f800af448f23f8ffdb9c28f"
+    },
+    "laravel-best-practices": {
+      "source": "laravel/boost",
+      "sourceType": "github",
+      "skillPath": ".ai/laravel/skill/laravel-best-practices/SKILL.md",
+      "computedHash": "e48511670a7b7ddf163845242b51f3c417154cf10dba4e4a24c72481e70424d3"
     },
     "laravel-specialist": {
       "source": "Jeffallan/claude-skills",
@@ -61,11 +103,35 @@
       "skillPath": "skills/secure-code-guardian/SKILL.md",
       "computedHash": "4cebc5f003afe8115f5494aa39d686a1cf9fdc806245cd55fd974c4fa25a7685"
     },
+    "tailwindcss-development": {
+      "source": "laravel/boost",
+      "sourceType": "github",
+      "skillPath": ".ai/tailwindcss/4/skill/tailwindcss-development/SKILL.md",
+      "computedHash": "1f3d74416f5e374c297b95cf3663ae39754d78c6ec2a12b5b2619e48b0b746f3"
+    },
     "test-master": {
       "source": "Jeffallan/claude-skills",
       "sourceType": "github",
       "skillPath": "skills/test-master/SKILL.md",
       "computedHash": "c01e86694830811642583df6a4760ec7930ec7986e1a3faccd2fa2e7c4c2b991"
+    },
+    "testing-best-practices": {
+      "source": "laravel/boost",
+      "sourceType": "github",
+      "skillPath": ".ai/laravel/skill/testing-best-practices/SKILL.blade.php",
+      "computedHash": "25bdef7c1963708d3772285cfbe505f224a235f76956c28894e4cbea123c2e30"
+    },
+    "ui-styling": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/ui-styling/SKILL.md",
+      "computedHash": "6f43cd27b520e201041f00607a8ae758a74f8a704c4a22bfa9fdff84b7f9e921"
+    },
+    "ui-ux-pro-max": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/ui-ux-pro-max/SKILL.md",
+      "computedHash": "32cc9f96965c5724bd361ec4f303baa25f68a26fd1be403e5d7a01f396d18298"
     }
   }
 }

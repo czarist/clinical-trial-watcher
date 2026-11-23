@@ -1,3 +1,4 @@
+import { setNavigating } from '@/activity';
 import { watch } from 'vue';
 import { createRouter, createWebHistory, type RouteLocationNormalized, type RouteRecordRaw } from 'vue-router';
 import { locale, t, type MessageKey } from '@/i18n';
@@ -51,6 +52,10 @@ export const router = createRouter({
     scrollBehavior: (_to, _from, saved) => saved ?? { top: 0 },
 });
 
+router.beforeEach(() => {
+    setNavigating(true);
+});
+
 router.beforeEach(async (to) => {
     const auth = useAuthStore();
     if (!auth.loaded) await auth.load();
@@ -69,6 +74,8 @@ function setTitle(to: RouteLocationNormalized): void {
 }
 
 router.afterEach(setTitle);
+router.afterEach(() => setNavigating(false));
+router.onError(() => setNavigating(false));
 
 // Pages that set their own title (a study) do so again when they load; others follow the language.
 watch(locale, () => setTitle(router.currentRoute.value));
