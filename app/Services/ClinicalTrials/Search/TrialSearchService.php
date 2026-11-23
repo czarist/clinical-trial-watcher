@@ -33,6 +33,9 @@ final readonly class TrialSearchService
             ->where('nct_id', $nctId)
             ->with([
                 ...ClinicalTrial::SYNCED_RELATIONS,
+                'identifiers',
+                'canonical:id,source,source_id,nct_id',
+                'duplicates:id,source,source_id,nct_id,canonical_trial_id',
                 'trialChanges' => fn ($query) => $query->latest('id')->limit(50),
             ])
             ->first();

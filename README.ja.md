@@ -46,6 +46,15 @@
 - **変更は変更前と変更後の値とともに追跡されます。** 新しい試験は新規として記録され、ベースラインになります。以降のインポートでは、全体の募集状況、実施施設（追加、削除、または施設ごとの状況の変更）、開始日と完了日（元の精度を保持し、月までの日付は月のまま）、結果の公開が比較され、構造化された詳細として保存されます。実施施設のリストは施設名と所在地で比較されるため、レジストリ上の並び順が変わっただけでは変更として扱われません。各変更には安定したフィンガープリントがあるため、再試行や繰り返しのインポートで同じ変更が二重に記録・通知されることはありません。
 - **部分的な日付は正規化されます**（`2024` → `2024-01-01`、`2024-06` → `2024-06-01`）。試験のペイロード全体は `raw_json` に保持されます。
 
+### 重複登録
+
+インポートは複数のレジストリに対応する設計です（`config/registries.php`。現在インポートしているのは ClinicalTrials.gov のみで、その他はロードマップで予定されています）。各レコードは所属するレジストリ（`source`）とそのレジストリでの識別子（`source_id`、レジストリごとに一意）を保持するため、同じレコードを再度インポートすると更新されます。
+
+- **複数回登録された試験は1件として表示。** 各レコードのレジストリ識別子（自身の識別子と、ClinicalTrials.gov の副次 ID に含まれる ISRCTN 番号や EudraCT 番号など、レコードが参照する識別子）は正規化され（`ISRCTN 12345678` と `isrctn12345678` は同じ）、比較されます。識別子を共有するレコードはリンクされてグループにまとめられます。`config/registries.php` で最初に記載されているレジストリのレコードが表示され、それ以外はその試験の別登録として保持されます。スポンサーのプロトコル番号、助成金番号、タイトルが試験の統合に使われることはありません。
+- **疑わしい一致は人が判断。** 同じレジストリの2つのレコードが識別子を共有する場合や、1つのレジストリのレコードを2件含むことになるグループは統合されず、そのリンクは `conflict` としてマークされます。運用者は `GET /api/admin/trial-links` でリンクを一覧し、確定または却下します。その判断は以降のインポートでも維持されます。共有していた識別子がなくなったリンクは削除され、グループが再計算されます。
+- **1つの試験に1つのアラート。** 検索では各試験が1回だけ表示され、どの登録の変更も試験に対して照合されます。2つ目のレジストリが報告した同じ内容（そのレジストリへの試験の登場や同じ状況）が再度一致したり、メールで送られたりすることはありません。ダイジェストには試験ごとに1項目が含まれます。
+- **既存データ。** アップグレード後に `php artisan trials:reconcile-duplicates` を一度実行して、保存済みの試験の識別子をインデックス化してください。インポートでは、保存する各試験についてこの処理が行われます。
+
 ### 検索
 
 - ページ分割された検索で、タイトルと概要に含まれる語（MySQL 全文検索）、疾患・状態、キーワード、MeSH 用語、募集状況、フェーズ、試験の種類、スポンサー、国、都市、開始日・初回公開日・最終更新日、結果の有無、地点からの距離で絞り込めます。
@@ -206,8 +215,8 @@ AI_MODEL=...                            # a model name the provider accepts
 | `POST` | `/auth/email/verification-notification` | トークン | 確認用リンクを再送信 |
 | `PUT` | `/account/profile`, `/account/password` | トークン | 名前とメールアドレス、またはパスワードを変更 |
 | `PUT` | `/account/locale` | トークン | アカウントの言語を変更（`locale`：`en`、`pt_BR`、`es`、`zh_CN`、`zh_TW`、`ja`、`ko`） |
-| `GET` | `/trials` | `view_clinical_trials` | 検索。フィルターは下記、`sort`、`page`、`per_page`（最大 100） |
-| `GET` | `/trials/{nct_id}` | `view_clinical_trials` | すべての関連リストを含む試験 |
+| `GET` | `/trials` | `view_clinical_trials` | 検索（試験ごとに1件の結果）。フィルターは下記（レジストリのキーである `source[]` を含む）、`sort`、`page`、`per_page`（最大 100） |
+| `GET` | `/trials/{nct_id}` | `view_clinical_trials` | すべての関連リスト、正規化された `identifiers`、別登録（`also_registered_as`、または別のレコードの下に表示されるレコードでは `duplicate_of`）を含む試験 |
 | `GET` `POST` | `/alerts` | `create_alerts`、確認済みメール | 保存済み検索の一覧または作成。チームの共有検索には `team_id`（オーナーが作成し、メンバーは一覧を取得） |
 | `GET` `PATCH` `DELETE` | `/alerts/{id}` | オーナー。チームメンバーは共有検索を閲覧可 | 保存済み検索の取得・変更・削除。`ai_digest_enabled`、`ai_digest_frequency`（`daily`、`weekly`）、`ai_digest_language`（`en`、`pt_BR`、`es`、`zh_CN`、`zh_TW`、`ja`、`ko`）を含む |
 | `GET` | `/alerts/{id}/matches` | オーナー、チームメンバー | 一致した試験 |
@@ -229,6 +238,8 @@ AI_MODEL=...                            # a model name the provider accepts
 | `GET` `PUT` | `/admin/roles`, `/admin/permissions`, `/admin/roles/{id}/permissions` | `manage_roles` | ロールの権限を管理 |
 | `GET` `POST` | `/admin/imports` | `manage_imports` | インポートの実行履歴。インポートをキューに追加（202） |
 | `GET` | `/admin/digests` | `manage_imports` | 状態、生成方法、フォールバックの理由、指標を含むダイジェスト配信回（内容は含まない） |
+| `GET` | `/admin/trial-links` | `manage_imports` | レジストリ識別子を共有するレコード間のリンク。`status` = `conflict`（既定）、`auto`、`confirmed`、`rejected` |
+| `PATCH` | `/admin/trial-links/{id}` | `manage_imports` | リンクを確定または却下（`status`：`confirmed` または `rejected`）。レコードは再グループ化される |
 
 検索フィルター：`q`、`condition`、`keyword`、`mesh_term`、`sponsor`、`country`、`city`、`status[]`、`phase[]`、`study_type[]`、`has_results`、`start_date_from`/`_to`、`first_posted_from`/`_to`、`last_update_from`/`_to`、および `latitude` + `longitude` + `radius_km`。`sort` には `-last_update_post_date`（既定）、`last_update_post_date`、`±start_date`、`±study_first_post_date`、`±brief_title`、`relevance` を指定できます。
 
@@ -254,7 +265,8 @@ API:     nginx → PHP-FPM (Laravel) → routes/api.php → Form Request → con
 Web app: Laravel serves resources/views/app.blade.php → Vue 3 + Vue Router + Pinia → /api
 ```
 
-- `app/Services/ClinicalTrials/Import/` にはインポート処理があります。レジストリのクライアントは `StudyRegistryClient` インターフェースの背後にあり、マッパーはペイロードの純粋関数で、永続化はシンクロナイザーが担当します。
+- `app/Services/ClinicalTrials/Import/` にはインポート処理があります。各レジストリは `StudyRegistryClient` と `StudyPayloadMapper` を持つ `RegistrySource`（`app/Services/Registries/`）で、`clinicaltrials:fetch --source=<key>` で1つを選びます（既定は `clinicaltrials_gov`）。レジストリごとに独自の増分カーソルを持ちます。マッパーはペイロードの純粋関数で、永続化はシンクロナイザーが担当します。
+- `app/Services/Registries/` には、レジストリの一覧（`SourceRegistry`）、識別子の正規化（`IdentifierParser`）、重複排除（`DuplicateLinker`、各試験のトランザクション内で実行）があります。
 - `app/Services/ClinicalTrials/Search/` は、`AppServiceProvider` に登録された小さな `TrialFilter` クラス群から検索を組み立てます。アラートも同じ条件とフィルターを再利用します。
 - `app/Services/ClinicalTrials/Changes/` には、試験の追跡対象となる事実と、それらを比較する純粋な `ChangeDetector` があります。
 - `app/Services/Alerts/` は保存済み検索の上限を適用し、インポート結果を照合してメールを送信します。`app/Services/Billing/` にはプランのルールと `Entitlements` があり、Stripe には `SubscriptionGateway` インターフェースを通じてアクセスします。`app/Services/Teams/` はチームと招待を管理します。
@@ -281,7 +293,7 @@ docker-compose run --rm node npm test
 
 ```text
 app/
-  Console/Commands/      clinicaltrials:fetch, alerts:send-digests, digests:dispatch, billing:check-prices
+  Console/Commands/      clinicaltrials:fetch, trials:reconcile-duplicates, alerts:send-digests, digests:dispatch, billing:check-prices
   Enums/                 statuses, phases, permissions, alert and digest frequency, team role
   Http/                  Controllers/Api (and Admin/), Requests/, Resources/, Middleware/
   Jobs/, Events/, Listeners/, Notifications/, Policies/

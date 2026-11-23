@@ -46,6 +46,15 @@
 - **变更会连同变更前后的值一起记录。** 新研究被记录为新增，并成为基线。在后续导入中，会比较总体招募状态、研究机构（新增、移除或机构状态变化）、开始和完成日期（保留原始精度：只有月份的日期仍然只到月份）以及已发布的结果，并以结构化详情保存。研究机构列表按机构名称和地点比较，因此注册库中列出顺序的变化不算变更。每项变更都有稳定的指纹，因此重试或重复的导入不会将其记录或通知两次。
 - **不完整的日期会被规范化**（`2024` → `2024-01-01`，`2024-06` → `2024-06-01`），完整的研究数据保存在 `raw_json` 中。
 
+### 重复注册
+
+导入功能支持多个注册库（`config/registries.php`；目前只导入 ClinicalTrials.gov，其他注册库已列入路线图）。每条记录都保存其所属注册库（`source`）及其在该注册库中的标识符（`source_id`），该标识符在每个注册库内唯一，因此再次导入同一条记录会更新它。
+
+- **多次注册的研究只显示一次。** 每条记录的注册标识符（自身的标识符以及它引用的标识符，例如 ClinicalTrials.gov 次要 ID 中的 ISRCTN 或 EudraCT 编号）会先规范化（`ISRCTN 12345678` 与 `isrctn12345678` 视为相同）再进行比较。共享某个标识符的记录会被关联并归为一组：显示 `config/registries.php` 中排在最前的注册库的记录，其他记录作为它的其他注册保留。申办方方案编号、资助编号和标题绝不会用于合并研究。
+- **存疑的匹配由人工判断。** 同一注册库中共享某个标识符的两条记录，或会包含同一注册库两条记录的分组，不会被合并：它们的关联会被标记为 `conflict`。运维人员可在 `GET /api/admin/trial-links` 列出关联并确认或拒绝；后续导入会保留该决定。共享标识符消失的关联会被删除，分组会重新计算。
+- **一项研究，一次提醒。** 搜索中每项研究只列出一次；任一注册的变更都会针对该研究进行匹配；另一个注册库报告的相同消息（研究出现在该注册库中，或相同的状态）不会再次匹配或发送邮件。每期摘要中每项研究只有一个条目。
+- **已有数据。** 升级后运行一次 `php artisan trials:reconcile-duplicates`，为已存储研究的标识符建立索引；导入时会对保存的每项研究自动执行此操作。
+
 ### 搜索
 
 - 分页搜索，可按以下条件筛选：标题和摘要中的词语（MySQL 全文检索）、疾病/状况、关键词、MeSH 术语、招募状态、分期、研究类型、申办方、国家、城市、开始日期、首次发布日期和最后更新日期、是否有结果，以及与某个地点的距离。
@@ -206,8 +215,8 @@ AI_MODEL=...                            # a model name the provider accepts
 | `POST` | `/auth/email/verification-notification` | 令牌 | 重新发送确认链接 |
 | `PUT` | `/account/profile`, `/account/password` | 令牌 | 修改姓名和邮箱，或修改密码 |
 | `PUT` | `/account/locale` | 令牌 | 修改账户语言（`locale`：`en`、`pt_BR`、`es`、`zh_CN`、`zh_TW`、`ja`、`ko`） |
-| `GET` | `/trials` | `view_clinical_trials` | 搜索；筛选条件见下文，以及 `sort`、`page`、`per_page`（最多 100） |
-| `GET` | `/trials/{nct_id}` | `view_clinical_trials` | 研究及其所有关联列表 |
+| `GET` | `/trials` | `view_clinical_trials` | 搜索，每项研究一个结果；筛选条件见下文（包括 `source[]`，即注册库键名），以及 `sort`、`page`、`per_page`（最多 100） |
+| `GET` | `/trials/{nct_id}` | `view_clinical_trials` | 研究及其所有关联列表、规范化后的 `identifiers`，以及它的其他注册（`also_registered_as`；若该记录显示在另一条记录之下，则为 `duplicate_of`） |
 | `GET` `POST` | `/alerts` | `create_alerts`，已确认邮箱 | 列出或创建已保存的搜索；使用 `team_id` 处理团队共享的搜索（所有者创建，成员查看列表） |
 | `GET` `PATCH` `DELETE` | `/alerts/{id}` | 所有者；团队成员可读取共享的搜索 | 读取、修改或删除已保存的搜索，包括 `ai_digest_enabled`、`ai_digest_frequency`（`daily`、`weekly`）和 `ai_digest_language`（`en`、`pt_BR`、`es`、`zh_CN`、`zh_TW`、`ja`、`ko`） |
 | `GET` | `/alerts/{id}/matches` | 所有者、团队成员 | 匹配的研究 |
@@ -229,6 +238,8 @@ AI_MODEL=...                            # a model name the provider accepts
 | `GET` `PUT` | `/admin/roles`, `/admin/permissions`, `/admin/roles/{id}/permissions` | `manage_roles` | 管理角色权限 |
 | `GET` `POST` | `/admin/imports` | `manage_imports` | 导入运行记录；将导入加入队列（202） |
 | `GET` | `/admin/digests` | `manage_imports` | 摘要各期的状态、生成方式、回退原因和指标（不含内容） |
+| `GET` | `/admin/trial-links` | `manage_imports` | 共享某个注册标识符的记录之间的关联；`status` = `conflict`（默认）、`auto`、`confirmed` 或 `rejected` |
+| `PATCH` | `/admin/trial-links/{id}` | `manage_imports` | 确认或拒绝一个关联（`status`：`confirmed` 或 `rejected`）；相关记录会重新分组 |
 
 搜索筛选条件：`q`、`condition`、`keyword`、`mesh_term`、`sponsor`、`country`、`city`、`status[]`、`phase[]`、`study_type[]`、`has_results`、`start_date_from`/`_to`、`first_posted_from`/`_to`、`last_update_from`/`_to`，以及 `latitude` + `longitude` + `radius_km`。`sort` 接受 `-last_update_post_date`（默认）、`last_update_post_date`、`±start_date`、`±study_first_post_date`、`±brief_title` 和 `relevance`。
 
@@ -254,7 +265,8 @@ API:     nginx → PHP-FPM (Laravel) → routes/api.php → Form Request → con
 Web app: Laravel serves resources/views/app.blade.php → Vue 3 + Vue Router + Pinia → /api
 ```
 
-- `app/Services/ClinicalTrials/Import/` 包含导入逻辑。注册库客户端位于 `StudyRegistryClient` 接口之后，映射器是只依赖数据内容的纯函数，同步器负责持久化。
+- `app/Services/ClinicalTrials/Import/` 包含导入逻辑。每个注册库都是一个 `RegistrySource`（`app/Services/Registries/`），带有一个 `StudyRegistryClient` 和一个 `StudyPayloadMapper`；`clinicaltrials:fetch --source=<key>` 用于选择注册库（默认 `clinicaltrials_gov`），每个注册库都有各自的增量游标。映射器是只依赖数据内容的纯函数，同步器负责持久化。
+- `app/Services/Registries/` 包含注册库列表（`SourceRegistry`）、标识符规范化（`IdentifierParser`）和去重（`DuplicateLinker`，在每项研究的事务中运行）。
 - `app/Services/ClinicalTrials/Search/` 由在 `AppServiceProvider` 中注册的小型 `TrialFilter` 类组合构建搜索。提醒复用相同的条件和筛选器。
 - `app/Services/ClinicalTrials/Changes/` 包含研究的跟踪事实，以及负责比较这些事实的纯函数式 `ChangeDetector`。
 - `app/Services/Alerts/` 负责执行已保存搜索的数量上限、匹配导入结果并发送邮件。`app/Services/Billing/` 包含套餐规则和 `Entitlements`；通过 `SubscriptionGateway` 接口访问 Stripe。`app/Services/Teams/` 管理团队和邀请。
@@ -281,7 +293,7 @@ docker-compose run --rm node npm test
 
 ```text
 app/
-  Console/Commands/      clinicaltrials:fetch, alerts:send-digests, digests:dispatch, billing:check-prices
+  Console/Commands/      clinicaltrials:fetch, trials:reconcile-duplicates, alerts:send-digests, digests:dispatch, billing:check-prices
   Enums/                 statuses, phases, permissions, alert and digest frequency, team role
   Http/                  Controllers/Api (and Admin/), Requests/, Resources/, Middleware/
   Jobs/, Events/, Listeners/, Notifications/, Policies/

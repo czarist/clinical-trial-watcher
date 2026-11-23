@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Resources;
 
 use App\Models\ClinicalTrials\ClinicalTrial;
+use App\Services\Registries\SourceRegistry;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,8 +21,13 @@ class ClinicalTrialSummaryResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $sources = app(SourceRegistry::class);
+
         return [
             'nct_id' => $this->nct_id,
+            'source' => $this->source,
+            'source_id' => $this->source_id,
+            'registry' => $sources->name((string) $this->source),
             'brief_title' => $this->brief_title,
             'acronym' => $this->acronym,
             'overall_status' => $this->overall_status,
@@ -34,7 +40,7 @@ class ClinicalTrialSummaryResource extends JsonResource
             'has_results' => $this->has_results,
             'conditions' => $this->whenLoaded('conditions', fn () => $this->conditions->pluck('condition')),
             'locations_count' => $this->whenCounted('locations'),
-            'registry_url' => "https://clinicaltrials.gov/study/{$this->nct_id}",
+            'registry_url' => $sources->recordUrl((string) $this->source, $this->source_id),
         ];
     }
 }

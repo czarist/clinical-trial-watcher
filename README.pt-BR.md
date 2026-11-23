@@ -46,6 +46,15 @@
 - **Mudanças são registradas com o valor anterior e o novo.** Um estudo novo é registrado como novo e vira a base de comparação. Nas importações seguintes são comparados o status geral de recrutamento, os centros (adicionados, removidos ou com status do centro alterado), as datas de início e de conclusão (com a precisão original: uma data só com mês continua sendo um mês) e a publicação de resultados, e as diferenças ficam gravadas de forma estruturada. As listas de centros são comparadas por instituição e local, então uma mudança na ordem em que o registro os lista não é uma mudança. Cada mudança tem uma impressão digital estável, então uma importação repetida não consegue registrá-la nem notificá-la duas vezes.
 - **Datas parciais são normalizadas** (`2024` → `2024-01-01`, `2024-06` → `2024-06-01`), e o payload completo do estudo fica em `raw_json`.
 
+### Registros duplicados
+
+A importação foi preparada para mais de um registro (`config/registries.php`; hoje só o ClinicalTrials.gov é importado, os outros estão planejados no roadmap). Cada registro guarda a sua origem (`source`) e o seu identificador nela (`source_id`), único por origem, então importar o mesmo registro de novo o atualiza.
+
+- **Estudos registrados mais de uma vez aparecem uma vez só.** Os identificadores de registro de cada estudo (o próprio e os que ele cita, como um número ISRCTN ou EudraCT entre os IDs secundários do ClinicalTrials.gov) são normalizados (`ISRCTN 12345678` e `isrctn12345678` são o mesmo) e comparados. Registros que compartilham um deles são ligados e agrupados: aparece o registro da origem listada primeiro em `config/registries.php`, e os outros ficam como inscrições adicionais do estudo. Números de protocolo do patrocinador, números de financiamento e títulos nunca são usados para juntar estudos.
+- **Correspondências duvidosas esperam uma pessoa.** Dois registros da mesma origem que compartilham um identificador, ou um grupo que ficaria com dois registros da mesma origem, não são juntados: os vínculos ficam como `conflict`. Os operadores listam os vínculos em `GET /api/admin/trial-links` e os confirmam ou rejeitam; a decisão é mantida pelas importações seguintes. Um vínculo cujo identificador compartilhado desaparece é removido e o grupo é recalculado.
+- **Um estudo, um alerta.** A pesquisa lista cada estudo uma vez, uma mudança em qualquer inscrição é comparada com o estudo, e a mesma notícia publicada por um segundo registro (o estudo aparecendo nele, ou o mesmo status) não gera nova correspondência nem novo e-mail. Um digest tem um item por estudo.
+- **Dados existentes.** Rode `php artisan trials:reconcile-duplicates` uma vez depois de atualizar, para indexar os identificadores dos estudos já gravados; as importações fazem isso para cada estudo que salvam.
+
 ### Pesquisa
 
 - Pesquisa paginada com filtros por palavras no título e no resumo (texto completo do MySQL), condição, palavra-chave, termo MeSH, status de recrutamento, fase, tipo de estudo, patrocinador, país, cidade, datas de início, de publicação e de última atualização, resultados e distância de um ponto.
@@ -206,8 +215,8 @@ Todas as rotas ficam em `/api` e respondem em JSON. Rotas protegidas exigem `Aut
 | `POST` | `/auth/email/verification-notification` | token | Reenvia o link de confirmação |
 | `PUT` | `/account/profile`, `/account/password` | token | Altera nome e e-mail, ou a senha |
 | `PUT` | `/account/locale` | token | Altera o idioma da conta (`locale`: `en`, `pt_BR`, `es`, `zh_CN`, `zh_TW`, `ja`, `ko`) |
-| `GET` | `/trials` | `view_clinical_trials` | Pesquisa; filtros abaixo, `sort`, `page`, `per_page` (até 100) |
-| `GET` | `/trials/{nct_id}` | `view_clinical_trials` | Estudo com todas as listas relacionadas |
+| `GET` | `/trials` | `view_clinical_trials` | Pesquisa, um resultado por estudo; filtros abaixo (inclusive `source[]`, a chave de um registro), `sort`, `page`, `per_page` (até 100) |
+| `GET` | `/trials/{nct_id}` | `view_clinical_trials` | Estudo com todas as listas relacionadas, seus `identifiers` normalizados e suas outras inscrições (`also_registered_as`, ou `duplicate_of` para um registro mostrado sob outro) |
 | `GET` `POST` | `/alerts` | `create_alerts`, e-mail confirmado | Lista ou cria buscas salvas; `team_id` para as compartilhadas de uma equipe (o dono cria, os membros listam) |
 | `GET` `PATCH` `DELETE` | `/alerts/{id}` | dono; membros da equipe leem as compartilhadas | Lê, altera ou exclui uma busca salva, inclusive `ai_digest_enabled`, `ai_digest_frequency` (`daily`, `weekly`) e `ai_digest_language` (`en`, `pt_BR`, `es`, `zh_CN`, `zh_TW`, `ja`, `ko`) |
 | `GET` | `/alerts/{id}/matches` | dono, membros da equipe | Estudos que corresponderam |
@@ -229,6 +238,8 @@ Todas as rotas ficam em `/api` e respondem em JSON. Rotas protegidas exigem `Aut
 | `GET` `PUT` | `/admin/roles`, `/admin/permissions`, `/admin/roles/{id}/permissions` | `manage_roles` | Gerencia as permissões dos papéis |
 | `GET` `POST` | `/admin/imports` | `manage_imports` | Execuções da importação; coloca uma importação na fila (202) |
 | `GET` | `/admin/digests` | `manage_imports` | Edições de digest com status, forma de geração, motivo da alternativa e métricas (sem conteúdo) |
+| `GET` | `/admin/trial-links` | `manage_imports` | Vínculos entre registros que compartilham um identificador; `status` = `conflict` (padrão), `auto`, `confirmed` ou `rejected` |
+| `PATCH` | `/admin/trial-links/{id}` | `manage_imports` | Confirma ou rejeita um vínculo (`status`: `confirmed` ou `rejected`); os registros são reagrupados |
 
 Filtros da pesquisa: `q`, `condition`, `keyword`, `mesh_term`, `sponsor`, `country`, `city`, `status[]`, `phase[]`, `study_type[]`, `has_results`, `start_date_from`/`_to`, `first_posted_from`/`_to`, `last_update_from`/`_to`, e `latitude` + `longitude` + `radius_km`. `sort` aceita `-last_update_post_date` (padrão), `last_update_post_date`, `±start_date`, `±study_first_post_date`, `±brief_title` e `relevance`.
 
@@ -254,7 +265,8 @@ API:        nginx → PHP-FPM (Laravel) → routes/api.php → Form Request → 
 Web:        o Laravel serve resources/views/app.blade.php → Vue 3 + Vue Router + Pinia → /api
 ```
 
-- `app/Services/ClinicalTrials/Import/` contém a importação. O cliente do registro fica atrás da interface `StudyRegistryClient`, o mapeador é uma função pura do payload e o sincronizador cuida da gravação.
+- `app/Services/ClinicalTrials/Import/` contém a importação. Cada registro é uma `RegistrySource` (`app/Services/Registries/`) com um `StudyRegistryClient` e um `StudyPayloadMapper`; `clinicaltrials:fetch --source=<chave>` escolhe um (padrão `clinicaltrials_gov`), e cada registro tem o seu próprio ponto de importação incremental. O mapeador é uma função pura do payload e o sincronizador cuida da gravação.
+- `app/Services/Registries/` contém a lista de registros (`SourceRegistry`), a normalização de identificadores (`IdentifierParser`) e a deduplicação (`DuplicateLinker`, executada na transação de cada estudo).
 - `app/Services/ClinicalTrials/Search/` monta a pesquisa com pequenas classes `TrialFilter` registradas no `AppServiceProvider`. Os alertas reaproveitam os mesmos critérios e filtros.
 - `app/Services/ClinicalTrials/Changes/` contém os fatos acompanhados de um estudo e o `ChangeDetector`, uma função pura que os compara.
 - `app/Services/Alerts/` aplica o limite de buscas salvas, cruza as importações e envia os e-mails. `app/Services/Billing/` contém as regras dos planos e o `Entitlements`; o Stripe é acessado pela interface `SubscriptionGateway`. `app/Services/Teams/` gerencia equipes e convites.
@@ -281,7 +293,7 @@ O esquema do banco é definido apenas pelas migrations em `database/migrations/`
 
 ```text
 app/
-  Console/Commands/      clinicaltrials:fetch, alerts:send-digests, digests:dispatch, billing:check-prices
+  Console/Commands/      clinicaltrials:fetch, trials:reconcile-duplicates, alerts:send-digests, digests:dispatch, billing:check-prices
   Enums/                 status, fases, permissões, frequência dos alertas e dos digests, papel na equipe
   Http/                  Controllers/Api (e Admin/), Requests/, Resources/, Middleware/
   Jobs/, Events/, Listeners/, Notifications/, Policies/

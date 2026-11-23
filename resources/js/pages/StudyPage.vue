@@ -35,7 +35,7 @@ watch(
 );
 
 function setTitle(): void {
-    if (trial.value) document.title = t('titles.suffix', { title: trial.value.nct_id });
+    if (trial.value) document.title = t('titles.suffix', { title: trial.value.nct_id ?? trial.value.source_id });
 }
 
 watch(locale, setTitle);
@@ -109,7 +109,22 @@ watch(locale, setTitle);
                         <dt>{{ t('study.sites') }}</dt><dd>{{ trial.locations.length }}</dd>
                         <dt>{{ t('study.lastUpdate') }}</dt><dd>{{ formatDate(trial.last_update_post_date) }}</dd>
                     </dl>
-                    <a class="button secondary" :href="trial.registry_url" target="_blank" rel="noopener">{{ t('study.openRegistry') }}</a>
+                    <a v-if="trial.registry_url" class="button secondary" :href="trial.registry_url" target="_blank" rel="noopener">{{ t('study.openRegistry', { registry: trial.registry }) }}</a>
+                    <template v-if="trial.also_registered_as?.length">
+                        <h2 class="study__registrations">{{ t('study.alsoRegistered') }}</h2>
+                        <ul>
+                            <li v-for="item in trial.also_registered_as" :key="`${item.source}:${item.source_id}`">
+                                <a v-if="item.registry_url" :href="item.registry_url" target="_blank" rel="noopener">{{ item.source_id }}</a>
+                                <span v-else>{{ item.source_id }}</span>
+                                <span class="muted"> ({{ item.registry }})</span>
+                            </li>
+                        </ul>
+                    </template>
+                    <p v-if="trial.duplicate_of" class="muted">
+                        {{ t('study.shownAs') }}
+                        <RouterLink v-if="trial.duplicate_of.nct_id" :to="`/studies/${trial.duplicate_of.nct_id}`">{{ trial.duplicate_of.source_id }}</RouterLink>
+                        <span v-else>{{ trial.duplicate_of.source_id }}</span>
+                    </p>
                 </aside>
             </div>
         </article>
@@ -144,6 +159,11 @@ watch(locale, setTitle);
 
 .references li + li {
     margin-top: var(--space-2);
+}
+
+.study__registrations {
+    font-size: var(--step-0);
+    margin: var(--space-4) 0 var(--space-1);
 }
 
 .study__facts dl {

@@ -46,6 +46,15 @@
 - **Changes are tracked with before-and-after values.** A new study is recorded as new and becomes the baseline. On later imports the overall recruitment status, the sites (added, removed, or with a changed site status), the start and completion dates (with their original precision: a month-only date stays a month) and posted results are compared and stored as structured details. Site lists are compared by facility and place, so a change in the order the registry lists them is not a change. Each change has a stable fingerprint, so a retried or repeated import cannot record it, or notify it, twice.
 - **Partial dates are normalized** (`2024` → `2024-01-01`, `2024-06` → `2024-06-01`), and the full study payload is kept in `raw_json`.
 
+### Duplicate registrations
+
+The import is built for more than one registry (`config/registries.php`; ClinicalTrials.gov is the only one imported today, the others are planned in the roadmap). Each record keeps its registry (`source`) and its identifier there (`source_id`), unique per registry, so importing a record again updates it.
+
+- **Studies registered more than once are shown once.** Each record's registry identifiers (its own and the ones it cites, such as an ISRCTN or EudraCT number among ClinicalTrials.gov secondary IDs) are normalized (`ISRCTN 12345678` and `isrctn12345678` are the same) and compared. Records that share one are linked and grouped: the record of the registry listed first in `config/registries.php` is shown, the others are kept as its other registrations. Sponsor protocol numbers, grant numbers and titles are never used to merge studies.
+- **Doubtful matches wait for a person.** Two records of the same registry that share an identifier, or a group that would hold two records of one registry, are not merged: their links are marked `conflict`. Operators list links at `GET /api/admin/trial-links` and confirm or reject them; the decision is kept by later imports. A link whose shared identifier disappears is removed and the group is recomputed.
+- **One study, one alert.** Searches list each study once, a change to any registration is matched against the study, and the same news reported by a second registry (the study appearing there, or the same status) is not matched or emailed again. A digest has one item per study.
+- **Existing data.** Run `php artisan trials:reconcile-duplicates` once after upgrading to index the identifiers of studies already stored; imports do it for every study they save.
+
 ### Search
 
 - Paginated search with filters for words in the title and summary (MySQL full-text), condition, keyword, MeSH term, recruitment status, phase, study type, sponsor, country, city, start, first-posted and last-update dates, results, and distance from a point.
@@ -206,8 +215,8 @@ All routes are under `/api` and return JSON. Protected routes need `Authorizatio
 | `POST` | `/auth/email/verification-notification` | token | Send the confirmation link again |
 | `PUT` | `/account/profile`, `/account/password` | token | Change name and email, or password |
 | `PUT` | `/account/locale` | token | Change the account language (`locale`: `en`, `pt_BR`, `es`, `zh_CN`, `zh_TW`, `ja`, `ko`) |
-| `GET` | `/trials` | `view_clinical_trials` | Search; filters below, `sort`, `page`, `per_page` (up to 100) |
-| `GET` | `/trials/{nct_id}` | `view_clinical_trials` | Study with every related list |
+| `GET` | `/trials` | `view_clinical_trials` | Search, one result per study; filters below (including `source[]`, a registry key), `sort`, `page`, `per_page` (up to 100) |
+| `GET` | `/trials/{nct_id}` | `view_clinical_trials` | Study with every related list, its normalized `identifiers`, and its other registrations (`also_registered_as`, or `duplicate_of` for a record shown under another one) |
 | `GET` `POST` | `/alerts` | `create_alerts`, confirmed email | List or create saved searches; `team_id` for a team's shared ones (owner creates, members list) |
 | `GET` `PATCH` `DELETE` | `/alerts/{id}` | owner; team members can read shared ones | Read, change or delete a saved search, including `ai_digest_enabled`, `ai_digest_frequency` (`daily`, `weekly`) and `ai_digest_language` (`en`, `pt_BR`, `es`, `zh_CN`, `zh_TW`, `ja`, `ko`) |
 | `GET` | `/alerts/{id}/matches` | owner, team members | Studies that matched |
@@ -229,6 +238,8 @@ All routes are under `/api` and return JSON. Protected routes need `Authorizatio
 | `GET` `PUT` | `/admin/roles`, `/admin/permissions`, `/admin/roles/{id}/permissions` | `manage_roles` | Manage role permissions |
 | `GET` `POST` | `/admin/imports` | `manage_imports` | Import runs; queue an import (202) |
 | `GET` | `/admin/digests` | `manage_imports` | Digest editions with status, generation, fallback reason and metrics (no content) |
+| `GET` | `/admin/trial-links` | `manage_imports` | Links between records that share a registry identifier; `status` = `conflict` (default), `auto`, `confirmed` or `rejected` |
+| `PATCH` | `/admin/trial-links/{id}` | `manage_imports` | Confirm or reject a link (`status`: `confirmed` or `rejected`); the records are regrouped |
 
 Search filters: `q`, `condition`, `keyword`, `mesh_term`, `sponsor`, `country`, `city`, `status[]`, `phase[]`, `study_type[]`, `has_results`, `start_date_from`/`_to`, `first_posted_from`/`_to`, `last_update_from`/`_to`, and `latitude` + `longitude` + `radius_km`. `sort` accepts `-last_update_post_date` (default), `last_update_post_date`, `±start_date`, `±study_first_post_date`, `±brief_title` and `relevance`.
 
@@ -254,7 +265,8 @@ API:     nginx → PHP-FPM (Laravel) → routes/api.php → Form Request → con
 Web app: Laravel serves resources/views/app.blade.php → Vue 3 + Vue Router + Pinia → /api
 ```
 
-- `app/Services/ClinicalTrials/Import/` holds the import. The registry client is behind the `StudyRegistryClient` interface, the mapper is a pure function of the payload, and the synchronizer owns persistence.
+- `app/Services/ClinicalTrials/Import/` holds the import. Each registry is a `RegistrySource` (`app/Services/Registries/`) with a `StudyRegistryClient` and a `StudyPayloadMapper`; `clinicaltrials:fetch --source=<key>` picks one (default `clinicaltrials_gov`), and each registry keeps its own incremental cursor. The mapper is a pure function of the payload, and the synchronizer owns persistence.
+- `app/Services/Registries/` holds the registry list (`SourceRegistry`), identifier normalization (`IdentifierParser`) and deduplication (`DuplicateLinker`, run in each study's transaction).
 - `app/Services/ClinicalTrials/Search/` builds the search from small `TrialFilter` classes registered in `AppServiceProvider`. Alerts reuse the same criteria and filters.
 - `app/Services/ClinicalTrials/Changes/` holds the tracked facts of a study and the pure `ChangeDetector` that compares them.
 - `app/Services/Alerts/` enforces the saved-search limit, matches imports and sends emails. `app/Services/Billing/` holds the plan rules and `Entitlements`; Stripe is reached through the `SubscriptionGateway` interface. `app/Services/Teams/` manages teams and invitations.
@@ -281,7 +293,7 @@ The schema is defined only by the migrations in `database/migrations/`. Add a ne
 
 ```text
 app/
-  Console/Commands/      clinicaltrials:fetch, alerts:send-digests, digests:dispatch, billing:check-prices
+  Console/Commands/      clinicaltrials:fetch, trials:reconcile-duplicates, alerts:send-digests, digests:dispatch, billing:check-prices
   Enums/                 statuses, phases, permissions, alert and digest frequency, team role
   Http/                  Controllers/Api (and Admin/), Requests/, Resources/, Middleware/
   Jobs/, Events/, Listeners/, Notifications/, Policies/

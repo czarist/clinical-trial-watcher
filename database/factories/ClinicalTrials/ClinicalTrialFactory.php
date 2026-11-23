@@ -8,6 +8,7 @@ use App\Enums\StudyPhase;
 use App\Enums\StudyStatus;
 use App\Enums\StudyType;
 use App\Models\ClinicalTrials\ClinicalTrial;
+use App\Services\Registries\ClinicalTrialsGovSource;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -25,7 +26,10 @@ final class ClinicalTrialFactory extends Factory
         $start = $this->faker->dateTimeBetween('-5 years', '+1 year');
 
         return [
+            'source' => ClinicalTrialsGovSource::KEY,
             'nct_id' => sprintf('NCT%08d', $this->faker->unique()->numberBetween(1, 99_999_999)),
+            // A ClinicalTrials.gov record is identified by its NCT number, also when a test sets it.
+            'source_id' => fn (array $attributes): ?string => $attributes['nct_id'],
             'org_study_id' => $this->faker->bothify('ORG-####-??'),
             'brief_title' => $this->faker->sentence(8),
             'official_title' => $this->faker->sentence(14),

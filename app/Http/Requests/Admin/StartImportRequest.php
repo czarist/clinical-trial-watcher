@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Requests\Admin;
 
 use App\Services\ClinicalTrials\Import\ImportOptions;
+use App\Services\Registries\ClinicalTrialsGovSource;
+use App\Services\Registries\SourceRegistry;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 final class StartImportRequest extends FormRequest
 {
@@ -16,7 +19,7 @@ final class StartImportRequest extends FormRequest
     }
 
     /**
-     * @return array<string, list<string>>
+     * @return array<string, list<mixed>>
      */
     public function rules(): array
     {
@@ -25,6 +28,7 @@ final class StartImportRequest extends FormRequest
             'since' => ['sometimes', 'nullable', 'date_format:Y-m-d', 'before_or_equal:today'],
             'page_size' => ['sometimes', 'integer', 'between:1,1000'],
             'max_pages' => ['sometimes', 'nullable', 'integer', 'min:1'],
+            'source' => ['sometimes', 'string', Rule::in(app(SourceRegistry::class)->keys())],
         ];
     }
 
@@ -38,6 +42,7 @@ final class StartImportRequest extends FormRequest
             full: (bool) ($this->validated('full') ?? false),
             updatedSince: $since !== null ? CarbonImmutable::parse($since) : null,
             maxPages: $maxPages !== null ? (int) $maxPages : null,
+            source: (string) ($this->validated('source') ?? ClinicalTrialsGovSource::KEY),
         );
     }
 }

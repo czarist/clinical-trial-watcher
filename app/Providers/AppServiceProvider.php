@@ -14,11 +14,13 @@ use App\Services\Billing\SubscriptionGateway;
 use App\Services\ClinicalTrials\Import\ClinicalTrialsGovClient;
 use App\Services\ClinicalTrials\Import\StudyRegistryClient;
 use App\Services\ClinicalTrials\Search\Filters\AttributeFilter;
+use App\Services\ClinicalTrials\Search\Filters\CanonicalFilter;
 use App\Services\ClinicalTrials\Search\Filters\DateRangeFilter;
 use App\Services\ClinicalTrials\Search\Filters\FullTextFilter;
 use App\Services\ClinicalTrials\Search\Filters\LocationFilter;
 use App\Services\ClinicalTrials\Search\Filters\PhaseFilter;
 use App\Services\ClinicalTrials\Search\Filters\RelatedTextFilter;
+use App\Services\ClinicalTrials\Search\Filters\SourceFilter;
 use App\Services\ClinicalTrials\Search\TrialQuery;
 use App\Services\ClinicalTrials\Search\TrialSearchCriteria;
 use App\Services\Digests\ChangeSummarizer;
@@ -26,6 +28,7 @@ use App\Services\Digests\DigestBuilder;
 use App\Services\Digests\FactualChangeWriter;
 use App\Services\Digests\SummaryPrompt;
 use App\Services\Digests\SummaryValidator;
+use App\Services\Registries\SourceRegistry;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -50,7 +53,14 @@ final class AppServiceProvider extends ServiceProvider
             (int) config('clinicaltrials.retry.sleep_ms'),
         ));
 
+        $this->app->singleton(SourceRegistry::class, fn (Application $app): SourceRegistry => new SourceRegistry(
+            $app,
+            (array) config('registries.sources'),
+        ));
+
         $this->app->singleton(TrialQuery::class, fn (): TrialQuery => new TrialQuery([
+            new CanonicalFilter,
+            new SourceFilter,
             new FullTextFilter,
             new RelatedTextFilter(fn (TrialSearchCriteria $c): ?string => $c->condition, 'conditions', 'condition'),
             new RelatedTextFilter(fn (TrialSearchCriteria $c): ?string => $c->keyword, 'keywords', 'keyword'),

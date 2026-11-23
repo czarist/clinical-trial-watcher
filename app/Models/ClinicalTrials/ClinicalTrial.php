@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace App\Models\ClinicalTrials;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * A study registered on ClinicalTrials.gov. Registry data, not medical advice.
+ * A study record read from one clinical trial registry (`source`, identified there by
+ * `source_id`). When several registries describe the same study, one record is shown and the
+ * others point to it through `canonical_trial_id`. Registry data, not medical advice.
  */
 class ClinicalTrial extends Model
 {
@@ -34,6 +38,8 @@ class ClinicalTrial extends Model
     ];
 
     protected $fillable = [
+        'source',
+        'source_id',
         'nct_id',
         'org_study_id',
         'brief_title',
@@ -151,5 +157,44 @@ class ClinicalTrial extends Model
     public function trialChanges(): HasMany
     {
         return $this->hasMany(ClinicalTrialChange::class);
+    }
+
+    public function identifiers(): HasMany
+    {
+        return $this->hasMany(ClinicalTrialIdentifier::class);
+    }
+
+    /**
+     * The record shown for the study when this one is a duplicate registration.
+     */
+    public function canonical(): BelongsTo
+    {
+        return $this->belongsTo(self::class, 'canonical_trial_id');
+    }
+
+    /**
+     * Other registrations of this study, when this record is the one shown.
+     */
+    public function duplicates(): HasMany
+    {
+        return $this->hasMany(self::class, 'canonical_trial_id');
+    }
+
+    /**
+     * The id of the record shown for this study: its own, or its canonical record's.
+     */
+    public function canonicalId(): int
+    {
+        return $this->canonical_trial_id ?? $this->id;
+    }
+
+    /**
+     * Only the records shown for a study: duplicate registrations are left out.
+     *
+     * @param  Builder<self>  $query
+     */
+    public function scopeCanonical(Builder $query): void
+    {
+        $query->whereNull($query->qualifyColumn('canonical_trial_id'));
     }
 }

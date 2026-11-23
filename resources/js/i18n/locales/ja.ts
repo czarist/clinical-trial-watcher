@@ -212,7 +212,9 @@ const messages: Messages = {
         countries: '国',
         sites: '実施施設',
         lastUpdate: '最終更新',
-        openRegistry: 'ClinicalTrials.gov で開く',
+        openRegistry: '{registry} で開く',
+        alsoRegistered: '他の登録番号',
+        shownAs: 'このサイトでの表示',
     },
     alerts: {
         title: 'アラート',

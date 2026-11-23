@@ -24,7 +24,7 @@ const languageTag = (content: DigestContent): string => tagOf(matchLocale(conten
         <ol class="digest__items">
             <li v-for="item in content.items" :key="`${item.rank}-${item.nct_id}`" class="item">
                 <h3>
-                    <span class="nct">{{ item.nct_id ?? content.labels.missing_fact }}</span>
+                    <span class="nct">{{ item.nct_id ?? item.source_id ?? content.labels.missing_fact }}</span>
                     {{ item.title ?? content.labels.missing_fact }}
                 </h3>
                 <p v-if="item.status" class="item__status">{{ item.status }}</p>
