@@ -8,9 +8,11 @@ use App\Enums\ImportRunStatus;
 use App\Jobs\ImportClinicalTrialsJob;
 use App\Services\ClinicalTrials\Import\ClinicalTrialImporter;
 use App\Services\ClinicalTrials\Import\ImportOptions;
+use App\Services\Registries\SourceRegistry;
 use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 final class FetchClinicalTrials extends Command
 {
@@ -19,13 +21,15 @@ final class FetchClinicalTrials extends Command
         {--since= : Import studies updated on or after this date (YYYY-MM-DD)}
         {--full : Read the whole registry instead of changes since the last successful run}
         {--max-pages= : Stop after this many pages}
-        {--queue : Dispatch the import to the queue instead of running it now}';
+        {--queue : Dispatch the import to the queue instead of running it now}
+        {--source=clinicaltrials_gov : Registry to import from (a key of config/registries.php)}';
 
-    protected $description = 'Import studies from the ClinicalTrials.gov API v2, following every page';
+    protected $description = 'Import studies from a registry (ClinicalTrials.gov by default), following every page';
 
-    public function handle(ClinicalTrialImporter $importer): int
+    public function handle(ClinicalTrialImporter $importer, SourceRegistry $sources): int
     {
         $validator = Validator::make($this->options(), [
+            'source' => ['required', 'string', Rule::in($sources->keys())],
             'pageSize' => ['required', 'integer', 'between:1,1000'],
             'since' => ['nullable', 'date_format:Y-m-d'],
             'max-pages' => ['nullable', 'integer', 'min:1'],
@@ -44,6 +48,7 @@ final class FetchClinicalTrials extends Command
             full: (bool) $this->option('full'),
             updatedSince: $this->option('since') !== null ? CarbonImmutable::parse($this->option('since')) : null,
             maxPages: $this->option('max-pages') !== null ? (int) $this->option('max-pages') : null,
+            source: (string) $this->option('source'),
         );
 
         if ($this->option('queue')) {
@@ -53,10 +58,10 @@ final class FetchClinicalTrials extends Command
             return self::SUCCESS;
         }
 
-        $this->info('Importing studies from ClinicalTrials.gov...');
+        $this->info("Importing studies from {$sources->name($options->source)}...");
         $run = $importer->import($options);
 
-        $this->table(['Run', 'Status', 'Since', 'Pages', 'Created', 'Updated', 'Unchanged', 'Failed'], [array_values($run->summary())]);
+        $this->table(['Run', 'Source', 'Status', 'Since', 'Pages', 'Created', 'Updated', 'Unchanged', 'Failed'], [array_values($run->summary())]);
 
         if ($run->error !== null) {
             $run->status === ImportRunStatus::Failed ? $this->error($run->error) : $this->warn($run->error);

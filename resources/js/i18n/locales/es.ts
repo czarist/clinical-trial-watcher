@@ -212,7 +212,9 @@ const messages: Messages = {
         countries: 'Países',
         sites: 'Centros',
         lastUpdate: 'Última actualización',
-        openRegistry: 'Abrir en ClinicalTrials.gov',
+        openRegistry: 'Abrir en {registry}',
+        alsoRegistered: 'También registrado como',
+        shownAs: 'Se muestra en este sitio como',
     },
     alerts: {
         title: 'Alertas',

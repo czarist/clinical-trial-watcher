@@ -9,13 +9,19 @@ use App\Models\ClinicalTrials\ClinicalTrial;
 use App\Models\ImportRun;
 use App\Services\ClinicalTrials\Changes\ChangeDetector;
 use App\Services\ClinicalTrials\Changes\TrackedFacts;
+use App\Services\Registries\ClinicalTrialsGovSource;
+use App\Services\Registries\Deduplication\DuplicateLinker;
+use App\Services\Registries\Identifiers\IdentifierParser;
 use Illuminate\Database\ConnectionInterface;
 
 /**
  * Persists one mapped study, its related lists and its change record atomically.
  *
- * The study is matched by NCT number. Every related list is replaced with the current one,
- * including empty lists, and only rows of this study are deleted.
+ * The record is matched by its registry and its identifier there (for ClinicalTrials.gov, the
+ * NCT number), so importing it again updates it. Every related list is replaced with the
+ * current one, including empty lists, and only rows of this record are deleted. Its registry
+ * identifiers are indexed and, in the same transaction, the record is linked to other
+ * registrations of the same study (see DuplicateLinker).
  *
  * Changes: a new study is recorded as created and its tracked facts become the baseline.
  * A study imported before facts were tracked gets its baseline on this import, without
@@ -28,22 +34,31 @@ final readonly class ClinicalTrialSynchronizer
     /** Attributes ignored when deciding whether a study changed. */
     private const array VOLATILE_ATTRIBUTES = ['raw_json', 'tracked_facts', 'updated_at'];
 
+    /** Retries of a study's transaction after a deadlock with a concurrent import. */
+    private const int TRANSACTION_ATTEMPTS = 3;
+
     public function __construct(
         private ConnectionInterface $db,
+        private DuplicateLinker $linker,
+        private IdentifierParser $identifiers = new IdentifierParser,
         private ChangeDetector $detector = new ChangeDetector,
     ) {}
 
     public function sync(MappedStudy $study, ?ImportRun $run = null): SyncOutcome
     {
         return $this->db->transaction(function () use ($study, $run): SyncOutcome {
-            $trial = ClinicalTrial::query()->where('nct_id', $study->nctId)->lockForUpdate()->first()
-                ?? new ClinicalTrial(['nct_id' => $study->nctId]);
+            $trial = ClinicalTrial::query()
+                ->where('source', $study->source)
+                ->where('source_id', $study->sourceId)
+                ->lockForUpdate()
+                ->first()
+                ?? new ClinicalTrial(['source' => $study->source, 'source_id' => $study->sourceId]);
 
             $isNew = ! $trial->exists;
             $previousStatus = $trial->overall_status;
             $previousFacts = is_array($trial->tracked_facts) ? TrackedFacts::fromArray($trial->tracked_facts) : null;
 
-            $trial->fill($study->attributes);
+            $trial->fill([...$study->attributes, 'nct_id' => $study->nctId]);
 
             if ($study->facts !== null) {
                 $trial->tracked_facts = $study->facts->toArray();
@@ -65,12 +80,14 @@ final readonly class ClinicalTrialSynchronizer
                 }
             }
 
+            $this->linker->index($trial, $this->identifiers->fromStudy($study));
+
             if ($outcome !== SyncOutcome::Unchanged) {
                 $this->recordChange($trial, $run, $isNew, $previousStatus, $details, $previousFacts, $study->facts);
             }
 
             return $outcome;
-        });
+        }, self::TRANSACTION_ATTEMPTS);
     }
 
     /**
@@ -113,7 +130,8 @@ final readonly class ClinicalTrialSynchronizer
         };
 
         $fingerprint = hash('sha256', json_encode([
-            $trial->nct_id,
+            // ClinicalTrials.gov records keep their NCT number here, as before other registries.
+            $trial->source === ClinicalTrialsGovSource::KEY ? $trial->source_id : $trial->source.':'.$trial->source_id,
             $type->value,
             $previousFacts?->hash(),
             $facts?->hash(),

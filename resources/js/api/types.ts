@@ -55,7 +55,11 @@ export interface BillingSummary {
 }
 
 export interface TrialSummary {
-    nct_id: string;
+    nct_id: string | null;
+    /** Registry the record comes from, e.g. "clinicaltrials_gov", and its identifier there. */
+    source: string;
+    source_id: string;
+    registry: string;
     brief_title: string;
     acronym: string | null;
     overall_status: string | null;
@@ -68,10 +72,21 @@ export interface TrialSummary {
     has_results: boolean;
     conditions?: string[];
     locations_count?: number;
-    registry_url: string;
+    registry_url: string | null;
+}
+
+/** Another record of the same study, in this or another registry. */
+export interface Registration {
+    source: string;
+    source_id: string;
+    registry: string;
+    registry_url: string | null;
+    nct_id: string | null;
 }
 
 export interface TrialDetail extends TrialSummary {
+    also_registered_as?: Registration[];
+    duplicate_of?: Registration | null;
     official_title: string | null;
     brief_summary: string | null;
     detailed_description: string | null;
@@ -196,6 +211,8 @@ export interface Team {
 export interface DigestItem {
     rank: number;
     nct_id: string | null;
+    source_id?: string | null;
+    registry?: string | null;
     title: string | null;
     /** Built by the server from a validated NCT number; null in samples. */
     url: string | null;

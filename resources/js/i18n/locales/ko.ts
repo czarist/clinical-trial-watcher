@@ -212,7 +212,9 @@ const messages: Messages = {
         countries: '국가',
         sites: '연구 기관',
         lastUpdate: '최종 업데이트',
-        openRegistry: 'ClinicalTrials.gov에서 열기',
+        openRegistry: '{registry}에서 열기',
+        alsoRegistered: '다른 등록 번호',
+        shownAs: '이 사이트에서 표시되는 기록',
     },
     alerts: {
         title: '알림',

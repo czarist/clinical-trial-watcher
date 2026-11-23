@@ -212,7 +212,9 @@ const messages: Messages = {
         countries: '国家',
         sites: '研究机构',
         lastUpdate: '最后更新',
-        openRegistry: '在 ClinicalTrials.gov 上打开',
+        openRegistry: '在 {registry} 上打开',
+        alsoRegistered: '其他登记号',
+        shownAs: '本站显示为',
     },
     alerts: {
         title: '提醒',
